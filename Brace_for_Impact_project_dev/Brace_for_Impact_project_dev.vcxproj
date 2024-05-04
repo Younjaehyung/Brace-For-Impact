@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f28fd834-97a5-48bd-bfbf-27dbdab9cbde}</ProjectGuid>
-    <RootNamespace>TESTproject</RootNamespace>
+    <ProjectGuid>{1c3a3119-3ef4-4166-9c2c-696b72cec493}</ProjectGuid>
+    <RootNamespace>BraceforImpactprojectdev</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,10 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="stdfx.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Brace_for_Impact_project_dev.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="Player1.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Brace_for_Impact_project_dev.cpp" />
+    <ClCompile Include="Player1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Brace_for_Impact_project_dev.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Brace_for_Impact_project_dev.ico" />
+    <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
