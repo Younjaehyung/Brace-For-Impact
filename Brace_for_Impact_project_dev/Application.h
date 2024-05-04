@@ -1,15 +1,17 @@
 #pragma once
 #include <Windows.h>
 #include "Player1.h"
+#include "enemy1.h"
 
 class Application {
 private:
 	Player1 player1;
-	
-	HWND mHwnd;
-	HDC mDC;
+	enemy1 enemys[10];
 
-	
+	HWND mHwnd;
+	HDC hDC;
+	HDC mDC;
+	RECT rt;
 	HBITMAP mBackBitmap;
 
 public:

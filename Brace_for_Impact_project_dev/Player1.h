@@ -14,5 +14,6 @@ public:
 	void f_Render(HDC mDC);
 	void f_Update();
 	void f_FixedUpdate();
+	RECT f_ReturnRect();
 };
 

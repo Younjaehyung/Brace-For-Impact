@@ -33,6 +33,9 @@
     <ClInclude Include="Player1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="enemy1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brace_for_Impact_project_dev.cpp">
@@ -42,6 +45,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Player1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
