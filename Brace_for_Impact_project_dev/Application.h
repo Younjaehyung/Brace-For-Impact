@@ -2,10 +2,14 @@
 #include <Windows.h>
 #include "Player1.h"
 #include "enemy1.h"
+#include "input.h"
+
 
 class Application {
 private:
 	Player1 player1;
+
+
 	enemy1 enemys[10];
 
 	HWND mHwnd;

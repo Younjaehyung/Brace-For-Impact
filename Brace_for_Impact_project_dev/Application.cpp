@@ -1,10 +1,10 @@
-#include "Application.h"
-
+﻿#include "Application.h"
 
 
 void Application::f_Update() {
-
+	input::Update();
 	player1.f_Update();
+
 	for (int i = 0; i < 10; i++) {
 		enemys[i].f_Update(player1);
 		for (int j = i + 1; j < 10; j++) {
@@ -20,6 +20,8 @@ void Application::f_FixedUpdate() {
 }
 void Application::f_Initialize(HWND hWnd) {
 	mHwnd = hWnd;
+	input::Initialize();
+
 	for (int i = 0; i < 10; i++) {
 		enemys[i].f_init();
 	}
@@ -33,10 +35,13 @@ void Application::f_Render() {
 	SelectObject(mDC, (HBITMAP)mBackBitmap);
 	Rectangle(mDC, 0, 0, rt.right, rt.bottom);
 
+
 	player1.f_Render(mDC);
 	for (int i = 0; i < 10; i++) {
 		enemys[i].f_Render(mDC);
 	}
+
+
 
 
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);

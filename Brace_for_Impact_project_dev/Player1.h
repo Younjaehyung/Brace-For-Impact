@@ -1,5 +1,6 @@
-#pragma once
+﻿#pragma once
 #include <Windows.h>
+#include "input.h"
 class Player1
 {
 

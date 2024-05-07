@@ -1,32 +1,30 @@
-#include "Player1.h"
+﻿#include "Player1.h"
+
 
 Player1::Player1() {
-	rect = { 0,0,10,10 };
+	rect = { 0,0,40,40 };
 }
 
 void Player1::f_Update() {
-	if (count == 100) {
-		if (GetAsyncKeyState(VK_UP) & 0x8000) {
-			OffsetRect(&rect, 0, -5);
+	
+		if (input::GetKey(eKeyCode::W)) {
+			OffsetRect(&rect, 0, -1);
 			count = 0;
 		}
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-			OffsetRect(&rect, -5, 0);
+		if (input::GetKey(eKeyCode::A)) {
+			OffsetRect(&rect, -1, 0);
 			count = 0;
 		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-			OffsetRect(&rect, 0, 5);
+		if (input::GetKey(eKeyCode::S)) {
+			OffsetRect(&rect, 0, 1);
 			count = 0;
 		}
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-			OffsetRect(&rect, 5, 0);
+		if (input::GetKey(eKeyCode::D)) {
+			OffsetRect(&rect, 1, 0);
 			count = 0;
 		}
 		
-	}
-	if (count < 100) {
-		count++;
-	}
+
 }
 void Player1::f_FixedUpdate() {
 }

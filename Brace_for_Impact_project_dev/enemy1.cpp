@@ -1,4 +1,4 @@
-#include "enemy1.h"
+﻿#include "enemy1.h"
 #include <random>
 
 std::random_device rd;
@@ -12,8 +12,8 @@ enemy1::enemy1() {
 void enemy1::f_init(){
 	rect.left = sponse(gen);
 	rect.top = sponse(gen);
-	rect.right = rect.left + 10;
-	rect.bottom = rect.top + 10;
+	rect.right = rect.left + 40;
+	rect.bottom = rect.top + 40;
 }
 
 void enemy1::f_attack() {
@@ -40,31 +40,31 @@ void enemy1::f_crash(enemy1& otherenemy) {
 }
 
 void enemy1::f_moving(Player1& player) {
-	if (count == 700) {
+	if (count == 5) {
 		if (player.f_ReturnRect().left < rect.left) {
-			OffsetRect(&rect, -5, 0);
+			OffsetRect(&rect, -1, 0);
 			count = 0;
 		}
 
 		if (player.f_ReturnRect().top < rect.top) {
-			OffsetRect(&rect, 0, -5);
+			OffsetRect(&rect, 0, -1);
 			count = 0;
 		}
 
 		if (player.f_ReturnRect().left > rect.left) {
-			OffsetRect(&rect, 5, 0);
+			OffsetRect(&rect, 1, 0);
 			count = 0;
 		}
 
 		if (player.f_ReturnRect().top > rect.top) {
-			OffsetRect(&rect, 0, 5);
+			OffsetRect(&rect, 0, 1);
 			count = 0;
 		}
 		
 	}
-	else if (count < 1000) {
+
 		count++;
-	}
+	
 }
 
 void  enemy1::f_Update(Player1& player1) {
