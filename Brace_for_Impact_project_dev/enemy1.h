@@ -6,6 +6,7 @@ class enemy1
 private:
 	RECT rect;
 	int count;
+
 public:
 	enemy1();
 	void f_moving(Player1& player);

@@ -135,6 +135,8 @@
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -142,6 +144,8 @@
     <ClCompile Include="enemy1.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc" />

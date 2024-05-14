@@ -8,6 +8,7 @@
 class Application {
 private:
 	Player1 player1;
+	Player2 player2;
 
 
 	enemy1 enemys[10];
@@ -17,6 +18,11 @@ private:
 	HDC mDC;
 	RECT rt;
 	HBITMAP mBackBitmap;
+
+	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
+	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI
+	RECT r_car = { 1024, 510, 1680, 1020 };		//차체 UI
+	RECT r_cannon = { 1124, 50, 1680, 460 };	//포신 UI
 
 public:
 	

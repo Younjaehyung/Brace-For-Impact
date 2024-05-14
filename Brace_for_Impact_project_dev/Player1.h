@@ -10,8 +10,23 @@ private:
 	
 
 public:
-
 	Player1();
+	void f_Render(HDC mDC);
+	void f_Update();
+	void f_FixedUpdate();
+	RECT f_ReturnRect();
+};
+
+class Player2
+{
+
+private:
+	RECT rect;
+	int count = 0;
+
+
+public:
+	Player2();
 	void f_Render(HDC mDC);
 	void f_Update();
 	void f_FixedUpdate();
