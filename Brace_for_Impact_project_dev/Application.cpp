@@ -24,8 +24,11 @@ void Application::f_Initialize(HWND hWnd) {
 	mHwnd = hWnd;
 	input::Initialize();
 
-	for (int i = 0; i < 10; i++) {
-		enemys[i].f_init();
+	for (int i = 0; i < 5; i++) {
+		enemys[i].f_init(1);
+	}
+	for (int i = 5; i < 10; i++) {
+		enemys[i].f_init(2);
 	}
 
 	hDC = GetDC(mHwnd);
@@ -50,7 +53,6 @@ void Application::f_Render() {
 		enemys[i].f_Render(mDC);
 	}
 
-	
 
 
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);

@@ -12,6 +12,7 @@ private:
 
 
 	enemy1 enemys[10];
+	
 
 	HWND mHwnd;
 	HDC hDC;

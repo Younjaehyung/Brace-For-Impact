@@ -1,11 +1,13 @@
 ﻿#pragma once
 #include <windows.h>
 #include "Player1.h"
+
 class enemy1
 {
 private:
 	RECT rect;
 	int count;
+	int type;
 
 public:
 	enemy1();
@@ -14,7 +16,9 @@ public:
 	void f_Update(Player1& player1);
 	void f_Render(HDC);
 	void f_FixedUpdate();
-	void f_init();
+	void f_init(int tp);
 	void f_crash(enemy1& otherenemy);
 };
+
+
 
