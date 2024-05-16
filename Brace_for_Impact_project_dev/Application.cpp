@@ -3,16 +3,18 @@
 
 void Application::f_Update() {
 	input::Update();
+	Time::Update ( );
 	player1.f_Update();
 	player2.f_Update();
 
 	for (int i = 0; i < 10; i++) {
 		enemys[i].f_Update(player1);
-	//	enemys[i].f_Update(player2);
+		//enemys[i].f_Update(player2);
 		for (int j = i + 1; j < 10; j++) {
 			enemys[i].f_crash(enemys[j]);
 		}
 	}
+
 }
 
 void Application::f_FixedUpdate() {
@@ -20,10 +22,12 @@ void Application::f_FixedUpdate() {
 
 
 }
-void Application::f_Initialize(HWND hWnd) {
+void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	mHwnd = hWnd;
+	hDC = GetDC ( mHwnd );
+	g_hinst = hInst_temp;
 	input::Initialize();
-
+	Time::Initailize ( );
 	for (int i = 0; i < 5; i++) {
 		enemys[i].f_init(1);
 	}
@@ -31,12 +35,14 @@ void Application::f_Initialize(HWND hWnd) {
 		enemys[i].f_init(2);
 	}
 
-	hDC = GetDC(mHwnd);
+	
 }
 void Application::f_Render() {
 	GetClientRect(mHwnd, &rt);
 	mDC = CreateCompatibleDC(hDC);
+	hmemDC = CreateCompatibleDC ( mDC );
 	mBackBitmap = CreateCompatibleBitmap(hDC, rt.right, rt.bottom);
+
 	SelectObject(mDC, (HBITMAP)mBackBitmap);
 	Rectangle(mDC, 0, 0, rt.right, rt.bottom);
 	
@@ -56,6 +62,7 @@ void Application::f_Render() {
 
 
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
+	DeleteDC ( hmemDC );
 	DeleteDC(mDC);
 	DeleteObject(mBackBitmap);
 	
