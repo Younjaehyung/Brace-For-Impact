@@ -6,8 +6,8 @@
 struct bullet{
 	int x;
 	int y;
-	int mx;
-	int my;
+	double mx;
+	double my;
 	int type;
 	BOOL PlayerBullet;
 	bullet* next;

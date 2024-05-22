@@ -3,8 +3,8 @@
 #include "Player1.h"
 
 struct monster {
-	int x;
-	int y;
+	float x;
+	float y;
 	int hp;
 	int cnt;
 	int type;

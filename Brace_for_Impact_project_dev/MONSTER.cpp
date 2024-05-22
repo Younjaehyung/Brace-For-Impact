@@ -26,7 +26,7 @@ void mop::spone(monster*& hd, int type){
 }
 
 void mop::move(monster*& hd , Player1 &p1) {
-	float speed = 6 * Time::DeltaTime();
+	float speed = 600 * Time::DeltaTime();
 	for (monster* p = hd; p != NULL; p = p->next) {
 		if (p->type == 1) {
 
@@ -56,7 +56,7 @@ void mop::move(monster*& hd , Player1 &p1) {
 
 			if (length(p1.f_ReturnRect().left, p1.f_ReturnRect().top, p->x ,p->y) > MONSTERLEN) {
 
-				if (p1.f_ReturnRect().left+20 < p->x) {
+				if (p1.f_ReturnRect().left < p->x) {
 					p->x -= speed;
 
 				}
@@ -64,7 +64,7 @@ void mop::move(monster*& hd , Player1 &p1) {
 					p->x += speed;
 				}
 
-				if (p1.f_ReturnRect().top+20 < p->y) {
+				if (p1.f_ReturnRect().top < p->y) {
 					p->y -= speed;
 
 				}
