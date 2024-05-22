@@ -4,6 +4,7 @@
 #include "enemy1.h"
 #include "input.h"
 #include "MONSTER.h"
+#include "BULLET.h"
 
 
 class Application {

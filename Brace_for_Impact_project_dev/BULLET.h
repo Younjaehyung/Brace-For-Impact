@@ -12,4 +12,8 @@ struct bullet{
 	bullet* next;
 };
 
+class bulletmanager {
+public:
+	bulletmanager();
+};
 
