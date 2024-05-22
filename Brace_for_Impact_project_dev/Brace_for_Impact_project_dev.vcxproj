@@ -133,9 +133,9 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="MATH.h" />
+    <ClInclude Include="MONSTER.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="resource1.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Time.h" />
@@ -147,6 +147,7 @@
     <ClCompile Include="enemy1.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="MATH.cpp" />
+    <ClCompile Include="MONSTER.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Time.cpp" />
