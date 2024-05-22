@@ -3,6 +3,7 @@
 #include "Player1.h"
 #include "enemy1.h"
 #include "input.h"
+#include "MONSTER.h"
 
 
 class Application {
@@ -12,6 +13,8 @@ private:
 	
 
 	enemy1 enemys[10];
+	monster* monsterHD = NULL;
+	mop monsters;
 	
 
 	HWND mHwnd;

@@ -14,6 +14,7 @@ void Application::f_Update() {
 			enemys[i].f_crash(enemys[j]);
 		}
 	}
+	monsters.move(monsterHD, player1);
 
 }
 
@@ -34,7 +35,7 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	for (int i = 5; i < 10; i++) {
 		enemys[i].f_init(2);
 	}
-
+	monsters.spone(monsterHD, 2);
 	
 }
 void Application::f_Render() {
@@ -58,7 +59,7 @@ void Application::f_Render() {
 	for (int i = 0; i < 10; i++) {
 		enemys[i].f_Render(mDC);
 	}
-
+	monsters.rander(mDC, monsterHD);
 
 
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
