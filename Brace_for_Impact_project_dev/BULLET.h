@@ -1,4 +1,7 @@
 #pragma once
+#include <windows.h>
+#include "Player1.h"
+
 
 struct bullet{
 	int x;
