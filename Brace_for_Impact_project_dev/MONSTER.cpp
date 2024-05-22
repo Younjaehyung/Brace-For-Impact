@@ -92,10 +92,10 @@ void mop::rander(HDC dc, monster*& hd) {
 
 	for (monster* p = hd; p != NULL; p = p->next) {
 		HBRUSH hBrush, oldBrush;
-		hBrush = CreateSolidBrush(RGB(255, 0, 0)); // »õ·Î¿î °´Ã¼ ¸¸µé±â: ºê·¯½¬
+		hBrush = CreateSolidBrush(RGB(255, 0, 0)); // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ê·¯ï¿½ï¿½
 		oldBrush = (HBRUSH)SelectObject(dc, hBrush);
 		Rectangle(dc, p->x - MOPSIZE, p->y - MOPSIZE, p->x + MOPSIZE, p->y + MOPSIZE);
-		SelectObject(dc, oldBrush); // ÀÌÀüÀÇ ºê·¯½Ã·Î µ¹¾Æ°¡±â
+		SelectObject(dc, oldBrush); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ê·¯ï¿½Ã·ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½
 		DeleteObject(hBrush);
 	}
 }

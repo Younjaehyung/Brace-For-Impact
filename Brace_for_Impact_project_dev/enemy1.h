@@ -1,11 +1,12 @@
 ﻿#pragma once
 #include <windows.h>
 #include "Player1.h"
-
+#include "MATH.h"
 class enemy1
 {
 private:
-	RECT rect;
+	
+	RECTS rect;
 	int count;
 	int type;
 

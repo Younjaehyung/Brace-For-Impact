@@ -11,9 +11,9 @@ void Application::f_Update() {
 	for (int i = 0; i < 10; i++) {
 		enemys[i].f_Update(player1);
 		//enemys[i].f_Update(player2);
-		for (int j = i + 1; j < 10; j++) {
+		/*for (int j = i + 1; j < 10; j++) {
 			enemys[i].f_crash(enemys[j]);
-		}
+		}*/
 	}
 	
 	//monsters.spone(monsterHD, 2);

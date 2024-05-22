@@ -2,16 +2,8 @@
 #include <Windows.h>
 #include "input.h"
 #include "Time.h"
+#include "MATH.h"
 
-typedef struct RECTS {
-
-	float left;
-	float top;
-	float right;
-	float bottom;
-
-
-}RECTS;
 
 class Player1
 {
