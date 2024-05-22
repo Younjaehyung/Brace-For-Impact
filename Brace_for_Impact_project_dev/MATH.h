@@ -1,7 +1,6 @@
-#pragma once
+﻿#pragma once
 #include<math.h>
-
-//double PI = 3.141592;
+#define PI 3.14
 
 float length(int x1, int y1, int x2, int y2);
 

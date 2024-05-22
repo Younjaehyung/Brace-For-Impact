@@ -1,11 +1,23 @@
 ﻿#pragma once
 #include <Windows.h>
 #include "input.h"
+#include "Time.h"
+
+typedef struct RECTS {
+
+	float left;
+	float top;
+	float right;
+	float bottom;
+
+
+}RECTS;
+
 class Player1
 {
 
 private:
-	RECT rect;
+	RECTS rect;
 	int count = 0;
 	
 
@@ -14,14 +26,14 @@ public:
 	void f_Render(HDC mDC);
 	void f_Update();
 	void f_FixedUpdate();
-	RECT f_ReturnRect();
+	RECTS f_ReturnRect();
 };
 
 class Player2
 {
 
 private:
-	RECT rect;
+	RECTS rect;
 	int count = 0;
 
 
@@ -30,6 +42,6 @@ public:
 	void f_Render(HDC mDC);
 	void f_Update();
 	void f_FixedUpdate();
-	RECT f_ReturnRect();
+	RECTS f_ReturnRect();
 };
 

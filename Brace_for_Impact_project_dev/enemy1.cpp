@@ -27,76 +27,72 @@ void enemy1::f_attack() {
 void enemy1::f_crash(enemy1& otherenemy) {
 	RECT temp;
 	
-	if (IntersectRect(&temp, &rect, &otherenemy.rect)) {
-		if (rect.left < otherenemy.rect.left) {
-			OffsetRect(&rect, -5, 0);
-		}
-		if (rect.right > otherenemy.rect.right) {
-			OffsetRect(&rect, 5, 0);
-		}
-		if (rect.top < otherenemy.rect.top) {
-			OffsetRect(&rect, 0, -5);
-		}
-		if (rect.bottom > otherenemy.rect.bottom) {
-			OffsetRect(&rect, 0, 5);
-		}
-	}
+
 
 }
 
 void enemy1::f_moving(Player1& player) {
+	float speed = 600 * Time::DeltaTime ( );
 	if (type == 1) {
-		if (count%5 == 0) {
+	
 			if (player.f_ReturnRect().left < rect.left) {
-				OffsetRect(&rect, -1, 0);
-				count = 0;
+				rect.left -= speed;
+				rect.right -= speed;
+				
 			}
 
 			if (player.f_ReturnRect().top < rect.top) {
-				OffsetRect(&rect, 0, -1);
-				count = 0;
+				rect.top -= speed;
+				rect.bottom -= speed;
+				
 			}
 
 			if (player.f_ReturnRect().left > rect.left) {
-				OffsetRect(&rect, 1, 0);
-				count = 0;
+				rect.left += speed;
+				rect.right += speed;
+				
 			}
 
 			if (player.f_ReturnRect().top > rect.top) {
-				OffsetRect(&rect, 0, 1);
-				count = 0;
+				rect.top += speed;
+				rect.bottom += speed;
+				
 			}
 
-		}
+		
 	}
 	else if (type == 2) {
-		if (count%5 == 0) {
+		
 
 			if (length(player.f_ReturnRect().left, player.f_ReturnRect().top, rect.left, rect.top) > LEN) {
-				if (player.f_ReturnRect().left < rect.left) {
-					OffsetRect(&rect, -1, 0);
-					count = 0;
+
+				if ( player.f_ReturnRect ( ).left < rect.left ) {
+					rect.left -= speed;
+					rect.right -= speed;
+
 				}
 
-				if (player.f_ReturnRect().top < rect.top) {
-					OffsetRect(&rect, 0, -1);
-					count = 0;
+				if ( player.f_ReturnRect ( ).top < rect.top ) {
+					rect.top -= speed;
+					rect.bottom -= speed;
+
 				}
 
-				if (player.f_ReturnRect().left > rect.left) {
-					OffsetRect(&rect, 1, 0);
-					count = 0;
+				if ( player.f_ReturnRect ( ).left > rect.left ) {
+					rect.left += speed;
+					rect.right += speed;
+
 				}
 
-				if (player.f_ReturnRect().top > rect.top) {
-					OffsetRect(&rect, 0, 1);
-					count = 0;
+				if ( player.f_ReturnRect ( ).top > rect.top ) {
+					rect.top += speed;
+					rect.bottom += speed;
+
 				}
 			}
-		}
+		
 	}
-		count++;
-	
+		
 }
 
 void  enemy1::f_Update(Player1& player1) {

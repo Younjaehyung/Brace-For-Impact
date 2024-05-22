@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include <Windows.h>
 #include "Player1.h"
 #include "enemy1.h"
@@ -9,21 +9,21 @@ class Application {
 private:
 	Player1 player1;
 	Player2 player2;
-
+	
 
 	enemy1 enemys[10];
 	
 
 	HWND mHwnd;
-	HDC hDC;
-	HDC mDC;
+	HDC hDC, mDC, hmemDC;
 	RECT rt;
 	HBITMAP mBackBitmap;
+	HINSTANCE g_hinst;
 
-	RECT r_stage = { 0, 0, 1024, 768 };			//Ω∫≈◊¿Ã¡ˆ UI
-	RECT r_info = { 0, 768, 1024, 1020 };		//¡§∫∏ UI
-	RECT r_car = { 1024, 510, 1680, 1020 };		//¬˜√º UI
-	RECT r_cannon = { 1124, 50, 1680, 460 };	//∆˜Ω≈ UI
+	RECT r_stage = { 0, 0, 1024, 768 };			//Ïä§ÌÖåÏù¥ÏßÄ UI
+	RECT r_info = { 0, 768, 1024, 1020 };		//Ï†ïÎ≥¥ UI
+	RECT r_car = { 1024, 510, 1680, 1020 };		//Ï∞®Ï≤¥ UI
+	RECT r_cannon = { 1124, 50, 1680, 460 };	//Ìè¨Ïã† UI
 
 public:
 	
@@ -31,6 +31,6 @@ public:
 	void f_Render();
 	void f_Update();
 	void f_FixedUpdate();
-	void f_Initialize(HWND hWnd);
+	void f_Initialize(HWND hWnd,HINSTANCE);
 };
 

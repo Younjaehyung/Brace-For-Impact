@@ -1,0 +1,41 @@
+1. 멤버함수의 f_
+2. 멤버변수의 m_
+3. 전역변수의 gm_
+4. 정적변수의 sm_
+5. 비트맵의 b_
+6. 기타 잡다한거는 _
+
+
+enemy는 vector 사용
+클래스별로 vs 정리는 하되 구조체 위주
+class로 실력은 확실히 는다.
+ㅈ망가능성 30%
+
+
+
+픽셀 64* 64에 200배
+
+조준	이동
+장전	증기
+발사	연료충전
+대쉬
+
+타이머를 한번 얘 뒤지면
+if( kill() ){
+enemy.status =0;
+settimer(3)
+}
+
+if(enemy.status==0){
+if( !Checktimer(3)){ani_mation}
+else{
+killtimer
+enemy.erase();
+}
+
+tank 포신 돌아가는법
+
+
+
+
+
