@@ -1,5 +1,6 @@
 ﻿#include "Application.h"
 
+int counter = 0;
 
 void Application::f_Update() {
 	input::Update();
@@ -14,8 +15,15 @@ void Application::f_Update() {
 			enemys[i].f_crash(enemys[j]);
 		}
 	}
+	
+	//monsters.spone(monsterHD, 2);
 	monsters.move(monsterHD, player1);
 
+	if (counter > 1000) {
+		monsters.spone(monsterHD, 2);
+		counter = 0;
+	}
+	counter++;
 }
 
 void Application::f_FixedUpdate() {
@@ -35,7 +43,7 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	for (int i = 5; i < 10; i++) {
 		enemys[i].f_init(2);
 	}
-	monsters.spone(monsterHD, 2);
+	
 	
 }
 void Application::f_Render() {

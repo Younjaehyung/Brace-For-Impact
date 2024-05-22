@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Brace_for_Impact_project_dev.h" />
+    <ClInclude Include="BULLET.h" />
     <ClInclude Include="enemy1.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="input.h" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Brace_for_Impact_project_dev.cpp" />
+    <ClCompile Include="BULLET.cpp" />
     <ClCompile Include="enemy1.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="MATH.cpp" />
@@ -155,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc" />
-    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Brace_for_Impact_project_dev.ico" />

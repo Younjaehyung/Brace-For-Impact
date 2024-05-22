@@ -27,12 +27,24 @@ void enemy1::f_attack() {
 void enemy1::f_crash(enemy1& otherenemy) {
 	RECT temp;
 	
-
-
+	if (IntersectRect(&temp, &rect, &otherenemy.rect)) {
+		if (rect.left < otherenemy.rect.left) {
+			OffsetRect(&rect, -5, 0);
+		}
+		if (rect.right > otherenemy.rect.right) {
+			OffsetRect(&rect, 5, 0);
+		}
+		if (rect.top < otherenemy.rect.top) {
+			OffsetRect(&rect, 0, -5);
+		}
+		if (rect.bottom > otherenemy.rect.bottom) {
+			OffsetRect(&rect, 0, 5);
+		}
+	}
 }
 
 void enemy1::f_moving(Player1& player) {
-	float speed = 600 * Time::DeltaTime ( );
+	float speed = 60 * Time::DeltaTime ( );
 	if (type == 1) {
 	
 			if (player.f_ReturnRect().left < rect.left) {
@@ -58,7 +70,6 @@ void enemy1::f_moving(Player1& player) {
 				rect.bottom += speed;
 				
 			}
-
 		
 	}
 	else if (type == 2) {

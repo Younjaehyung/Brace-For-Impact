@@ -9,11 +9,14 @@ struct bullet{
 	int mx;
 	int my;
 	int type;
+	BOOL PlayerBullet;
 	bullet* next;
 };
 
 class bulletmanager {
 public:
 	bulletmanager();
+	void move(bullet*& hd);
+	void rander(HDC dc, bullet*&hd);
 };
 

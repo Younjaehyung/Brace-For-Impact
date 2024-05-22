@@ -48,10 +48,13 @@
     <ClInclude Include="MATH.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="resource1.h">
+    <ClInclude Include="Stage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
+    <ClInclude Include="MONSTER.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BULLET.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,12 +86,15 @@
     <ClCompile Include="Stage.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="MONSTER.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BULLET.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc">
-      <Filter>리소스 파일</Filter>
-    </ResourceCompile>
-    <ResourceCompile Include="Resource.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
