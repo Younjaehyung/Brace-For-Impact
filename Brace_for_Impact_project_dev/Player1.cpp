@@ -10,22 +10,22 @@ void Player1::f_Update ( ) {
 	if ( input::GetKey ( eKeyCode::W ) ) {
 		rect.top -= speed;
 		rect.bottom -= speed;
-		count = 0;
+		
 	}
 	if ( input::GetKey ( eKeyCode::A ) ) {
 		rect.left -= speed;
 		rect.right -= speed;
-		count = 0;
+		
 	}
 	if ( input::GetKey ( eKeyCode::S ) ) {
 		rect.top += speed;
 		rect.bottom += speed;
-		count = 0;
+	
 	}
 	if ( input::GetKey ( eKeyCode::D ) ) {
 		rect.left += speed;
 		rect.right += speed;
-		count = 0;
+		
 	}
 
 
@@ -36,11 +36,15 @@ void Player1::f_FixedUpdate ( ) {
 }
 void Player1::f_Render ( HDC mDC ) {
 
+	
+
+
 	Rectangle ( mDC , rect.left , rect.top , rect.right , rect.bottom );
 }
 RECTS Player1::f_ReturnRect ( ) {
 	return rect;
 }
+
 
 
 

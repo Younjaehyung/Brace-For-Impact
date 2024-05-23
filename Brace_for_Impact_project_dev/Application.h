@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <Windows.h>
+#include "Gameobject.h"
 #include "Player1.h"
 #include "enemy1.h"
 #include "input.h"
