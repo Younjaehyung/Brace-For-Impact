@@ -4,8 +4,8 @@
 
 
 struct bullet{
-	int x;
-	int y;
+	double x;
+	double y;
 	double mx;
 	double my;
 	int type;

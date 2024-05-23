@@ -5,7 +5,7 @@
 
 float length(int x1, int y1, int x2, int y2);
 
-double angle(int x1, int y1, int x2, int y2);
+double angle(double x1, double y1, double x2, double y2);
 
 
 

@@ -16,7 +16,8 @@ private:
 	enemy1 enemys[10];
 	monster* monsterHD = NULL;
 	mop monsters;
-	
+	bullet* AllBullet = NULL;
+	bulletmanager BulletManager;
 
 	HWND mHwnd;
 	HDC hDC, mDC, hmemDC;

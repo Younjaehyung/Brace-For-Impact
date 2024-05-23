@@ -25,6 +25,33 @@ void mop::spone(monster*& hd, int type){
 	hd = newmop;
 }
 
+void mop::attack(monster*& mophd, bullet*& bullethd, Player1& p1) {
+
+	for (monster* p = mophd; p != NULL; p = p->next) {
+		if (p->type == 1) {
+
+		}
+		else if (p->type == 2) {
+			p->cnt++;
+			if (p->cnt > 100) {
+				p->cnt = 0;
+				bullet* newbullet = new bullet;
+				newbullet->x = p->x;
+				newbullet->y = p->y;
+				newbullet->type = 10;
+				double targetx = (double)(p1.f_ReturnRect().left + 20);
+				double targety = (double)(p1.f_ReturnRect().top + 20);
+				double ang = angle((double)(p->x), (double)(p->y) , targetx,targety );
+				newbullet->mx = -cos(ang);
+				newbullet->my = -sin(ang);
+
+				newbullet->next = bullethd;
+				bullethd = newbullet;
+			}
+		}
+	}
+}
+
 void mop::move(monster*& hd , Player1 &p1) {
 	float speed = 600 * Time::DeltaTime();
 	for (monster* p = hd; p != NULL; p = p->next) {
@@ -54,9 +81,9 @@ void mop::move(monster*& hd , Player1 &p1) {
 		}
 		else if (p->type == 2) {
 
-			if (length(p1.f_ReturnRect().left, p1.f_ReturnRect().top, p->x ,p->y) > MONSTERLEN) {
+			if (length(p1.f_ReturnRect().left+20, p1.f_ReturnRect().top+20, p->x ,p->y) > MONSTERLEN) {
 
-				if (p1.f_ReturnRect().left < p->x) {
+				if (p1.f_ReturnRect().left+20 < p->x) {
 					p->x -= speed;
 
 				}
@@ -64,7 +91,7 @@ void mop::move(monster*& hd , Player1 &p1) {
 					p->x += speed;
 				}
 
-				if (p1.f_ReturnRect().top < p->y) {
+				if (p1.f_ReturnRect().top+20 < p->y) {
 					p->y -= speed;
 
 				}
@@ -86,6 +113,11 @@ void mop::move(monster*& hd , Player1 &p1) {
 
 		}
 	}
+}
+
+void mop::f_Update(monster*& mophd, bullet*& bullethd, Player1& p1){
+	move(mophd, p1);
+	attack(mophd, bullethd, p1);
 }
 
 void mop::rander(HDC dc, monster*& hd) {
