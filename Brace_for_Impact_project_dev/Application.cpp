@@ -18,7 +18,7 @@ void Application::f_Update() {
 	
 	//monsters.spone(monsterHD, 2);
 	monsters.f_Update(monsterHD,AllBullet, player1);
-	BulletManager.move(AllBullet);
+	BulletManager.f_Updte(AllBullet);
 
 	if (counter > 1000) {
 		monsters.spone(monsterHD, 2);
@@ -71,6 +71,7 @@ void Application::f_Render() {
 	monsters.rander(mDC, monsterHD);
 	BulletManager.rander(mDC, AllBullet);
 
+	Time::Render(mDC);
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
 	DeleteDC ( hmemDC );
 	DeleteDC(mDC);

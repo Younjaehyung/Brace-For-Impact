@@ -8,7 +8,7 @@ struct bullet{
 	double y;
 	double mx;
 	double my;
-	int type;
+	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
 	BOOL PlayerBullet;
 	bullet* next;
 };
@@ -18,5 +18,7 @@ public:
 	bulletmanager();
 	void move(bullet*& hd);
 	void rander(HDC dc, bullet*&hd);
+	void deleteBullet(bullet*& hd);
+	void f_Updte(bullet*& hd);
 };
 
