@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <Windows.h>
+#include <list>
+#include "SceneManager.h"
 #include "Gameobject.h"
 #include "Player1.h"
 #include "enemy1.h"
@@ -14,10 +16,11 @@ private:
 	Player2 player2;
 	
 
-	enemy1 enemys[10];
-	monster* monsterHD = NULL;
-	mop monsters;
-	bullet* AllBullet = NULL;
+	//enemy1 enemys[10];
+	monster_manager monster_managers;
+	//monster* monsterHD = NULL;
+	//mop monsters;
+	//bullet* AllBullet = NULL;
 	bulletmanager BulletManager;
 
 	HWND mHwnd;

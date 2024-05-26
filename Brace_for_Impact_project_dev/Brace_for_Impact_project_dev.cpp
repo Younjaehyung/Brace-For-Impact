@@ -3,7 +3,7 @@
 
 #include "framework.h"
 #include "Brace_for_Impact_project_dev.h"
-
+#include "LoadScenes.h"
 #define MAX_LOADSTRING 100
 
 Application application;
@@ -112,7 +112,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       0, 0, 1680, 1050, nullptr, nullptr, hInstance, nullptr);
-
+   LoadScenes();
    application.f_Initialize(hWnd, hInst );
 
    if (!hWnd)

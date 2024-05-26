@@ -9,10 +9,11 @@ PlayScenes::~PlayScenes()
 }
 
 void PlayScenes :: Initialize() {
-	for (size_t i = 0; i < 100; i++)
+	for (size_t i = 0; i < 10; i++)
 	{
-		GameObject* obj = new GameObject();
-		obj->SetPosition(rand() % 1600, rand() % 900);
+		enemy1* obj  = new enemy1();
+		obj->Initialize(1);
+		
 		AddGameObject(obj);
 	}
 

@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 #include <windows.h>
+
 #include "Player1.h"
-#include "BULLET.h"
 
 struct monster {
 	float x;
@@ -13,12 +13,24 @@ struct monster {
 };
 
 class mop{
+private:
+	monster mop_inform;
+	
 public:
 	mop();
-	void spone(monster*& hd, int type);
-	void attack(monster*& mophd, bullet*& bullethd , Player1 &p1);
-	void move(monster*& hd , Player1 &p1);
-	void f_Update(monster*& mophd, bullet*& bullethd, Player1& p1);
-	void rander(HDC dc, monster*& hd);
+	
+	void attack( Player1 &p1);
+	void move(Player1 &p1);
+	void Update(  Player1& p1);
+	void render(HDC dc);
 
+};
+
+class monster_manager {
+private:
+	std::list<mop*> mops;
+public:
+	static monster* spone ( int type );
+	void Update ( Player1& p1 );
+	void render (HDC );
 };

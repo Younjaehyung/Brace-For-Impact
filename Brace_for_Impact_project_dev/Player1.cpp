@@ -5,7 +5,7 @@ Player1::Player1() {
 	rect = { 0,0,40,40 };
 }
 
-void Player1::f_Update ( ) {
+void Player1::Update ( ) {
 	float speed = 1200 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::W ) ) {
 		rect.top -= speed;
@@ -32,16 +32,16 @@ void Player1::f_Update ( ) {
 }
 
 
-void Player1::f_FixedUpdate ( ) {
+void Player1::FixedUpdate ( ) {
 }
-void Player1::f_Render ( HDC mDC ) {
+void Player1::Render ( HDC mDC ) {
 
 	
 
 
 	Rectangle ( mDC , rect.left , rect.top , rect.right , rect.bottom );
 }
-RECTS Player1::f_ReturnRect ( ) {
+RECTS Player1::ReturnRect ( ) {
 	return rect;
 }
 
@@ -53,7 +53,7 @@ Player2::Player2() {
 	rect = { 40,40,80,80 };
 }
 
-void Player2::f_Update() {
+void Player2::Update() {
 	float speed = 1200 * Time::DeltaTime ( );
 	if (input::GetKey(eKeyCode::UP)) {
 		rect.top -= speed;
@@ -80,12 +80,12 @@ void Player2::f_Update() {
 }
 
 
-void Player2::f_FixedUpdate() {
+void Player2::FixedUpdate() {
 }
-void Player2::f_Render(HDC mDC) {
+void Player2::Render(HDC mDC) {
 
 	Rectangle(mDC, rect.left, rect.top, rect.right, rect.bottom);
 }
-RECTS Player2::f_ReturnRect() {
+RECTS Player2::ReturnRect() {
 	return rect;
 }

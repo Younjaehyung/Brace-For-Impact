@@ -9,3 +9,4 @@ void GameObject:: Render(HDC mDC){
 
 }
 void GameObject:: LateUpdate(){}
+void GameObject::Initialize() {}

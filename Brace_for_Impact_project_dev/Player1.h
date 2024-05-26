@@ -15,10 +15,10 @@ private:
 
 public:
 	Player1();
-	void f_Render(HDC mDC);
-	void f_Update();
-	void f_FixedUpdate();
-	RECTS f_ReturnRect();
+	void Render(HDC mDC);
+	void Update();
+	void FixedUpdate();
+	RECTS ReturnRect();
 };
 
 class Player2
@@ -31,9 +31,9 @@ private:
 
 public:
 	Player2();
-	void f_Render(HDC mDC);
-	void f_Update();
-	void f_FixedUpdate();
-	RECTS f_ReturnRect();
+	void Render(HDC mDC);
+	void Update();
+	void FixedUpdate();
+	RECTS ReturnRect();
 };
 

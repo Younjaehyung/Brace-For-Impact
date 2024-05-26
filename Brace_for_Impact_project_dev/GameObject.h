@@ -7,23 +7,26 @@ class GameObject
 		GameObject();
 		~GameObject();
 
-		void Update();
+		virtual void Update() ;
 		void LateUpdate();
-		void Render(HDC);
+		virtual void Render(HDC);
+		virtual void Initialize();
 
-
-		void SetPosition(float x, float y) {
-			mx = x;
-			my = y;
+		void SetPosition(float right, float top,float left,float bottom) {
+			rect.bottom = bottom;
+			rect.left = left;
+			rect.right = right;
+			rect.top = top;
 
 		}
 
 		float GetPositionx() { return mx; }
 		float GetPositiony() { return my; }
 
-	private:
+	protected:
 		//게임 오브젝트 좌표
 		float mx;
 		float my;
+		RECTS rect;
 };
 

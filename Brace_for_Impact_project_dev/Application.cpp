@@ -5,11 +5,13 @@ int counter = 0;
 void Application::f_Update() {
 	input::Update();
 	Time::Update ( );
-	player1.f_Update();
-	player2.f_Update();
+	player1.Update();
+	player2.Update();
 
+	
+	SceneManager::Update();
 	for (int i = 0; i < 10; i++) {
-		enemys[i].f_Update(player1);
+		//enemys[i].f_Update(player1);
 		//enemys[i].f_Update(player2);
 		/*for (int j = i + 1; j < 10; j++) {
 			enemys[i].f_crash(enemys[j]);
@@ -17,11 +19,11 @@ void Application::f_Update() {
 	}
 	
 	//monsters.spone(monsterHD, 2);
-	monsters.f_Update(monsterHD,AllBullet, player1);
-	BulletManager.f_Updte(AllBullet);
+	monster_managers.Update (player1 );
+	BulletManager.Update ( );
 
 	if (counter > 1000) {
-		monsters.spone(monsterHD, 2);
+		monster_manager::spone (2 );
 		counter = 0;
 	}
 	counter++;
@@ -38,13 +40,14 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	g_hinst = hInst_temp;
 	input::Initialize();
 	Time::Initailize ( );
-	for (int i = 0; i < 5; i++) {
-		enemys[i].f_init(1);
-	}
-	for (int i = 5; i < 10; i++) {
-		enemys[i].f_init(2);
-	}
 	
+	//for (int i = 0; i < 5; i++) {
+	////	enemys[i].Initialize(1);
+	//}
+	//for (int i = 5; i < 10; i++) {
+	//	//enemys[i].Initialize(2);
+	//}
+	////SceneManager::Initialize();
 	
 }
 void Application::f_Render() {
@@ -61,15 +64,17 @@ void Application::f_Render() {
 	Rectangle(mDC, r_info.left, r_info.top, r_info.right, r_info.bottom);	//정보 UI
 	Rectangle(mDC, r_car.left, r_car.top, r_car.right, r_car.bottom);	//포신 조종실 UI
 	Rectangle(mDC, r_cannon.left, r_cannon.top, r_cannon.right, r_cannon.bottom);	//차체 조종실 UI
+	SceneManager::Render(mDC);
 
-	player1.f_Render(mDC);
-	player2.f_Render(mDC);
-
+	player1.Render(mDC);
+	player2.Render(mDC);
+	monster_managers.render ( mDC );
+	BulletManager.rander ( mDC );
 	for (int i = 0; i < 10; i++) {
-		enemys[i].f_Render(mDC);
+		//enemys[i].f_Render(mDC);
 	}
-	monsters.rander(mDC, monsterHD);
-	BulletManager.rander(mDC, AllBullet);
+	
+	
 
 	Time::Render(mDC);
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);

@@ -12,11 +12,12 @@ enemy1::enemy1() {
 	
 
 }
-void enemy1::f_init(int tp){
+void enemy1::Initialize(int tp){
 	rect.left = sponse(gen);
 	rect.top = sponse(gen);
 	rect.right = rect.left + 40;
 	rect.bottom = rect.top + 40;
+	//GameObject::SetPosition(left, top, right,bottom);
 	type = tp;
 }
 
@@ -106,7 +107,7 @@ void enemy1::f_moving(Player1& player) {
 		
 }
 
-void  enemy1::f_Update(Player1& player1) {
+void  enemy1::Update(Player1& player1) {
 
 	f_moving(player1);
 	
@@ -115,7 +116,7 @@ void  enemy1::f_Update(Player1& player1) {
 }
 void  enemy1::f_FixedUpdate() {
 }
-void  enemy1::f_Render(HDC mDC) {
+void  enemy1::Render(HDC mDC) {
 
 	Rectangle(mDC, rect.left, rect.top, rect.right, rect.bottom);
 }
