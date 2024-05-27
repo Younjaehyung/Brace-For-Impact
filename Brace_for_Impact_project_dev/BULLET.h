@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <windows.h>
+#include "Time.h"
 #include <list>
 
 //struct bullet{
@@ -16,8 +17,8 @@ class bullet {
 private:
 	double x;
 	double y;
-	double mx;
-	double my;
+	double mx; // x 이동거리
+	double my; // y 이동거리
 	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
 	BOOL PlayerBullet;
 public:

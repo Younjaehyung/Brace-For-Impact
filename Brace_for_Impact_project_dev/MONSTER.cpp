@@ -25,7 +25,6 @@ void mop::attack(Player1& p1) {
 		}
 		else if ( mop_inform.type == 2) {
 			
-
 			double targetx = ( double ) ( p1.ReturnRect ( ).left + 20 );
 			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );

@@ -12,8 +12,8 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 
 void bullet::move ( ) {
 	
-		x += mx;
-		y += my;
+		x += mx *600 * Time::DeltaTime ( );
+		y += my * 600 * Time::DeltaTime ( );
 
 		if ( x < 0 || y < 0 ) {
 			type = 0;

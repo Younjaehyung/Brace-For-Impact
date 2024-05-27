@@ -8,13 +8,18 @@
 #include "input.h"
 #include "MONSTER.h"
 #include "BULLET.h"
+#include <atlimage.h>
 
 
 class Application {
 private:
+	BYTE bBlendOp = AC_SRC_OVER;
 	Player1 player1;
 	Player2 player2;
 	
+	CImage enemyimg;
+	int nWidth , nHeight;
+
 	HWND mHwnd;
 	HDC hDC, mDC, hmemDC;
 	RECT rt;

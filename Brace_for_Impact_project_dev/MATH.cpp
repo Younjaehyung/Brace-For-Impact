@@ -1,4 +1,4 @@
-#include"MATH.h"
+﻿#include"MATH.h"
 
 float length(int x1, int y1, int x2, int y2) {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
@@ -6,6 +6,38 @@ float length(int x1, int y1, int x2, int y2) {
 
 double angle(double x1, double y1, double x2, double y2) {
 	return atan2(y1-y2,x1-x2);
+}
+
+float a2bLine(float x, float p1x, float p1y, float mopx, float mopy) {
+	if (p1x != mopx) {
+		return (p1y - mopy) / (p1x - mopx) * (x - mopx) + mopy;
+	}
+	else {
+		return p1x;
+	}
+}
+
+BOOL rect2Cir(RECTS rect, double x, double y, int sz) {
+	if (rect.left - sz<x && rect.right + sz>x && rect.top - sz<y && rect.bottom>y) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy ) {
+	if ( rect.top < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) && rect.bottom < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) ) {
+		return 1;
+	}
+	if ( rect.top < a2bLine ( rect.right , p1x , p1y , mopx , mopy ) && rect.bottom < a2bLine ( rect.right , p1x , p1y , mopx , mopy ) ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+
+	return 0;
 }
 
 bool IntersectRect_float(RECTS& rect1, RECTS& rect2){

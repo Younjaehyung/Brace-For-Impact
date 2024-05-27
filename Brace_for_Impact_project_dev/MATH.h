@@ -2,12 +2,12 @@
 #include<math.h>
 #include<Windows.h>
 #define PI 3.14
-
+//두 점의 길이
 float length(int x1, int y1, int x2, int y2);
-
+//두 점의 각도
 double angle(double x1, double y1, double x2, double y2);
-
-
+//두 점의 직선의 방정식 f(x)=y
+float a2bLine(float x, float p1x, float p1y, float mopx, float mopy);
 
 typedef struct RECTS {
 	float left;
@@ -16,7 +16,13 @@ typedef struct RECTS {
 	float bottom;
 }RECTS;
 
+//원과 사각형 충돌
+BOOL rect2Cir(RECTS rect, double x, double y, int sz);
+//면과 선 충돌
+BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy );
+
 bool IntersectRect_float(RECTS& ,RECTS&);
+
 
 
 bool PtinRect_float(const RECTS& rect, const POINT& point);

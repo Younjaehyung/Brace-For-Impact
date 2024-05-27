@@ -55,9 +55,9 @@ void Application::f_Render() {
 	mDC = CreateCompatibleDC(hDC);
 	hmemDC = CreateCompatibleDC ( mDC );
 	mBackBitmap = CreateCompatibleBitmap(hDC, rt.right, rt.bottom);
+	SelectObject ( mDC , ( HBITMAP ) mBackBitmap );
 
-	SelectObject(mDC, (HBITMAP)mBackBitmap);
-	Rectangle(mDC, 0, 0, rt.right, rt.bottom);
+	Rectangle ( mDC , 0 , 0 , rt.right , rt.bottom );
 	
 	//화면 전체 크기 1680, 1050 (Y축 윈도우 창 크기때문에 30빼고 계산)
 	Rectangle(mDC, r_stage.left, r_stage.top, r_stage.right, r_stage.bottom);	//필드 스테이지 UI
@@ -73,11 +73,16 @@ void Application::f_Render() {
 	for (int i = 0; i < 10; i++) {
 		//enemys[i].f_Render(mDC);
 	}
-	
-	
 
+	//enemyimg.Load ( L"Enemy_2_png.png" );
+	//nWidth = enemyimg.GetWidth ( ); nHeight = enemyimg.GetHeight ( );
+	//img.StretchBlt ( mDC , 0 , 0 , 100 , 100 , 0 , 0 , nWidth , nHeight , SRCCOPY );
+	//enemyimg.AlphaBlend ( mDC , 0 , 0 , 100 , 100 , 0 , 0 , nWidth , nHeight , 255 , bBlendOp );
+	
 	Time::Render(mDC);
+	
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
+
 	DeleteDC ( hmemDC );
 	DeleteDC(mDC);
 	DeleteObject(mBackBitmap);
