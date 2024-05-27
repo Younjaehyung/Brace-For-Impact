@@ -169,6 +169,16 @@
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="BFI_Building_1.bmp" />
+    <Image Include="BFI_Bullet_1.bmp" />
+    <Image Include="BFI_Enemy_1.bmp" />
+    <Image Include="BFI_Enemy_2.bmp" />
+    <Image Include="BFI_Player.bmp" />
+    <Image Include="BFI_Stage_1_1.bmp" />
+    <Image Include="BFI_Stage_1_2.bmp" />
+    <Image Include="BFI_Stage_2.bmp" />
+    <Image Include="BFI_Tank_car.bmp" />
+    <Image Include="BFI_Tank_head.bmp" />
     <Image Include="Brace_for_Impact_project_dev.ico" />
     <Image Include="small.ico" />
   </ItemGroup>

@@ -135,5 +135,35 @@
     <Image Include="Brace_for_Impact_project_dev.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_Building_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Bullet_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Enemy_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Enemy_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Player.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_1_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_1_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Tank_car.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Tank_head.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>
