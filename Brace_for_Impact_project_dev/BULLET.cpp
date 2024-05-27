@@ -1,7 +1,7 @@
 ﻿#include "BULLET.h"
 #include "MATH.h"
 #include <random>
-std::list<bullet*> bulletmanager::bullets;
+std::list<bullet*> BulletManager::bullets;
 
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
@@ -34,16 +34,16 @@ void bullet::Update ( ) {
 
 
 
-bulletmanager::bulletmanager ( ) {
+BulletManager::BulletManager ( ) {
 
 }
-void bulletmanager::CreateBullet (bullet*& newbullet ) {
+void BulletManager::CreateBullet (bullet*& newbullet ) {
 	
 		bullets.push_back ( newbullet );
 
 }
 
-void bulletmanager::DeleteBullet() {
+void BulletManager::DeleteBullet() {
 	
 	
 
@@ -55,14 +55,14 @@ void bulletmanager::DeleteBullet() {
 
 }
 
-void bulletmanager::Update() {
+void BulletManager::Update() {
 	for ( auto iter : bullets) {
 		iter->Update ( );
 	}
 }
 
 
-void bulletmanager::rander(HDC dc) {
+void BulletManager::rander(HDC dc) {
 	for ( auto iter : bullets ) {
 		iter->rander (dc );
 	}

@@ -27,11 +27,11 @@ public:
 	void rander ( HDC dc );
 };
 
-class bulletmanager {
+class BulletManager {
 private:
 	static std::list<bullet*> bullets;
 public:
-	bulletmanager();
+	BulletManager();
 	static void rander(HDC dc);
 	static void CreateBullet ( bullet*& newbullet );
 	static void DeleteBullet ( );

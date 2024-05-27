@@ -19,11 +19,11 @@ void Application::f_Update() {
 	}
 	
 	//monsters.spone(monsterHD, 2);
-	monster_managers.Update (player1 );
-	BulletManager.Update ( );
+	MonsterManager::Update (player1 );
+	BulletManager::Update ( );
 
 	if (counter > 1000) {
-		monster_manager::spone (2 );
+		MonsterManager::spone (2 );
 		counter = 0;
 	}
 	counter++;
@@ -68,8 +68,8 @@ void Application::f_Render() {
 
 	player1.Render(mDC);
 	player2.Render(mDC);
-	monster_managers.render ( mDC );
-	BulletManager.rander ( mDC );
+	MonsterManager::render ( mDC );
+	BulletManager::rander ( mDC );
 	for (int i = 0; i < 10; i++) {
 		//enemys[i].f_Render(mDC);
 	}

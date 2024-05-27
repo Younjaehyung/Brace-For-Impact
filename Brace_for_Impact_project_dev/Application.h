@@ -15,14 +15,6 @@ private:
 	Player1 player1;
 	Player2 player2;
 	
-
-	//enemy1 enemys[10];
-	monster_manager monster_managers;
-	//monster* monsterHD = NULL;
-	//mop monsters;
-	//bullet* AllBullet = NULL;
-	bulletmanager BulletManager;
-
 	HWND mHwnd;
 	HDC hDC, mDC, hmemDC;
 	RECT rt;

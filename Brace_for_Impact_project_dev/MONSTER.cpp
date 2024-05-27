@@ -1,6 +1,6 @@
 ﻿#include "MONSTER.h"
 
-std::list<mop*> monster_manager::mops;
+std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
 
@@ -30,7 +30,7 @@ void mop::attack(Player1& p1) {
 			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
 			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
-			bulletmanager::CreateBullet ( newbullet );
+			BulletManager::CreateBullet ( newbullet );
 		
 		}
 	
@@ -119,7 +119,7 @@ void mop::render(HDC dc) {
 
 
 
-void monster_manager::spone ( int type ) {
+void MonsterManager::spone ( int type ) {
 	mop* newmop = new mop(type);
 
 	mops.push_back ( newmop );
@@ -127,14 +127,14 @@ void monster_manager::spone ( int type ) {
 }
 
 
-void monster_manager::Update ( Player1& p1 )
+void MonsterManager::Update ( Player1& p1 )
 {
 	for ( auto iter : mops ) {
 		iter->Update ( p1 );
 	}
 }
 
-void monster_manager::render ( HDC mDC)
+void MonsterManager::render ( HDC mDC)
 {
 	for ( auto iter : mops ) {
 		iter->render(mDC);

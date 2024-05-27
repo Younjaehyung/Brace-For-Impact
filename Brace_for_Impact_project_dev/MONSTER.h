@@ -28,7 +28,7 @@ public:
 
 };
 
-class monster_manager {
+class MonsterManager {
 private:
 	static std::list<mop*> mops;
 public:
