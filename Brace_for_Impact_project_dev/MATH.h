@@ -16,13 +16,7 @@ typedef struct RECTS {
 	float bottom;
 }RECTS;
 
-//원과 사각형 충돌
-BOOL rect2Cir(RECTS rect, double x, double y, int sz);
-//면과 선 충돌
-BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy );
-
 bool IntersectRect_float(RECTS& ,RECTS&);
-
 
 
 bool PtinRect_float(const RECTS& rect, const POINT& point);
