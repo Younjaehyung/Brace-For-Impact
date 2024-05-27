@@ -75,6 +75,9 @@
     <ClInclude Include="PlayScenes.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brace_for_Impact_project_dev.cpp">
@@ -122,6 +125,9 @@
     <ClCompile Include="PlayScenes.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Tank.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc">
@@ -133,6 +139,36 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Brace_for_Impact_project_dev.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Building_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Bullet_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Enemy_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Enemy_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Player.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_1_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_1_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Tank_car.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Tank_head.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

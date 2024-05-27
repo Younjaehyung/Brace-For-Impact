@@ -1,4 +1,5 @@
 ﻿#pragma once
+#pragma comment(lib, "msimg32.lib")
 #include <Windows.h>
 #include <list>
 #include "SceneManager.h"
@@ -8,22 +9,18 @@
 #include "input.h"
 #include "MONSTER.h"
 #include "BULLET.h"
-#include <atlimage.h>
-
+#include "Resource.h"
+#include "Tank.h"
 
 class Application {
 private:
-	BYTE bBlendOp = AC_SRC_OVER;
 	Player1 player1;
 	Player2 player2;
-	
-	CImage enemyimg;
-	int nWidth , nHeight;
-
+	Tank tank_p;
 	HWND mHwnd;
 	HDC hDC, mDC, hmemDC;
 	RECT rt;
-	HBITMAP mBackBitmap;
+	HBITMAP mBackBitmap, mBitmap, B_Stage_1_1, B_Stage_1_2, B_Player, B_Tank_car, B_Tank_head;
 	HINSTANCE g_hinst;
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI

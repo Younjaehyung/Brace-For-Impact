@@ -14,25 +14,28 @@ mop::mop(int type) {
 	mop_inform.hp = 100;
 	mop_inform.type = type;
 	mop_inform.cnt = 0;
+	count = 0;
 }
 
 
 void mop::attack(Player1& p1) {
 
-	
-		if (mop_inform.type == 1) {
+	if ( count >= 0.4 ) {
+		if ( mop_inform.type == 1 ) {
 
 		}
-		else if ( mop_inform.type == 2) {
-			
+		else if ( mop_inform.type == 2 ) {
+
 			double targetx = ( double ) ( p1.ReturnRect ( ).left + 20 );
 			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
 			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
 			BulletManager::CreateBullet ( newbullet );
-		
+
 		}
-	
+		count = 0;
+	}
+	count += Time::DeltaTime ( );
 }
 
 void mop::move( Player1 &p1) {

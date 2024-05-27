@@ -26,6 +26,7 @@ public:
 	void Update ( );
 	void move ( );
 	void rander ( HDC dc );
+	int return_type ( ) { return type; };
 };
 
 class BulletManager {

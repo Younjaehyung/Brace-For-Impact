@@ -45,11 +45,11 @@ void BulletManager::CreateBullet (bullet*& newbullet ) {
 
 void BulletManager::DeleteBullet() {
 	
-	
 
-	//map 나가면 status ==0 
 	for ( auto iter : bullets ) {
-		
+		if ( iter->return_type ( ) == 0 ) {
+
+		}
 	}
 	
 

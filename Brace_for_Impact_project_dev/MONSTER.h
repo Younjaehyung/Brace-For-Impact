@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <windows.h>
 #include <list>
+#include "Time.h"
 #include "Player1.h"
 #include "MATH.h"
 #include <random>
@@ -17,7 +18,7 @@ typedef struct monster {
 class mop{
 private:
 	monster mop_inform;
-	
+	float count;
 public:
 	mop(int );
 	
@@ -31,8 +32,9 @@ public:
 class MonsterManager {
 private:
 	static std::list<mop*> mops;
+	
 public:
 	static void spone ( int type );
 	static void Update ( Player1& p1 );
-	static void render (HDC );
+	static void render (HDC);
 };

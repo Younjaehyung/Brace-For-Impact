@@ -15,6 +15,7 @@ private:
 
 public:
 	Player1();
+	void move ( );
 	void Render(HDC mDC);
 	void Update();
 	void FixedUpdate();
