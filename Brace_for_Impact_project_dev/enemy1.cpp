@@ -48,25 +48,25 @@ void enemy1::f_moving(Player1& player) {
 	float speed = 600 * Time::DeltaTime ( );
 	if (type == 1) {
 	
-			if (player.f_ReturnRect().left < rect.left) {
+			if (player.ReturnRect().left < rect.left) {
 				rect.left -= speed;
 				rect.right -= speed;
-				
+			
 			}
 
-			if (player.f_ReturnRect().top < rect.top) {
+			if (player.ReturnRect().top < rect.top) {
 				rect.top -= speed;
 				rect.bottom -= speed;
 				
 			}
 
-			if (player.f_ReturnRect().left > rect.left) {
+			if (player.ReturnRect().left > rect.left) {
 				rect.left += speed;
 				rect.right += speed;
 				
 			}
 
-			if (player.f_ReturnRect().top > rect.top) {
+			if (player.ReturnRect().top > rect.top) {
 				rect.top += speed;
 				rect.bottom += speed;
 				
@@ -76,27 +76,27 @@ void enemy1::f_moving(Player1& player) {
 	else if (type == 2) {
 		
 
-			if (length(player.f_ReturnRect().left, player.f_ReturnRect().top, rect.left, rect.top) > LEN) {
+			if (length(player.ReturnRect().left, player.ReturnRect().top, rect.left, rect.top) > LEN) {
 
-				if ( player.f_ReturnRect ( ).left < rect.left ) {
+				if ( player.ReturnRect ( ).left < rect.left ) {
 					rect.left -= speed;
 					rect.right -= speed;
 
 				}
 
-				if ( player.f_ReturnRect ( ).top < rect.top ) {
+				if ( player.ReturnRect ( ).top < rect.top ) {
 					rect.top -= speed;
 					rect.bottom -= speed;
 
 				}
 
-				if ( player.f_ReturnRect ( ).left > rect.left ) {
+				if ( player.ReturnRect ( ).left > rect.left ) {
 					rect.left += speed;
 					rect.right += speed;
 
 				}
 
-				if ( player.f_ReturnRect ( ).top > rect.top ) {
+				if ( player.ReturnRect ( ).top > rect.top ) {
 					rect.top += speed;
 					rect.bottom += speed;
 

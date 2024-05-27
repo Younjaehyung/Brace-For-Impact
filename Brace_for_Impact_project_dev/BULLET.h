@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include <windows.h>
 #include <list>
-#include "Player1.h"
-#include "MONSTER.h"
 
 //struct bullet{
 //	double x;
@@ -23,7 +21,7 @@ private:
 	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
 	BOOL PlayerBullet;
 public:
-	bullet ( double  , double  , double  , double  , int  );
+	bullet ( double  , double  , int ,double  , double  );
 	void Update ( );
 	void move ( );
 	void rander ( HDC dc );
@@ -31,12 +29,13 @@ public:
 
 class bulletmanager {
 private:
-	std::list<bullet*> bullets;
+	static std::list<bullet*> bullets;
 public:
 	bulletmanager();
-	void rander(HDC dc);
-	static void CreateBullet (Player1& ,monster& m1 ,int );
-	void DeleteBullet ( );
-	void Update();
+	static void rander(HDC dc);
+	static void CreateBullet ( bullet*& newbullet );
+	static void DeleteBullet ( );
+	static void Update();
 };
+
 

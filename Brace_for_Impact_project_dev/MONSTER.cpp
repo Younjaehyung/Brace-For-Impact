@@ -1,8 +1,6 @@
 ﻿#include "MONSTER.h"
-#include "MATH.h"
-#include <random>
-#include "enemy1.h"
 
+std::list<mop*> monster_manager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
 
@@ -10,8 +8,12 @@ std::random_device rdmop;
 std::mt19937 genmop;
 std::uniform_int_distribution<int> sponsemop(0, 800);
 
-mop::mop() {
-
+mop::mop(int type) {
+	mop_inform.x = sponsemop ( genmop );
+	mop_inform.y = sponsemop ( genmop );
+	mop_inform.hp = 100;
+	mop_inform.type = type;
+	mop_inform.cnt = 0;
 }
 
 
@@ -23,10 +25,13 @@ void mop::attack(Player1& p1) {
 		}
 		else if ( mop_inform.type == 2) {
 			
-			
-			bulletmanager::CreateBullet (p1,2);
-				
-			
+
+			double targetx = ( double ) ( p1.ReturnRect ( ).left + 20 );
+			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
+			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
+			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
+			bulletmanager::CreateBullet ( newbullet );
+		
 		}
 	
 }
@@ -36,22 +41,22 @@ void mop::move( Player1 &p1) {
 	
 		if ( mop_inform.type == 1) {
 
-			if (p1.ReturnRect().left < p->x) {
+			if (p1.ReturnRect().left < mop_inform.x) {
 				mop_inform.x -= speed;
 
 			}
 
-			if (p1.ReturnRect().top < p->y) {
+			if (p1.ReturnRect().top < mop_inform.y) {
 				mop_inform.y -= speed;
 
 			}
 
-			if (p1.ReturnRect().left > p->x) {
+			if (p1.ReturnRect().left > mop_inform.x) {
 				mop_inform.x += speed;
 				
 			}
 
-			if (p1.ReturnRect().top > p->y) {
+			if (p1.ReturnRect().top > mop_inform.y) {
 				mop_inform.y += speed;
 
 			}
@@ -114,16 +119,11 @@ void mop::render(HDC dc) {
 
 
 
-monster* monster_manager::spone ( int type ) {
-	monster* newmop = new monster;
-	newmop->x = sponsemop ( genmop );
-	newmop->y = sponsemop ( genmop );
-	newmop->hp = 100;
-	newmop->type = type;
-	newmop->cnt = 0;
+void monster_manager::spone ( int type ) {
+	mop* newmop = new mop(type);
 
-
-	return newmop;
+	mops.push_back ( newmop );
+	
 }
 
 

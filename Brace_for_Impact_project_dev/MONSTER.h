@@ -1,23 +1,25 @@
 ﻿#pragma once
 #include <windows.h>
-
+#include <list>
 #include "Player1.h"
+#include "MATH.h"
+#include <random>
+#include "BULLET.h"
 
-struct monster {
+typedef struct monster {
 	float x;
 	float y;
 	int hp;
 	int cnt;
 	int type;
-	monster* next;
-};
+}monster;
 
 class mop{
 private:
 	monster mop_inform;
 	
 public:
-	mop();
+	mop(int );
 	
 	void attack( Player1 &p1);
 	void move(Player1 &p1);
@@ -28,9 +30,9 @@ public:
 
 class monster_manager {
 private:
-	std::list<mop*> mops;
+	static std::list<mop*> mops;
 public:
-	static monster* spone ( int type );
-	void Update ( Player1& p1 );
-	void render (HDC );
+	static void spone ( int type );
+	static void Update ( Player1& p1 );
+	static void render (HDC );
 };
