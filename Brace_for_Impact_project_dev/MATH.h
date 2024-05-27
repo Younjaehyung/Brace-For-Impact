@@ -16,6 +16,12 @@ typedef struct RECTS {
 	float bottom;
 }RECTS;
 
+float a2bLine ( float x , float p1x , float p1y , float mopx , float mopy );
+
+BOOL rect2Cir ( RECTS rect , double x , double y , int sz );
+
+BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy );
+
 bool IntersectRect_float(RECTS& ,RECTS&);
 
 
