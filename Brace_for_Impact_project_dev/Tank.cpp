@@ -1,7 +1,13 @@
 ﻿#include "Tank.h"
 
 Tank::Tank () {
-	
+	Tank_car_count = 0;
+	Tank_head_count = 0;
+	Tank_head_frame=0 , Tank_car_frame=0;
+	Tank_car_direct=0 , Tank_head_direct=0;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
+	Tk_c_status=0;
+	frameInterval=0;
+	headMove = 0;
 }
 
 void Tank::Init ( HINSTANCE g_hinst ) {
@@ -37,42 +43,81 @@ void Tank::move ( )
 	moving_rander_cal ( );
 }
 
-void Tank::aiming ( ) {
-	if ( Tank_head_count >= 0.1 ) {
-		if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+void Tank::aiming_animation () {
+	if ( headMove == 1 ) {
+		if ( headArrow == 0 && Tank_head_count >=0.03) {
+			
 			Tank_head_frame += 128;
 			if ( Tank_head_frame >= 128 * 3 ) {
 				Tank_head_direct += 1;
 				Tank_head_frame = 0;
+				Tank_head_count = 0;
+				headMove = 0;
+				angle -= 45.0;
 			}
-			angle -= 45.0;
+
 			if ( Tank_head_direct > 7 ) {
 				Tank_head_direct = 0;
 			}
+			Tank_head_count = 0;
 		}
-		if ( input::GetKey ( eKeyCode::LEFT ) ) {
+		else if( headArrow == 1 && Tank_head_count >= 0.03 ) {
 			
 			Tank_head_frame -= 128;
-			if(Tank_head_frame <= 0 ){ 
-				Tank_head_direct -= 1; 
+			if ( Tank_head_frame <= 0 ) {
+				Tank_head_direct -= 1;
 				Tank_head_frame = 0;
+				Tank_head_count = 0;
+				headMove = 0;
+				angle += 45.0;
 			}
-			angle += 45.0;
+
 			if ( Tank_head_direct < 0 ) {
 				Tank_head_direct = 7;
 			}
+			Tank_head_count = 0;
 		}
-		
-		if ( input::GetKeyUp ( eKeyCode::RIGHT ) ) {
+		Tank_head_count += Time::DeltaTime ( );
+	}
+
+	
+}
+
+void Tank::aiming ( ) {
+	if ( headMove == 0 ) {
+		if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+			if ( ( frameInterval >= 0.1  ) ) {
+				headMove = 1;
+				headArrow = 0;
+
+				frameInterval = 0;
+			}
+			frameInterval += Time::DeltaTime ( );
+		}
+		else if ( input::GetKey ( eKeyCode::LEFT ) ) {
+			if ( ( frameInterval >= 0.1  ) ) {
+				headArrow = 1;
+				headMove = 1;
+				frameInterval = 0;
+			}
+			frameInterval += Time::DeltaTime ( );
+		}
+	}
+	else {
+		aiming_animation ( );
+	}
+	/*	if ( input::GetKeyUp ( eKeyCode::RIGHT ) ) {
 			Tank_head_frame = 0;
+			
 		}
 		if ( input::GetKey ( eKeyCode::LEFT ) ) {
 			Tank_head_frame = 0;
 			
-		}
-		Tank_head_count = 0;
-	}
-	Tank_head_count += Time::DeltaTime ( );
+			
+		}*/
+		
+	
+	
 }
 
 void Tank::shooting ( )
@@ -102,7 +147,18 @@ void Tank::moving_rander_cal ( ) {
 	}
 	Tank_car_count += Time::DeltaTime ( );
 	
-
+	if ( input::GetKey ( eKeyCode::W ) ) {
+		Tank_car_direct = 0;
+	}
+	if ( input::GetKey ( eKeyCode::A ) ) {
+		Tank_car_direct = 6;
+	}
+	if ( input::GetKey ( eKeyCode::S ) ) {
+		Tank_car_direct = 4;
+	}
+	if ( input::GetKey ( eKeyCode::D ) ) {
+		Tank_car_direct = 2;
+	}
 
 	if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
 		Tank_car_direct = 7;
@@ -120,18 +176,7 @@ void Tank::moving_rander_cal ( ) {
 	}
 
 
-	if ( input::GetKey ( eKeyCode::W ) && !input::GetKey ( eKeyCode::D ) && !input::GetKey ( eKeyCode::A ) ) {
-		Tank_car_direct = 0;
-	}
-	if ( input::GetKey ( eKeyCode::A ) && !input::GetKey ( eKeyCode::W ) && !input::GetKey ( eKeyCode::S ) ) {
-		Tank_car_direct = 6;
-	}
-	if ( input::GetKey ( eKeyCode::S ) && !input::GetKey ( eKeyCode::D ) && !input::GetKey ( eKeyCode::A ) ) {
-		Tank_car_direct = 4;
-	}
-	if ( input::GetKey ( eKeyCode::D ) && !input::GetKey ( eKeyCode::W ) && !input::GetKey ( eKeyCode::S ) ) {
-		Tank_car_direct = 2;
-	}
+	
 
 
 	

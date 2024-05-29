@@ -15,15 +15,17 @@ private:
 	float Tank_car_count;
 	float Tank_head_count;
 	float angle;
-
+	float frameInterval;
 	BOOL isMove;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
-
+	BOOL headMove;
+	BOOL headArrow;
 public:
 	Tank ( );
 	void move ( );
 	void shooting ( );
 	void moving_rander_cal ( );
 	void aiming();
+	void aiming_animation ( );
 	void Init ( HINSTANCE g_hinst );
 	void Update ( );
 	void render ( HDC , HDC );
