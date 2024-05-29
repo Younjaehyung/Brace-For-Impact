@@ -18,7 +18,7 @@ typedef struct monster {
 class mop{
 private:
 	monster mop_inform;
-	float count;
+	float attack_count;
 public:
 	mop(int );
 	

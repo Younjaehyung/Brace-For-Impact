@@ -29,3 +29,5 @@ bool PtinRect_float(const RECTS& rect, const POINT& point);
 
 
 RECTS float_return(const int& left, const int& top, const int& right, const int& bottom);
+
+double Radian_return ( float angle );

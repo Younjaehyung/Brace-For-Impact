@@ -14,13 +14,13 @@ mop::mop(int type) {
 	mop_inform.hp = 100;
 	mop_inform.type = type;
 	mop_inform.cnt = 0;
-	count = 0;
+	attack_count = 0;
 }
 
 
 void mop::attack(Player1& p1) {
 
-	if ( count >= 5 ) {
+	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
 
 		}
@@ -33,9 +33,9 @@ void mop::attack(Player1& p1) {
 			BulletManager::CreateBullet ( newbullet );
 
 		}
-		count = 0;
+		attack_count = 0;
 	}
-	count += Time::DeltaTime ( );
+	attack_count += Time::DeltaTime ( );
 }
 
 void mop::move( Player1 &p1) {

@@ -74,3 +74,7 @@ RECTS float_return(const int& left, const int& top, const int& right, const int&
 	return return_rects;
 }
 
+double Radian_return (float angle ) {
+
+	return angle * PI / 180.0;
+}

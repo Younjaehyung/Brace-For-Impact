@@ -7,7 +7,10 @@ Tank::Tank () {
 void Tank::Init ( HINSTANCE g_hinst ) {
 	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
 	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP10 ) ); //---1) 비트맵 로드하기
-
+	
+	angle = 90;
+	 Tank_car_count=0;
+	 Tank_head_count=0;
 }
 
 
@@ -31,25 +34,60 @@ void Tank::move ( )
 		rect.right += speed;
 	}
 
+	moving_rander_cal ( );
+}
 
+void Tank::aiming ( ) {
+	if ( Tank_head_count >= 0.3 ) {
+		if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+			Tank_head_direct += 1;
+			angle -= 45.0;
+			if ( Tank_head_direct > 7 ) {
+				Tank_head_direct = 0;
+			}
+		}
+		if ( input::GetKey ( eKeyCode::LEFT ) ) {
+			Tank_head_direct -= 1;
+			angle += 45.0;
+			if ( Tank_head_direct < 0 ) {
+				Tank_head_direct = 7;
+			}
+		}
+		
+		Tank_head_count = 0;
+	}
+	Tank_head_count += Time::DeltaTime ( );
 }
 
 void Tank::shooting ( )
 {
 
-	
+	if ( input::GetKey ( eKeyCode::UP ) ) {
+
+		bullet* newbullet = new bullet ( rect.left+64 ,  -10 + rect.top+64  , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+		BulletManager::CreateBullet ( newbullet );
+	}
 }
 
 void Tank::Update ( )
 {
+	aiming ( );
+	shooting ( );
 	move ( );
+	
 }
 
-void Tank::render (HDC hmemDC, HDC mDC)
-{
-	Tank_car_frame += 128;
-	if ( Tank_car_frame >= 128 * 4 ) Tank_car_frame = 0;
-	float speed = 5000 * Time::DeltaTime ( );
+void Tank::moving_rander_cal ( ) {
+	
+	if ( Tank_car_count >= 0.3 ) {
+		Tank_car_frame += 128;
+		if ( Tank_car_frame >= 128 * 4 ) Tank_car_frame = 0;
+		Tank_car_count = 0;
+	}
+	Tank_car_count += Time::DeltaTime ( );
+	
+
+
 	if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
 		Tank_car_direct = 7;
 	}
@@ -64,7 +102,7 @@ void Tank::render (HDC hmemDC, HDC mDC)
 	}
 
 
-	if ( input::GetKey ( eKeyCode::W ) && !input::GetKey ( eKeyCode::D )  && !input::GetKey ( eKeyCode:: A ) ) {
+	if ( input::GetKey ( eKeyCode::W ) && !input::GetKey ( eKeyCode::D ) && !input::GetKey ( eKeyCode::A ) ) {
 		Tank_car_direct = 0;
 	}
 	if ( input::GetKey ( eKeyCode::A ) && !input::GetKey ( eKeyCode::W ) && !input::GetKey ( eKeyCode::S ) ) {
@@ -78,18 +116,11 @@ void Tank::render (HDC hmemDC, HDC mDC)
 	}
 
 
-	if ( input::GetKey ( eKeyCode::LEFT ) ) {
-		Tank_head_direct += 1;
-		if ( Tank_head_direct > 7 ) {
-			Tank_head_direct = 0;
-		}
-	}
-	if ( input::GetKey ( eKeyCode::RIGHT ) ) {
-		Tank_head_direct -= 1;
-		if ( Tank_head_direct < 0 ) {
-			Tank_head_direct = 7;
-		}
-	}
+	
+}
+
+void Tank::render (HDC hmemDC, HDC mDC)
+{
 
 	//탱크 몸통
 	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_car );

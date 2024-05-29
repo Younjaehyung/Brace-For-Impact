@@ -96,8 +96,8 @@ void Application::f_Render() {
 	MonsterManager::render ( mDC );
 	BulletManager::rander ( mDC );
 	tank_p.render (hmemDC,mDC);
-	Time::Render(mDC);
 	
+	Time::Render ( mDC );
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
 
 	DeleteDC ( hmemDC );
