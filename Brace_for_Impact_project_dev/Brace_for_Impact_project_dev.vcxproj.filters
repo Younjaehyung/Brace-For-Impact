@@ -171,5 +171,11 @@
     <Image Include="BFI_Tank_head.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="UI)info_up.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="UI)Tankinside.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

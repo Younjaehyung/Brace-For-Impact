@@ -183,6 +183,8 @@
     <Image Include="BFI_Tank_head.bmp" />
     <Image Include="Brace_for_Impact_project_dev.ico" />
     <Image Include="small.ico" />
+    <Image Include="UI)info_up.bmp" />
+    <Image Include="UI)Tankinside.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

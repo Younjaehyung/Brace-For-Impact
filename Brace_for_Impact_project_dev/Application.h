@@ -18,22 +18,26 @@ private:
 	Player2 player2;
 	Tank tank_p;
 	HWND mHwnd;
-	HDC hDC, mDC, hmemDC;
+	HDC hDC , mDC , hmemDC;
 	RECT rt;
-	HBITMAP mBackBitmap, mBitmap, B_Stage_1_1, B_Stage_1_2, B_Player, B_Tank_car, B_Tank_head;
+	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
+	HBITMAP B_Machine[ 5 ];
+	HBITMAP B_UI_info_up , B_UI_inside;
 	HINSTANCE g_hinst;
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI
 	RECT r_car = { 1024, 510, 1680, 1020 };		//차체 UI
 	RECT r_cannon = { 1124, 50, 1680, 460 };	//포신 UI
+	RECT r_playground = { 1024, 0, 1680, 1020 };	//포신 UI
 
 public:
-	
-	void f_Run();
-	void f_Render();
-	void f_Update();
-	void f_FixedUpdate();
-	void f_Initialize(HWND hWnd,HINSTANCE);
+
+	void f_Run ( );
+	void f_Render ( );
+	void f_Update ( );
+	void f_FixedUpdate ( );
+	void f_Initialize ( HWND hWnd , HINSTANCE );
 };
+
 

@@ -13,7 +13,7 @@ void Tank::Init ( HINSTANCE g_hinst ) {
 
 void Tank::move ( )
 {
-	float speed = 400 * Time::DeltaTime ( );
+	float speed = 200 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::W ) ) {
 		rect.top -= speed;
 		rect.bottom -= speed;

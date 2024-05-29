@@ -12,7 +12,7 @@ void Player1::Update ( ) {
 }
 
 void Player1::move ( ) {
-	float speed = 1200 * Time::DeltaTime ( );
+	float speed = 200 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::W ) ) {
 		rect.top -= speed;
 		rect.bottom -= speed;
@@ -57,7 +57,7 @@ Player2::Player2() {
 }
 
 void Player2::Update() {
-	float speed = 1200 * Time::DeltaTime ( );
+	float speed = 200 * Time::DeltaTime ( );
 	if (input::GetKey(eKeyCode::UP)) {
 		rect.top -= speed;
 		rect.bottom -= speed;

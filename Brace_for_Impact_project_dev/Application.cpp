@@ -42,7 +42,13 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	Time::Initailize ( );
 	
 	//osw - mBitmap 추가
-	mBitmap = (HBITMAP) LoadBitmap (g_hinst , MAKEINTRESOURCE (IDB_BITMAP8) ); //---1) 비트맵 로드하기
+	mBitmap = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP8 ) ); //---1) 비트맵 로드하기
+	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
+	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP10 ) ); //---1) 비트맵 로드하기
+	B_UI_info_up = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP11 ) );
+	B_UI_inside = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP12 ) );
+	//
+
 	//B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
 	//B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP10 ) ); //---1) 비트맵 로드하기
 	tank_p.Init ( g_hinst );
@@ -60,16 +66,29 @@ void Application::f_Render() {
 
 
 	//화면 전체 크기 1680, 1050 (Y축 윈도우 창 크기때문에 30빼고 계산)
-	Rectangle(mDC, r_stage.left, r_stage.top, r_stage.right, r_stage.bottom);	//필드 스테이지 UI
-	Rectangle(mDC, r_info.left, r_info.top, r_info.right, r_info.bottom);	//정보 UI
-	Rectangle(mDC, r_car.left, r_car.top, r_car.right, r_car.bottom);	//포신 조종실 UI
-	Rectangle(mDC, r_cannon.left, r_cannon.top, r_cannon.right, r_cannon.bottom);	//차체 조종실 UI
-	SceneManager::Render(mDC);
+	Rectangle ( mDC , r_stage.left , r_stage.top , r_stage.right , r_stage.bottom );	//필드 스테이지 UI
+	Rectangle ( mDC , r_info.left , r_info.top , r_info.right , r_info.bottom );	//정보 UI
+	Rectangle ( mDC , r_car.left , r_car.top , r_car.right , r_car.bottom );	//포신 조종실 UI
+	Rectangle ( mDC , r_cannon.left , r_cannon.top , r_cannon.right , r_cannon.bottom );	//차체 조종실 UI
+
+	Rectangle ( mDC , r_playground.left , r_playground.top , r_playground.right , r_playground.bottom );	//차체 조종실 UI
+
+	SceneManager::Render ( mDC );
 
 
 	//OSW - hmemDC추가
-	SelectObject (hmemDC , ( HBITMAP ) mBitmap );
-	StretchBlt (mDC , 0 , 0 , r_stage.right , r_stage.bottom , hmemDC ,0 , 0 , 512 , 480 , SRCCOPY );
+	SelectObject ( hmemDC , ( HBITMAP ) mBitmap );
+	StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , hmemDC , 0 , 0 , 512 , 480 , SRCCOPY );
+
+	//UI
+	SelectObject ( hmemDC , ( HBITMAP ) B_UI_info_up );
+	TransparentBlt ( mDC , 0 , 668 , 1024 , 128 , hmemDC , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
+
+	//UI 탱크 내부
+	SelectObject ( hmemDC , ( HBITMAP ) B_UI_inside );
+	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , hmemDC , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
+
+	//===
 
 
 	player1.Render(mDC);
