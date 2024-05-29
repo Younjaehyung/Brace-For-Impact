@@ -10,7 +10,7 @@ class Player1
 
 private:
 	RECTS rect;
-	int count = 0;
+	double count;
 	int frame , direct;		//direct 0 : 좌 1: 우
 
 public:
@@ -29,7 +29,7 @@ class Player2
 
 private:
 	RECTS rect;
-	int count = 0;
+	double count;
 	int frame , direct;		//direct 0 : 좌 1: 우
 
 public:

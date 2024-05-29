@@ -6,6 +6,7 @@ void Player1::Init ( HINSTANCE g_hinst ) {
 
 Player1::Player1() {
 	rect = { 0,0,40,40 };
+	count = 0;
 }
 
 void Player1::Update ( ) {
@@ -20,29 +21,44 @@ void Player1::move ( ) {
 	if ( input::GetKey ( eKeyCode::W ) ) {
 		rect.top -= speed;
 		rect.bottom -= speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
-		
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+		}
+		count+= Time::DeltaTime ( );
 	}
 	if ( input::GetKey ( eKeyCode::A ) ) {
 		rect.left -= speed;
 		rect.right -= speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
-		direct = 0;
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+			direct = 0;
+		}
+		count += Time::DeltaTime ( );
 	}
 	if ( input::GetKey ( eKeyCode::S ) ) {
 		rect.top += speed;
 		rect.bottom += speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+		}
+		count += Time::DeltaTime ( );
 	}
 	if ( input::GetKey ( eKeyCode::D ) ) {
 		rect.left += speed;
 		rect.right += speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
-		direct = 1;
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+			direct = 1;
+		}
+		count += Time::DeltaTime ( );
 
 	}
 }
@@ -68,6 +84,7 @@ RECTS Player1::ReturnRect ( ) {
 
 Player2::Player2() {
 	rect = { 40,40,80,80 };
+	count = 0;
 }
 
 void Player2::Init ( HINSTANCE g_hinst ) {
@@ -79,30 +96,45 @@ void Player2::Update() {
 	if ( input::GetKey ( eKeyCode::UP ) ) {
 		rect.top -= speed;
 		rect.bottom -= speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+		}
+		count += Time::DeltaTime ( );
 
 	}
 	if ( input::GetKey ( eKeyCode::LEFT ) ) {
 		rect.left -= speed;
 		rect.right -= speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
-		direct = 0;
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+			direct = 0;
+		}
+		count += Time::DeltaTime ( );
 	}
 	if ( input::GetKey ( eKeyCode::DOWN ) ) {
 		rect.top += speed;
 		rect.bottom += speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+		}
+		count += Time::DeltaTime ( );
 	}
 	if ( input::GetKey ( eKeyCode::RIGHT ) ) {
 		rect.left += speed;
 		rect.right += speed;
-		frame += 32;
-		if ( frame >= 128 ) frame = 0;
-		direct = 1;
-
+		if ( count >= 0.1 ) {
+			count = 0;
+			frame += 32;
+			if ( frame >= 128 ) frame = 0;
+			direct = 1;
+		}
+		count += Time::DeltaTime ( );
 	}
 }
 

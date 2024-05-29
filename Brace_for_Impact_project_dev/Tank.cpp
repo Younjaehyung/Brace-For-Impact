@@ -44,7 +44,7 @@ void Tank::move ( )
 }
 
 void Tank::aiming_animation () {
-	if ( headMove == 1 ) {
+	//if ( headMove == 1 ) {
 		if ( headArrow == 0 && Tank_head_count >=0.03) {
 			
 			Tank_head_frame += 128;
@@ -78,7 +78,7 @@ void Tank::aiming_animation () {
 			Tank_head_count = 0;
 		}
 		Tank_head_count += Time::DeltaTime ( );
-	}
+	
 
 	
 }
@@ -106,17 +106,6 @@ void Tank::aiming ( ) {
 	else {
 		aiming_animation ( );
 	}
-	/*	if ( input::GetKeyUp ( eKeyCode::RIGHT ) ) {
-			Tank_head_frame = 0;
-			
-		}
-		if ( input::GetKey ( eKeyCode::LEFT ) ) {
-			Tank_head_frame = 0;
-			
-			
-		}*/
-		
-	
 	
 }
 
