@@ -20,7 +20,7 @@ mop::mop(int type) {
 
 void mop::attack(Player1& p1) {
 
-	if ( count >= 0.4 ) {
+	if ( count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
 
 		}

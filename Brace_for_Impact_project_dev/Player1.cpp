@@ -38,10 +38,6 @@ void Player1::move ( ) {
 void Player1::FixedUpdate ( ) {
 }
 void Player1::Render ( HDC mDC ) {
-
-	
-
-
 	Rectangle ( mDC , rect.left , rect.top , rect.right , rect.bottom );
 }
 RECTS Player1::ReturnRect ( ) {
@@ -61,7 +57,6 @@ void Player2::Update() {
 	if (input::GetKey(eKeyCode::UP)) {
 		rect.top -= speed;
 		rect.bottom -= speed;
-	
 	}
 	if (input::GetKey(eKeyCode::LEFT)) {
 		rect.left -= speed;
@@ -76,10 +71,7 @@ void Player2::Update() {
 	if (input::GetKey(eKeyCode::RIGHT)) {
 		rect.left += speed;
 		rect.right += speed;
-		
 	}
-
-
 }
 
 
