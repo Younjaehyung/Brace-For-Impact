@@ -38,22 +38,38 @@ void Tank::move ( )
 }
 
 void Tank::aiming ( ) {
-	if ( Tank_head_count >= 0.3 ) {
+	if ( Tank_head_count >= 0.1 ) {
 		if ( input::GetKey ( eKeyCode::RIGHT ) ) {
-			Tank_head_direct += 1;
+			Tank_head_frame += 128;
+			if ( Tank_head_frame >= 128 * 3 ) {
+				Tank_head_direct += 1;
+				Tank_head_frame = 0;
+			}
 			angle -= 45.0;
 			if ( Tank_head_direct > 7 ) {
 				Tank_head_direct = 0;
 			}
 		}
 		if ( input::GetKey ( eKeyCode::LEFT ) ) {
-			Tank_head_direct -= 1;
+			
+			Tank_head_frame -= 128;
+			if(Tank_head_frame <= 0 ){ 
+				Tank_head_direct -= 1; 
+				Tank_head_frame = 0;
+			}
 			angle += 45.0;
 			if ( Tank_head_direct < 0 ) {
 				Tank_head_direct = 7;
 			}
 		}
 		
+		if ( input::GetKeyUp ( eKeyCode::RIGHT ) ) {
+			Tank_head_frame = 0;
+		}
+		if ( input::GetKey ( eKeyCode::LEFT ) ) {
+			Tank_head_frame = 0;
+			
+		}
 		Tank_head_count = 0;
 	}
 	Tank_head_count += Time::DeltaTime ( );
@@ -81,7 +97,7 @@ void Tank::moving_rander_cal ( ) {
 	
 	if ( Tank_car_count >= 0.3 ) {
 		Tank_car_frame += 128;
-		if ( Tank_car_frame >= 128 * 4 ) Tank_car_frame = 0;
+		if ( Tank_car_frame >= 128 * 2 ) Tank_car_frame = 0;
 		Tank_car_count = 0;
 	}
 	Tank_car_count += Time::DeltaTime ( );
@@ -90,6 +106,8 @@ void Tank::moving_rander_cal ( ) {
 
 	if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
 		Tank_car_direct = 7;
+		isMove = true;
+
 	}
 	if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
 		Tank_car_direct = 1;
@@ -128,7 +146,7 @@ void Tank::render (HDC hmemDC, HDC mDC)
 
 	//탱크 머리
 	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_head );
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , hmemDC , Tank_head_direct * 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , hmemDC , Tank_head_frame , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//===
 

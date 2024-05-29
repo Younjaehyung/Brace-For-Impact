@@ -52,7 +52,7 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	//B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
 	//B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP10 ) ); //---1) 비트맵 로드하기
 	tank_p.Init ( g_hinst );
-
+	player1.Init ( g_hinst);
 }
 void Application::f_Render() {
 	GetClientRect(mHwnd, &rt);
@@ -91,8 +91,8 @@ void Application::f_Render() {
 	//===
 
 
-	player1.Render(mDC);
-	player2.Render(mDC);
+	player1.Render( hmemDC , mDC );
+	player2.Render( hmemDC , mDC );
 	MonsterManager::render ( mDC );
 	BulletManager::rander ( mDC );
 	tank_p.render (hmemDC,mDC);
