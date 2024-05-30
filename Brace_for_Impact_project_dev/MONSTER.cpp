@@ -3,7 +3,6 @@
 std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
-int BLOCKCOUNT = 20;
 
 std::random_device rdmop;
 std::mt19937 genmop;
@@ -39,15 +38,9 @@ void mop::attack(Player1& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Player1 &p1 , Block blocks[] ) {
+void mop::move( Player1 &p1) {
 	float speed = 600 * Time::DeltaTime();
-	BOOL blockmop = 0;
-	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
-			blockmop = 1;
-		}
-	}
-
+	
 		if ( mop_inform.type == 1) {
 
 			if (p1.ReturnRect().left < mop_inform.x) {
@@ -73,49 +66,43 @@ void mop::move( Player1 &p1 , Block blocks[] ) {
 
 		}
 		else if ( mop_inform.type == 2) {
-			if ( blockmop ) {
 
-				mop_inform.x += speed;
+			if (length(p1.ReturnRect().left+20, p1.ReturnRect().top+20, mop_inform.x , mop_inform.y) > MONSTERLEN) {
 
-			}
-			else {
-				if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
+				if (p1.ReturnRect().left+20 < mop_inform.x) {
+					mop_inform.x -= speed;
 
-					if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
-						mop_inform.x -= speed;
-
-					}
-					else {
-						mop_inform.x += speed;
-					}
-
-					if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
-						mop_inform.y -= speed;
-
-					}
-					else {
-						mop_inform.y += speed;
-					}
-					/*
-					if (p1.f_ReturnRect().left > p->x) {
-						p->x += speed;
-
-					}
-
-					if (p1.f_ReturnRect().top > p->y) {
-						p->y += speed;
-
-					}
-					*/
 				}
+				else {
+					mop_inform.x += speed;
+				}
+
+				if (p1.ReturnRect().top+20 < mop_inform.y) {
+					mop_inform.y -= speed;
+
+				}
+				else {
+					mop_inform.y += speed;
+				}
+				/*
+				if (p1.f_ReturnRect().left > p->x) {
+					p->x += speed;
+
+				}
+
+				if (p1.f_ReturnRect().top > p->y) {
+					p->y += speed;
+
+				}
+				*/
 			}
 
 		}
 	
 }
 
-void mop::Update( Player1& p1 , Block blocks[] ){
-	move( p1, blocks);
+void mop::Update( Player1& p1){
+	move( p1);
 	attack(  p1);
 }
 
@@ -145,10 +132,10 @@ void MonsterManager::spone ( int type ) {
 }
 
 
-void MonsterManager::Update ( Player1& p1 , Block blocks[] )
+void MonsterManager::Update ( Player1& p1 )
 {
 	for ( auto iter : mops ) {
-		iter->Update ( p1 , blocks);
+		iter->Update ( p1 );
 	}
 }
 

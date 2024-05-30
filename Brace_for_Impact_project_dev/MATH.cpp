@@ -16,14 +16,6 @@ float a2bLine ( float x , float p1x , float p1y , float mopx , float mopy ) {
 		return p1x;
 	}
 }
-float a2bLine2 ( float y , float p1x , float p1y , float mopx , float mopy ) {
-	if ( p1y != mopy ) {
-		return ( p1x - mopx ) / ( p1y - mopy ) * ( y - mopy ) + mopx;
-	}
-	else {
-		return p1y;
-	}
-}
 
 BOOL rect2Cir ( RECTS rect , double x , double y , int sz ) {
 	if ( rect.left - sz<x && rect.right + sz>x && rect.top - sz<y && rect.bottom>y ) {
@@ -35,25 +27,11 @@ BOOL rect2Cir ( RECTS rect , double x , double y , int sz ) {
 }
 
 BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy ) {
-	if ( mopx <rect.left && p1x> rect.right ) {
-		if ( rect.top < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) && rect.bottom > a2bLine ( rect.left , p1x , p1y , mopx , mopy ) ) {
-			return 1;
-		}
+	if ( rect.top < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) && rect.bottom < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) ) {
+		return 1;
 	}
-	if ( mopx > rect.right && p1x < rect.left ) {
-		if ( rect.top < a2bLine ( rect.right , p1x , p1y , mopx , mopy ) && rect.bottom > a2bLine ( rect.right , p1x , p1y , mopx , mopy ) ) {
-			return 1;
-		}
-	}
-	if ( mopy <rect.top && p1y> rect.bottom ) {
-		if ( rect.left < a2bLine2 ( rect.top , p1x , p1y , mopx , mopy ) && rect.right > a2bLine2 ( rect.top , p1x , p1y , mopx , mopy ) ) {
-			return 1;
-		}
-	}
-	if ( mopy >rect.bottom && p1y< rect.top ) {
-		if ( rect.left < a2bLine2 ( rect.bottom , p1x , p1y , mopx , mopy ) && rect.right > a2bLine2 ( rect.bottom , p1x , p1y , mopx , mopy ) ) {
-			return 1;
-		}
+	if ( rect.top < a2bLine ( rect.right , p1x , p1y , mopx , mopy ) && rect.bottom < a2bLine ( rect.right , p1x , p1y , mopx , mopy ) ) {
+		return 1;
 	}
 	else {
 		return 0;

@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="BLOCK.h" />
     <ClInclude Include="Brace_for_Impact_project_dev.h" />
     <ClInclude Include="BULLET.h" />
     <ClInclude Include="CommonInclude.h" />
@@ -155,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="BLOCK.cpp" />
     <ClCompile Include="Brace_for_Impact_project_dev.cpp" />
     <ClCompile Include="BULLET.cpp" />
     <ClCompile Include="enemy1.cpp" />
