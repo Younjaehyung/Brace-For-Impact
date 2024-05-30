@@ -19,7 +19,7 @@ void Application::f_Update() {
 	}
 	
 	//monsters.spone(monsterHD, 2);
-	MonsterManager::Update (player1 ,blocks );
+	MonsterManager::Update (player1 );
 	BulletManager::Update ( );
 
 	if (counter > 1000) {
@@ -97,18 +97,7 @@ void Application::f_Render() {
 	
 	tank_p.render (hmemDC,mDC);
 	BulletManager::rander ( mDC );
-<<<<<<< Updated upstream
 	Time::Render ( mDC );
-=======
-	for (int i = 0; i < 10; i++) {
-		//enemys[i].f_Render(mDC);
-	}
-	for ( int i = 0; i < 20; i++ ) {
-		blocks[i].Render ( mDC );
-	}
-
-	Time::Render(mDC);
->>>>>>> Stashed changes
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
 
 	DeleteDC ( hmemDC );
