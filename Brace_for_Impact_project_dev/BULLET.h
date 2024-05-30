@@ -20,24 +20,28 @@ private:
 	double mx; // x 이동거리
 	double my; // y 이동거리
 	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
+
+
 	BOOL PlayerBullet;
 public:
 	bullet ( double  , double  , int ,double  , double  );
 	void Update ( );
 	void move ( );
-	void rander ( HDC dc );
+	void Render ( HDC dc );
 	int return_type ( ) { return type; };
 };
 
 class BulletManager {
 private:
-	static std::list<bullet*> bullets;
+	 std::list<bullet*> bullets;
 public:
 	BulletManager();
-	static void rander(HDC dc);
-	static void CreateBullet ( bullet*& newbullet );
-	static void DeleteBullet ( );
-	static void Update();
+	void Initailize ( HINSTANCE g_hinst );
+	void Update ( );
+	 void Render(HDC dc);
+	 void CreateBullet ( bullet*& newbullet );
+	void DeleteBullet ( );
+
 };
 
 

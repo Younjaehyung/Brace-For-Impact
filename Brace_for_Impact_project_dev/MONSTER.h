@@ -31,10 +31,14 @@ public:
 
 class MonsterManager {
 private:
-	static std::list<mop*> mops;
-	
+	std::list<mop*> mops;
+	HBITMAP Monster1 , Monster2 , Monster3,Monster4;
+
+
 public:
-	static void spone ( int type );
-	static void Update ( Player1& p1 );
-	static void render (HDC);
+
+	void spone ( int type );
+	void Initailize (HINSTANCE );
+	void Update ( Player1& p1 );
+	void Render (HDC);
 };

@@ -12,11 +12,14 @@ private:
 	RECTS rect;
 	double count;
 	int frame , direct;		//direct 0 : 좌 1: 우
+	bool tank_status;
+	HBITMAP B_Player_1;
 
 public:
 	Player1();
-	HBITMAP B_Player_1;
+	
 	void move ( );
+	void tank_control ( );
 	void Render ( HDC , HDC );
 	void Update();
 	void FixedUpdate();
@@ -31,10 +34,12 @@ private:
 	RECTS rect;
 	double count;
 	int frame , direct;		//direct 0 : 좌 1: 우
-
+	bool tank_status;
+	HBITMAP B_Player_2;
 public:
 	Player2();
-	HBITMAP B_Player_2;
+	
+	void tank_control ( );
 	void Render ( HDC , HDC );
 	void Update();
 	void FixedUpdate();

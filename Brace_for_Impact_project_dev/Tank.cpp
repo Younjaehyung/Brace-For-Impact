@@ -11,9 +11,9 @@ Tank::Tank () {
 	headMove = 0;
 }
 
-void Tank::Init ( HINSTANCE g_hinst ) {
-	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ); //---1) 비트맵 로드하기
-	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ); //---1) 비트맵 로드하기
+void Tank::Initailize ( HINSTANCE g_hinst ) {
+	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ); //---1) 비트맵 로드하기    youn
+	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ); //---1) 비트맵 로드하기	youn
 	
 	angle = 90;
 	 Tank_car_count=0;
@@ -130,8 +130,11 @@ void Tank::shooting ( )
 
 void Tank::Update ( )
 {
+
 	aiming ( );
+	
 	shooting ( );
+	
 	move ( );
 	
 }
@@ -180,7 +183,7 @@ void Tank::moving_rander_cal ( ) {
 	
 }
 
-void Tank::render (HDC hmemDC, HDC mDC)
+void Tank::Render (HDC hmemDC, HDC mDC)
 {
 
 	//탱크 몸통

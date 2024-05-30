@@ -1,14 +1,14 @@
 ﻿#include "BULLET.h"
 #include "MATH.h"
 #include <random>
-std::list<bullet*> BulletManager::bullets;
-
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 :x(dx),y(dy),mx(dmx),my(dmy),type(dtype){
 	// 0: 삭제   1~9: 플레이어용   10~:몬스터용 
 
 }
+
+
 
 void bullet::move ( ) {
 	
@@ -21,7 +21,7 @@ void bullet::move ( ) {
 
 	
 }
-void bullet::rander ( HDC dc ) {
+void bullet::Render ( HDC dc ) {
 
 	Ellipse ( dc , x - 5 , y - 5 , x + 5 , y + 5 );
 
@@ -33,10 +33,15 @@ void bullet::Update ( ) {
 }
 
 
-
 BulletManager::BulletManager ( ) {
 
 }
+
+
+void BulletManager::Initailize ( HINSTANCE g_hinst ) {
+
+}
+
 void BulletManager::CreateBullet (bullet*& newbullet ) {
 	
 		bullets.push_back ( newbullet );
@@ -62,9 +67,9 @@ void BulletManager::Update() {
 }
 
 
-void BulletManager::rander(HDC dc) {
+void BulletManager::Render(HDC dc) {
 	for ( auto iter : bullets ) {
-		iter->rander (dc );
+		iter->Render (dc );
 	}
 }
 

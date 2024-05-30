@@ -3,7 +3,7 @@
 #include "BULLET.h"
 #include "MATH.h"
 #include "Resource.h"
-class Tank : public Player1
+class Tank 
 {
 
 private:
@@ -23,6 +23,7 @@ private:
 	BOOL isMove;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
 	BOOL headMove;
 	BOOL headArrow;
+ 
 public:
 	Tank ( );
 	void move ( );
@@ -30,9 +31,9 @@ public:
 	void moving_rander_cal ( );
 	void aiming();
 	void aiming_animation ( );
-	void Init ( HINSTANCE g_hinst );
+	void Initailize ( HINSTANCE g_hinst );
 	void Update ( );
-	void render ( HDC , HDC );
+	void Render ( HDC , HDC );
 
 };
 

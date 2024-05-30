@@ -5,9 +5,6 @@ int counter = 0;
 void Application::f_Update() {
 	input::Update();
 	Time::Update ( );
-	player1.Update();
-	player2.Update();
-	tank_p.Update ( );
 	
 	SceneManager::Update();
 	for (int i = 0; i < 10; i++) {
@@ -19,14 +16,8 @@ void Application::f_Update() {
 	}
 	
 	//monsters.spone(monsterHD, 2);
-	MonsterManager::Update (player1 );
-	BulletManager::Update ( );
-
-	if (counter > 1000) {
-		MonsterManager::spone (2 );
-		counter = 0;
-	}
-	counter++;
+	gameobject.Update ( );
+	
 }
 
 void Application::f_FixedUpdate() {
@@ -40,19 +31,14 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	g_hinst = hInst_temp;
 	input::Initialize();
 	Time::Initailize ( );
-	
+	gameobject.Initailize ( g_hinst );
 	//osw - mBitmap 추가
-	mBitmap = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2 ) ); //---1) 비트맵 로드하기
-	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ); //---1) 비트맵 로드하기
-	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ); //---1) 비트맵 로드하기
-	B_UI_info_up = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) );
-	B_UI_inside = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) );
+	
 	//
 
 	//B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
 	//B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP10 ) ); //---1) 비트맵 로드하기
-	tank_p.Init ( g_hinst );
-	player1.Init ( g_hinst);
+	
 }
 void Application::f_Render() {
 	GetClientRect(mHwnd, &rt);
@@ -89,14 +75,7 @@ void Application::f_Render() {
 	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , hmemDC , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 
 	//===
-
-
-	player1.Render( hmemDC , mDC );
-	player2.Render( hmemDC , mDC );
-	MonsterManager::render ( mDC );
-	
-	tank_p.render (hmemDC,mDC);
-	BulletManager::rander ( mDC );
+	gameobject.Render (mDC );
 	Time::Render ( mDC );
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
 

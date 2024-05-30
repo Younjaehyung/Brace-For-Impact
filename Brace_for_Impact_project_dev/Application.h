@@ -9,14 +9,15 @@
 #include "input.h"
 #include "MONSTER.h"
 #include "BULLET.h"
-#include "Resource.h"
 #include "Tank.h"
+#include "Game.h"
+
+#include "Resource.h"
 
 class Application {
 private:
-	Player1 player1;
-	Player2 player2;
-	Tank tank_p;
+	Game gameobject;
+
 	HWND mHwnd;
 	HDC hDC , mDC , hmemDC;
 	RECT rt;

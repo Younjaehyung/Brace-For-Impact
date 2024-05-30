@@ -119,11 +119,14 @@ void mop::render(HDC dc) {
 	
 }
 
+void  MonsterManager::Initailize ( HINSTANCE g_hinst ) {
+
+}
 
 
 void MonsterManager::spone ( int type ) {
-	mop* newmop = new mop(type);
 
+	mop* newmop = new mop(type);
 	mops.push_back ( newmop );
 	
 }
@@ -136,7 +139,7 @@ void MonsterManager::Update ( Player1& p1 )
 	}
 }
 
-void MonsterManager::render ( HDC mDC)
+void MonsterManager::Render ( HDC mDC)
 {
 	for ( auto iter : mops ) {
 		iter->render(mDC);

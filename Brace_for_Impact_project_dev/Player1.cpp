@@ -1,7 +1,7 @@
 ﻿#include "Player1.h"
 
 void Player1::Init ( HINSTANCE g_hinst ) {
-	B_Player_1 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );
+	B_Player_1 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
 }
 
 Player1::Player1() {
@@ -63,7 +63,13 @@ void Player1::move ( ) {
 	}
 }
 
+void Player1::tank_control ( ) {
+	if( )
+
+}
+
 void Player1::FixedUpdate ( ) {
+
 }
 void Player1::Render (HDC hmemDC , HDC mDC ) {
 
@@ -88,7 +94,7 @@ Player2::Player2() {
 }
 
 void Player2::Init ( HINSTANCE g_hinst ) {
-	B_Player_2 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );
+	B_Player_2 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
 }
 
 void Player2::Update() {
@@ -138,6 +144,10 @@ void Player2::Update() {
 	}
 }
 
+
+void Player2::tank_control ( ) {
+
+}
 
 void Player2::FixedUpdate() {
 }
