@@ -21,6 +21,9 @@ private:
 	double my; // y 이동거리
 	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
 	BOOL PlayerBullet;
+
+	HBITMAP B_bullet;
+
 public:
 	bullet ( double  , double  , int ,double  , double  );
 	void Update ( );

@@ -1,4 +1,6 @@
 ﻿#include "Tank.h"
+#define TANKSIZE 192
+
 
 Tank::Tank () {
 	Tank_car_count = 0;
@@ -185,11 +187,11 @@ void Tank::render (HDC hmemDC, HDC mDC)
 
 	//탱크 몸통
 	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_car );
-	TransparentBlt ( mDC , rect.left , rect.top , 128 , 128 , hmemDC , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE , hmemDC , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//탱크 머리
 	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_head );
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , hmemDC , Tank_head_frame * 128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , hmemDC , Tank_head_frame * 128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//===
 

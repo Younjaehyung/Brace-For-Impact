@@ -28,6 +28,8 @@ private:
 	HBITMAP B_ENEMY_1 , B_ENEMY_2 , B_PLAYER , B_BUILDING;
 	HINSTANCE g_hinst;
 
+	HBRUSH blackBrush;
+
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI
 	RECT r_car = { 1024, 510, 1680, 1020 };		//차체 UI

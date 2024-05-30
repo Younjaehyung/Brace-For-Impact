@@ -28,6 +28,9 @@ public:
 	void Update(  Player1& p1 , Block blocks[] );
 	void render(HDC dc);
 
+
+	int frame , direct;		//direct 0 : 좌 1: 우
+
 };
 
 class MonsterManager {

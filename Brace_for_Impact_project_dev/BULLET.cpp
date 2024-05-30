@@ -3,6 +3,7 @@
 #include <random>
 std::list<bullet*> BulletManager::bullets;
 
+#define SIZE 20
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 :x(dx),y(dy),mx(dmx),my(dmy),type(dtype){
@@ -23,7 +24,7 @@ void bullet::move ( ) {
 }
 void bullet::rander ( HDC dc ) {
 
-	Ellipse ( dc , x - 5 , y - 5 , x + 5 , y + 5 );
+	Ellipse ( dc , x - SIZE , y - SIZE , x + SIZE , y + SIZE );
 
 }
 
