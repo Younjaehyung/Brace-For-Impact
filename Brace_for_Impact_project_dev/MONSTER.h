@@ -34,16 +34,18 @@ public:
 class MonsterManager {
 private:
 
-	MonsterManager ( ) {};
+	MonsterManager ( ) {
+		count = 0;
+	};
 	std::list<mop*> mops;
-	
+	float count;
 public:
 	static MonsterManager& getInstance ( ) {
 		static MonsterManager instance;
 		return instance;
 	}
 
-	void spone ( int type );
+	void spawn ( int type );
 
 	void Update ( );
 	void Render ( const HDC& );
