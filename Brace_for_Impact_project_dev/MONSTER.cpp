@@ -3,6 +3,7 @@
 //std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
+int BLOCKCOUNT = 20;
 
 std::random_device rdmop;
 std::mt19937 genmop;
@@ -38,9 +39,19 @@ void mop::attack( Tank& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
+<<<<<<< .merge_file_5eRAzh
 void mop::move( Tank& p1) {
+=======
+void mop::move( Player1 &p1 , Block blocks[] ) {
+>>>>>>> .merge_file_40bg4J
 	float speed = 600 * Time::DeltaTime();
-	
+	BOOL blockmop = 0;
+	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
+		if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
+			blockmop = 1;
+		}
+	}
+
 		if ( mop_inform.type == 1) {
 
 			if ( p1.return_rect ( ).left < mop_inform.x) {
@@ -66,44 +77,68 @@ void mop::move( Tank& p1) {
 
 		}
 		else if ( mop_inform.type == 2) {
+			if ( blockmop ) {
 
+				mop_inform.x += speed;
+
+<<<<<<< .merge_file_5eRAzh
 			if (length( p1.return_rect ( ).left+20, p1.return_rect ( ).top+20, mop_inform.x , mop_inform.y) > MONSTERLEN) {
 
 				if ( p1.return_rect ( ).left+20 < mop_inform.x) {
 					mop_inform.x -= speed;
+=======
+			}
+			else {
+				if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
 
-				}
-				else {
-					mop_inform.x += speed;
-				}
+					if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+						mop_inform.x -= speed;
+>>>>>>> .merge_file_40bg4J
 
+					}
+					else {
+						mop_inform.x += speed;
+					}
+
+<<<<<<< .merge_file_5eRAzh
 				if ( p1.return_rect ( ).top+20 < mop_inform.y) {
 					mop_inform.y -= speed;
+=======
+					if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+						mop_inform.y -= speed;
+>>>>>>> .merge_file_40bg4J
 
-				}
-				else {
-					mop_inform.y += speed;
-				}
-				/*
-				if (p1.f_ReturnRect().left > p->x) {
-					p->x += speed;
+					}
+					else {
+						mop_inform.y += speed;
+					}
+					/*
+					if (p1.f_ReturnRect().left > p->x) {
+						p->x += speed;
 
-				}
+					}
 
-				if (p1.f_ReturnRect().top > p->y) {
-					p->y += speed;
+					if (p1.f_ReturnRect().top > p->y) {
+						p->y += speed;
 
+					}
+					*/
 				}
-				*/
 			}
 
 		}
 	
 }
 
+<<<<<<< .merge_file_5eRAzh
 void mop::Update( ){
 	move(PlayerManager::getInstance().Tank_return());
 	attack( PlayerManager::getInstance ( ).Tank_return ( ) );
+=======
+void mop::Update( Player1& p1 , Block blocks[] ){
+	move( p1, blocks);
+	attack(  p1);
+>>>>>>> .merge_file_40bg4J
 }
 
 void mop::Render( const HDC& dc) {
@@ -129,10 +164,17 @@ void MonsterManager::spone ( int type ) {
 }
 
 
+<<<<<<< .merge_file_5eRAzh
 void MonsterManager::Update (  )
 {
 	for ( auto iter : mops ) {
 		iter->Update (  );
+=======
+void MonsterManager::Update ( Player1& p1 , Block blocks[] )
+{
+	for ( auto iter : mops ) {
+		iter->Update ( p1 , blocks);
+>>>>>>> .merge_file_40bg4J
 	}
 }
 
