@@ -6,6 +6,7 @@
 #include "MATH.h"
 #include <random>
 #include "BULLET.h"
+#include "BLOCK.h"
 
 typedef struct monster {
 	float x;
@@ -23,8 +24,8 @@ public:
 	mop(int );
 	
 	void attack( Player1 &p1);
-	void move(Player1 &p1);
-	void Update(  Player1& p1);
+	void move(Player1 &p1 , Block blocks[] );
+	void Update(  Player1& p1 , Block blocks[] );
 	void render(HDC dc);
 
 };
@@ -35,6 +36,6 @@ private:
 	
 public:
 	static void spone ( int type );
-	static void Update ( Player1& p1 );
+	static void Update ( Player1& p1 , Block blocks[] );
 	static void render (HDC);
 };

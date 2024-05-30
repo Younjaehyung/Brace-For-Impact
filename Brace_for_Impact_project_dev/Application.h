@@ -9,6 +9,7 @@
 #include "input.h"
 #include "MONSTER.h"
 #include "BULLET.h"
+#include "BLOCK.h"
 #include "Resource.h"
 #include "Tank.h"
 
@@ -16,6 +17,7 @@ class Application {
 private:
 	Player1 player1;
 	Player2 player2;
+	Block blocks[ 20 ];
 	Tank tank_p;
 	HWND mHwnd;
 	HDC hDC , mDC , hmemDC;

@@ -19,7 +19,7 @@ void Application::f_Update() {
 	}
 	
 	//monsters.spone(monsterHD, 2);
-	MonsterManager::Update (player1 );
+	MonsterManager::Update (player1 ,blocks);
 	BulletManager::Update ( );
 
 	if (counter > 1000) {
@@ -89,7 +89,7 @@ void Application::f_Render() {
 	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , hmemDC , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 
 	//===
-
+	blocks[ 0 ].Render ( mDC );
 
 	player1.Render( hmemDC , mDC );
 	player2.Render( hmemDC , mDC );
