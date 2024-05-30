@@ -31,6 +31,7 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	g_hinst = hInst_temp;
 	input::Initialize();
 	Time::Initailize ( );
+
 	gameobject.Initailize ( g_hinst );
 	//osw - mBitmap 추가
 	
@@ -38,18 +39,19 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 
 	//B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
 	//B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP10 ) ); //---1) 비트맵 로드하기
-	
+	GetClientRect ( mHwnd , &rt );
+	mDC = CreateCompatibleDC ( hDC );
+	hmemDC = CreateCompatibleDC ( mDC );
+	mBackBitmap = CreateCompatibleBitmap ( hDC , rt.right , rt.bottom );
+	Texture::Texture_Loading (hmemDC,hInst_temp);
 }
 void Application::f_Render() {
-	GetClientRect(mHwnd, &rt);
-	mDC = CreateCompatibleDC(hDC);
-	hmemDC = CreateCompatibleDC ( mDC );
-	mBackBitmap = CreateCompatibleBitmap(hDC, rt.right, rt.bottom);
+	
 	SelectObject ( mDC , ( HBITMAP ) mBackBitmap );
 
 	Rectangle ( mDC , 0 , 0 , rt.right , rt.bottom );
 	
-
+	
 
 	//화면 전체 크기 1680, 1050 (Y축 윈도우 창 크기때문에 30빼고 계산)
 	Rectangle ( mDC , r_stage.left , r_stage.top , r_stage.right , r_stage.bottom );	//필드 스테이지 UI
@@ -63,15 +65,16 @@ void Application::f_Render() {
 
 
 	//OSW - hmemDC추가
-	SelectObject ( hmemDC , ( HBITMAP ) mBitmap );
+	Texture::Texture_Getting ( "B_STAGE_2" );
 	StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , hmemDC , 0 , 0 , 512 , 480 , SRCCOPY );
 
-	//UI
-	SelectObject ( hmemDC , ( HBITMAP ) B_UI_info_up );
+	//UI B_UI_info_up
+	Texture::Texture_Getting ( "B_UI_info_up" );
 	TransparentBlt ( mDC , 0 , 668 , 1024 , 128 , hmemDC , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//UI 탱크 내부
-	SelectObject ( hmemDC , ( HBITMAP ) B_UI_inside );
+
+	Texture::Texture_Getting ( "B_UI_inside" );
 	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , hmemDC , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 
 	//===

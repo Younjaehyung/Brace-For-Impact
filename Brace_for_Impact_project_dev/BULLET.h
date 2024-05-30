@@ -33,14 +33,14 @@ public:
 
 class BulletManager {
 private:
-	 std::list<bullet*> bullets;
+	static std::list<bullet*> bullets;
 public:
-	BulletManager();
-	void Initailize ( HINSTANCE g_hinst );
-	void Update ( );
-	 void Render(HDC dc);
-	 void CreateBullet ( bullet*& newbullet );
-	void DeleteBullet ( );
+	 BulletManager();
+	 static void Initailize (  HDC );
+	static void Update ( );
+	static void Render(HDC dc);
+	static  void CreateBullet ( bullet*& newbullet );
+	static void DeleteBullet ( );
 
 };
 

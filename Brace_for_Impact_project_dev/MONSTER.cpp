@@ -18,7 +18,7 @@ mop::mop(int type) {
 }
 
 
-void mop::attack(Player1& p1) {
+void mop::attack( Tank* p1) {
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -38,7 +38,7 @@ void mop::attack(Player1& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Player1 &p1) {
+void mop::move( Tank* ) {
 	float speed = 600 * Time::DeltaTime();
 	
 		if ( mop_inform.type == 1) {
@@ -101,9 +101,9 @@ void mop::move( Player1 &p1) {
 	
 }
 
-void mop::Update( Player1& p1){
-	move( p1);
-	attack(  p1);
+void mop::Update( ){
+	move(PlayerManager::Tank_return());
+	attack( PlayerManager::Tank_return ( ) );
 }
 
 void mop::render(HDC dc) {
@@ -132,10 +132,10 @@ void MonsterManager::spone ( int type ) {
 }
 
 
-void MonsterManager::Update ( Player1& p1 )
+void MonsterManager::Update (  )
 {
 	for ( auto iter : mops ) {
-		iter->Update ( p1 );
+		iter->Update (  );
 	}
 }
 

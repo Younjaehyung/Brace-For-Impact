@@ -1,8 +1,10 @@
 ﻿#pragma once
 #include <windows.h>
 #include <list>
+#include "Texture.h"
 #include "Time.h"
-#include "Player1.h"
+#include "Player.h"
+#include "Tank.h"
 #include "MATH.h"
 #include <random>
 #include "BULLET.h"
@@ -19,26 +21,26 @@ class mop{
 private:
 	monster mop_inform;
 	float attack_count;
+	HBITMAP* hBitmap;
 public:
 	mop(int );
 	
-	void attack( Player1 &p1);
-	void move(Player1 &p1);
-	void Update(  Player1& p1);
+	void attack(Tank*);
+	void move( Tank* );
+	void Update( );
 	void render(HDC dc);
 
 };
 
 class MonsterManager {
 private:
-	std::list<mop*> mops;
-	HBITMAP Monster1 , Monster2 , Monster3,Monster4;
-
+	static std::list<mop*> mops;
+	
 
 public:
 
-	void spone ( int type );
-	void Initailize (HINSTANCE );
-	void Update ( Player1& p1 );
-	void Render (HDC);
+	static void spone ( int type );
+	static void Initailize (HINSTANCE ,HDC);
+	static void Update ( );
+	static void Render (HDC);
 };

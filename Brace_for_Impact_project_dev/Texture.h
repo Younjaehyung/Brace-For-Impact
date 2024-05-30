@@ -2,13 +2,19 @@
 #include <Windows.h>
 #include <unordered_map>
 #include <string>
+#include "Resource.h"
 
 class Texture {
 protected:
     static std::unordered_map<std::string , HBITMAP> idBitmap;
-
+    static HDC mDC;
+    static HDC hmemDC;
 public:
-    void Texture_Loading ( HINSTANCE g_hinst ) {
+    
+
+    static void Texture_Loading (HDC tempDC ,HINSTANCE g_hinst ) {
+        hmemDC = tempDC;
+
         idBitmap.emplace ( "B_Tank_car" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ) );
         idBitmap.emplace ( "B_Tank_head" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ) );
         idBitmap.emplace ( "B_Player_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) ) );
@@ -20,14 +26,15 @@ public:
 
     }
 
-    HBITMAP Texture_Getting ( const std::string& name ) {
+    static bool Texture_Getting ( const std::string& name ) {
         auto it = idBitmap.find ( name );
         if ( it != idBitmap.end ( ) ) {
-            return it->second;
+            SelectObject ( hmemDC , it->second );
+            return 1;
         }
         else {
             // 필요한 경우 에러 처리 로직 추가
-            return nullptr;
+            return 0;
         }
     }
 };

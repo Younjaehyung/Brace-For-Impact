@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "Tank.h"
 #include "MONSTER.h"
 #include "BULLET.h"
 #include "Player.h"
@@ -7,26 +6,28 @@
 class Game
 {
 private:
-	BulletManager bulletManager;
-	MonsterManager monsterManager;
-	PlayerManager playerManager;
+	HDC hmemDC;
 
 public:
+	Game::Game (HDC DC) {
+		
+	}
+
 	void Update ( ) {
-		bulletManager.Update ( );
-		monsterManager.Update ( );
-		playerManager.Update ( );
+		BulletManager::Update ( );
+		MonsterManager::Update ( );
+		PlayerManager::Update ( );
 	}
 	void Render (HDC mDC ) {
-		bulletManager.Render (mDC );
-		monsterManager.Render ( mDC );
-		playerManager.Render ( mDC );
+		BulletManager::Render (mDC );
+		MonsterManager::Render ( mDC );
+		PlayerManager::Render ( mDC );
 	}
 
 	void Initailize ( HINSTANCE g_hinst ) {
-		bulletManager.Initailize ( g_hinst );
-		playerManager.Initailize ( g_hinst );
-		monsterManager.Initailize ( g_hinst );
+		BulletManager::Initailize ( g_hinst );
+		MonsterManager::Initailize ( g_hinst );
+		PlayerManager::Initailize ( g_hinst );
 	}
 
 	void Interaction_player1$controller ( ) {

@@ -38,7 +38,7 @@ BulletManager::BulletManager ( ) {
 }
 
 
-void BulletManager::Initailize ( HINSTANCE g_hinst ) {
+void BulletManager::Initailize ( HDC ) {
 
 }
 

@@ -1,7 +1,7 @@
 ﻿#include "Player1.h"
 
 void Player1::Init ( HINSTANCE g_hinst ) {
-	B_Player_1 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
+	//B_Player_1 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
 }
 
 Player1::Player1() {
@@ -63,19 +63,14 @@ void Player1::move ( ) {
 	}
 }
 
-void Player1::tank_control ( ) {
-	if( )
-
-}
 
 void Player1::FixedUpdate ( ) {
 
 }
 void Player1::Render (HDC hmemDC , HDC mDC ) {
 
-	Rectangle ( mDC , rect.left, rect.top, rect.right , rect.bottom );
 	//플레이어1
-	SelectObject ( hmemDC , ( HBITMAP ) B_Player_1 );
+	Texture::Texture_Getting ( "B_Player_1" );
 	TransparentBlt ( mDC , rect.left, rect.top, 128 , 128 , hmemDC , frame , direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
 
 
@@ -94,7 +89,7 @@ Player2::Player2() {
 }
 
 void Player2::Init ( HINSTANCE g_hinst ) {
-	B_Player_2 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
+	//B_Player_2 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
 }
 
 void Player2::Update() {
@@ -145,18 +140,14 @@ void Player2::Update() {
 }
 
 
-void Player2::tank_control ( ) {
-
-}
 
 void Player2::FixedUpdate() {
 }
-void Player2::Render ( HDC hmemDC , HDC mDC ) {
+void Player2::Render (  HDC mDC ) {
 	//플레이어2
-	SelectObject ( hmemDC , ( HBITMAP ) B_Player_2 );
+	Texture::Texture_Getting ( "B_Player_2" );
 	TransparentBlt ( mDC , rect.left, rect.top, 128 , 128 , hmemDC , frame , 64 + direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
 
-	Rectangle(mDC, rect.left, rect.top, rect.right, rect.bottom);
 }
 RECTS Player2::ReturnRect() {
 	return rect;

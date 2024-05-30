@@ -12,9 +12,6 @@ Tank::Tank () {
 }
 
 void Tank::Initailize ( HINSTANCE g_hinst ) {
-	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ); //---1) 비트맵 로드하기    youn
-	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ); //---1) 비트맵 로드하기	youn
-	
 	angle = 90;
 	 Tank_car_count=0;
 	 Tank_head_count=0;
@@ -183,15 +180,15 @@ void Tank::moving_rander_cal ( ) {
 	
 }
 
-void Tank::Render (HDC hmemDC, HDC mDC)
+void Tank::Render (HDC mDC)
 {
 
 	//탱크 몸통
-	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_car );
+	Texture::Texture_Getting ( "B_Tank_car" );
 	TransparentBlt ( mDC , rect.left , rect.top , 128 , 128 , hmemDC , Tank_car_frame, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//탱크 머리
-	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_head );
+	Texture::Texture_Getting ( "B_Tank_head" );
 	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , hmemDC , Tank_head_frame , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//===
