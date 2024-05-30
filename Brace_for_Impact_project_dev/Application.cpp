@@ -94,9 +94,9 @@ void Application::f_Render() {
 	player1.Render( hmemDC , mDC );
 	player2.Render( hmemDC , mDC );
 	MonsterManager::render ( mDC );
-	BulletManager::rander ( mDC );
-	tank_p.render (hmemDC,mDC);
 	
+	tank_p.render (hmemDC,mDC);
+	BulletManager::rander ( mDC );
 	Time::Render ( mDC );
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
 

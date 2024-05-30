@@ -6,6 +6,7 @@ Tank::Tank () {
 	Tank_head_frame=0 , Tank_car_frame=0;
 	Tank_car_direct=0 , Tank_head_direct=0;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
 	Tk_c_status=0;
+	angle = 90;
 	frameInterval=0;
 	headMove = 0;
 }
@@ -111,12 +112,20 @@ void Tank::aiming ( ) {
 
 void Tank::shooting ( )
 {
+	
+		if ( input::GetKey ( eKeyCode::UP ) ) {
+			if ( shootingInterval >= 0.5 ) {
+				shootingInterval = 0;
 
-	if ( input::GetKey ( eKeyCode::UP ) ) {
+			bullet* newbullet = new bullet ( rect.left + 64 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + 64 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+			BulletManager::CreateBullet ( newbullet );
+			}
+			shootingInterval+= Time::DeltaTime ( );
+		}
+		else {
+			shootingInterval = 0;
+		}
 
-		bullet* newbullet = new bullet ( rect.left+64 ,  -10 + rect.top+64  , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
-		BulletManager::CreateBullet ( newbullet );
-	}
 }
 
 void Tank::Update ( )
