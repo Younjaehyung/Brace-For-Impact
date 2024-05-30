@@ -3,12 +3,13 @@
 std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
+int BLOCKCOUNT = 20;
 
 std::random_device rdmop;
 std::mt19937 genmop;
-std::uniform_int_distribution<int> sponsemop(0, 800);
+std::uniform_int_distribution<int> sponsemop ( 0 , 800 );
 
-mop::mop(int type) {
+mop::mop ( int type ) {
 	mop_inform.x = sponsemop ( genmop );
 	mop_inform.y = sponsemop ( genmop );
 	mop_inform.hp = 100;
@@ -18,7 +19,7 @@ mop::mop(int type) {
 }
 
 
-void mop::attack(Player1& p1) {
+void mop::attack ( Player1& p1 ) {
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -38,38 +39,49 @@ void mop::attack(Player1& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Player1 &p1) {
-	float speed = 600 * Time::DeltaTime();
-	
-		if ( mop_inform.type == 1) {
+void mop::move ( Player1& p1 , Block blocks[] ) {
+	float speed = 600 * Time::DeltaTime ( );
+	BOOL blockmop = 0;
+	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
+		if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
+			blockmop = 1;
+		}
+	}
 
-			if (p1.ReturnRect().left < mop_inform.x) {
-				mop_inform.x -= speed;
+	if ( mop_inform.type == 1 ) {
 
-			}
-
-			if (p1.ReturnRect().top < mop_inform.y) {
-				mop_inform.y -= speed;
-
-			}
-
-			if (p1.ReturnRect().left > mop_inform.x) {
-				mop_inform.x += speed;
-				
-			}
-
-			if (p1.ReturnRect().top > mop_inform.y) {
-				mop_inform.y += speed;
-
-			}
-
+		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
+			mop_inform.x -= speed;
 
 		}
-		else if ( mop_inform.type == 2) {
 
-			if (length(p1.ReturnRect().left+20, p1.ReturnRect().top+20, mop_inform.x , mop_inform.y) > MONSTERLEN) {
+		if ( p1.ReturnRect ( ).top < mop_inform.y ) {
+			mop_inform.y -= speed;
 
-				if (p1.ReturnRect().left+20 < mop_inform.x) {
+		}
+
+		if ( p1.ReturnRect ( ).left > mop_inform.x ) {
+			mop_inform.x += speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).top > mop_inform.y ) {
+			mop_inform.y += speed;
+
+		}
+
+
+	}
+	else if ( mop_inform.type == 2 ) {
+		if ( blockmop ) {
+
+			mop_inform.x += speed;
+
+		}
+		else {
+			if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
+
+				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
 					mop_inform.x -= speed;
 
 				}
@@ -77,7 +89,7 @@ void mop::move( Player1 &p1) {
 					mop_inform.x += speed;
 				}
 
-				if (p1.ReturnRect().top+20 < mop_inform.y) {
+				if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
 					mop_inform.y -= speed;
 
 				}
@@ -96,49 +108,50 @@ void mop::move( Player1 &p1) {
 				}
 				*/
 			}
-
 		}
-	
+
+	}
+
 }
 
-void mop::Update( Player1& p1){
-	move( p1);
-	attack(  p1);
+void mop::Update ( Player1& p1 , Block blocks[] ) {
+	move ( p1 , blocks );
+	attack ( p1 );
 }
 
-void mop::render(HDC dc) {
+void mop::render ( HDC dc ) {
 
-	
-		HBRUSH hBrush, oldBrush;
-		hBrush = CreateSolidBrush(RGB(255, 0, 0)); // ���ο� ��ü �����: �귯��
-		oldBrush = (HBRUSH)SelectObject(dc, hBrush);
-		Rectangle(dc, mop_inform.x - MOPSIZE, mop_inform.y - MOPSIZE, mop_inform.x + MOPSIZE, mop_inform.y + MOPSIZE);
-		
-		SelectObject(dc, oldBrush); // ������ �귯�÷� ���ư���
-		DeleteObject(hBrush);
-	
+
+	HBRUSH hBrush , oldBrush;
+	hBrush = CreateSolidBrush ( RGB ( 255 , 0 , 0 ) ); //    ο    ü      :  귯  
+	oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
+	Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x + MOPSIZE , mop_inform.y + MOPSIZE );
+
+	SelectObject ( dc , oldBrush ); //         귯 ÷     ư   
+	DeleteObject ( hBrush );
+
 }
 
 
 
 void MonsterManager::spone ( int type ) {
-	mop* newmop = new mop(type);
+	mop* newmop = new mop ( type );
 
 	mops.push_back ( newmop );
-	
+
 }
 
 
-void MonsterManager::Update ( Player1& p1 )
+void MonsterManager::Update ( Player1& p1 , Block blocks[] )
 {
 	for ( auto iter : mops ) {
-		iter->Update ( p1 );
+		iter->Update ( p1 , blocks );
 	}
 }
 
-void MonsterManager::render ( HDC mDC)
+void MonsterManager::render ( HDC mDC )
 {
 	for ( auto iter : mops ) {
-		iter->render(mDC);
+		iter->render ( mDC );
 	}
 }

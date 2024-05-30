@@ -17,6 +17,7 @@ typedef struct RECTS {
 }RECTS;
 
 float a2bLine ( float x , float p1x , float p1y , float mopx , float mopy );
+float a2bLine2 ( float y , float p1x , float p1y , float mopx , float mopy );
 
 BOOL rect2Cir ( RECTS rect , double x , double y , int sz );
 

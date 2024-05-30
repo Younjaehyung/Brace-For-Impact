@@ -75,7 +75,11 @@
     <ClInclude Include="PlayScenes.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Tank.h">
+=======
+    <ClInclude Include="BLOCK.h">
+>>>>>>> Stashed changes
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -125,7 +129,11 @@
     <ClCompile Include="PlayScenes.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="Tank.cpp">
+=======
+    <ClCompile Include="BLOCK.cpp">
+>>>>>>> Stashed changes
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
