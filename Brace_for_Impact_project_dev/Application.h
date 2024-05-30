@@ -24,7 +24,7 @@ private:
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
 	HBITMAP B_Machine[ 5 ];
-	HBITMAP B_UI_info_up , B_UI_inside;
+	HBITMAP B_UI_info_up , B_UI_inside, B_UI_stage;
 	HBITMAP B_ENEMY_1 , B_ENEMY_2 , B_PLAYER , B_BUILDING;
 	HINSTANCE g_hinst;
 

@@ -47,6 +47,8 @@ void Application::f_Initialize(HWND hWnd,HINSTANCE  hInst_temp ) {
 	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ); //---1) 비트맵 로드하기
 	B_UI_info_up = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) );
 	B_UI_inside = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) );
+
+	B_UI_stage = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_STAGE ) );
 	//
 
 	//B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BITMAP9 ) ); //---1) 비트맵 로드하기
@@ -80,9 +82,13 @@ void Application::f_Render() {
 	SelectObject ( hmemDC , ( HBITMAP ) mBitmap );
 	StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , hmemDC , 0 , 0 , 512 , 480 , SRCCOPY );
 
-	//UI
-	SelectObject ( hmemDC , ( HBITMAP ) B_UI_info_up );
-	TransparentBlt ( mDC , 0 , 668 , 1024 , 128 , hmemDC , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
+	//UI 정보창 위부분
+	//SelectObject ( hmemDC , ( HBITMAP ) B_UI_info_up );
+	//TransparentBlt ( mDC , 0 , 668 , 1024 , 128 , hmemDC , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
+
+	//UI 스테이지
+	SelectObject ( hmemDC , ( HBITMAP ) B_UI_stage );
+	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 , hmemDC , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
 
 	//UI 탱크 내부
 	SelectObject ( hmemDC , ( HBITMAP ) B_UI_inside );

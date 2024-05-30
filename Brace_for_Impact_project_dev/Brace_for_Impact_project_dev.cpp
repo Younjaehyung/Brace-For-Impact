@@ -64,7 +64,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         }
     }
-
+    std::cout << "A" << std::endl;
     return (int) msg.wParam;
 }
 
@@ -92,7 +92,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_BRACEFORIMPACTPROJECTDEV);
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-
+    std::cout << "B" << std::endl;
     return RegisterClassExW(&wcex);
 }
 
@@ -122,7 +122,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
+   std::cout << "C" << std::endl;
    return TRUE;
 }
 

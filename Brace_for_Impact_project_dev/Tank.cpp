@@ -3,7 +3,7 @@
 Tank::Tank () {
 	Tank_car_count = 0;
 	Tank_head_count = 0;
-	Tank_head_frame=0 , Tank_car_frame=0;
+	Tank_head_frame=2 , Tank_car_frame=0;
 	Tank_car_direct=0 , Tank_head_direct=0;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
 	Tk_c_status=0;
 	angle = 90;
@@ -46,33 +46,33 @@ void Tank::move ( )
 
 void Tank::aiming_animation () {
 	//if ( headMove == 1 ) {
-		if ( headArrow == 0 && Tank_head_count >=0.03) {
+		if ( headArrow == 0 && Tank_head_count >=0.05) {
 			
-			Tank_head_frame += 128;
-			if ( Tank_head_frame >= 128 * 3 ) {
+			Tank_head_frame++;
+			if ( Tank_head_frame > 4 ) {
 				Tank_head_direct += 1;
-				Tank_head_frame = 0;
+				Tank_head_frame = 2;
 				Tank_head_count = 0;
 				headMove = 0;
 				angle -= 45.0;
 			}
-
+			
 			if ( Tank_head_direct > 7 ) {
 				Tank_head_direct = 0;
 			}
 			Tank_head_count = 0;
 		}
-		else if( headArrow == 1 && Tank_head_count >= 0.03 ) {
+		else if( headArrow == 1 && Tank_head_count >= 0.05 ) {
 			
-			Tank_head_frame -= 128;
-			if ( Tank_head_frame <= 0 ) {
+			Tank_head_frame--;
+			if ( Tank_head_frame < 0 ) {
 				Tank_head_direct -= 1;
-				Tank_head_frame = 0;
+				Tank_head_frame = 2;
 				Tank_head_count = 0;
 				headMove = 0;
 				angle += 45.0;
 			}
-
+			
 			if ( Tank_head_direct < 0 ) {
 				Tank_head_direct = 7;
 			}
@@ -139,8 +139,8 @@ void Tank::Update ( )
 void Tank::moving_rander_cal ( ) {
 	
 	if ( Tank_car_count >= 0.3 ) {
-		Tank_car_frame += 128;
-		if ( Tank_car_frame >= 128 * 2 ) Tank_car_frame = 0;
+		Tank_car_frame++;
+		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
 		Tank_car_count = 0;
 	}
 	Tank_car_count += Time::DeltaTime ( );
@@ -185,11 +185,11 @@ void Tank::render (HDC hmemDC, HDC mDC)
 
 	//탱크 몸통
 	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_car );
-	TransparentBlt ( mDC , rect.left , rect.top , 128 , 128 , hmemDC , Tank_car_frame, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , rect.left , rect.top , 128 , 128 , hmemDC , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//탱크 머리
 	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_head );
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , hmemDC , Tank_head_frame , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , hmemDC , Tank_head_frame * 128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//===
 

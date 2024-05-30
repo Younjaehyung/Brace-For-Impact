@@ -173,16 +173,27 @@
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="BFI_BOSS_2_sprite.bmp" />
     <Image Include="BFI_Building_1.bmp" />
     <Image Include="BFI_Bullet_1.bmp" />
+    <Image Include="BFI_Control_attack.bmp" />
+    <Image Include="BFI_Control_dash.bmp" />
+    <Image Include="BFI_Control_engine.bmp" />
+    <Image Include="BFI_Control_move.bmp" />
+    <Image Include="BFI_Control_reloader.bmp" />
+    <Image Include="BFI_Control_steam.bmp" />
     <Image Include="BFI_Enemy_1.bmp" />
     <Image Include="BFI_Enemy_2.bmp" />
+    <Image Include="BFI_Enemy_3.bmp" />
+    <Image Include="BFI_Enemy_4.bmp" />
+    <Image Include="BFI_Enemy_5.bmp" />
     <Image Include="BFI_Player.bmp" />
     <Image Include="BFI_Stage_1_1.bmp" />
     <Image Include="BFI_Stage_1_2.bmp" />
     <Image Include="BFI_Stage_2.bmp" />
     <Image Include="BFI_Tank_car.bmp" />
     <Image Include="BFI_Tank_head.bmp" />
+    <Image Include="BFI_UI_stage.bmp" />
     <Image Include="Brace_for_Impact_project_dev.ico" />
     <Image Include="small.ico" />
     <Image Include="UI)info_up.bmp" />
