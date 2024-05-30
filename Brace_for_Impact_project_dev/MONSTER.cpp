@@ -1,6 +1,6 @@
 ﻿#include "MONSTER.h"
 
-std::list<mop*> MonsterManager::mops;
+//std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
 
@@ -18,7 +18,7 @@ mop::mop(int type) {
 }
 
 
-void mop::attack( Tank* p1) {
+void mop::attack( Tank& p1) {
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -26,11 +26,11 @@ void mop::attack( Tank* p1) {
 		}
 		else if ( mop_inform.type == 2 ) {
 
-			double targetx = ( double ) ( p1.ReturnRect ( ).left + 20 );
-			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
+			double targetx = ( double ) ( p1.return_rect ( ).left + 20 );
+			double targety = ( double ) ( p1.return_rect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
 			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
-			BulletManager::CreateBullet ( newbullet );
+			BulletManager::getInstance().CreateBullet ( newbullet );
 
 		}
 		attack_count = 0;
@@ -38,27 +38,27 @@ void mop::attack( Tank* p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Tank* ) {
+void mop::move( Tank& p1) {
 	float speed = 600 * Time::DeltaTime();
 	
 		if ( mop_inform.type == 1) {
 
-			if (p1.ReturnRect().left < mop_inform.x) {
+			if ( p1.return_rect ( ).left < mop_inform.x) {
 				mop_inform.x -= speed;
 
 			}
 
-			if (p1.ReturnRect().top < mop_inform.y) {
+			if ( p1.return_rect ( ).top < mop_inform.y) {
 				mop_inform.y -= speed;
 
 			}
 
-			if (p1.ReturnRect().left > mop_inform.x) {
+			if ( p1.return_rect ( ).left > mop_inform.x) {
 				mop_inform.x += speed;
 				
 			}
 
-			if (p1.ReturnRect().top > mop_inform.y) {
+			if ( p1.return_rect ( ).top > mop_inform.y) {
 				mop_inform.y += speed;
 
 			}
@@ -67,9 +67,9 @@ void mop::move( Tank* ) {
 		}
 		else if ( mop_inform.type == 2) {
 
-			if (length(p1.ReturnRect().left+20, p1.ReturnRect().top+20, mop_inform.x , mop_inform.y) > MONSTERLEN) {
+			if (length( p1.return_rect ( ).left+20, p1.return_rect ( ).top+20, mop_inform.x , mop_inform.y) > MONSTERLEN) {
 
-				if (p1.ReturnRect().left+20 < mop_inform.x) {
+				if ( p1.return_rect ( ).left+20 < mop_inform.x) {
 					mop_inform.x -= speed;
 
 				}
@@ -77,7 +77,7 @@ void mop::move( Tank* ) {
 					mop_inform.x += speed;
 				}
 
-				if (p1.ReturnRect().top+20 < mop_inform.y) {
+				if ( p1.return_rect ( ).top+20 < mop_inform.y) {
 					mop_inform.y -= speed;
 
 				}
@@ -102,11 +102,11 @@ void mop::move( Tank* ) {
 }
 
 void mop::Update( ){
-	move(PlayerManager::Tank_return());
-	attack( PlayerManager::Tank_return ( ) );
+	move(PlayerManager::getInstance().Tank_return());
+	attack( PlayerManager::getInstance ( ).Tank_return ( ) );
 }
 
-void mop::render(HDC dc) {
+void mop::Render( const HDC& dc) {
 
 	
 		HBRUSH hBrush, oldBrush;
@@ -119,9 +119,6 @@ void mop::render(HDC dc) {
 	
 }
 
-void  MonsterManager::Initailize ( HINSTANCE g_hinst ) {
-
-}
 
 
 void MonsterManager::spone ( int type ) {
@@ -139,9 +136,9 @@ void MonsterManager::Update (  )
 	}
 }
 
-void MonsterManager::Render ( HDC mDC)
+void MonsterManager::Render ( const HDC& mDC)
 {
 	for ( auto iter : mops ) {
-		iter->render(mDC);
+		iter->Render(mDC);
 	}
 }

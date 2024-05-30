@@ -17,15 +17,16 @@ private:
 	HBITMAP* B_Player_1;
 	HDC hmemDC;
 public:
-	Player1();
+
+	Player1 ( );
 	
 	void move ( );
 	//void tank_control ( );
-	void Render ( HDC );
+	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();
-	void Init ( HINSTANCE g_hinst );
+	
 };
 
 class Player2
@@ -42,7 +43,7 @@ public:
 	Player2();
 	
 	//void tank_control ( );
-	void Render ( HDC );
+	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();

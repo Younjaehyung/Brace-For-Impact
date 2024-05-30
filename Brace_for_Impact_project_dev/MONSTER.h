@@ -4,7 +4,6 @@
 #include "Texture.h"
 #include "Time.h"
 #include "Player.h"
-#include "Tank.h"
 #include "MATH.h"
 #include <random>
 #include "BULLET.h"
@@ -25,22 +24,27 @@ private:
 public:
 	mop(int );
 	
-	void attack(Tank*);
-	void move( Tank* );
+	void attack(Tank&);
+	void move( Tank& );
 	void Update( );
-	void render(HDC dc);
+	void Render( const HDC& dc);
 
 };
 
 class MonsterManager {
 private:
-	static std::list<mop*> mops;
+
+	MonsterManager ( ) {};
+	std::list<mop*> mops;
 	
-
 public:
+	static MonsterManager& getInstance ( ) {
+		static MonsterManager instance;
+		return instance;
+	}
 
-	static void spone ( int type );
-	static void Initailize (HINSTANCE ,HDC);
-	static void Update ( );
-	static void Render (HDC);
+	void spone ( int type );
+
+	void Update ( );
+	void Render ( const HDC& );
 };

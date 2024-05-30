@@ -6,28 +6,30 @@
 class Game
 {
 private:
-	HDC hmemDC;
-
+	int score;
 public:
-	Game::Game (HDC DC) {
+	Game ( ) :score(0) {
 		
 	}
 
 	void Update ( ) {
-		BulletManager::Update ( );
-		MonsterManager::Update ( );
-		PlayerManager::Update ( );
+
+		BulletManager::getInstance ( ).Update ( );
+		MonsterManager::getInstance ( ).Update ( );
+		PlayerManager::getInstance ( ).Update ( );
 	}
-	void Render (HDC mDC ) {
-		BulletManager::Render (mDC );
-		MonsterManager::Render ( mDC );
-		PlayerManager::Render ( mDC );
+	void Render ( const HDC& mDC ) {
+		BulletManager::getInstance ( ).Render ( mDC );
+		MonsterManager::getInstance ( ).Render ( mDC );
+		PlayerManager::getInstance ( ).Render ( mDC );
 	}
 
-	void Initailize ( HINSTANCE g_hinst ) {
-		BulletManager::Initailize ( g_hinst );
-		MonsterManager::Initailize ( g_hinst );
-		PlayerManager::Initailize ( g_hinst );
+	void Initailize ( HDC mDC,HINSTANCE g_hinst ) {
+		Texture::getInstance ( ).Texture_Loading ( mDC , g_hinst );
+		BulletManager::getInstance ( );
+		MonsterManager::getInstance ( );
+		PlayerManager::getInstance ( );
+		
 	}
 
 	void Interaction_player1$controller ( ) {

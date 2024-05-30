@@ -21,7 +21,7 @@ void bullet::move ( ) {
 
 	
 }
-void bullet::Render ( HDC dc ) {
+void bullet::Render ( const HDC& dc ) {
 
 	Ellipse ( dc , x - 5 , y - 5 , x + 5 , y + 5 );
 
@@ -29,16 +29,6 @@ void bullet::Render ( HDC dc ) {
 
 void bullet::Update ( ) {
 	move ( );
-
-}
-
-
-BulletManager::BulletManager ( ) {
-
-}
-
-
-void BulletManager::Initailize ( HDC ) {
 
 }
 
@@ -64,10 +54,11 @@ void BulletManager::Update() {
 	for ( auto iter : bullets) {
 		iter->Update ( );
 	}
+
 }
 
 
-void BulletManager::Render(HDC dc) {
+void BulletManager::Render( const HDC& dc) {
 	for ( auto iter : bullets ) {
 		iter->Render (dc );
 	}

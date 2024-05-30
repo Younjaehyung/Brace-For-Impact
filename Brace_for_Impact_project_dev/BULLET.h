@@ -27,20 +27,27 @@ public:
 	bullet ( double  , double  , int ,double  , double  );
 	void Update ( );
 	void move ( );
-	void Render ( HDC dc );
+	void Render ( const HDC& );
 	int return_type ( ) { return type; };
 };
 
 class BulletManager {
 private:
-	static std::list<bullet*> bullets;
+	BulletManager ( ) {};
+	 std::list<bullet*> bullets;
+	
 public:
-	 BulletManager();
-	 static void Initailize (  HDC );
-	static void Update ( );
-	static void Render(HDC dc);
-	static  void CreateBullet ( bullet*& newbullet );
-	static void DeleteBullet ( );
+	static BulletManager& getInstance ( ) {
+		static BulletManager instance;
+		return instance;
+	}
+
+
+	//void Initailize ( const HDC& );
+	void Update ( );
+	void Render( const HDC& dc);
+	void CreateBullet ( bullet*& newbullet );
+	void DeleteBullet ( );
 
 };
 

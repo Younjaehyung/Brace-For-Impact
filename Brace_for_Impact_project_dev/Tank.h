@@ -8,6 +8,7 @@ class Tank
 {
 
 private:
+	
 	RECTS rect;
 	HBITMAP* bitmap;
 	int Tank_head_frame, Tank_car_frame;
@@ -26,15 +27,23 @@ private:
 	BOOL headArrow;
  
 public:
+	
 	Tank ( );
+
+
 	void move ( );
 	void shooting ( );
 	void moving_rander_cal ( );
 	void aiming();
 	void aiming_animation ( );
-	void Initailize ( HINSTANCE g_hinst );
+	
+	RECTS& return_rect ( ) {
+		return rect;
+	}
+
+
 	void Update ( );
-	void Render ( HDC );
+	void Render ( const HDC& );
 
 };
 
