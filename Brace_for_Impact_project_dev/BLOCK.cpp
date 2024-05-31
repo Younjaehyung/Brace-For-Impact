@@ -22,3 +22,26 @@ void Block::makeblock (RECTS rects, int type1 ) {
 RECTS Block::ReturnRect ( ) {
 	return rect;
 }
+
+void BlockManager::Initilize ( int type )
+{
+	Block temp;
+	Blocks.push_back (temp);
+}
+
+void BlockManager::Update ( )
+{
+}
+
+void BlockManager::Render ( const HDC& dc)
+{
+	for ( auto& block_render : Blocks ) {
+		block_render.Render (dc );
+	}
+
+}
+
+std::vector<Block>& BlockManager::BlockReturn ( )
+{
+	return Blocks;
+}

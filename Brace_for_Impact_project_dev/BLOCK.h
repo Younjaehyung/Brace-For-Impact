@@ -15,3 +15,20 @@ public:
 	void makeblock ( RECTS rects , int type );
 	RECTS ReturnRect ( );
 };
+
+class BlockManager {
+private:
+	BlockManager ( ) {};
+	std::vector<Block> Blocks;
+
+public:
+	static BlockManager& getInstance ( ) {
+		static BlockManager instance;
+		return instance;
+	}
+
+	void Initilize ( int type );
+	void Update ( );
+	void Render ( const HDC& );
+	std::vector<Block>& BlockReturn ( );
+};

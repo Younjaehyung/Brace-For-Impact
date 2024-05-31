@@ -2,6 +2,7 @@
 #include "MONSTER.h"
 #include "BULLET.h"
 #include "Player.h"
+#include"BLOCK.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ public:
 		BulletManager::getInstance ( ).Render ( mDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
 		PlayerManager::getInstance ( ).Render ( mDC );
+		BlockManager::getInstance ( ).Render ( mDC );
 	}
 
 	void Initailize ( HDC mDC,HINSTANCE g_hinst ) {
@@ -29,7 +31,7 @@ public:
 		BulletManager::getInstance ( );
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
-		
+		BlockManager::getInstance ( ).Initilize(3);
 	}
 
 	void Interaction_player1$controller ( ) {

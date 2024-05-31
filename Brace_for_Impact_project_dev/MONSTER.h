@@ -7,6 +7,7 @@
 #include "MATH.h"
 #include <random>
 #include "BULLET.h"
+#include"BLOCK.h"
 
 typedef struct monster {
 	float x;

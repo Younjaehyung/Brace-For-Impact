@@ -39,47 +39,31 @@ void mop::attack( Tank& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-<<<<<<< HEAD
-void mop::move( Tank& p1) {
-
-	float speed = 600 * Time::DeltaTime();
-	BOOL blockmop = 0;
-	RECTS moprect = { mop_inform.x -MOPSIZE -2 , mop_inform.y - MOPSIZE-2 , mop_inform.x + MOPSIZE+2 , mop_inform.y + MOPSIZE+2 };
-	RECTS cpyrect = {300,300,400,400};
-	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		////if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect) ) {
-		//	if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
-		//		blockmop = 1;
-		//		cpyrect = blocks[ i ].ReturnRect();
-		//	}
-		////}
-=======
-void mop::move ( Player1& p1 , Block blocks[] ) {
+void mop::move ( Tank& p1  ) {
 	float speed = 600 * Time::DeltaTime ( );
 	BOOL blockmop = 0;
 	RECTS moprect = { mop_inform.x - MOPSIZE - 2 , mop_inform.y - MOPSIZE - 2 , mop_inform.x + MOPSIZE + 2 , mop_inform.y + MOPSIZE + 2 };
 	RECTS cpyrect;
-	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect ) ) {
-			if ( blocks[ i ].ReturnRect ( ).top >= moprect.top ) {
+	for ( auto& ScanBlock : BlockManager::getInstance().BlockReturn()) {
+		if ( rect2rect ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+			if ( ScanBlock.ReturnRect ( ).top >= moprect.top ) {
 				mop_inform.y -= speed;
 			}
-			if ( blocks[ i ].ReturnRect ( ).bottom <= moprect.bottom ) {
+			if ( ScanBlock.ReturnRect ( ).bottom <= moprect.bottom ) {
 				mop_inform.y += speed;
 			}
-			if ( blocks[ i ].ReturnRect ( ).right <= moprect.right ) {
+			if ( ScanBlock.ReturnRect ( ).right <= moprect.right ) {
 				mop_inform.x += speed;
 			}
-			if ( blocks[ i ].ReturnRect ( ).left >= moprect.left ) {
+			if ( ScanBlock.ReturnRect ( ).left >= moprect.left ) {
 				mop_inform.x -= speed;
 			}
 		}
-		if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
+		if ( rect2Line4 ( ScanBlock.ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
 			blockmop = 1;
-			cpyrect = blocks[ i ].ReturnRect ( );
+			cpyrect = ScanBlock.ReturnRect ( );
 		}
 
->>>>>>> main
 	}
 	if ( mop_inform.type == 1 ) {
 
@@ -147,10 +131,7 @@ void mop::move ( Player1& p1 , Block blocks[] ) {
 		}
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 }
 
 void mop::Update( ){
@@ -192,7 +173,7 @@ void MonsterManager::Update (  )
 
 	if ( count >= 10 ) {
 		count = 0;
-		spawn ( 1 );
+		spawn ( 2 );
 		
 	}
 	count += Time::DeltaTime ( );
