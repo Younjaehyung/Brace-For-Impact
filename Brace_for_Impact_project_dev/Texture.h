@@ -28,6 +28,9 @@ public:
         idBitmap.emplace ( "B_UI_INFO_UP" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) ) );
         idBitmap.emplace ( "B_UI_INSIDE" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) ) );
 
+
+
+
         for ( const auto& pair : idBitmap ) {
             HDC memDC = CreateCompatibleDC ( mDC );
             SelectObject ( memDC , pair.second );

@@ -3,7 +3,7 @@
 
 
 Tank::Tank () {
-	rect = {};
+	
 	Tank_car_count = 0;
 	Tank_head_count = 0;
 	Tank_head_frame=2 , Tank_car_frame=0;

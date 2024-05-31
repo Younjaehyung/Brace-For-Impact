@@ -58,7 +58,7 @@ void Application::f_Render() {
 
 	//UI 탱크 내부
 
-	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , Texture::getInstance ( ).Texture_GetDC ( "B_UI_inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , Texture::getInstance ( ).Texture_GetDC ( "B_UI_INSIDE" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 
 
 	//===
