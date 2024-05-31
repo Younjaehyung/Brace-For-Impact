@@ -78,7 +78,13 @@
     <ClInclude Include="Tank.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BLOCK.h">
+    <ClInclude Include="Game.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,7 +137,10 @@
     <ClCompile Include="Tank.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BLOCK.cpp">
+    <ClCompile Include="Interaction.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -181,39 +190,6 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="UI)Tankinside.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_BOSS_2_sprite.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_attack.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_dash.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_engine.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_move.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_reloader.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_steam.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Enemy_3.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Enemy_4.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Enemy_5.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_UI_stage.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

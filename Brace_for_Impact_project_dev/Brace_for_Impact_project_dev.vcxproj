@@ -134,10 +134,12 @@
     <ClInclude Include="CommonInclude.h" />
     <ClInclude Include="enemy1.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="MATH.h" />
     <ClInclude Include="MONSTER.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="PlayScenes.h" />
     <ClInclude Include="Resource.h" />
@@ -146,6 +148,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="LoadScenes.h" />
@@ -156,8 +159,10 @@
     <ClCompile Include="Brace_for_Impact_project_dev.cpp" />
     <ClCompile Include="BULLET.cpp" />
     <ClCompile Include="enemy1.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gameobject.cpp" />
     <ClCompile Include="input.cpp" />
+    <ClCompile Include="Interaction.cpp" />
     <ClCompile Include="MATH.cpp" />
     <ClCompile Include="MONSTER.cpp" />
     <ClCompile Include="Player1.cpp" />
