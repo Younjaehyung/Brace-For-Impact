@@ -20,8 +20,6 @@ private:
 	double mx; // x 이동거리
 	double my; // y 이동거리
 	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
-
-
 	BOOL PlayerBullet;
 
 	HBITMAP B_bullet;
@@ -30,28 +28,19 @@ public:
 	bullet ( double  , double  , int ,double  , double  );
 	void Update ( );
 	void move ( );
-	void Render ( const HDC& );
+	void rander ( HDC dc );
 	int return_type ( ) { return type; };
 };
 
 class BulletManager {
 private:
-	BulletManager ( ) {};
-	 std::list<bullet*> bullets;
-	
+	static std::list<bullet*> bullets;
 public:
-	static BulletManager& getInstance ( ) {
-		static BulletManager instance;
-		return instance;
-	}
-
-
-	//void Initailize ( const HDC& );
-	void Update ( );
-	void Render( const HDC& dc);
-	void CreateBullet ( bullet*& newbullet );
-	void DeleteBullet ( );
-
+	BulletManager();
+	static void rander(HDC dc);
+	static void CreateBullet ( bullet*& newbullet );
+	static void DeleteBullet ( );
+	static void Update();
 };
 
 

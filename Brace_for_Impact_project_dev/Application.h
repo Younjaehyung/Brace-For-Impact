@@ -4,24 +4,31 @@
 #include <list>
 #include "SceneManager.h"
 #include "Gameobject.h"
+#include "Player1.h"
+#include "enemy1.h"
 #include "input.h"
-#include "Game.h"
-#include "Texture.h"
-
+#include "MONSTER.h"
+#include "BULLET.h"
+#include "BLOCK.h"
+#include "Resource.h"
+#include "Tank.h"
 
 class Application {
 private:
-	Game gameobject;
-
+	Player1 player1;
+	Player2 player2;
+	Block blocks[ 20 ];
+	Tank tank_p;
 	HWND mHwnd;
-	HDC hDC , mDC;
-	HINSTANCE g_hinst;
-
+	HDC hDC , mDC , hmemDC;
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
 	HBITMAP B_Machine[ 5 ];
-	HBITMAP B_UI_info_up , B_UI_inside;
+	HBITMAP B_UI_info_up , B_UI_inside, B_UI_stage;
 	HBITMAP B_ENEMY_1 , B_ENEMY_2 , B_PLAYER , B_BUILDING;
+	HINSTANCE g_hinst;
+
+	HBRUSH blackBrush;
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI
@@ -30,17 +37,12 @@ private:
 	RECT r_playground = { 1024, 0, 1680, 1020 };	//포신 UI
 
 public:
-	Application ( ) {
-		hDC = NULL;
-		mDC = NULL;
-		mBackBitmap = NULL;
-	}
+
 	void f_Run ( );
 	void f_Render ( );
 	void f_Update ( );
 	void f_FixedUpdate ( );
 	void f_Initialize ( HWND hWnd , HINSTANCE );
-	void HandleResize ( );
 };
 
 

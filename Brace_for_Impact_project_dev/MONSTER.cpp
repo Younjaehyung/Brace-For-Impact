@@ -1,6 +1,6 @@
 ﻿#include "MONSTER.h"
 
-//std::list<mop*> MonsterManager::mops;
+std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
 int BLOCKCOUNT = 20;
@@ -19,7 +19,7 @@ mop::mop(int type) {
 }
 
 
-void mop::attack( Tank& p1) {
+void mop::attack(Player1& p1) {
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -31,7 +31,7 @@ void mop::attack( Tank& p1) {
 			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
 			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
-			BulletManager::getInstance().CreateBullet ( newbullet );
+			BulletManager::CreateBullet ( newbullet );
 
 		}
 		attack_count = 0;
@@ -39,19 +39,18 @@ void mop::attack( Tank& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Tank& p1) {
-
+void mop::move( Player1 &p1 , Block blocks[] ) {
 	float speed = 600 * Time::DeltaTime();
 	BOOL blockmop = 0;
 	RECTS moprect = { mop_inform.x -MOPSIZE -2 , mop_inform.y - MOPSIZE-2 , mop_inform.x + MOPSIZE+2 , mop_inform.y + MOPSIZE+2 };
-	RECTS cpyrect = {300,300,400,400};
+	RECTS cpyrect;
 	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		////if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect) ) {
-		//	if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
-		//		blockmop = 1;
-		//		cpyrect = blocks[ i ].ReturnRect();
-		//	}
-		////}
+		//if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect) ) {
+			if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
+				blockmop = 1;
+				cpyrect = blocks[ i ].ReturnRect();
+			}
+		//}
 	}
 	if ( mop_inform.type == 1 ) {
 
@@ -118,16 +117,15 @@ void mop::move( Tank& p1) {
 			}
 		}
 	}
-
+	
 }
 
-void mop::Update( ){
-	move(PlayerManager::getInstance().Tank_return());
-	attack( PlayerManager::getInstance ( ).Tank_return ( ) );
-
+void mop::Update( Player1& p1 , Block blocks[] ){
+	move( p1, blocks);
+	attack(  p1);
 }
 
-void mop::Render( const HDC& dc) {
+void mop::render(HDC dc) {
 
 	
 		HBRUSH hBrush, oldBrush;
@@ -142,34 +140,24 @@ void mop::Render( const HDC& dc) {
 
 
 
-void MonsterManager::spawn ( int type ) {
-
+void MonsterManager::spone ( int type ) {
 	mop* newmop = new mop(type);
+
 	mops.push_back ( newmop );
 	
 }
 
 
-
-void MonsterManager::Update (  )
+void MonsterManager::Update ( Player1& p1 , Block blocks[] )
 {
 	for ( auto iter : mops ) {
-		iter->Update (  );
-
+		iter->Update ( p1 , blocks);
 	}
-
-	if ( count >= 10 ) {
-		count = 0;
-		spawn ( 1 );
-		
-	}
-	count += Time::DeltaTime ( );
-
 }
 
-void MonsterManager::Render ( const HDC& mDC)
+void MonsterManager::render ( HDC mDC)
 {
 	for ( auto iter : mops ) {
-		iter->Render(mDC);
+		iter->render(mDC);
 	}
 }
