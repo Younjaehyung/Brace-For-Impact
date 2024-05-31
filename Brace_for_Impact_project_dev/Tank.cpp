@@ -19,25 +19,63 @@ Tank::Tank () {
 
 void Tank::move ( )
 {
+	//float speed = 200 * Time::DeltaTime ( );
+
+	//if ( ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) ||
+	//   ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) ||
+	//   ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) ||
+	//   ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) ) {
+	//	
+	//	speed /= sqrt ( 2 ); // 대각선 이동 시 속도 조정
+	//}
+
+
+	//if ( input::GetKey ( eKeyCode::W ) ) {
+	//	rect.top -= speed;
+	//	rect.bottom -= speed;
+	//}
+	//if ( input::GetKey ( eKeyCode::A ) ) {
+	//	rect.left -= speed;
+	//	rect.right -= speed;
+	//}
+	//if ( input::GetKey ( eKeyCode::S ) ) {
+	//	rect.top += speed;
+	//	rect.bottom += speed;
+	//}
+	//if ( input::GetKey ( eKeyCode::D ) ) {
+	//	rect.left += speed;
+	//	rect.right += speed;
+	//	
+	//}
 	float speed = 200 * Time::DeltaTime ( );
+	float moveX = 0;
+	float moveY = 0;
+
 	if ( input::GetKey ( eKeyCode::W ) ) {
-		rect.top -= speed;
-		rect.bottom -= speed;
+		moveY -= 1;
 	}
 	if ( input::GetKey ( eKeyCode::A ) ) {
-		rect.left -= speed;
-		rect.right -= speed;
+		moveX -= 1;
 	}
 	if ( input::GetKey ( eKeyCode::S ) ) {
-		rect.top += speed;
-		rect.bottom += speed;
+		moveY += 1;
 	}
 	if ( input::GetKey ( eKeyCode::D ) ) {
-		rect.left += speed;
-		rect.right += speed;
-		
+		moveX += 1;
 	}
-	
+
+	// Normalize the movement vector
+	float magnitude = sqrt ( moveX * moveX + moveY * moveY );
+	if ( magnitude > 0 ) {
+		moveX = ( moveX / magnitude ) * speed;
+		moveY = ( moveY / magnitude ) * speed;
+	}
+
+	rect.left += moveX;
+	rect.right += moveX;
+	rect.top += moveY;
+	rect.bottom += moveY;
+
 	moving_rander_cal ( );
 }
 
