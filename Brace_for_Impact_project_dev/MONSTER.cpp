@@ -1,6 +1,6 @@
 ﻿#include "MONSTER.h"
 
-std::list<mop*> MonsterManager::mops;
+//std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 200;
 int MOPSIZE = 20;
 int BLOCKCOUNT = 20;
@@ -19,7 +19,7 @@ mop::mop(int type) {
 }
 
 
-void mop::attack(Player1& p1) {
+void mop::attack( Tank& p1) {
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -27,11 +27,11 @@ void mop::attack(Player1& p1) {
 		}
 		else if ( mop_inform.type == 2 ) {
 
-			double targetx = ( double ) ( p1.ReturnRect ( ).left + 20 );
-			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
+			double targetx = ( double ) ( p1.return_rect ( ).left + 20 );
+			double targety = ( double ) ( p1.return_rect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
 			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
-			BulletManager::CreateBullet ( newbullet );
+			BulletManager::getInstance().CreateBullet ( newbullet );
 
 		}
 		attack_count = 0;
@@ -39,33 +39,34 @@ void mop::attack(Player1& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Player1 &p1 , Block blocks[] ) {
+void mop::move( Tank& p1) {
+
 	float speed = 600 * Time::DeltaTime();
 	BOOL blockmop = 0;
 	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
+		/*if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
 			blockmop = 1;
-		}
+		}*/
 	}
 
 		if ( mop_inform.type == 1) {
 
-			if (p1.ReturnRect().left < mop_inform.x) {
+			if ( p1.return_rect ( ).left < mop_inform.x) {
 				mop_inform.x -= speed;
 
 			}
 
-			if (p1.ReturnRect().top < mop_inform.y) {
+			if ( p1.return_rect ( ).top < mop_inform.y) {
 				mop_inform.y -= speed;
 
 			}
 
-			if (p1.ReturnRect().left > mop_inform.x) {
+			if ( p1.return_rect ( ).left > mop_inform.x) {
 				mop_inform.x += speed;
 				
 			}
 
-			if (p1.ReturnRect().top > mop_inform.y) {
+			if ( p1.return_rect ( ).top > mop_inform.y) {
 				mop_inform.y += speed;
 
 			}
@@ -79,9 +80,9 @@ void mop::move( Player1 &p1 , Block blocks[] ) {
 
 			}
 			else {
-				if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
+				if ( length ( p1.return_rect ( ).left + 20 , p1.return_rect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
 
-					if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+					if ( p1.return_rect ( ).left + 20 < mop_inform.x ) {
 						mop_inform.x -= speed;
 
 					}
@@ -89,7 +90,8 @@ void mop::move( Player1 &p1 , Block blocks[] ) {
 						mop_inform.x += speed;
 					}
 
-					if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+
+					if ( p1.return_rect ( ).top + 20 < mop_inform.y ) {
 						mop_inform.y -= speed;
 
 					}
@@ -114,12 +116,13 @@ void mop::move( Player1 &p1 , Block blocks[] ) {
 	
 }
 
-void mop::Update( Player1& p1 , Block blocks[] ){
-	move( p1, blocks);
-	attack(  p1);
+void mop::Update( ){
+	move(PlayerManager::getInstance().Tank_return());
+	attack( PlayerManager::getInstance ( ).Tank_return ( ) );
+
 }
 
-void mop::render(HDC dc) {
+void mop::Render( const HDC& dc) {
 
 	
 		HBRUSH hBrush, oldBrush;
@@ -134,24 +137,34 @@ void mop::render(HDC dc) {
 
 
 
-void MonsterManager::spone ( int type ) {
-	mop* newmop = new mop(type);
+void MonsterManager::spawn ( int type ) {
 
+	mop* newmop = new mop(type);
 	mops.push_back ( newmop );
 	
 }
 
 
-void MonsterManager::Update ( Player1& p1 , Block blocks[] )
+
+void MonsterManager::Update (  )
 {
 	for ( auto iter : mops ) {
-		iter->Update ( p1 , blocks);
+		iter->Update (  );
+
 	}
+
+	if ( count >= 10 ) {
+		count = 0;
+		spawn ( 1 );
+		
+	}
+	count += Time::DeltaTime ( );
+
 }
 
-void MonsterManager::render ( HDC mDC)
+void MonsterManager::Render ( const HDC& mDC)
 {
 	for ( auto iter : mops ) {
-		iter->render(mDC);
+		iter->Render(mDC);
 	}
 }

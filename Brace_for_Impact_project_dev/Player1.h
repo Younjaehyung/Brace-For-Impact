@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <Windows.h>
+#include "Texture.h"
 #include "input.h"
 #include "Time.h"
 #include "MATH.h"
@@ -12,16 +13,20 @@ private:
 	RECTS rect;
 	double count;
 	int frame , direct;		//direct 0 : 좌 1: 우
-
+	bool tank_status;
+	HBITMAP* B_Player_1;
+	HDC hmemDC;
 public:
-	Player1();
-	HBITMAP B_Player_1;
+
+	Player1 ( );
+	
 	void move ( );
-	void Render ( HDC , HDC );
+	//void tank_control ( );
+	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();
-	void Init ( HINSTANCE g_hinst );
+	
 };
 
 class Player2
@@ -31,11 +36,14 @@ private:
 	RECTS rect;
 	double count;
 	int frame , direct;		//direct 0 : 좌 1: 우
-
+	bool tank_status;
+	HBITMAP B_Player_2;
+	HDC hmemDC;
 public:
 	Player2();
-	HBITMAP B_Player_2;
-	void Render ( HDC , HDC );
+	
+	//void tank_control ( );
+	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();

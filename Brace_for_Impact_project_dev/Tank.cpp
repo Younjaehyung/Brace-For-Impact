@@ -3,6 +3,7 @@
 
 
 Tank::Tank () {
+	rect = {};
 	Tank_car_count = 0;
 	Tank_head_count = 0;
 	Tank_head_frame=2 , Tank_car_frame=0;
@@ -13,14 +14,7 @@ Tank::Tank () {
 	headMove = 0;
 }
 
-void Tank::Init ( HINSTANCE g_hinst ) {
-	B_Tank_car = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ); //---1) 비트맵 로드하기
-	B_Tank_head = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ); //---1) 비트맵 로드하기
-	
-	angle = 90;
-	 Tank_car_count=0;
-	 Tank_head_count=0;
-}
+
 
 
 void Tank::move ( )
@@ -41,8 +35,9 @@ void Tank::move ( )
 	if ( input::GetKey ( eKeyCode::D ) ) {
 		rect.left += speed;
 		rect.right += speed;
+		
 	}
-
+	
 	moving_rander_cal ( );
 }
 
@@ -120,7 +115,7 @@ void Tank::shooting ( )
 				shootingInterval = 0;
 
 			bullet* newbullet = new bullet ( rect.left + 64 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + 64 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
-			BulletManager::CreateBullet ( newbullet );
+			BulletManager::getInstance().CreateBullet ( newbullet );
 			}
 			shootingInterval+= Time::DeltaTime ( );
 		}
@@ -132,8 +127,11 @@ void Tank::shooting ( )
 
 void Tank::Update ( )
 {
+
 	aiming ( );
+	
 	shooting ( );
+	
 	move ( );
 	
 }
@@ -182,19 +180,17 @@ void Tank::moving_rander_cal ( ) {
 	
 }
 
-void Tank::render (HDC hmemDC, HDC mDC)
+void Tank::Render ( const HDC& mDC)
 {
 
 	//탱크 몸통
-	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_car );
-	TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE , hmemDC , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
+	
+	TransparentBlt ( mDC , rect.left , rect.top , 128 , 128 , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame , Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	
 	//탱크 머리
-	SelectObject ( hmemDC , ( HBITMAP ) B_Tank_head );
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , hmemDC , Tank_head_frame * 128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-
-	//===
-
+	
+	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 
 }
