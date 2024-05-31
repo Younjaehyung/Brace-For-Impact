@@ -1,17 +1,15 @@
 ﻿#include "BULLET.h"
 #include "MATH.h"
 #include <random>
+std::list<bullet*> BulletManager::bullets;
 
 #define SIZE 20
-
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 :x(dx),y(dy),mx(dmx),my(dmy),type(dtype){
 	// 0: 삭제   1~9: 플레이어용   10~:몬스터용 
 
 }
-
-
 
 void bullet::move ( ) {
 	
@@ -24,7 +22,7 @@ void bullet::move ( ) {
 
 	
 }
-void bullet::Render ( const HDC& dc ) {
+void bullet::rander ( HDC dc ) {
 
 	Ellipse ( dc , x - SIZE , y - SIZE , x + SIZE , y + SIZE );
 
@@ -35,6 +33,11 @@ void bullet::Update ( ) {
 
 }
 
+
+
+BulletManager::BulletManager ( ) {
+
+}
 void BulletManager::CreateBullet (bullet*& newbullet ) {
 	
 		bullets.push_back ( newbullet );
@@ -57,13 +60,12 @@ void BulletManager::Update() {
 	for ( auto iter : bullets) {
 		iter->Update ( );
 	}
-
 }
 
 
-void BulletManager::Render( const HDC& dc) {
+void BulletManager::rander(HDC dc) {
 	for ( auto iter : bullets ) {
-		iter->Render (dc );
+		iter->rander (dc );
 	}
 }
 
