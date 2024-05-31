@@ -37,7 +37,7 @@ public:
 	void aiming();
 	void aiming_animation ( );
 	
-	RECTS& return_rect ( ) {
+	RECTS& ReturnRect ( ) {
 		return rect;
 	}
 

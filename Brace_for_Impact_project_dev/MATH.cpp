@@ -1,5 +1,10 @@
 ﻿#include"MATH.h"
 
+float abs_F ( float i ) {
+	if ( i < 0 ) return -i;
+	else return i;
+}
+
 float length(int x1, int y1, int x2, int y2) {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
@@ -35,22 +40,22 @@ BOOL rect2Cir ( RECTS rect , double x , double y , int sz ) {
 }
 
 BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy ) {
-	if ( mopx <rect.left && p1x> rect.right ) {
+	if ( mopx <rect.left && p1x> rect.left ) {
 		if ( rect.top < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) && rect.bottom > a2bLine ( rect.left , p1x , p1y , mopx , mopy ) ) {
 			return 1;
 		}
 	}
-	if ( mopx > rect.right && p1x < rect.left ) {
+	if ( mopx > rect.right && p1x < rect.right ) {
 		if ( rect.top < a2bLine ( rect.right , p1x , p1y , mopx , mopy ) && rect.bottom > a2bLine ( rect.right , p1x , p1y , mopx , mopy ) ) {
 			return 1;
 		}
 	}
-	if ( mopy <rect.top && p1y> rect.bottom ) {
+	if ( mopy <rect.top && p1y> rect.top ) {
 		if ( rect.left < a2bLine2 ( rect.top , p1x , p1y , mopx , mopy ) && rect.right > a2bLine2 ( rect.top , p1x , p1y , mopx , mopy ) ) {
 			return 1;
 		}
 	}
-	if ( mopy >rect.bottom && p1y< rect.top ) {
+	if ( mopy >rect.bottom && p1y< rect.bottom ) {
 		if ( rect.left < a2bLine2 ( rect.bottom , p1x , p1y , mopx , mopy ) && rect.right > a2bLine2 ( rect.bottom , p1x , p1y , mopx , mopy ) ) {
 			return 1;
 		}
@@ -59,6 +64,70 @@ BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy ) 
 		return 0;
 	}
 
+	return 0;
+}
+BOOL rect2Line4 ( RECTS rect , RECTS p1 , RECTS mop ) {
+	if ( rect2Line ( rect , p1.left , p1.top , mop.left , mop.top ) ) {
+		return 1;
+	}
+	if ( rect2Line ( rect , p1.right , p1.top , mop.right , mop.top ) ) {
+		return 1;
+	}
+	if ( rect2Line ( rect , p1.left , p1.bottom , mop.left , mop.bottom ) ) {
+		return 1;
+	}
+	if ( rect2Line ( rect , p1.right , p1.bottom , mop.right , mop.bottom ) ) {
+		return 1;
+	}
+	return 0;
+}
+
+BOOL rect2rect ( RECTS block , RECTS mop ) {
+	if (block.left<mop.left && block.right >mop.left && block.top<mop.top&&block.bottom>mop.top ) {
+		return 1;
+	}
+	if ( block.left<mop.right && block.right >mop.right && block.top<mop.top && block.bottom>mop.top ) {
+		return 1;
+	}
+	if ( block.left<mop.left && block.right >mop.left && block.top<mop.bottom && block.bottom>mop.bottom ) {
+		return 1;
+	}
+	if ( block.left<mop.right && block.right >mop.right && block.top<mop.bottom && block.bottom>mop.bottom ) {
+		return 1;
+	}
+	return 0;
+}
+
+BOOL ckMopDown ( RECTS rect , RECTS mop ) {
+	if ( rect.left<mop.right && rect.right>mop.left ) {
+		if ( rect.bottom < mop.top ) {
+			return 1;
+		}
+	}
+	return 0;
+}
+BOOL ckMopUp ( RECTS rect , RECTS mop ) {
+	if ( rect.left<mop.right && rect.right>mop.left ) {
+		if ( rect.top > mop.bottom ) {
+			return 1;
+		}
+	}
+	return 0;
+}
+BOOL ckMopLeft ( RECTS rect , RECTS mop ) {
+	if ( rect.top < mop.bottom && rect.bottom < mop.top ) {
+		if ( rect.left > mop.right ) {
+			return 1;
+		}
+	}
+	return 0;
+}
+BOOL ckMopRight ( RECTS rect , RECTS mop ) {
+	if ( rect.top < mop.bottom && rect.bottom < mop.top ) {
+		if ( rect.right < mop.left ) {
+			return 1;
+		}
+	}
 	return 0;
 }
 

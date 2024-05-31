@@ -27,8 +27,8 @@ void mop::attack( Tank& p1) {
 		}
 		else if ( mop_inform.type == 2 ) {
 
-			double targetx = ( double ) ( p1.return_rect ( ).left + 20 );
-			double targety = ( double ) ( p1.return_rect ( ).top + 20 );
+			double targetx = ( double ) ( p1.ReturnRect ( ).left + 20 );
+			double targety = ( double ) ( p1.ReturnRect ( ).top + 20 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
 			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
 			BulletManager::getInstance().CreateBullet ( newbullet );
@@ -43,77 +43,82 @@ void mop::move( Tank& p1) {
 
 	float speed = 600 * Time::DeltaTime();
 	BOOL blockmop = 0;
+	RECTS moprect = { mop_inform.x -MOPSIZE -2 , mop_inform.y - MOPSIZE-2 , mop_inform.x + MOPSIZE+2 , mop_inform.y + MOPSIZE+2 };
+	RECTS cpyrect = {300,300,400,400};
 	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		/*if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
-			blockmop = 1;
-		}*/
+		////if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect) ) {
+		//	if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
+		//		blockmop = 1;
+		//		cpyrect = blocks[ i ].ReturnRect();
+		//	}
+		////}
+	}
+	if ( mop_inform.type == 1 ) {
+
+		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
+			mop_inform.x -= speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).top < mop_inform.y ) {
+			mop_inform.y -= speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).left > mop_inform.x ) {
+			mop_inform.x += speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).top > mop_inform.y ) {
+			mop_inform.y += speed;
+
+		}
+
+
+	}
+	else if ( mop_inform.type == 2 ) {
+		if (blockmop) {
+			if ( cpyrect.top > moprect.bottom ) {
+				mop_inform.x += speed;
+			}
+			if ( cpyrect.bottom < moprect.top ) {
+				mop_inform.x -= speed;
+			}
+			if ( cpyrect.right < moprect.left ) {
+				mop_inform.y += speed;
+			}
+			if ( cpyrect.left > moprect.right ) {
+				mop_inform.y -= speed;
+			}
+		}
+		else {
+			if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
+
+				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+					mop_inform.x -= speed;
+				}
+				else {
+					mop_inform.x += speed;
+				}
+				if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+					mop_inform.y -= speed;
+				}
+				else {
+					mop_inform.y += speed;
+				}
+				/*
+				if (p1.f_ReturnRect().left > p->x) {
+					p->x += speed;
+				}
+				if (p1.f_ReturnRect().top > p->y) {
+					p->y += speed;
+				}
+				*/
+			}
+		}
 	}
 
-		if ( mop_inform.type == 1) {
-
-			if ( p1.return_rect ( ).left < mop_inform.x) {
-				mop_inform.x -= speed;
-
-			}
-
-			if ( p1.return_rect ( ).top < mop_inform.y) {
-				mop_inform.y -= speed;
-
-			}
-
-			if ( p1.return_rect ( ).left > mop_inform.x) {
-				mop_inform.x += speed;
-				
-			}
-
-			if ( p1.return_rect ( ).top > mop_inform.y) {
-				mop_inform.y += speed;
-
-			}
-
-
-		}
-		else if ( mop_inform.type == 2) {
-			if ( blockmop ) {
-
-				mop_inform.x += speed;
-
-			}
-			else {
-				if ( length ( p1.return_rect ( ).left + 20 , p1.return_rect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
-
-					if ( p1.return_rect ( ).left + 20 < mop_inform.x ) {
-						mop_inform.x -= speed;
-
-					}
-					else {
-						mop_inform.x += speed;
-					}
-
-
-					if ( p1.return_rect ( ).top + 20 < mop_inform.y ) {
-						mop_inform.y -= speed;
-
-					}
-					else {
-						mop_inform.y += speed;
-					}
-					/*
-					if (p1.f_ReturnRect().left > p->x) {
-						p->x += speed;
-
-					}
-
-					if (p1.f_ReturnRect().top > p->y) {
-						p->y += speed;
-
-					}
-					*/
-				}
-			}
-
-		}
-	
 }
 
 void mop::Update( ){

@@ -7,7 +7,7 @@ void Application::f_Update() {
 	Time::Update ( );
 	
 	SceneManager::Update();
-	
+
 	gameobject.Update ( );
 	
 }
@@ -45,8 +45,8 @@ void Application::f_Render() {
 	Rectangle ( mDC , r_cannon.left , r_cannon.top , r_cannon.right , r_cannon.bottom );	//차체 조종실 UI
 	Rectangle ( mDC , r_playground.left , r_playground.top , r_playground.right , r_playground.bottom );	//차체 조종실 UI
 
-	SelectObject ( mDC , blackBrush );
-	Rectangle ( mDC , r_info.left , r_info.top , r_info.right , r_info.bottom );	//정보 UI
+	//SelectObject ( mDC , blackBrush );
+	//Rectangle ( mDC , r_info.left , r_info.top , r_info.right , r_info.bottom );	//정보 UI
 	SceneManager::Render ( mDC );
 
 
@@ -56,10 +56,6 @@ void Application::f_Render() {
 
 	//UI B_UI_info_up
 
-	//UI
-	SelectObject ( hmemDC , ( HBITMAP ) B_UI_info_up );
-	TransparentBlt ( mDC , 0 , 668 , 1024 , 128 , hmemDC , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
-
 	//UI 탱크 내부
 
 	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , Texture::getInstance ( ).Texture_GetDC ( "B_UI_inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
@@ -67,6 +63,7 @@ void Application::f_Render() {
 
 	//===
 	gameobject.Render (mDC );
+
 
 
 	Time::Render ( mDC );
