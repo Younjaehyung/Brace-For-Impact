@@ -39,18 +39,31 @@ void mop::attack(Player1& p1) {
 	attack_count += Time::DeltaTime ( );
 }
 
-void mop::move( Player1 &p1 , Block blocks[] ) {
-	float speed = 600 * Time::DeltaTime();
+void mop::move ( Player1& p1 , Block blocks[] ) {
+	float speed = 600 * Time::DeltaTime ( );
 	BOOL blockmop = 0;
-	RECTS moprect = { mop_inform.x -MOPSIZE -2 , mop_inform.y - MOPSIZE-2 , mop_inform.x + MOPSIZE+2 , mop_inform.y + MOPSIZE+2 };
+	RECTS moprect = { mop_inform.x - MOPSIZE - 2 , mop_inform.y - MOPSIZE - 2 , mop_inform.x + MOPSIZE + 2 , mop_inform.y + MOPSIZE + 2 };
 	RECTS cpyrect;
 	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		//if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect) ) {
-			if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
-				blockmop = 1;
-				cpyrect = blocks[ i ].ReturnRect();
+		if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect ) ) {
+			if ( blocks[ i ].ReturnRect ( ).top >= moprect.top ) {
+				mop_inform.y -= speed;
 			}
-		//}
+			if ( blocks[ i ].ReturnRect ( ).bottom <= moprect.bottom ) {
+				mop_inform.y += speed;
+			}
+			if ( blocks[ i ].ReturnRect ( ).right <= moprect.right ) {
+				mop_inform.x += speed;
+			}
+			if ( blocks[ i ].ReturnRect ( ).left >= moprect.left ) {
+				mop_inform.x -= speed;
+			}
+		}
+		if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
+			blockmop = 1;
+			cpyrect = blocks[ i ].ReturnRect ( );
+		}
+
 	}
 	if ( mop_inform.type == 1 ) {
 
@@ -77,7 +90,7 @@ void mop::move( Player1 &p1 , Block blocks[] ) {
 
 	}
 	else if ( mop_inform.type == 2 ) {
-		if (blockmop) {
+		if ( blockmop ) {
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
 			}
@@ -117,7 +130,8 @@ void mop::move( Player1 &p1 , Block blocks[] ) {
 			}
 		}
 	}
-	
+
+
 }
 
 void mop::Update( Player1& p1 , Block blocks[] ){
