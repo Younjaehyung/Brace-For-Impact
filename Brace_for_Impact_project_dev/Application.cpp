@@ -17,7 +17,6 @@ void Application::f_Update() {
 			enemys[i].f_crash(enemys[j]);
 		}*/
 	}
-	
 	//monsters.spone(monsterHD, 2);
 	MonsterManager::Update (player1 ,blocks);
 	BulletManager::Update ( );
@@ -94,10 +93,11 @@ void Application::f_Render() {
 
 	//UI 탱크 내부
 	SelectObject ( hmemDC , ( HBITMAP ) B_UI_inside );
-	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , hmemDC , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , hmemDC , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ));
 
 	//===
 	blocks[ 0 ].Render ( mDC );
+	blocks[ 1 ].Render ( mDC );
 
 	player1.Render( hmemDC , mDC );
 	player2.Render( hmemDC , mDC );

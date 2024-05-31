@@ -13,6 +13,12 @@ void Block::Render ( HDC dc ) {
 	Rectangle ( dc , rect.left , rect.top , rect.right , rect.bottom );
 }
 
+void Block::makeblock (RECTS rects, int type1 ) {
+	rect = rects;
+	type = type1;
+}
+
+
 RECTS Block::ReturnRect ( ) {
 	return rect;
 }

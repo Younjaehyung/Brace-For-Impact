@@ -42,75 +42,81 @@ void mop::attack(Player1& p1) {
 void mop::move( Player1 &p1 , Block blocks[] ) {
 	float speed = 600 * Time::DeltaTime();
 	BOOL blockmop = 0;
+	RECTS moprect = { mop_inform.x -MOPSIZE -2 , mop_inform.y - MOPSIZE-2 , mop_inform.x + MOPSIZE+2 , mop_inform.y + MOPSIZE+2 };
+	RECTS cpyrect;
 	for ( int i = 0; i < BLOCKCOUNT; i++ ) {
-		if ( rect2Line ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) ) {
-			blockmop = 1;
+		//if ( rect2rect ( blocks[ i ].ReturnRect ( ) , moprect) ) {
+			if ( rect2Line4 ( blocks[ i ].ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
+				blockmop = 1;
+				cpyrect = blocks[ i ].ReturnRect();
+			}
+		//}
+	}
+	if ( mop_inform.type == 1 ) {
+
+		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
+			mop_inform.x -= speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).top < mop_inform.y ) {
+			mop_inform.y -= speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).left > mop_inform.x ) {
+			mop_inform.x += speed;
+
+		}
+
+		if ( p1.ReturnRect ( ).top > mop_inform.y ) {
+			mop_inform.y += speed;
+
+		}
+
+
+	}
+	else if ( mop_inform.type == 2 ) {
+		if (blockmop) {
+			if ( cpyrect.top > moprect.bottom ) {
+				mop_inform.x += speed;
+			}
+			if ( cpyrect.bottom < moprect.top ) {
+				mop_inform.x -= speed;
+			}
+			if ( cpyrect.right < moprect.left ) {
+				mop_inform.y += speed;
+			}
+			if ( cpyrect.left > moprect.right ) {
+				mop_inform.y -= speed;
+			}
+		}
+		else {
+			if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
+
+				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+					mop_inform.x -= speed;
+				}
+				else {
+					mop_inform.x += speed;
+				}
+				if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+					mop_inform.y -= speed;
+				}
+				else {
+					mop_inform.y += speed;
+				}
+				/*
+				if (p1.f_ReturnRect().left > p->x) {
+					p->x += speed;
+				}
+				if (p1.f_ReturnRect().top > p->y) {
+					p->y += speed;
+				}
+				*/
+			}
 		}
 	}
-
-		if ( mop_inform.type == 1) {
-
-			if (p1.ReturnRect().left < mop_inform.x) {
-				mop_inform.x -= speed;
-
-			}
-
-			if (p1.ReturnRect().top < mop_inform.y) {
-				mop_inform.y -= speed;
-
-			}
-
-			if (p1.ReturnRect().left > mop_inform.x) {
-				mop_inform.x += speed;
-				
-			}
-
-			if (p1.ReturnRect().top > mop_inform.y) {
-				mop_inform.y += speed;
-
-			}
-
-
-		}
-		else if ( mop_inform.type == 2) {
-			if ( blockmop ) {
-
-				mop_inform.x += speed;
-
-			}
-			else {
-				if ( length ( p1.ReturnRect ( ).left + 20 , p1.ReturnRect ( ).top + 20 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
-
-					if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
-						mop_inform.x -= speed;
-
-					}
-					else {
-						mop_inform.x += speed;
-					}
-
-					if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
-						mop_inform.y -= speed;
-
-					}
-					else {
-						mop_inform.y += speed;
-					}
-					/*
-					if (p1.f_ReturnRect().left > p->x) {
-						p->x += speed;
-
-					}
-
-					if (p1.f_ReturnRect().top > p->y) {
-						p->y += speed;
-
-					}
-					*/
-				}
-			}
-
-		}
 	
 }
 

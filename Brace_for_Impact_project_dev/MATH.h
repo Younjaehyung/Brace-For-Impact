@@ -3,6 +3,8 @@
 #include<Windows.h>
 #define PI 3.14
 
+float abs_F ( float i );
+
 float length(int x1, int y1, int x2, int y2);
 
 double angle(double x1, double y1, double x2, double y2);
@@ -21,6 +23,14 @@ float a2bLine ( float x , float p1x , float p1y , float mopx , float mopy );
 BOOL rect2Cir ( RECTS rect , double x , double y , int sz );
 
 BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy );
+BOOL rect2Line4 ( RECTS rect , RECTS p1 , RECTS mop );
+
+BOOL rect2rect ( RECTS block , RECTS mop );
+
+BOOL ckMopDown ( RECTS rect , RECTS mop );
+BOOL ckMopUp ( RECTS rect , RECTS mop );
+BOOL ckMopLeft ( RECTS rect , RECTS mop );
+BOOL ckMopRight ( RECTS rect , RECTS mop );
 
 bool IntersectRect_float(RECTS& ,RECTS&);
 
