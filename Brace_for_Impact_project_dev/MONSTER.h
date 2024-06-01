@@ -20,6 +20,7 @@ typedef struct monster {
 class mop{
 private:
 	monster mop_inform;
+	float move_count;
 	float attack_count;
 	HBITMAP* hBitmap;
 public:

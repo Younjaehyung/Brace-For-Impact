@@ -16,6 +16,7 @@ mop::mop(int type) {
 	mop_inform.type = type;
 	mop_inform.cnt = 0;
 	attack_count = 0;
+	move_count = 0;
 }
 
 
@@ -67,7 +68,7 @@ void mop::move ( Tank& p1  ) {
 
 	}
 	if ( mop_inform.type == 1 ) {
-		frame++;
+	
 		if ( frame >= 4 ) frame = 0;
 		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 			mop_inform.x -= speed;
@@ -92,7 +93,7 @@ void mop::move ( Tank& p1  ) {
 
 	}
 	else if ( mop_inform.type == 2 ) {
-		frame++;
+		
 		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
 			if ( cpyrect.top > moprect.bottom ) {
@@ -136,6 +137,13 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 	}
+
+	if ( move_count >= 0.3 ) {
+		frame++;
+		if ( move_count >= 6 ) frame = 0;
+		move_count = 0;
+	}
+	move_count += Time::DeltaTime ( );
 
 
 }
