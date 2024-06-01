@@ -15,8 +15,6 @@ Tank::Tank () {
 }
 
 
-
-
 void Tank::move ( )
 {
 	//float speed = 200 * Time::DeltaTime ( );
@@ -152,7 +150,7 @@ void Tank::shooting ( )
 			if ( shootingInterval >= 0.5 ) {
 				shootingInterval = 0;
 
-			bullet* newbullet = new bullet ( rect.left + 64 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + 64 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+			bullet* newbullet = new bullet ( rect.left + TANKSIZE/2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE /2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
 			BulletManager::getInstance().CreateBullet ( newbullet );
 			}
 			shootingInterval+= Time::DeltaTime ( );
@@ -210,25 +208,13 @@ void Tank::moving_rander_cal ( ) {
 	if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
 		Tank_car_direct = 3;
 	}
-
-
-	
-
-
-	
 }
 
 void Tank::Render ( const HDC& mDC)
 {
-
-	//탱크 몸통
-
-	
-	TransparentBlt ( mDC , rect.left , rect.top , 128 , 128 , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame , Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	//탱크 몸통	
+	TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	
 	//탱크 머리
-	
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-
-
+	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 }

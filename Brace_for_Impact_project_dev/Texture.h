@@ -20,13 +20,41 @@ public:
 
     void Texture_Loading (const HDC& mDC , const HINSTANCE& g_hinst ) {
         
+        //탱크와 플레이어 비트맵 선언
         idBitmap.emplace ( "B_Tank_car" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ) );
         idBitmap.emplace ( "B_Tank_head" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ) );
         idBitmap.emplace ( "B_Player_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) ) );
         idBitmap.emplace ( "B_Player_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) ) );
-        idBitmap.emplace ( "B_STAGE_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2 ) ) );
+        idBitmap.emplace ( "B_Bullet" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BULLET ) ) );
+        
+
+        //UI 비트맵 선언
         idBitmap.emplace ( "B_UI_INFO_UP" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) ) );
-        idBitmap.emplace ( "B_UI_INSIDE" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) ) );
+        idBitmap.emplace ( "B_UI_Inside" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) ) );
+        idBitmap.emplace ( "B_UI_Stage" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_STAGE ) ) );
+
+        //조종기 오브젝트 비트맵 선언
+        idBitmap.emplace ( "B_CT_Dash" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_DASH ) ) );
+        idBitmap.emplace ( "B_CT_Engine" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ENGINE ) ) );
+        idBitmap.emplace ( "B_CT_Move" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_MOVE ) ) );
+        idBitmap.emplace ( "B_CT_Attack" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ATTACK ) ) );
+        idBitmap.emplace ( "B_CT_Reload" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_RELOAD ) ) );
+        idBitmap.emplace ( "B_CT_Steam" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_STEAM ) ) );
+
+        //스테이지 관련 비트맵 선언
+        idBitmap.emplace ( "B_Building" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BUILDING ) ) );
+        idBitmap.emplace ( "B_STAGE_1_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1_1 ) ) );
+        idBitmap.emplace ( "B_STAGE_1_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1_2 ) ) );
+        idBitmap.emplace ( "B_STAGE_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2 ) ) );
+
+        //적 비트맵 선언
+        idBitmap.emplace ( "B_Enemy_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_1 ) ) );
+        idBitmap.emplace ( "B_Enemy_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_2 ) ) );
+        idBitmap.emplace ( "B_Enemy_3" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_3 ) ) );
+        idBitmap.emplace ( "B_Boss_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_2 ) ) );
+
+
+
 
         for ( const auto& pair : idBitmap ) {
             HDC memDC = CreateCompatibleDC ( mDC );

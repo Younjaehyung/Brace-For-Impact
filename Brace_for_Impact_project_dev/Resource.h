@@ -34,9 +34,9 @@
 #define IDB_BM_CT_RELOAD                158
 #define IDB_BM_CT_STEAM                 159
 #define IDB_BM_ENEMY_3                  160
-#define IDB_BITMAP11                    161
+#define IDB_BM_ENEMY_4                  161
 #define IDB_BITMAP12                    162
-#define IDB_BITMAP13                    163
+#define IDB_BM_ENEMY_5                  162
 #define IDB_BM_UI_STAGE                 163
 #define IDC_STATIC                      -1
 

@@ -40,7 +40,8 @@ void mop::attack( Tank& p1) {
 }
 
 void mop::move ( Tank& p1  ) {
-	float speed = 600 * Time::DeltaTime ( );
+	//OSW: 속도 300 -> 100으로 수정함
+	float speed = 100 * Time::DeltaTime ( );
 	BOOL blockmop = 0;
 	RECTS moprect = { mop_inform.x - MOPSIZE - 2 , mop_inform.y - MOPSIZE - 2 , mop_inform.x + MOPSIZE + 2 , mop_inform.y + MOPSIZE + 2 };
 	RECTS cpyrect;
@@ -66,15 +67,16 @@ void mop::move ( Tank& p1  ) {
 
 	}
 	if ( mop_inform.type == 1 ) {
-
+		frame++;
+		if ( frame >= 4 ) frame = 0;
 		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 			mop_inform.x -= speed;
-
+			direct = 1;
 		}
 
 		if ( p1.ReturnRect ( ).top < mop_inform.y ) {
 			mop_inform.y -= speed;
-
+			direct = 0;
 		}
 
 		if ( p1.ReturnRect ( ).left > mop_inform.x ) {
@@ -90,6 +92,8 @@ void mop::move ( Tank& p1  ) {
 
 	}
 	else if ( mop_inform.type == 2 ) {
+		frame++;
+		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
@@ -109,9 +113,11 @@ void mop::move ( Tank& p1  ) {
 
 				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
 					mop_inform.x -= speed;
+					direct = 1;
 				}
 				else {
 					mop_inform.x += speed;
+					direct = 0;
 				}
 				if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
 					mop_inform.y -= speed;
@@ -146,7 +152,13 @@ void mop::Render( const HDC& dc) {
 		HBRUSH hBrush, oldBrush;
 		hBrush = CreateSolidBrush(RGB(255, 0, 0)); // ���ο� ��ü �����: �귯��
 		oldBrush = (HBRUSH)SelectObject(dc, hBrush);
+
+		//OSW 적 가죽1
 		Rectangle(dc, mop_inform.x - MOPSIZE, mop_inform.y - MOPSIZE, mop_inform.x + MOPSIZE, mop_inform.y + MOPSIZE);
+		TransparentBlt ( dc , mop_inform.x , mop_inform.y ,128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 64 , direct * 64, 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		//
+
 		
 		SelectObject(dc, oldBrush); // ������ �귯�÷� ���ư���
 		DeleteObject(hBrush);

@@ -20,7 +20,7 @@ void Application::f_FixedUpdate() {
 void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	mHwnd = hWnd;
 	hDC = GetDC ( mHwnd );
-
+	blackBrush = CreateSolidBrush ( RGB ( 50 , 50 , 50 ) );
 
 	g_hinst = hInst_temp;
 	input::Initialize ( );
@@ -45,21 +45,25 @@ void Application::f_Render() {
 	Rectangle ( mDC , r_cannon.left , r_cannon.top , r_cannon.right , r_cannon.bottom );	//차체 조종실 UI
 	Rectangle ( mDC , r_playground.left , r_playground.top , r_playground.right , r_playground.bottom );	//차체 조종실 UI
 
-	//SelectObject ( mDC , blackBrush );
-	//Rectangle ( mDC , r_info.left , r_info.top , r_info.right , r_info.bottom );	//정보 UI
+	SelectObject ( mDC , blackBrush );
+	Rectangle ( mDC , r_info.left , r_info.top , r_info.right , r_info.bottom );	//정보 UI
 	SceneManager::Render ( mDC );
 
 
 	//OSW - hmemDC추가
 
-	StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
+	StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , 
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
 
 	//UI B_UI_info_up
 
-	//UI 탱크 내부
-
-	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , Texture::getInstance ( ).Texture_GetDC ( "B_UI_inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
-
+	//UI 비트맵
+	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , 
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 , 
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 0 , 768 , 1024 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_info_up" ) , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	//===
 	gameobject.Render (mDC );

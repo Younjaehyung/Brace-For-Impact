@@ -29,7 +29,7 @@ private:
 public:
 	
 	Tank ( );
-
+	HBRUSH blackBrush;
 
 	void move ( );
 	void shooting ( );
