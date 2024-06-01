@@ -30,6 +30,8 @@ private:
 	RECT r_playground = { 1024, 0, 1680, 1020 };	//포신 UI
 
 	HBRUSH blackBrush;
+	HBRUSH redBrush;
+
 
 public:
 	Application ( ) {

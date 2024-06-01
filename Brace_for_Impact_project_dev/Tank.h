@@ -16,6 +16,8 @@ private:
 	int Tk_c_status;
 	float angle;
 
+	int Stage_frame;
+
 	float Tank_car_count;
 	float Tank_head_count;
 	float frameInterval;

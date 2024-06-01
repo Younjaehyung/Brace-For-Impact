@@ -174,10 +174,14 @@ void Tank::Update ( )
 
 void Tank::moving_rander_cal ( ) {
 	
-	if ( Tank_car_count >= 0.3 ) {
+	if ( Tank_car_count >= 0.1 ) {
 		Tank_car_frame++;
 		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
 		Tank_car_count = 0;
+
+		//탱크 움직일 때만 ui움직이도록 바꿀꺼임
+		Stage_frame++;
+		if ( Stage_frame >= 4 ) Stage_frame = 0;
 	}
 	Tank_car_count += Time::DeltaTime ( );
 	
@@ -217,4 +221,8 @@ void Tank::Render ( const HDC& mDC)
 	
 	//탱크 머리
 	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+
+	//스테이지 UI
+	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , Stage_frame*1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
 }

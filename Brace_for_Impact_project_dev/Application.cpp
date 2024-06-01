@@ -20,7 +20,8 @@ void Application::f_FixedUpdate() {
 void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	mHwnd = hWnd;
 	hDC = GetDC ( mHwnd );
-	blackBrush = CreateSolidBrush ( RGB ( 50 , 50 , 50 ) );
+	blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
+	redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 
 	g_hinst = hInst_temp;
 	input::Initialize ( );
@@ -45,8 +46,7 @@ void Application::f_Render() {
 	Rectangle ( mDC , r_cannon.left , r_cannon.top , r_cannon.right , r_cannon.bottom );	//차체 조종실 UI
 	Rectangle ( mDC , r_playground.left , r_playground.top , r_playground.right , r_playground.bottom );	//차체 조종실 UI
 
-	SelectObject ( mDC , blackBrush );
-	Rectangle ( mDC , r_info.left , r_info.top , r_info.right , r_info.bottom );	//정보 UI
+	
 	SceneManager::Render ( mDC );
 
 
@@ -60,10 +60,41 @@ void Application::f_Render() {
 	//UI 비트맵
 	TransparentBlt ( mDC , r_playground.left , r_playground.top - 50 , 656 , 1024 , 
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 , 
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 0 , 768 , 1024 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_info_up" ) , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );
+	//스테이지 UI는 tank.cpp로 이동됬음. 탱크 움직임에 맞춰서 변해야 하기 때문에.
+	TransparentBlt ( mDC , 0 , 768 , 1024 , 225 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info" ) , 0 , 0 , 1024 , 252 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 760 , 640 , 128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	//탱크 체력
+	SelectObject ( mDC , redBrush );
+	Rectangle ( mDC , 100 , 780 , 300 , 780 + 64 );	//정보 UI
+	TransparentBlt ( mDC , 0 , 780 , 500 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
+	
+	SelectObject ( mDC , blackBrush );
+	Rectangle ( mDC , 100 , 880 , 300 , 880 + 64 );	//정보 UI
+	//탱크 연료
+	TransparentBlt ( mDC , 0 , 880 , 500 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 700 , 780 , 96 , 192 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 0 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 800 , 780 , 96 , 192 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 1 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 900 , 780 , 96 , 192 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 2 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
+
+	TransparentBlt ( mDC , 500 , 780 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" ) , 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 500 , 880 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" ) , 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+
+	
+	
+	/*TransparentBlt ( mDC , 0 , 768 , 1024 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info_up" ) , 0 , 0 , 1024 , 128 , RGB ( 255 , 255 , 255 ) );*/
+	
 
 	//===
 	gameobject.Render (mDC );

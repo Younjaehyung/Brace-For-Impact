@@ -29,9 +29,14 @@ public:
         
 
         //UI 비트맵 선언
-        idBitmap.emplace ( "B_UI_INFO_UP" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) ) );
+        idBitmap.emplace ( "B_UI_Info_up" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) ) );
         idBitmap.emplace ( "B_UI_Inside" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) ) );
         idBitmap.emplace ( "B_UI_Stage" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_STAGE ) ) );
+        idBitmap.emplace ( "B_UI_Cooltime" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_COOLTIME ) ) );
+        idBitmap.emplace ( "B_UI_Status" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_STATUS ) ) );
+        idBitmap.emplace ( "B_UI_Player" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_PLAYER ) ) );
+        idBitmap.emplace ( "B_UI_Reloader" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_RELOADER ) ) );
+        idBitmap.emplace ( "B_UI_Info" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO ) ) );
 
         //조종기 오브젝트 비트맵 선언
         idBitmap.emplace ( "B_CT_Dash" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_DASH ) ) );
@@ -51,6 +56,8 @@ public:
         idBitmap.emplace ( "B_Enemy_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_1 ) ) );
         idBitmap.emplace ( "B_Enemy_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_2 ) ) );
         idBitmap.emplace ( "B_Enemy_3" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_3 ) ) );
+        idBitmap.emplace ( "B_Enemy_4" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_4 ) ) );
+        idBitmap.emplace ( "B_Enemy_5" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_5 ) ) );
         idBitmap.emplace ( "B_Boss_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_2 ) ) );
 
 

@@ -138,9 +138,9 @@ void mop::move ( Tank& p1  ) {
 		}
 	}
 
-	if ( move_count >= 0.3 ) {
+	if ( move_count >= 0.1 ) {
 		frame++;
-		if ( move_count >= 6 ) frame = 0;
+		if ( frame >= 6 ) frame = 0;
 		move_count = 0;
 	}
 	move_count += Time::DeltaTime ( );
