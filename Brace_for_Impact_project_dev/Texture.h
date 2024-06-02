@@ -45,6 +45,7 @@ public:
         idBitmap.emplace ( "B_CT_Attack" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ATTACK ) ) );
         idBitmap.emplace ( "B_CT_Reload" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_RELOAD ) ) );
         idBitmap.emplace ( "B_CT_Steam" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_STEAM ) ) );
+        idBitmap.emplace ( "B_CT_Cannon" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_CANNON) ) );
 
         //스테이지 관련 비트맵 선언
         idBitmap.emplace ( "B_Building" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BUILDING ) ) );

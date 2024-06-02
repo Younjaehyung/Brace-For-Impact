@@ -187,6 +187,7 @@
     <Image Include="BFI_Control_move.bmp" />
     <Image Include="BFI_Control_reloader.bmp" />
     <Image Include="BFI_Control_steam.bmp" />
+    <Image Include="BFI_CT_Cannon.bmp" />
     <Image Include="BFI_Enemy_1.bmp" />
     <Image Include="BFI_Enemy_2.bmp" />
     <Image Include="BFI_Enemy_3.bmp" />

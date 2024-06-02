@@ -174,7 +174,7 @@ void Tank::Update ( )
 
 void Tank::moving_rander_cal ( ) {
 	
-	if ( Tank_car_count >= 0.1 ) {
+	if ( Tank_car_count >= 0.2 ) {
 		Tank_car_frame++;
 		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
 		Tank_car_count = 0;

@@ -69,10 +69,10 @@ void mop::move ( Tank& p1  ) {
 	}
 	if ( mop_inform.type == 1 ) {
 	
-		if ( frame >= 4 ) frame = 0;
+		if ( frame >= 6 ) frame = 0;
 		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 			mop_inform.x -= speed;
-			direct = 1;
+			direct = 3;
 		}
 
 		if ( p1.ReturnRect ( ).top < mop_inform.y ) {
@@ -114,7 +114,7 @@ void mop::move ( Tank& p1  ) {
 
 				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
 					mop_inform.x -= speed;
-					direct = 1;
+					direct = 3;
 				}
 				else {
 					mop_inform.x += speed;
@@ -164,7 +164,7 @@ void mop::Render( const HDC& dc) {
 		//OSW 적 가죽1
 		Rectangle(dc, mop_inform.x - MOPSIZE, mop_inform.y - MOPSIZE, mop_inform.x + MOPSIZE, mop_inform.y + MOPSIZE);
 		TransparentBlt ( dc , mop_inform.x , mop_inform.y ,128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 64 , direct * 64, 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_2" ) , frame * 64 , direct * 64, 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		//
 
 		

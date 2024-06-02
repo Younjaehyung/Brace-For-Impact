@@ -1,5 +1,5 @@
 ﻿#include "Player1.h"
-
+#define PLAYERSIZE 96
 
 
 Player1::Player1() {
@@ -70,7 +70,7 @@ void Player1::Render ( const HDC& mDC ) {
 	
 		//플레이어1
 
-	TransparentBlt ( mDC , rect.left, rect.top, 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame , direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + rect.left,  300+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame , direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
 
 
 }
@@ -145,7 +145,7 @@ void Player2::FixedUpdate() {
 void Player2::Render ( const HDC& mDC ) {
 	//플레이어2
 	
-	TransparentBlt ( mDC , rect.left, rect.top, 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame , 64 + direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + rect.left,  200 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame , 64 + direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
 
 }
 RECTS Player2::ReturnRect() {
