@@ -5,6 +5,7 @@
 #include "Time.h"
 #include "MATH.h"
 #include "Resource.h"
+#define PLAYERSIZE 96
 
 class Player1
 {
@@ -16,6 +17,9 @@ private:
 	bool tank_status;
 	HBITMAP* B_Player_1;
 	HDC hmemDC;
+
+	RECTS p1Rect;
+
 public:
 
 	Player1 ( );
@@ -39,6 +43,9 @@ private:
 	bool tank_status;
 	HBITMAP B_Player_2;
 	HDC hmemDC;
+
+	
+
 public:
 	Player2();
 	

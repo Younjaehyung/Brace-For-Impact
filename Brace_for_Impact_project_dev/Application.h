@@ -27,7 +27,8 @@ private:
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI			너비 1024 높이 252
 	RECT r_car = { 1024, 510, 1680, 1020 };		//차체 UI
 	RECT r_cannon = { 1124, 50, 1680, 460 };	//포신 UI
-	RECT r_playground = { 1024, 0, 1680, 1020 };	//포신 UI
+	RECT r_playground = { 1024, 0, 1680, 1020 };	//조종실 UI
+	RECT r_canMove = { 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 750 };	//플레이어의 활동 가능 구역
 
 	HBRUSH blackBrush;
 	HBRUSH redBrush;

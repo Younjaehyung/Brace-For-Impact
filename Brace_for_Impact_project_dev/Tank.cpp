@@ -145,20 +145,23 @@ void Tank::aiming ( ) {
 
 void Tank::shooting ( )
 {
-	
+		//OSW 24.06.02 20:12 탱크 존나 펑펑터지는 문제있음. 수정 필요함
 		if ( input::GetKey ( eKeyCode::UP ) ) {
-			if ( shootingInterval >= 0.5 ) {
+			if ( shootingInterval >= 0.3 ) {
+				shootingInterval = 0;
+				Cannon_frame++;
+				if ( Cannon_frame > 4 ) Cannon_frame = 0;
 				shootingInterval = 0;
 
 			bullet* newbullet = new bullet ( rect.left + TANKSIZE/2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE /2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
 			BulletManager::getInstance().CreateBullet ( newbullet );
 			}
 			shootingInterval+= Time::DeltaTime ( );
+			
 		}
 		else {
 			shootingInterval = 0;
 		}
-
 }
 
 void Tank::Update ( )
@@ -225,4 +228,7 @@ void Tank::Render ( const HDC& mDC)
 	//스테이지 UI
 	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , Stage_frame*1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , Cannon_frame* 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
+
 }

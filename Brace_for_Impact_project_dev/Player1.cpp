@@ -59,6 +59,8 @@ void Player1::move ( ) {
 		count += Time::DeltaTime ( );
 
 	}
+	//플레이어1 충돌 범위
+	p1Rect = { 1024 + rect.left , 0 + rect.top , 1024 + rect.left + PLAYERSIZE , 0 + rect.top + PLAYERSIZE };
 }
 
 
@@ -68,11 +70,19 @@ void Player1::FixedUpdate ( ) {
 void Player1::Render ( const HDC& mDC ) {
 
 	
-		//플레이어1
-
-	TransparentBlt ( mDC , 1024 + rect.left,  300+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame , direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
-
-
+	//플레이어1
+	
+	TransparentBlt ( mDC , 1024 + rect.left,  0+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame , direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
+	//Rectangle ( mDC , p1Rect.left , p1Rect.top , p1Rect.right, p1Rect.bottom );
+	//좌표 알아보기 용
+	wchar_t str1[ 50 ] = L"";
+	wchar_t str2[ 50 ] = L"";
+	wsprintf ( str1 , L"X : %d" , (int)rect.left );
+	wsprintf ( str2, L"Y : %d" , ( int ) rect.top );
+	int len1 = wcsnlen_s ( str1 , 50 );
+	int len2 = wcsnlen_s ( str2 , 50 );
+	TextOut ( mDC , 100 , 200 , str1 , len1 );
+	TextOut ( mDC , 100 , 300 , str2 , len2 );
 }
 RECTS Player1::ReturnRect ( ) {
 	return rect;

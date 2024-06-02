@@ -163,7 +163,7 @@ void mop::Render( const HDC& dc) {
 
 		//OSW 적 가죽1
 		Rectangle(dc, mop_inform.x - MOPSIZE, mop_inform.y - MOPSIZE, mop_inform.x + MOPSIZE, mop_inform.y + MOPSIZE);
-		TransparentBlt ( dc , mop_inform.x , mop_inform.y ,128 , 128 ,
+		TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE ,128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_2" ) , frame * 64 , direct * 64, 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		//
 
