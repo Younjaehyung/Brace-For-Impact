@@ -24,11 +24,11 @@ public:
 		player1.Update ( );
 		player2.Update ( );
 		tank.Update ( );
-
+		TankController::TankOilCount ( );
 	}
-	void Render ( const HDC& mDC ) {
-		player1.Render (mDC );
-		player2.Render ( mDC );
+	void Render ( const HDC& mDC ,const HDC& orimDC ) {
+		player1.Render ( orimDC );
+		player2.Render ( orimDC );
 		tank.Render ( mDC );
 
 	}

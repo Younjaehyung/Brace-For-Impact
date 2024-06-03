@@ -16,7 +16,8 @@ private:
 	static Frame Stage_frame , Cannon_frame , Inside_frame;
 
 	static int tankhp;
-	
+	static int tankoil;
+	static float tankoilcount;
 public:
 	static int& TankMoveStatus ( ) {
 		return tankmove;
@@ -30,6 +31,22 @@ public:
 	static Frame& TankCannon_frame ( ) {
 		return Cannon_frame;
 	}
-
-	
+	static int& TankHp ( ) {
+		return tankhp;
+	}
+	static int& TankOil ( ) {
+		return tankoil;
+	}
+	static void Damage (int damage) {
+		if (tankhp > 0 ) {
+			tankhp -= damage;
+		}
+	}
+	static void TankOilCount ( ) {
+		if ( tankoilcount >= 1 ) {
+			tankoil -= 1;
+			tankoilcount = 0;
+		}
+		tankoilcount += 5 * Time::DeltaTime ( );
+	}
 };

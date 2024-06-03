@@ -45,9 +45,9 @@ void bullet::move ( ) {
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 				tankrect.bottom = tankrect.top + 192;
 				tankrect.right = tankrect.left + 192;
-				if ( rect2Cir ( tankrect , x , y , SIZE ) && PlayerManager::getInstance ( ).Tank_return ( ).ReturnHP()>0 ) {
+				if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp()>0 ) {
 					type = 0;
-					PlayerManager::getInstance ( ).Tank_return ( ).Damage ( 1 );
+					TankController::Damage ( 1 );
 				}
 			}
 		}

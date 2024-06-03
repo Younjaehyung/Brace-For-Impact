@@ -78,7 +78,7 @@ void Application::f_Render() {
 		top = max ( 0 , tankRect.top - 480 );
 	}
 
-	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) );
+	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ),mDC );
 	
 	StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
 

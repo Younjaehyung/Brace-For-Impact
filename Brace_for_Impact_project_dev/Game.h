@@ -24,10 +24,10 @@ public:
 		MonsterManager::getInstance ( ).Update ( );
 		PlayerManager::getInstance ( ).Update ( );
 	}
-	void Render ( const HDC& mDC ) {
+	void Render ( const HDC& mDC,const HDC& orimDC ) {
 		BulletManager::getInstance ( ).Render ( mDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
-		PlayerManager::getInstance ( ).Render ( mDC );
+		PlayerManager::getInstance ( ).Render ( mDC, orimDC );
 		BlockManager::getInstance ( ).Render ( mDC );
 	}
 
