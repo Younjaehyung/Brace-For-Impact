@@ -58,7 +58,19 @@ void Application::f_Render() {
 
 	//StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , 
 	//	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
-	gameobject.Camera (hDC );
+	HDC GameDC = CreateCompatibleDC ( mDC );
+	HBITMAP bit = CreateCompatibleBitmap ( mDC , 2100 , 1420 );
+	SelectObject ( GameDC , bit );
+	StretchBlt ( GameDC , 0 , 0 , 1024*2 , 960*2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );
+
+
+	gameobject.Camera ( GameDC );
+	gameobject.Render ( GameDC );
+
+	StretchBlt ( mDC , 0 , 0 , 1024 , 960 , GameDC , PlayerManager::getInstance().Tank_return().ReturnRect().left - 400 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 300 , 1024 , 960 , SRCCOPY );
+	DeleteDC ( GameDC );
+	DeleteObject ( bit );
 	//UI B_UI_info_up
 
 	//UI 비트맵
@@ -113,7 +125,7 @@ void Application::f_Render() {
 	//플레이어 활동 가능 구역
 	//Rectangle ( mDC , 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 750 );
 	//===OSW===
-	gameobject.Render (mDC );
+	
 
 
 
