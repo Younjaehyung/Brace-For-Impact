@@ -90,7 +90,6 @@ void mop::move ( Tank& p1  ) {
 	float len = 0;
 	BOOL ckBlock=0;
 	if ( mop_inform.type == 1 ) {
-	
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -163,10 +162,8 @@ void mop::move ( Tank& p1  ) {
 				mop_inform.y += speed;
 			}
 		}
-
 	}
 	else if ( mop_inform.type == 2 ) {
-		
 		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -252,7 +249,6 @@ void mop::move ( Tank& p1  ) {
 		}
 	}
 	else if ( mop_inform.type == 3 ) {
-
 		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물

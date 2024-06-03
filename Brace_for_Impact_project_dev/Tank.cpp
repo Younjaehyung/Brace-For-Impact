@@ -157,10 +157,9 @@ void Tank::shooting ( )
 			BulletManager::getInstance().CreateBullet ( newbullet );
 			}
 			shootingInterval+= Time::DeltaTime ( );
-			
 		}
 		else {
-			shootingInterval = 0;
+			shootingInterval += Time::DeltaTime ( );
 		}
 }
 

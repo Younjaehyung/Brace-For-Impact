@@ -95,6 +95,20 @@ BOOL rect2rect ( RECTS block , RECTS mop ) {
 	if ( block.left<mop.right && block.right >mop.right && block.top<mop.bottom && block.bottom>mop.bottom ) {
 		return 1;
 	}
+
+	if ( mop.left<block.left && mop.right > block.left && mop.top<block.top && mop.bottom>block.top ) {
+		return 1;
+	}
+	if ( mop.left<block.right && mop.right > block.right && mop.top<block.top && mop.bottom>block.top ) {
+		return 1;
+	}
+	if ( mop.left<block.left && mop.right > block.left && mop.top<block.bottom && mop.bottom>block.bottom ) {
+		return 1;
+	}
+	if ( mop.left<block.right && mop.right > block.right && mop.top<block.bottom && mop.bottom>block.bottom ) {
+		return 1;
+	}
+
 	return 0;
 }
 
