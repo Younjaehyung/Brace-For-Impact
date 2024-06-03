@@ -31,19 +31,21 @@ void bullet::move ( ) {
 			}
 		}
 		//몬스터가 탄 맞음
-		if ( type < 10 ) {
+		if ( type <= 10 ) {
 			for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 				if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) ) {
 					type = 0;
 				}
 			}
 		}
-		//플레이어(탱크)가 탄 맞음
-		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
-		tankrect.bottom = tankrect.top + 192;
-		tankrect.right = tankrect.left + 192;
-		if ( rect2Cir ( tankrect , x , y , SIZE ) ) {
-			type = 0;
+		if ( type > 10 ) {
+			//플레이어(탱크)가 탄 맞음
+			RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
+			tankrect.bottom = tankrect.top + 192;
+			tankrect.right = tankrect.left + 192;
+			if ( rect2Cir ( tankrect , x , y , SIZE ) ) {
+				type = 0;
+			}
 		}
 	
 }

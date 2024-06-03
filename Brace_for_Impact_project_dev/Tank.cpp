@@ -153,7 +153,7 @@ void Tank::shooting ( )
 				if ( Cannon_frame > 4 ) Cannon_frame = 0;
 				shootingInterval = 0;
 
-			bullet* newbullet = new bullet ( rect.left + TANKSIZE/2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE /2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 10 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+			bullet* newbullet = new bullet ( rect.left + TANKSIZE/2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE /2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 5 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
 			BulletManager::getInstance().CreateBullet ( newbullet );
 			}
 			shootingInterval+= Time::DeltaTime ( );
