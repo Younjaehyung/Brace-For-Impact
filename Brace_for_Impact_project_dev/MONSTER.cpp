@@ -38,8 +38,8 @@ void mop::attack( Tank& p1) {
 
 			double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
 			double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
-			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
-			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
+			double ang = angle ( ( double ) ( mop_inform.x) , ( double ) ( mop_inform.y ) , targetx , targety );
+			bullet* newbullet = new bullet ( mop_inform.x+40 , mop_inform.y+40 , 10 , -cos ( ang ) , -sin ( ang ) );
 			BulletManager::getInstance().CreateBullet ( newbullet );
 
 		}
@@ -51,11 +51,10 @@ void mop::attack( Tank& p1) {
 			double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
 			double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
 			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
-			bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang ) , -sin ( ang ) );
+			bullet* newbullet = new bullet ( mop_inform.x+30 , mop_inform.y+30 , 10 , -cos ( ang ) , -sin ( ang ) );
 			BulletManager::getInstance ( ).CreateBullet ( newbullet );
-
+			attack_count = 0;
 		}
-		attack_count = 0;
 	}
 	attack_count += Time::DeltaTime ( );
 }
@@ -64,21 +63,22 @@ void mop::move ( Tank& p1  ) {
 	//OSW: 속도 300 -> 100으로 수정함
 	float speed = 100 * Time::DeltaTime ( );
 	BOOL blockmop = 0;
-	RECTS moprect = { mop_inform.x - MOPSIZE - 2 , mop_inform.y - MOPSIZE - 2 , mop_inform.x + MOPSIZE + 2 , mop_inform.y + MOPSIZE + 2 };
+	RECTS moprect = { mop_inform.x   , mop_inform.y   , mop_inform.x + 100  , mop_inform.y + 100  };
 	RECTS cpyrect;
 	for ( auto& ScanBlock : BlockManager::getInstance().BlockReturn()) {
+		//벽과 몹 충돌
 		if ( rect2rect ( ScanBlock.ReturnRect ( ) , moprect ) ) {
 			if ( ScanBlock.ReturnRect ( ).top >= moprect.top ) {
-				mop_inform.y -= speed;
+				mop_inform.y -= 2*speed;
 			}
 			if ( ScanBlock.ReturnRect ( ).bottom <= moprect.bottom ) {
-				mop_inform.y += speed;
+				mop_inform.y += 2*speed;
 			}
 			if ( ScanBlock.ReturnRect ( ).right <= moprect.right ) {
-				mop_inform.x += speed;
+				mop_inform.x += 2*speed;
 			}
 			if ( ScanBlock.ReturnRect ( ).left >= moprect.left ) {
-				mop_inform.x -= speed;
+				mop_inform.x -= 2*speed;
 			}
 		}
 		if ( rect2Line4 ( ScanBlock.ReturnRect ( ) , p1.ReturnRect ( ) , moprect ) ) {
@@ -87,25 +87,68 @@ void mop::move ( Tank& p1  ) {
 		}
 
 	}
+	float len = 0;
+	BOOL ckBlock=0;
 	if ( mop_inform.type == 1 ) {
 	
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
+			//몹 아래 장애물
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right);
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len<10) {
+					mop_inform.y -= speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.bottom < moprect.top ) {
 				mop_inform.x -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F(ScanBlock.ReturnRect ( ).right - moprect.left);
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y += speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.right < moprect.left ) {
 				mop_inform.y += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopUp ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).top - moprect.bottom );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x += speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.left > moprect.right ) {
 				mop_inform.y -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopDown ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).bottom - moprect.top );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x -= speed;
+				}
+				ckBlock = 0;
 			}
 		}
 		else {
-			if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+			if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
 				mop_inform.x -= speed;
 				direct = 3;
 			}
@@ -113,7 +156,7 @@ void mop::move ( Tank& p1  ) {
 				mop_inform.x += speed;
 				direct = 0;
 			}
-			if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+			if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 				mop_inform.y -= speed;
 			}
 			else {
@@ -121,29 +164,69 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 
-
 	}
 	else if ( mop_inform.type == 2 ) {
 		
 		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
+			//몹 아래 장애물
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y -= speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.bottom < moprect.top ) {
 				mop_inform.x -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).right - moprect.left );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y += speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.right < moprect.left ) {
 				mop_inform.y += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopUp ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).top - moprect.bottom );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x += speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.left > moprect.right ) {
 				mop_inform.y -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopDown ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).bottom - moprect.top );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x -= speed;
+				}
+				ckBlock = 0;
 			}
 		}
 		else {
 			if ( length ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
 
-				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+				if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
 					mop_inform.x -= speed;
 					direct = 3;
 				}
@@ -151,7 +234,7 @@ void mop::move ( Tank& p1  ) {
 					mop_inform.x += speed;
 					direct = 0;
 				}
-				if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+				if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 					mop_inform.y -= speed;
 				}
 				else {
@@ -172,23 +255,64 @@ void mop::move ( Tank& p1  ) {
 
 		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
+			//몹 아래 장애물
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y -= speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.bottom < moprect.top ) {
 				mop_inform.x -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).right - moprect.left );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y += speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.right < moprect.left ) {
 				mop_inform.y += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopUp ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).top - moprect.bottom );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x += speed;
+				}
+				ckBlock = 0;
 			}
 			if ( cpyrect.left > moprect.right ) {
 				mop_inform.y -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopDown ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).bottom - moprect.top );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x -= speed;
+				}
+				ckBlock = 0;
 			}
 		}
 		else {
 			if ( length ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
 
-				if ( p1.ReturnRect ( ).left + 20 < mop_inform.x ) {
+				if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 					mop_inform.x -= speed;
 					direct = 3;
 				}
@@ -196,7 +320,7 @@ void mop::move ( Tank& p1  ) {
 					mop_inform.x += speed;
 					direct = 0;
 				}
-				if ( p1.ReturnRect ( ).top + 20 < mop_inform.y ) {
+				if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 					mop_inform.y -= speed;
 				}
 				else {
@@ -240,7 +364,7 @@ void mop::Render( const HDC& dc) {
 
 		//OSW 적 가죽1
 		if ( mop_inform.type == 1 ) {
-			Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x + MOPSIZE , mop_inform.y + MOPSIZE );
+			Rectangle ( dc , mop_inform.x  , mop_inform.y  , mop_inform.x + 100 , mop_inform.y + 100 );
 			//몬스터 추가해줘 응애
 		}
 		else if ( mop_inform.type == 2 ) {

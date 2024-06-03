@@ -115,7 +115,7 @@ BOOL ckMopUp ( RECTS rect , RECTS mop ) {
 	return 0;
 }
 BOOL ckMopLeft ( RECTS rect , RECTS mop ) {
-	if ( rect.top < mop.bottom && rect.bottom < mop.top ) {
+	if ( rect.top < mop.bottom && rect.bottom > mop.top ) {
 		if ( rect.left > mop.right ) {
 			return 1;
 		}
@@ -123,7 +123,7 @@ BOOL ckMopLeft ( RECTS rect , RECTS mop ) {
 	return 0;
 }
 BOOL ckMopRight ( RECTS rect , RECTS mop ) {
-	if ( rect.top < mop.bottom && rect.bottom < mop.top ) {
+	if ( rect.top < mop.bottom && rect.bottom > mop.top ) {
 		if ( rect.right < mop.left ) {
 			return 1;
 		}
