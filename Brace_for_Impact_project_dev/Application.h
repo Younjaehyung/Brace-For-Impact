@@ -14,14 +14,12 @@ private:
 	Game gameobject;
 
 	HWND mHwnd;
-	HDC hDC , mDC;
+	HDC hDC , mDC,GameDC;
 	HINSTANCE g_hinst;
 
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
-	HBITMAP B_Machine[ 5 ];
-	HBITMAP B_UI_info_up , B_UI_inside;
-	HBITMAP B_ENEMY_1 , B_ENEMY_2 , B_PLAYER , B_BUILDING;
+	
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI			너비 1024 높이 252
@@ -30,8 +28,7 @@ private:
 	RECT r_playground = { 1024, 0, 1680, 1020 };	//조종실 UI
 	RECT r_canMove = { 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 750 };	//플레이어의 활동 가능 구역
 
-	HBRUSH blackBrush;
-	HBRUSH redBrush;
+
 
 
 public:

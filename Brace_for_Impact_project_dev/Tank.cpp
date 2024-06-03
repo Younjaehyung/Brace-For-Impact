@@ -145,23 +145,44 @@ void Tank::aiming ( ) {
 	
 }
 
+
+
 void Tank::shooting ( )
 {
 		//OSW 24.06.02 20:12 탱크 존나 펑펑터지는 문제있음. 수정 필요함
-		if ( input::GetKey ( eKeyCode::UP ) ) {
+		if ( input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( ) == 0) {
 			if ( shootingInterval >= 0.3 ) {
-				shootingInterval = 0;
-				Cannon_frame++;
-				if ( Cannon_frame > 4 ) Cannon_frame = 0;
+				TankController::TankAimingStatus ( ) = 1;
+				
 				shootingInterval = 0;
 
-			bullet* newbullet = new bullet ( rect.left + TANKSIZE/2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE /2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 5 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
-			BulletManager::getInstance().CreateBullet ( newbullet );
+
+				bullet* newbullet = new bullet ( rect.left + TANKSIZE / 2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE / 2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 5 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+				BulletManager::getInstance ( ).CreateBullet ( newbullet );
+					
+
 			}
-			shootingInterval+= Time::DeltaTime ( );
-		}
-		else {
 			shootingInterval += Time::DeltaTime ( );
+				
+		}
+		else { shootingInterval = 0; }
+			
+			
+
+		if ( TankController::TankAimingStatus ( ) == 1 ) {
+			if ( TankController::TankCannon_frame ( ).count >= 0.1 ) {
+				TankController::TankCannon_frame ( ).frame++;
+				TankController::TankCannon_frame ( ).count = 0;
+
+				if ( TankController::TankCannon_frame ( ).frame > 4 ) {
+					TankController::TankCannon_frame ( ).frame = 0;
+
+					TankController::TankAimingStatus ( ) = 0;
+					
+				}
+			}
+			TankController::TankCannon_frame ( ).count += Time::DeltaTime ( );
+
 		}
 }
 
@@ -206,9 +227,11 @@ void Tank::moving_rander_cal ( ) {
 		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
 		Tank_car_count = 0;
 
+		TankController::TankStage_frame().frame++;
+		if ( TankController::TankStage_frame ( ).frame >= 4 ) TankController::TankStage_frame ( ).frame = 0;
+		
 		//탱크 움직일 때만 ui움직이도록 바꿀꺼임
-		Stage_frame++;
-		if ( Stage_frame >= 4 ) Stage_frame = 0;
+		
 	}
 	Tank_car_count += Time::DeltaTime ( );
 	
@@ -243,16 +266,14 @@ void Tank::moving_rander_cal ( ) {
 
 void Tank::Render ( const HDC& mDC)
 {
+	
+	
 	//탱크 몸통	
 	TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	
 	//탱크 머리
 	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	
 
-	//스테이지 UI
-	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , Stage_frame*1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , Cannon_frame* 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
 
 }
