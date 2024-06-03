@@ -173,6 +173,11 @@ void mop::Render( const HDC& dc) {
 	
 }
 
+RECTS mop::ReturnRect ( ) {
+	RECTS r = { mop_inform.x,mop_inform.y, mop_inform.x+100 , mop_inform.y+100 };
+	return r;
+}
+
 
 
 void MonsterManager::spawn ( int type ) {
@@ -205,4 +210,8 @@ void MonsterManager::Render ( const HDC& mDC)
 	for ( auto iter : mops ) {
 		iter->Render(mDC);
 	}
+}
+
+std::list<mop*>& MonsterManager::MopReturn ( ) {
+	return mops;
 }

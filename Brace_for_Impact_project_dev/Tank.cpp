@@ -94,7 +94,7 @@ void Tank::aiming_animation () {
 				Tank_head_direct = 0;
 			}
 			Tank_head_count = 0;
-		}
+		} 
 		else if( headArrow == 1 && Tank_head_count >= 0.05 ) {
 			
 			Tank_head_frame--;
