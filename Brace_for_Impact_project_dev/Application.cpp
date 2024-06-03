@@ -73,12 +73,12 @@ void Application::f_Render() {
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	//==탱크 체력
 	SelectObject ( mDC , redBrush );
-	Rectangle ( mDC , 90 , 780 , 90 + 300 , 780 + 64 );	//정보 UI
+	Rectangle ( mDC , 90 , 780 , 90 + PlayerManager::getInstance ( ).Tank_return ( ).ReturnHP ( ) , 780 + 64 );	//정보 UI
 	TransparentBlt ( mDC , 0 , 780 , 500 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
 	
 	SelectObject ( mDC , blackBrush );
-	Rectangle ( mDC , 90 , 880 , 90 + 300 , 880 + 64 );	//정보 UI
+	Rectangle ( mDC , 90 , 880 , 90 + PlayerManager::getInstance ( ).Tank_return ( ).ReturnOIL ( ) , 880 + 64 );	//정보 UI
 	//==탱크 연료
 	TransparentBlt ( mDC , 0 , 880 , 500 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );

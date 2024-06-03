@@ -23,7 +23,9 @@ private:
 	float Tank_head_count;
 	float frameInterval;
 	float shootingInterval;
-
+	int HP;
+	int OIL;
+	float OILcount = 0;
 	
 	BOOL isMove;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
 	BOOL headMove;
@@ -43,7 +45,10 @@ public:
 	RECTS& ReturnRect ( ) {
 		return rect;
 	}
-
+	int ReturnHP ( );
+	void Damage ( int damage );
+	int ReturnOIL ( );
+	void OILDown();
 
 	void Update ( );
 	void Render ( const HDC& );

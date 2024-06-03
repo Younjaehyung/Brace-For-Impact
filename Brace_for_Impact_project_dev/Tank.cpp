@@ -12,6 +12,8 @@ Tank::Tank () {
 	angle = 90;
 	frameInterval=0;
 	headMove = 0;
+	HP = 300;
+	OIL = 300;
 }
 
 
@@ -163,15 +165,38 @@ void Tank::shooting ( )
 		}
 }
 
+int Tank::ReturnHP ( ) {
+	return HP;
+}
+void Tank::Damage ( int damage ) {
+	if ( HP > 0 ) {
+		HP -= damage;
+	}
+}
+int Tank::ReturnOIL ( ) {
+	return OIL;
+}
+void Tank::OILDown ( ) {
+	if ( OIL > 0 ) {
+		OIL -= 1;
+	}
+}
+
 void Tank::Update ( )
 {
+	if ( HP > 0 ) {
+		aiming ( );
 
-	aiming ( );
-	
-	shooting ( );
-	
-	move ( );
-	
+		shooting ( );
+		if ( OIL > 0 ) {
+			move ( );
+		}
+		if ( OILcount >= 1 ) {
+			OILDown ( );
+			OILcount = 0;
+		}
+		OILcount+= 5*Time::DeltaTime ( );
+	}
 }
 
 void Tank::moving_rander_cal ( ) {
