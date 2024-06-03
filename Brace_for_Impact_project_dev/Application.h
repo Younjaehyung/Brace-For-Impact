@@ -28,8 +28,7 @@ private:
 	RECT r_playground = { 1024, 0, 1680, 1020 };	//조종실 UI
 	RECT r_canMove = { 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 750 };	//플레이어의 활동 가능 구역
 
-	HBRUSH blackBrush;
-	HBRUSH redBrush;
+
 
 
 public:

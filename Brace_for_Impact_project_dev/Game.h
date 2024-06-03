@@ -8,10 +8,14 @@ class Game
 {
 private:
 	int score;
+	HBRUSH blackBrush;
+	HBRUSH redBrush;
 	
+
 public:
 	Game ( ) :score(0) {
-		
+		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
+		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 	}
 
 	void Update ( ) {
@@ -36,8 +40,8 @@ public:
 		
 	}
 
-	void Camera ( HDC mDC );
-
+	void Camera_UI ( const HDC& mDC );
+	
 	void Interaction_player1$controller ( ) {
 
 	}

@@ -143,31 +143,42 @@ void Tank::aiming ( ) {
 	
 }
 
+
+
 void Tank::shooting ( )
 {
 		//OSW 24.06.02 20:12 탱크 존나 펑펑터지는 문제있음. 수정 필요함
-		if ( input::GetKey ( eKeyCode::UP ) ) {
+		if ( input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( ) == 0) {
 			if ( shootingInterval >= 0.3 ) {
-				shootingInterval = 0;
+				TankController::TankAimingStatus ( ) = 1;
 				
 				shootingInterval = 0;
 
-			bullet* newbullet = new bullet ( rect.left + TANKSIZE/2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE /2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 5 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
-			BulletManager::getInstance().CreateBullet ( newbullet );
-			}
-			else{
-				Cannon_frame++;
+				bullet* newbullet = new bullet ( rect.left + TANKSIZE / 2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE / 2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , 5 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+				BulletManager::getInstance ( ).CreateBullet ( newbullet );
+					
 
-				if ( Cannon_frame > 4 ) Cannon_frame = 0;
-				CannonInterval += Time::DeltaTime ( );
 			}
-			shootingInterval+= Time::DeltaTime ( );
-			
+			shootingInterval += Time::DeltaTime ( );
+				
 		}
-		else {
-			Cannon_frame = 0;
+		else { shootingInterval = 0; }
 			
-			shootingInterval = 0;
+			
+
+		if ( TankController::TankAimingStatus ( ) == 1 ) {
+			if ( TankController::TankCannon_frame ( ).count >= 0.1 ) {
+				TankController::TankCannon_frame ( ).frame++;
+				TankController::TankCannon_frame ( ).count = 0;
+
+				if ( TankController::TankCannon_frame ( ).frame > 4 ) {
+					TankController::TankCannon_frame ( ).frame = 0;
+
+					TankController::TankAimingStatus ( ) = 0;
+					
+				}
+			}
+			TankController::TankCannon_frame ( ).count += Time::DeltaTime ( );
 		}
 }
 
@@ -189,9 +200,11 @@ void Tank::moving_rander_cal ( ) {
 		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
 		Tank_car_count = 0;
 
+		TankController::TankStage_frame().frame++;
+		if ( TankController::TankStage_frame ( ).frame >= 4 ) TankController::TankStage_frame ( ).frame = 0;
+		
 		//탱크 움직일 때만 ui움직이도록 바꿀꺼임
-		Stage_frame++;
-		if ( Stage_frame >= 4 ) Stage_frame = 0;
+		
 	}
 	Tank_car_count += Time::DeltaTime ( );
 	
