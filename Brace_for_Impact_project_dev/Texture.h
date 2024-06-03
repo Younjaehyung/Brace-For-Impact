@@ -19,7 +19,9 @@ public:
     }
 
     void Texture_Loading (const HDC& mDC , const HINSTANCE& g_hinst ) {
-        
+        HBITMAP mBitmap = CreateCompatibleBitmap ( mDC , 1024 * 2 , 960 * 2 );
+        idBitmap.emplace ( "GAME_FIELD" , mBitmap );
+
         //탱크와 플레이어 비트맵 선언
         idBitmap.emplace ( "B_Tank_car" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_CAR ) ) );
         idBitmap.emplace ( "B_Tank_head" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TANK_HEAD ) ) );

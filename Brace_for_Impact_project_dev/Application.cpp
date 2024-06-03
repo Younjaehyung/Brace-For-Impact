@@ -34,12 +34,14 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	gameobject.Initailize ( hDC,g_hinst );
 
 	
-	
+	GameDC = CreateCompatibleDC ( hDC );
+	mBitmap = CreateCompatibleBitmap ( hDC , 1024 * 2 , 960 * 2 );
+	SelectObject ( GameDC , ( HBITMAP ) mBitmap );
 };
 void Application::f_Render() {
 	HandleResize ( );
 	SelectObject ( mDC , ( HBITMAP ) mBackBitmap );
-
+	
 	Rectangle ( mDC , 0 , 0 , rt.right , rt.bottom );
 	
 	
@@ -58,19 +60,32 @@ void Application::f_Render() {
 
 	//StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , 
 	//	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
-	HDC GameDC = CreateCompatibleDC ( mDC );
-	HBITMAP bit = CreateCompatibleBitmap ( mDC , 2100 , 1420 );
-	SelectObject ( GameDC , bit );
-	StretchBlt ( GameDC , 0 , 0 , 1024*2 , 960*2 ,
+	StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024*2 , 960*2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );
 
+	RECTS tankRect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
+	int left;
+	if ( tankRect.left + 512 >= 2048 ) {
+		left = 512 * 2;
+	}
+	else {
+		left = max ( 0 , tankRect.left - 512 );
+	}
+	int top;
+	if ( tankRect.top + 480 >= 1920 ) {
+		top = 480 * 2;
+	}
+	else {
+		top = max ( 0 , tankRect.top - 480 );
+	}
 
-	gameobject.Camera ( GameDC );
-	gameobject.Render ( GameDC );
+	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) );
+	StretchBlt ( mDC , 0 , 0 , 1024 , 960 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
 
-	StretchBlt ( mDC , 0 , 0 , 1024 , 960 , GameDC , PlayerManager::getInstance().Tank_return().ReturnRect().left - 400 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 300 , 1024 , 960 , SRCCOPY );
-	DeleteDC ( GameDC );
-	DeleteObject ( bit );
+
+	//StretchBlt ( mDC , 0 , 0 , 1024 , 960 , GameDC , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left - 512 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 480 , 1024 , 960 , SRCCOPY );
+
+
 	//UI B_UI_info_up
 
 	//UI 비트맵
@@ -150,6 +165,7 @@ void Application::HandleResize ( ) {
 	mDC = CreateCompatibleDC ( hDC );
 	
 	mBackBitmap = CreateCompatibleBitmap ( hDC , rt.right , rt.bottom );
+
 }
 
 void Application::f_Run() {

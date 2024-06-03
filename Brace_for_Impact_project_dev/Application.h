@@ -14,7 +14,7 @@ private:
 	Game gameobject;
 
 	HWND mHwnd;
-	HDC hDC , mDC;
+	HDC hDC , mDC,GameDC;
 	HINSTANCE g_hinst;
 
 	RECT rt;

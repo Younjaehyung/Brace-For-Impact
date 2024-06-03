@@ -8,7 +8,7 @@ class Game
 {
 private:
 	int score;
-	HDC GameDC;
+	
 public:
 	Game ( ) :score(0) {
 		

@@ -233,12 +233,7 @@ void Tank::Render ( const HDC& mDC)
 	
 	//탱크 머리
 	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-	std::cout << rect.left << std::endl;
-	
 	
 
-
-
-	
 
 }
