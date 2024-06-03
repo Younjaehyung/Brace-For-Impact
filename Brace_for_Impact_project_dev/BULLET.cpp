@@ -1,6 +1,7 @@
 ﻿#include "BULLET.h"
 #include "MATH.h"
 #include <random>
+#include"BLOCK.h"
 
 #define SIZE 20
 
@@ -21,13 +22,17 @@ void bullet::move ( ) {
 		if ( x < 0 || y < 0 ) {
 			type = 0;
 		}
-
+		for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+			if ( rect2Cir ( ScanBlock.ReturnRect ( ) , x , y , SIZE ) ) {
+				type = 0;
+			}
+		}
 	
 }
 void bullet::Render ( const HDC& dc ) {
-
-	Ellipse ( dc , x - SIZE , y - SIZE , x + SIZE , y + SIZE );
-
+	if ( type != 0 ) {
+		Ellipse ( dc , x - SIZE , y - SIZE , x + SIZE , y + SIZE );
+	}
 }
 
 void bullet::Update ( ) {
