@@ -8,6 +8,7 @@ class Game
 {
 private:
 	int score;
+	HDC GameDC;
 public:
 	Game ( ) :score(0) {
 		
@@ -32,7 +33,10 @@ public:
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
 		BlockManager::getInstance ( ).Initilize(3);
+		
 	}
+
+	void Camera ( HDC mDC );
 
 	void Interaction_player1$controller ( ) {
 

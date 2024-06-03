@@ -219,16 +219,26 @@ void Tank::moving_rander_cal ( ) {
 
 void Tank::Render ( const HDC& mDC)
 {
+	HDC GameDC = CreateCompatibleDC ( mDC );
+	HBITMAP bit = CreateCompatibleBitmap ( mDC , 2100, 1420 );
+	SelectObject ( GameDC , bit );
+	StretchBlt ( GameDC,0,0, 2100, 1420 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) ,0 ,0 , 1024, 768 , SRCCOPY );
+	
+	
 	//탱크 몸통	
-	TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( GameDC , rect.left , rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	
 	//탱크 머리
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( GameDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	std::cout << rect.left << std::endl;
+	StretchBlt ( mDC , 0, 0 , 1024 , 768 , GameDC , rect.left -200 , rect.top - 150 , 800 ,600, SRCCOPY );
 
 	//스테이지 UI
 	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , Stage_frame*1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , Cannon_frame* 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
-
+	DeleteDC ( GameDC );
+	DeleteObject ( bit );
 }

@@ -19,9 +19,7 @@ private:
 
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
-	HBITMAP B_Machine[ 5 ];
-	HBITMAP B_UI_info_up , B_UI_inside;
-	HBITMAP B_ENEMY_1 , B_ENEMY_2 , B_PLAYER , B_BUILDING;
+	
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI			너비 1024 높이 252

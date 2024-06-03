@@ -147,6 +147,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="TankController.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Time.h" />
@@ -171,6 +172,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="TankController.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>

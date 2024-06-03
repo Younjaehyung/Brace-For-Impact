@@ -90,6 +90,9 @@
     <ClInclude Include="BLOCK.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="TankController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Brace_for_Impact_project_dev.cpp">
@@ -147,6 +150,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BLOCK.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TankController.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
