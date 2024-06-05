@@ -15,10 +15,7 @@ mop::mop(int type) {
 	if ( type == 1 ) {
 		mop_inform.hp = 2;
 	}
-	else if ( type == 2 ) {
-		mop_inform.hp = 1;
-	}
-	else if ( type == 3 ) {
+	else if ( type != 1 ) {
 		mop_inform.hp = 1;
 	}
 	mop_inform.type = type;
@@ -27,8 +24,9 @@ mop::mop(int type) {
 	move_count = 0;
 }
 
-
 void mop::attack( Tank& p1) {
+	RECTS moprect = { mop_inform.x   , mop_inform.y   , mop_inform.x + 100  , mop_inform.y + 100 };
+	RECTS tankrect = { p1.ReturnRect ( ).left+30   , p1.ReturnRect ( ).top+40  , p1.ReturnRect ( ).right+165  , p1.ReturnRect ( ).bottom+175 };
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -36,11 +34,12 @@ void mop::attack( Tank& p1) {
 		}
 		else if ( mop_inform.type == 2 ) {
 
-			double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
-			double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
-			double ang = angle ( ( double ) ( mop_inform.x) , ( double ) ( mop_inform.y ) , targetx , targety );
-			bullet* newbullet = new bullet ( mop_inform.x+40 , mop_inform.y+40 , 10 , -cos ( ang ) , -sin ( ang ) );
-			BulletManager::getInstance().CreateBullet ( newbullet );
+			bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 11 );
+
+		}
+		else if ( mop_inform.type == 4 ) {
+
+			bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 12 );
 
 		}
 		attack_count = 0;
@@ -48,13 +47,21 @@ void mop::attack( Tank& p1) {
 	if ( attack_count >= 0.1 ) {
 		if ( mop_inform.type == 3 ) {
 
-			double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
-			double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
-			double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
-			bullet* newbullet = new bullet ( mop_inform.x+30 , mop_inform.y+30 , 10 , -cos ( ang ) , -sin ( ang ) );
-			BulletManager::getInstance ( ).CreateBullet ( newbullet );
+			//double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
+			//double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
+			//double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
+			//bullet* newbullet = new bullet ( mop_inform.x+30 , mop_inform.y+30 , 10 , -cos ( ang ) , -sin ( ang ) );
+			//BulletManager::getInstance ( ).CreateBullet ( newbullet );
+			bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 10 );
 			attack_count = 0;
 		}
+	}
+	if ( mop_inform.type == 5 ) {
+		if ( rect2rect ( tankrect , moprect ) ) {
+			mop_inform.hp = 0;
+			TankController::Damage ( 50 );
+		}
+		//bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 ,13);
 	}
 	attack_count += Time::DeltaTime ( );
 }
@@ -85,11 +92,10 @@ void mop::move ( Tank& p1  ) {
 			blockmop = 1;
 			cpyrect = ScanBlock.ReturnRect ( );
 		}
-
 	}
 	float len = 0;
 	BOOL ckBlock=0;
-	if ( mop_inform.type == 1 ) {
+	if ( mop_inform.type == 1 || mop_inform.type == 5 ) {
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -147,7 +153,7 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 		else {
-			if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
+			if ( p1.ReturnRect ( ).left+50  < mop_inform.x ) {
 				mop_inform.x -= speed;
 				direct = 3;
 			}
@@ -155,7 +161,7 @@ void mop::move ( Tank& p1  ) {
 				mop_inform.x += speed;
 				direct = 0;
 			}
-			if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
+			if ( p1.ReturnRect ( ).top+50  < mop_inform.y ) {
 				mop_inform.y -= speed;
 			}
 			else {
@@ -163,7 +169,7 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 	}
-	else if ( mop_inform.type == 2 ) {
+	else {
 		if ( frame >= 4 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -248,91 +254,6 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 	}
-	else if ( mop_inform.type == 3 ) {
-		if ( frame >= 4 ) frame = 0;
-		if ( blockmop ) {
-			//몹 아래 장애물
-			if ( cpyrect.top > moprect.bottom ) {
-				mop_inform.x += speed;
-				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
-						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right );
-						ckBlock = 1;
-					}
-				}
-				if ( ckBlock && len < 10 ) {
-					mop_inform.y -= speed;
-				}
-				ckBlock = 0;
-			}
-			if ( cpyrect.bottom < moprect.top ) {
-				mop_inform.x -= speed;
-				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
-						len = abs_F ( ScanBlock.ReturnRect ( ).right - moprect.left );
-						ckBlock = 1;
-					}
-				}
-				if ( ckBlock && len < 10 ) {
-					mop_inform.y += speed;
-				}
-				ckBlock = 0;
-			}
-			if ( cpyrect.right < moprect.left ) {
-				mop_inform.y += speed;
-				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopUp ( ScanBlock.ReturnRect ( ) , moprect ) ) {
-						len = abs_F ( ScanBlock.ReturnRect ( ).top - moprect.bottom );
-						ckBlock = 1;
-					}
-				}
-				if ( ckBlock && len < 10 ) {
-					mop_inform.x += speed;
-				}
-				ckBlock = 0;
-			}
-			if ( cpyrect.left > moprect.right ) {
-				mop_inform.y -= speed;
-				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopDown ( ScanBlock.ReturnRect ( ) , moprect ) ) {
-						len = abs_F ( ScanBlock.ReturnRect ( ).bottom - moprect.top );
-						ckBlock = 1;
-					}
-				}
-				if ( ckBlock && len < 10 ) {
-					mop_inform.x -= speed;
-				}
-				ckBlock = 0;
-			}
-		}
-		else {
-			if ( length ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
-
-				if ( p1.ReturnRect ( ).left < mop_inform.x ) {
-					mop_inform.x -= speed;
-					direct = 3;
-				}
-				else {
-					mop_inform.x += speed;
-					direct = 0;
-				}
-				if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
-					mop_inform.y -= speed;
-				}
-				else {
-					mop_inform.y += speed;
-				}
-				/*
-				if (p1.f_ReturnRect().left > p->x) {
-					p->x += speed;
-				}
-				if (p1.f_ReturnRect().top > p->y) {
-					p->y += speed;
-				}
-				*/
-			}
-		}
-	}
 
 	if ( move_count >= 0.1 ) {
 		frame++;
@@ -355,8 +276,9 @@ void mop::Render( const HDC& dc) {
 
 	
 		HBRUSH hBrush, oldBrush;
-		hBrush = CreateSolidBrush(RGB(255, 0, 0)); // ���ο� ��ü �����: �귯��
-		oldBrush = (HBRUSH)SelectObject(dc, hBrush);
+		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
+		//Rectangle ( dc , tankrect.left +30 , tankrect.top +40 , tankrect.right+165 , tankrect.bottom+175 ); //히트박스
+
 
 		//OSW 적 가죽1
 		if ( mop_inform.type == 1 ) {
@@ -369,14 +291,35 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_2" ) , frame * 64 , direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		}
 		else if ( mop_inform.type == 3 ) {
+			hBrush = CreateSolidBrush ( RGB ( 255 , 0 , 0 ) ); // ���ο� ��ü �����: �귯��
+			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
 			Ellipse( dc , mop_inform.x  , mop_inform.y  , mop_inform.x + 60 , mop_inform.y + 60 );
+			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
+			DeleteObject ( hBrush );
+			//몬스터 추가해줘 응애
+		}
+		else if ( mop_inform.type == 4 ) {
+			hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 255 ) ); // ���ο� ��ü �����: �귯��
+			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
+			Ellipse ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 60 , mop_inform.y + 60 );
+			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
+			DeleteObject ( hBrush );
+			
+			//몬스터 추가해줘 응애
+		}
+		else if ( mop_inform.type == 5 ) {
+			hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 0 ) ); // ���ο� ��ü �����: �귯��
+			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
+			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
+			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
+			DeleteObject ( hBrush );
+
 			//몬스터 추가해줘 응애
 		}
 		//
 
 		
-		SelectObject(dc, oldBrush); // ������ �귯�÷� ���ư���
-		DeleteObject(hBrush);
+		
 	
 }
 
@@ -415,9 +358,11 @@ void MonsterManager::Update (  )
 
 	if ( count >= 10 ) {
 		count = 0;
-		spawn ( 2 );
 		spawn ( 1 );
+		spawn ( 2 );
 		spawn ( 3 );
+		spawn ( 4 );
+		spawn ( 5 );
 		
 	}
 	count += Time::DeltaTime ( );

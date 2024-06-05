@@ -40,6 +40,9 @@ public:
 	static void Damage (int damage) {
 		if (tankhp > 0 ) {
 			tankhp -= damage;
+			if ( tankhp < 0 ) {
+				tankhp = 0;
+			}
 		}
 	}
 	static void TankOilCount ( ) {
@@ -47,6 +50,8 @@ public:
 			tankoil -= 1;
 			tankoilcount = 0;
 		}
-		tankoilcount += 5 * Time::DeltaTime ( );
+		if ( tankoil > 0 ) {
+			tankoilcount += 5 * Time::DeltaTime ( );
+		}
 	}
 };

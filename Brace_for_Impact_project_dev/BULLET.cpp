@@ -10,15 +10,20 @@
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 :x(dx),y(dy),mx(dmx),my(dmy),type(dtype){
+	if ( dtype > 0 && dtype < 10 ) PlayerBullet = 1;
 	// 0: 삭제   1~9: 플레이어용   10~:몬스터용 
-
+	//10: 기본탄 1 데미지
+	//11: 강력탄 10 데미지
+	//12: 분열탄 맞을 시 8방향으로 나뉨
+	//13: 회전탄 회전하면서 날아감
 }
 
 
 
 void bullet::move ( ) {
 	
-		x += mx *600 * Time::DeltaTime ( );
+	
+		x += mx * 600 * Time::DeltaTime ( );
 		y += my * 600 * Time::DeltaTime ( );
 
 		if ( x < 0 || y < 0 ) {
@@ -28,11 +33,19 @@ void bullet::move ( ) {
 			//벽에 탄 맞음
 			for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
 				if ( rect2Cir ( ScanBlock.ReturnRect ( ) , x , y , SIZE ) ) {
+					if ( type == 12 ) {
+						double angle1 = 45 * ( 3.141592 / 180 );
+						for ( int i = 0; i < 8; i++ ) {
+							bullet* newbullet = new bullet ( x , y , 10 , -cos ( i * angle1 ) , -sin ( i * angle1 ) );
+							BulletManager::getInstance ( ).CreateBullet ( newbullet );
+						}
+					}
 					type = 0;
 				}
 			}
+
 			//몬스터가 탄 맞음
-			if ( type>0 &&type < 10 ) {
+			if ( PlayerBullet ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
 						type = 0;
@@ -40,14 +53,30 @@ void bullet::move ( ) {
 					}
 				}
 			}
-			if ( type >= 10 ) {
+			if ( !PlayerBullet ) {
 				//플레이어(탱크)가 탄 맞음
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
-				tankrect.bottom = tankrect.top + 192;
-				tankrect.right = tankrect.left + 192;
+				tankrect.left += 30;
+				tankrect.top += 30;
+				tankrect.right += 165;
+				tankrect.bottom += 175;
+				
 				if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp()>0 ) {
+					if ( type == 10 ) {
+						TankController::Damage ( 1 );
+					}
+					else if ( type == 11 ) {
+						TankController::Damage ( 10 );
+					}
+					else if ( type == 12 ) {
+						TankController::Damage ( 1 );
+						double angle1 = 45 * (3.141592 / 180);
+						for ( int i = 0; i < 8; i++ ) {
+							bullet* newbullet = new bullet ( x , y , 10 , -cos ( i*angle1 +angle1/2 ) , -sin ( i*angle1 +angle1/2 ) );
+							BulletManager::getInstance ( ).CreateBullet ( newbullet );
+						}
+					}
 					type = 0;
-					TankController::Damage ( 1 );
 				}
 			}
 		}

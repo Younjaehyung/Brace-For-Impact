@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include<math.h>
 #include<Windows.h>
+#include"BULLET.h"
 #define PI 3.14
 
 float abs_F ( float i );
@@ -9,7 +10,7 @@ float length(int x1, int y1, int x2, int y2);
 
 double angle(double x1, double y1, double x2, double y2);
 
-
+void bulletshot ( float x1 , float y1 , float x2 , float y2 , int type );
 
 typedef struct RECTS {
 	float left;

@@ -108,7 +108,7 @@ BOOL rect2rect ( RECTS block , RECTS mop ) {
 	if ( mop.left<block.right && mop.right > block.right && mop.top<block.bottom && mop.bottom>block.bottom ) {
 		return 1;
 	}
-
+	
 	return 0;
 }
 
@@ -143,6 +143,14 @@ BOOL ckMopRight ( RECTS rect , RECTS mop ) {
 		}
 	}
 	return 0;
+}
+
+void bulletshot ( float x1 , float y1 , float x2 , float y2 , int type) { // 1한테로 2가 발사
+	double targetx = ( double ) ( x1 );
+	double targety = ( double ) ( y1 );
+	double ang = angle ( ( double ) ( x2 ) , ( double ) ( y2 ) , targetx , targety );
+	bullet* newbullet = new bullet ( x2 , y2 , type , -cos ( ang ) , -sin ( ang ) );
+	BulletManager::getInstance ( ).CreateBullet ( newbullet );
 }
 
 bool IntersectRect_float(RECTS& rect1, RECTS& rect2){
