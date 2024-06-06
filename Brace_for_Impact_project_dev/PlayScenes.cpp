@@ -31,4 +31,6 @@ void PlayScenes :: LateUpdate() {
 
 void PlayScenes :: Render(HDC hdc) {
 	Scene::Render(hdc);
+	StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 960 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );
 }

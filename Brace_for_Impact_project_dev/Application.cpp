@@ -54,6 +54,20 @@ void Application::f_Render() {
 	//
 	SceneManager::Render ( mDC );
 
+	switch ( Stage_num ) {
+	case 0:
+
+		break;
+	case 1:
+		break;
+	}
+
+	if ( input::GetKey ( eKeyCode::P ) ) {
+		Stage_num = 1;
+	}
+	else if ( input::GetKey ( eKeyCode::O ) ) {
+		Stage_num = 0;
+	}
 
 	//OSW - hmemDC추가
 

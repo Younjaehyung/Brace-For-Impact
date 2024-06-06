@@ -1,4 +1,6 @@
 ﻿#include "MONSTER.h"
+#define SIZE 256
+
 
 //std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 250;
@@ -170,7 +172,7 @@ void mop::move ( Tank& p1  ) {
 		}
 	}
 	else {
-		if ( frame >= 4 ) frame = 0;
+		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
 			if ( cpyrect.top > moprect.bottom ) {
@@ -283,17 +285,21 @@ void mop::Render( const HDC& dc) {
 		//OSW 적 가죽1
 		if ( mop_inform.type == 1 ) {
 			Rectangle ( dc , mop_inform.x  , mop_inform.y  , mop_inform.x + 100 , mop_inform.y + 100 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE*2 , SIZE*2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			//몬스터 추가해줘 응애
 		}
 		else if ( mop_inform.type == 2 ) {
 			//Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x + MOPSIZE , mop_inform.y + MOPSIZE );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , 128 , 128 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_2" ) , frame * 64 , direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 		}
 		else if ( mop_inform.type == 3 ) {
 			hBrush = CreateSolidBrush ( RGB ( 255 , 0 , 0 ) ); // ���ο� ��ü �����: �귯��
 			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
 			Ellipse( dc , mop_inform.x  , mop_inform.y  , mop_inform.x + 60 , mop_inform.y + 60 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
 			DeleteObject ( hBrush );
 			//몬스터 추가해줘 응애
@@ -302,6 +308,8 @@ void mop::Render( const HDC& dc) {
 			hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 255 ) ); // ���ο� ��ü �����: �귯��
 			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
 			Ellipse ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 60 , mop_inform.y + 60 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_3" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
 			DeleteObject ( hBrush );
 			
@@ -311,6 +319,8 @@ void mop::Render( const HDC& dc) {
 			hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 0 ) ); // ���ο� ��ü �����: �귯��
 			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
 			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
 			DeleteObject ( hBrush );
 

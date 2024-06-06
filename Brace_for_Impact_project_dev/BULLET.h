@@ -2,6 +2,7 @@
 #include <windows.h>
 #include "Time.h"
 #include <list>
+#include "Texture.h"
 
 //struct bullet{
 //	double x;

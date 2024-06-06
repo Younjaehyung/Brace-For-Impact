@@ -7,6 +7,8 @@
 #include "input.h"
 #include "Game.h"
 #include "Texture.h"
+#include "PlayScenes.h"
+#include "SceneManager.h"
 
 
 class Application {
@@ -16,6 +18,8 @@ private:
 	HWND mHwnd;
 	HDC hDC , mDC,GameDC;
 	HINSTANCE g_hinst;
+
+	int Stage_num;
 
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
