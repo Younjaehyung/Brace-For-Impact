@@ -42,12 +42,14 @@ void Game::Camera_UI (const HDC& mDC )
 	TransparentBlt ( mDC , 1024 + 400 , 0 + 80 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Move" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
-	TransparentBlt ( mDC , 1024 + 270 , 0 + 500 , 96 , 160 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , 0 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
+	
 	TransparentBlt ( mDC , 1024 + 100 , 0 + 730 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 450 , 0 + 730 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , TankController::TankCannon_frame().frame * 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + 270 , 0 + 350 , 96 , 160 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , 0 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
+
 }

@@ -1,10 +1,10 @@
 ﻿#include"BLOCK.h"
 
 Block::Block ( ) {
-	rect.left = 500;
-	rect.right = 800;
-	rect.top = 400;
-	rect.bottom = 450;
+	rect.left = 64*3;
+	rect.right = 64*9;
+	rect.top = 64*3;
+	rect.bottom = 64*7;
 	type = 3;
 }
 

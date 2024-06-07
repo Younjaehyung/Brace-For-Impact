@@ -19,7 +19,7 @@ public:
     }
 
     void Texture_Loading (const HDC& mDC , const HINSTANCE& g_hinst ) {
-        HBITMAP mBitmap = CreateCompatibleBitmap ( mDC , 1024 * 2 , 960 * 2 );
+        HBITMAP mBitmap = CreateCompatibleBitmap ( mDC , 1024 * 2 , 1024 * 2 );
         idBitmap.emplace ( "GAME_FIELD" , mBitmap );
 
         //탱크와 플레이어 비트맵 선언
@@ -54,7 +54,8 @@ public:
         idBitmap.emplace ( "B_STAGE_1_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1_1 ) ) );
         idBitmap.emplace ( "B_STAGE_1_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1_2 ) ) );
         idBitmap.emplace ( "B_STAGE_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2 ) ) );
-
+        idBitmap.emplace ( "B_STAGE_3" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_3 ) ) );
+        idBitmap.emplace ( "B_STAGE_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1 ) ) );
         //적 비트맵 선언
         idBitmap.emplace ( "B_Enemy_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_1 ) ) );
         idBitmap.emplace ( "B_Enemy_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_2 ) ) );
@@ -63,7 +64,8 @@ public:
         idBitmap.emplace ( "B_Enemy_5" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ENEMY_5 ) ) );
         idBitmap.emplace ( "B_Boss_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_2 ) ) );
 
-
+        //스크린 화면 출력
+        idBitmap.emplace ( "B_TITLE" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_TITLE ) ) );
 
 
         for ( const auto& pair : idBitmap ) {

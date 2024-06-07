@@ -24,7 +24,7 @@ void Application::f_FixedUpdate() {
 void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	mHwnd = hWnd;
 	hDC = GetDC ( mHwnd );
-	
+	Stage_num = 0;
 
 	g_hinst = hInst_temp;
 	input::Initialize ( );
@@ -34,7 +34,7 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 
 	
 	GameDC = CreateCompatibleDC ( hDC );
-	mBitmap = CreateCompatibleBitmap ( hDC , 1024 * 2 , 960 * 2 );
+	mBitmap = CreateCompatibleBitmap ( hDC , 1024 * 2 , 1024 * 2 );
 	SelectObject ( GameDC , ( HBITMAP ) mBitmap );
 };
 void Application::f_Render() {
@@ -55,26 +55,40 @@ void Application::f_Render() {
 
 	switch ( Stage_num ) {
 	case 0:
-
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 		break;
 	case 1:
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_3" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 		break;
+	case 2:
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_1" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
+		break;
+	case 3:
+		
+		break;
+
 	}
 
-	if ( input::GetKey ( eKeyCode::P ) ) {
-		Stage_num = 1;
+	if ( input::GetKey ( eKeyCode::I ) ) {
+		Stage_num = 0;
 	}
 	else if ( input::GetKey ( eKeyCode::O ) ) {
-		Stage_num = 0;
+		Stage_num = 1;
+	}
+	else if ( input::GetKey ( eKeyCode::P ) ) {
+		Stage_num = 2;
+	}
+	else if ( input::GetKey ( eKeyCode::U ) ) {
+		Stage_num = 3;
 	}
 
 	//OSW - hmemDC추가
 
 	//StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , 
 	//	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
-	StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024*2 , 960*2 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );
-
 	
 	
 	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left + 512 >= 2048 ) {
@@ -84,31 +98,38 @@ void Application::f_Render() {
 		TankController::camera.left = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left - 512 );
 	}
 	
-	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 480 >= 1920 ) {
-		TankController::camera.top = 480 * 2;
+	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 512 >= 2048 ) {
+		TankController::camera.top = 512 * 2;
 	}
 	else {
-		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 480 );
+		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 512 );
 	}
 	TankController::camera.right = TankController::camera.left + 1024;
-	TankController::camera.bottom = TankController::camera.top + 780;
+	TankController::camera.bottom = TankController::camera.top + 1024;
 	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ),mDC );
 	
 
 	//StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
-	BitBlt ( mDC , 0 , 0 , 1024 , 780 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
+	BitBlt ( mDC , 0 , 0 , 1024 , 1024 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
 
-	TransparentBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
+
+
+	/*TransparentBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024-50 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
-
+	*/
+	BitBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ), 0 , 0 , SRCCOPY );
 	
 	gameobject.Camera_UI ( mDC );
-	//Rectangle ( mDC , 0 , 0 , 1024 , 780 );
-	//UI 비트맵
-	
+
+	//TITLE 출력
+	/*BitBlt ( mDC , 0 , 0 , 1024 , 1024 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_TITLE" ) , 0 , 0 , SRCCOPY );*/
 
 	//플레이어 활동 가능 구역
-	//Rectangle ( mDC , 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 750 );
+	//Rectangle ( mDC , 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 800 );
+
+	// 
 	//===OSW===
 	
 
