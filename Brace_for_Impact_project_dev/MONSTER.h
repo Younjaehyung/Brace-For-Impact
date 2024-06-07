@@ -23,6 +23,9 @@ private:
 	float move_count;
 	float attack_count;
 	HBITMAP* hBitmap;
+
+
+
 public:
 	mop(int );
 	

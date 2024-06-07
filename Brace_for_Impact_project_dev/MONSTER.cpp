@@ -3,7 +3,7 @@
 
 
 //std::list<mop*> MonsterManager::mops;
-int MONSTERLEN = 250;
+int MONSTERLEN = 500;
 int MOPSIZE = 20;
 int BLOCKCOUNT = 20;
 
@@ -20,10 +20,16 @@ mop::mop(int type) {
 	else if ( type != 1 ) {
 		mop_inform.hp = 1;
 	}
+
 	mop_inform.type = type;
 	mop_inform.cnt = 0;
 	attack_count = 0;
 	move_count = 0;
+	switch( mop_inform.type ){
+	case 1:
+
+		break;
+	}
 }
 
 void mop::attack( Tank& p1) {
@@ -46,15 +52,22 @@ void mop::attack( Tank& p1) {
 		}
 		attack_count = 0;
 	}
-	if ( attack_count >= 0.1 ) {
-		if ( mop_inform.type == 3 ) {
+	if ( attack_count <= 1 ) {
+		if ( attack_count >= 0.1 ) {
+			if ( mop_inform.type == 3 ) {
 
-			//double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
-			//double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
-			//double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
-			//bullet* newbullet = new bullet ( mop_inform.x+30 , mop_inform.y+30 , 10 , -cos ( ang ) , -sin ( ang ) );
-			//BulletManager::getInstance ( ).CreateBullet ( newbullet );
-			bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 10 );
+				//double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
+				//double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
+				//double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
+				//bullet* newbullet = new bullet ( mop_inform.x+30 , mop_inform.y+30 , 10 , -cos ( ang ) , -sin ( ang ) );
+				//BulletManager::getInstance ( ).CreateBullet ( newbullet );
+				bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 10 );
+				//attack_count = 0;
+			}
+		}
+	}
+	else {
+		if ( attack_count >= 10 ) {
 			attack_count = 0;
 		}
 	}
@@ -72,7 +85,7 @@ void mop::move ( Tank& p1  ) {
 	//OSW: 속도 300 -> 100으로 수정함
 	float speed = 100 * Time::DeltaTime ( );
 	BOOL blockmop = 0;
-	RECTS moprect = { mop_inform.x   , mop_inform.y   , mop_inform.x + 100  , mop_inform.y + 100  };
+	RECTS moprect = ReturnRect ( );
 	RECTS cpyrect;
 	for ( auto& ScanBlock : BlockManager::getInstance().BlockReturn()) {
 		//벽과 몹 충돌
@@ -270,6 +283,7 @@ void mop::move ( Tank& p1  ) {
 void mop::Update( ){
 	
 	move ( PlayerManager::getInstance ( ).Tank_return ( ) );
+
 	attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
 	
 }
@@ -280,51 +294,45 @@ void mop::Render( const HDC& dc) {
 		HBRUSH hBrush, oldBrush;
 		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 		//Rectangle ( dc , tankrect.left +30 , tankrect.top +40 , tankrect.right+165 , tankrect.bottom+175 ); //히트박스
-
+		if ( TankController::camera.left>=mop_inform.x || 
+			TankController::camera.right<=mop.inform) {
+			return;
+		}
 
 		//OSW 적 가죽1
-		if ( mop_inform.type == 1 ) {
-			Rectangle ( dc , mop_inform.x  , mop_inform.y  , mop_inform.x + 100 , mop_inform.y + 100 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE*2 , SIZE*2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-			//몬스터 추가해줘 응애
+		if ( mop_inform.type == 1 ) { //기본
+			Rectangle ( dc , mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 		}
-		else if ( mop_inform.type == 2 ) {
-			//Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x + MOPSIZE , mop_inform.y + MOPSIZE );
+		else if ( mop_inform.type == 2 ) { // 한발
+			Rectangle ( dc , mop_inform.x +40  , mop_inform.y+20  , mop_inform.x +190 , mop_inform.y +180 );
 			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 		}
-		else if ( mop_inform.type == 3 ) {
-			hBrush = CreateSolidBrush ( RGB ( 255 , 0 , 0 ) ); // ���ο� ��ü �����: �귯��
-			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
-			Ellipse( dc , mop_inform.x  , mop_inform.y  , mop_inform.x + 60 , mop_inform.y + 60 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
-			DeleteObject ( hBrush );
-			//몬스터 추가해줘 응애
+		else if ( mop_inform.type == 3 ) { //오줌
+			Rectangle ( dc , mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 		}
-		else if ( mop_inform.type == 4 ) {
-			hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 255 ) ); // ���ο� ��ü �����: �귯��
-			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
-			Ellipse ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 60 , mop_inform.y + 60 );
+		else if ( mop_inform.type == 4 ) { // 탄폭파
+			Rectangle ( dc , mop_inform.x , mop_inform.y+30  , mop_inform.x + 210 , mop_inform.y + 180 );
+			//hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 255 ) ); // ���ο� ��ü �����: �귯��
+			//oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
 			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_3" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
-			DeleteObject ( hBrush );
+			//SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
+			//DeleteObject ( hBrush );
 			
-			//몬스터 추가해줘 응애
+			
 		}
-		else if ( mop_inform.type == 5 ) {
-			hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 0 ) ); // ���ο� ��ü �����: �귯��
-			oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
-			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
+		else if ( mop_inform.type == 5 ) { // 자폭병
+			
+			Rectangle ( dc , mop_inform.x+40, mop_inform.y+20 , mop_inform.x + 170 , mop_inform.y + 200 );
 			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-			SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
-			DeleteObject ( hBrush );
-
-			//몬스터 추가해줘 응애
+			
+			
 		}
 		//
 
@@ -334,7 +342,26 @@ void mop::Render( const HDC& dc) {
 }
 
 RECTS mop::ReturnRect ( ) {
-	RECTS r = { mop_inform.x,mop_inform.y, mop_inform.x+100 , mop_inform.y+100 };
+	RECTS r;
+	if ( mop_inform.type == 1 ) {
+		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
+	}
+	else if ( mop_inform.type == 2 ) {
+		r = { mop_inform.x + 40  , mop_inform.y + 20  , mop_inform.x + 190 , mop_inform.y + 180 };
+	}
+	else if ( mop_inform.type == 3 ) {
+		r = { mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 };
+	}
+	else if ( mop_inform.type == 4 ) {
+		r = { mop_inform.x , mop_inform.y + 30  , mop_inform.x + 210 , mop_inform.y + 180 };
+	}
+	else if ( mop_inform.type == 5 ) {
+		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
+	}
+
+
+	//RECTS r = { mop_inform.x,mop_inform.y, mop_inform.x+200 , mop_inform.y+200 };  //256 * 256
+
 	return r;
 }
 
@@ -368,9 +395,9 @@ void MonsterManager::Update (  )
 
 	if ( count >= 10 ) {
 		count = 0;
-		spawn ( 1 );
-		spawn ( 2 );
-		spawn ( 3 );
+		//spawn ( 1 );
+		//spawn ( 2 );
+		//spawn ( 3 );
 		spawn ( 4 );
 		spawn ( 5 );
 		

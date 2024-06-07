@@ -19,6 +19,8 @@ private:
 	static int tankoil;
 	static float tankoilcount;
 public:
+	static RECT camera;
+
 	static int& TankMoveStatus ( ) {
 		return tankmove;
 	}

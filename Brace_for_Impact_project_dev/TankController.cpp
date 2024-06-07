@@ -6,3 +6,4 @@ Frame TankController::Cannon_frame = {};
 int TankController::tankhp = {300};
 int TankController::tankoil = {300};
 float TankController::tankoilcount = {};
+RECT TankController::camera = {};
