@@ -50,17 +50,43 @@ void Tank::move ( )
 	float moveX = 0;
 	float moveY = 0;
 
-	if ( input::GetKey ( eKeyCode::W ) ) {
-		moveY -= 1;
+	BOOL ckBlock[ 4 ] = {0,0,0,0}; // 0: 몹 위 , 1: 아래 , 2: 좌 , 3: 우
+	for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+		if ( rect2rect ( ReturnRect ( ) , ScanBlock.ReturnRect ( ) ) ) {
+			if ( ckMopUp ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+				ckBlock[ 0 ] = 1;
+			}
+			if ( ckMopDown ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+				ckBlock[ 1 ] = 1;
+			}
+			if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+				ckBlock[ 2 ] = 1;
+			}
+			if ( ckMopRight ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+				ckBlock[ 3 ] = 1;
+			}
+		}
 	}
-	if ( input::GetKey ( eKeyCode::A ) ) {
-		moveX -= 1;
+
+	if ( !ckBlock[ 0 ] ) {
+		if ( input::GetKey ( eKeyCode::W ) ) {
+			moveY -= 1;
+		}
 	}
-	if ( input::GetKey ( eKeyCode::S ) ) {
-		moveY += 1;
+	if ( !ckBlock[ 2 ] ) {
+		if ( input::GetKey ( eKeyCode::A ) ) {
+			moveX -= 1;
+		}
 	}
-	if ( input::GetKey ( eKeyCode::D ) ) {
-		moveX += 1;
+	if ( !ckBlock[ 1 ] ) {
+		if ( input::GetKey ( eKeyCode::S ) ) {
+			moveY += 1;
+		}
+	}
+	if ( !ckBlock[ 3 ] ) {
+		if ( input::GetKey ( eKeyCode::D ) ) {
+			moveX += 1;
+		}
 	}
 
 	// Normalize the movement vector

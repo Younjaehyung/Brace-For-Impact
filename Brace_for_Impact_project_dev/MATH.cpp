@@ -112,9 +112,9 @@ BOOL rect2rect ( RECTS block , RECTS mop ) {
 	return 0;
 }
 
-BOOL ckMopDown ( RECTS rect , RECTS mop ) {
+BOOL ckMopDown ( RECTS rect , RECTS mop ) { //몹의 아래쪽에 벽이 있는지 확인
 	if ( rect.left<mop.right && rect.right>mop.left ) {
-		if ( rect.bottom < mop.top ) {
+		if ( rect.bottom > mop.bottom ) {
 			return 1;
 		}
 	}
@@ -122,15 +122,15 @@ BOOL ckMopDown ( RECTS rect , RECTS mop ) {
 }
 BOOL ckMopUp ( RECTS rect , RECTS mop ) {
 	if ( rect.left<mop.right && rect.right>mop.left ) {
-		if ( rect.top > mop.bottom ) {
+		if ( rect.top < mop.top ) {
 			return 1;
 		}
 	}
 	return 0;
 }
-BOOL ckMopLeft ( RECTS rect , RECTS mop ) {
+BOOL ckMopLeft ( RECTS rect , RECTS mop ) { 
 	if ( rect.top < mop.bottom && rect.bottom > mop.top ) {
-		if ( rect.left > mop.right ) {
+		if ( rect.left < mop.left ) {
 			return 1;
 		}
 	}
@@ -138,7 +138,7 @@ BOOL ckMopLeft ( RECTS rect , RECTS mop ) {
 }
 BOOL ckMopRight ( RECTS rect , RECTS mop ) {
 	if ( rect.top < mop.bottom && rect.bottom > mop.top ) {
-		if ( rect.right < mop.left ) {
+		if ( rect.right > mop.right ) {
 			return 1;
 		}
 	}

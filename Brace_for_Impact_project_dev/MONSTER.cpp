@@ -33,8 +33,8 @@ mop::mop(int type) {
 }
 
 void mop::attack( Tank& p1) {
-	RECTS moprect = { mop_inform.x   , mop_inform.y   , mop_inform.x + 100  , mop_inform.y + 100 };
-	RECTS tankrect = { p1.ReturnRect ( ).left+30   , p1.ReturnRect ( ).top+40  , p1.ReturnRect ( ).right+165  , p1.ReturnRect ( ).bottom+175 };
+	RECTS moprect = ReturnRect();
+	RECTS tankrect = p1.ReturnRect ( );
 
 	if ( attack_count >= 5 ) {
 		if ( mop_inform.type == 1 ) {
@@ -117,7 +117,7 @@ void mop::move ( Tank& p1  ) {
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
 				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
 						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right);
 						ckBlock = 1;
 					}
@@ -130,7 +130,7 @@ void mop::move ( Tank& p1  ) {
 			if ( cpyrect.bottom < moprect.top ) {
 				mop_inform.x -= speed;
 				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
 						len = abs_F(ScanBlock.ReturnRect ( ).right - moprect.left);
 						ckBlock = 1;
 					}
@@ -168,7 +168,7 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 		else {
-			if ( p1.ReturnRect ( ).left+50  < mop_inform.x ) {
+			if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
 				mop_inform.x -= speed;
 				direct = 3;
 			}
@@ -176,7 +176,7 @@ void mop::move ( Tank& p1  ) {
 				mop_inform.x += speed;
 				direct = 0;
 			}
-			if ( p1.ReturnRect ( ).top+50  < mop_inform.y ) {
+			if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 				mop_inform.y -= speed;
 			}
 			else {
@@ -191,7 +191,7 @@ void mop::move ( Tank& p1  ) {
 			if ( cpyrect.top > moprect.bottom ) {
 				mop_inform.x += speed;
 				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
 						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right );
 						ckBlock = 1;
 					}
@@ -204,7 +204,7 @@ void mop::move ( Tank& p1  ) {
 			if ( cpyrect.bottom < moprect.top ) {
 				mop_inform.x -= speed;
 				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
 						len = abs_F ( ScanBlock.ReturnRect ( ).right - moprect.left );
 						ckBlock = 1;
 					}
@@ -293,7 +293,7 @@ void mop::Render( const HDC& dc) {
 	
 		HBRUSH hBrush, oldBrush;
 		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
-		//Rectangle ( dc , tankrect.left +30 , tankrect.top +40 , tankrect.right+165 , tankrect.bottom+175 ); //히트박스
+		Rectangle ( dc , tankrect.left , tankrect.top , tankrect.right , tankrect.bottom ); //히트박스
 		/*if ( TankController::camera.left>=mop_inform.x- MOPSIZE+SIZE ||
 			TankController::camera.right<=mop_inform.y - MOPSIZE + SIZE ) {
 			return;
@@ -398,9 +398,9 @@ void MonsterManager::Update (  )
 
 	if ( count >= 10 ) {
 		count = 0;
-		//spawn ( 1 );
-		//spawn ( 2 );
-		//spawn ( 3 );
+		spawn ( 1 );
+		spawn ( 2 );
+		spawn ( 3 );
 		spawn ( 4 );
 		spawn ( 5 );
 		

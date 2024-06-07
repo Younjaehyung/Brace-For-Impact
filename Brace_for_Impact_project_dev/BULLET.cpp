@@ -56,10 +56,6 @@ void bullet::move ( ) {
 			if ( !PlayerBullet ) {
 				//플레이어(탱크)가 탄 맞음
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
-				tankrect.left += 30;
-				tankrect.top += 30;
-				tankrect.right += 165;
-				tankrect.bottom += 175;
 				
 				if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp()>0 ) {
 					if ( type == 10 ) {

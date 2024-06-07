@@ -5,6 +5,7 @@
 #include "BULLET.h"
 #include "MATH.h"
 #include "Resource.h"
+#include "BLOCK.h"
 class Tank 
 {
 
@@ -41,7 +42,8 @@ public:
 	void aiming_animation ( );
 	
 	RECTS& ReturnRect ( ) {
-		return rect;
+		RECTS r = { rect.left + 15 , rect.top + 20 ,rect.right + 115 , rect.bottom + 120 };
+		return r;
 	}
 	void Damage ( int damage );
 
