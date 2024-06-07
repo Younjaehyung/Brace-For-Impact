@@ -90,7 +90,8 @@ void Application::f_Render() {
 	else {
 		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 480 );
 	}
-	
+	TankController::camera.right = TankController::camera.left + 1024;
+	TankController::camera.bottom = TankController::camera.top + 780;
 	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ),mDC );
 	
 	//StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );

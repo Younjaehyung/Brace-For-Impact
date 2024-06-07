@@ -11,7 +11,7 @@ private:
 	int type;
 public:
 	Block ( );
-	void Render ( HDC mDC );
+	void Render ( const HDC& mDC );
 	void makeblock ( RECTS rects , int type );
 	RECTS ReturnRect ( );
 };

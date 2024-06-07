@@ -28,7 +28,7 @@ private:
 	HBITMAP B_bullet;
 
 public:
-	bullet ( double  , double  , int ,double  , double  );
+	bullet ( double  , double  , int ,double , double  );
 	void Update ( );
 	void move ( );
 	void Render ( const HDC& );
@@ -37,9 +37,11 @@ public:
 
 class BulletManager {
 private:
-	BulletManager ( ) {};
+	BulletManager ( ) {
+		deletetime = 0;
+	};
 	 std::list<bullet*> bullets;
-	
+	 float deletetime;
 public:
 	static BulletManager& getInstance ( ) {
 		static BulletManager instance;

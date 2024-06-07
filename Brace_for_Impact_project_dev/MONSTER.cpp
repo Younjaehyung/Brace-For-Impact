@@ -294,11 +294,14 @@ void mop::Render( const HDC& dc) {
 		HBRUSH hBrush, oldBrush;
 		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 		//Rectangle ( dc , tankrect.left +30 , tankrect.top +40 , tankrect.right+165 , tankrect.bottom+175 ); //히트박스
-		if ( TankController::camera.left>=mop_inform.x || 
-			TankController::camera.right<=mop.inform) {
+		/*if ( TankController::camera.left>=mop_inform.x- MOPSIZE+SIZE ||
+			TankController::camera.right<=mop_inform.y - MOPSIZE + SIZE ) {
+			return;
+		}*/
+		if (( mop_inform.x - MOPSIZE + SIZE < TankController::camera.left || mop_inform.x - MOPSIZE  > TankController::camera.right || mop_inform.y - MOPSIZE + SIZE  < TankController::camera.top || mop_inform.y - MOPSIZE > TankController::camera.bottom )) {
+			//std::cout << "extrude" << std::endl;
 			return;
 		}
-
 		//OSW 적 가죽1
 		if ( mop_inform.type == 1 ) { //기본
 			Rectangle ( dc , mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 );

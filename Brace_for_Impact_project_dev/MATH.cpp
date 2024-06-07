@@ -30,7 +30,7 @@ float a2bLine2 ( float y , float p1x , float p1y , float mopx , float mopy ) {
 	}
 }
 
-BOOL rect2Cir ( RECTS rect , double x , double y , int sz ) {
+BOOL rect2Cir ( RECTS rect ,double& x ,double& y ,int sz ) {
 	if ( rect.left - sz<x && rect.right + sz>x && rect.top - sz<y && rect.bottom>y ) {
 		return 1;
 	}
@@ -39,7 +39,7 @@ BOOL rect2Cir ( RECTS rect , double x , double y , int sz ) {
 	}
 }
 
-BOOL rect2Line ( RECTS rect , float p1x , float p1y , float mopx , float mopy ) {
+BOOL rect2Line ( RECTS rect , float& p1x , float& p1y , float& mopx , float& mopy ) {
 	if ( mopx <rect.left && p1x> rect.left ) {
 		if ( rect.top < a2bLine ( rect.left , p1x , p1y , mopx , mopy ) && rect.bottom > a2bLine ( rect.left , p1x , p1y , mopx , mopy ) ) {
 			return 1;
@@ -187,7 +187,7 @@ RECTS float_return(const int& left, const int& top, const int& right, const int&
 	return return_rects;
 }
 
-double Radian_return (float angle ) {
+double Radian_return (float& angle ) {
 
 	return angle * PI / 180.0;
 }

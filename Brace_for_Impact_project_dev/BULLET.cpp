@@ -97,33 +97,50 @@ void bullet::Update ( ) {
 }
 
 void BulletManager::CreateBullet (bullet*& newbullet ) {
-	
-		bullets.push_back ( newbullet );
 
+		bullets.push_back ( newbullet );
+	
 }
 
 void BulletManager::DeleteBullet() {
-	
+	if ( bullets.size()  ) {
+		 deletetime += Time::DeltaTime ( );
+		if ( deletetime > 10.0 ) {
+			
 
-	for ( auto iter : bullets ) {
-		if ( iter->return_type ( ) == 0 ) {
+				for ( auto iter = bullets.begin ( ); iter != bullets.end ( );) {
+					if ( ( *iter )->return_type ( ) == 0 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+						bullet* del = *iter;  // 삭제할 노드의 포인터를 저장
+						iter = bullets.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
+					
+						delete del;  // 삭제할 노드를 메모리에서 해제
 
+						std::cout << "aa" << std::endl;
+					}
+					else {
+						++iter;  // 다음 노드로 이동
+					}
+				}
+				deletetime = 0;
 		}
+		
+
 	}
 	
 
 }
 
 void BulletManager::Update() {
-	for ( auto iter : bullets) {
+	for ( auto& iter : bullets) {
 		iter->Update ( );
 	}
-
+	DeleteBullet ( );
+	
 }
 
 
 void BulletManager::Render( const HDC& dc) {
-	for ( auto iter : bullets ) {
+	for ( auto& iter : bullets ) {
 		iter->Render (dc );
 	}
 }

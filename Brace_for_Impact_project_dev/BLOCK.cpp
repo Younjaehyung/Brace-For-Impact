@@ -9,7 +9,7 @@ Block::Block ( ) {
 }
 
 
-void Block::Render ( HDC dc ) {
+void Block::Render ( const HDC& dc ) {
 	Rectangle ( dc , rect.left , rect.top , rect.right , rect.bottom );
 }
 

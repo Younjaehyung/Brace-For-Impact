@@ -1,5 +1,5 @@
 ﻿#include "Tank.h"
-#define TANKSIZE 192
+#define TANKSIZE 128//192
 
 
 Tank::Tank () {
