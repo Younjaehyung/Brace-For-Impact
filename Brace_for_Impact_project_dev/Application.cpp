@@ -72,8 +72,8 @@ void Application::f_Render() {
 
 	//StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , 
 	//	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
-	StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024*2 , 960*2 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );
+	/*StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024*2 , 960*2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );*/
 
 	
 	
@@ -94,8 +94,10 @@ void Application::f_Render() {
 	TankController::camera.bottom = TankController::camera.top + 780;
 	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ),mDC );
 	
+
 	//StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
 	BitBlt ( mDC , 0 , 0 , 1024 , 780 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
+
 	TransparentBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 
