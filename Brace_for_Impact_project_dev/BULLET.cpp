@@ -26,6 +26,16 @@ void bullet::move ( ) {
 		x += mx * 600 * Time::DeltaTime ( );
 		y += my * 600 * Time::DeltaTime ( );
 
+		//OSW
+		//총알 프레임
+		if ( timer1 > 0.3 ) {
+			frame++;
+			if ( frame >= 3 ) frame = 0;
+			timer1 = 0;
+		}timer1 += Time::DeltaTime ( );
+		// 
+		//
+
 		if ( x < 0 || y < 0 ) {
 			type = 0;
 		}
@@ -79,11 +89,10 @@ void bullet::move ( ) {
 	
 }
 void bullet::Render ( const HDC& dc ) {
-	TransparentBlt ( dc , x- SIZE , y- SIZE , SIZE * 2 , SIZE * 2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , 0 * 32 , 9 * 32 , 160 , 320 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( dc , x , y , SIZE * 8 , SIZE * 8 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( type != 0 ) {
-		TransparentBlt ( dc , x - SIZE , y - SIZE , SIZE * 2 , SIZE * 2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , 0  , 9 * 32 , 160 , 320 , RGB ( 255 , 255 , 255 ) );
+		
 		Ellipse ( dc , x - SIZE , y - SIZE , x + SIZE , y + SIZE );
 	}
 }

@@ -183,6 +183,7 @@
     <Image Include="BFI_BOSS_2_sprite.bmp" />
     <Image Include="BFI_Building_1.bmp" />
     <Image Include="BFI_Bullet_1.bmp" />
+    <Image Include="BFI_Bullet_2.bmp" />
     <Image Include="BFI_Control_attack.bmp" />
     <Image Include="BFI_Control_dash.bmp" />
     <Image Include="BFI_Control_engine.bmp" />

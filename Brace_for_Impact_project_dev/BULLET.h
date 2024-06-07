@@ -22,7 +22,8 @@ private:
 	double my; // y 이동거리
 	int type; // 0: 삭제   1~9: 플레이어용   10~:몬스터용
 
-
+	float timer1;
+	int frame;
 	BOOL PlayerBullet;
 
 	HBITMAP B_bullet;
@@ -42,6 +43,7 @@ private:
 	};
 	 std::list<bullet*> bullets;
 	 float deletetime;
+	 
 public:
 	static BulletManager& getInstance ( ) {
 		static BulletManager instance;
