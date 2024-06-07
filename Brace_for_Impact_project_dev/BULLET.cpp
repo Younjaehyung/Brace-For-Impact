@@ -83,10 +83,11 @@ void bullet::move ( ) {
 	
 }
 void bullet::Render ( const HDC& dc ) {
-	TransparentBlt ( dc , x , y , SIZE * 2 , SIZE * 2 ,
+	TransparentBlt ( dc , x- SIZE , y- SIZE , SIZE * 2 , SIZE * 2 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , 0 * 32 , 9 * 32 , 160 , 320 , RGB ( 255 , 255 , 255 ) );
 	if ( type != 0 ) {
-		
+		TransparentBlt ( dc , x - SIZE , y - SIZE , SIZE * 2 , SIZE * 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , 0  , 9 * 32 , 160 , 320 , RGB ( 255 , 255 , 255 ) );
 		Ellipse ( dc , x - SIZE , y - SIZE , x + SIZE , y + SIZE );
 	}
 }

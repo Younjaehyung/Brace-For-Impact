@@ -255,5 +255,11 @@
     <Image Include="BFI_CT_Cannon.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_Stage_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Stage_3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>
