@@ -1,7 +1,7 @@
 ﻿#include "MONSTER.h"
 #define SIZE 256
 
-
+//status // 0: 중립상태 , 1: 이동 , 2: 공격 , 3: 데미지 , 4: 사망
 //std::list<mop*> MonsterManager::mops;
 int MONSTERLEN = 500;
 int MOPSIZE = 20;
@@ -41,28 +41,27 @@ void mop::attack( Tank& p1) {
 
 		}
 		else if ( mop_inform.type == 2 ) {
-
-			bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 11 );
-
+			if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+				status = 2;
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
+			}
 		}
 		else if ( mop_inform.type == 4 ) {
-
-			bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 12 );
-
+			if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+				status = 2;
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 12 );
+			}
 		}
 		attack_count = 0;
 	}
+	//몹3 용
 	if ( attack_count <= 1 ) {
 		if ( attack_count >= 0.1 ) {
 			if ( mop_inform.type == 3 ) {
-
-				//double targetx = ( double ) ( p1.ReturnRect ( ).left + 60 );
-				//double targety = ( double ) ( p1.ReturnRect ( ).top + 60 );
-				//double ang = angle ( ( double ) ( mop_inform.x ) , ( double ) ( mop_inform.y ) , targetx , targety );
-				//bullet* newbullet = new bullet ( mop_inform.x+30 , mop_inform.y+30 , 10 , -cos ( ang ) , -sin ( ang ) );
-				//BulletManager::getInstance ( ).CreateBullet ( newbullet );
-				bulletshot ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x + 40 , mop_inform.y + 40 , 10 );
-				//attack_count = 0;
+				if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+					status = 2;
+					bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
+				}
 			}
 		}
 	}
@@ -73,6 +72,7 @@ void mop::attack( Tank& p1) {
 	}
 	if ( mop_inform.type == 5 ) {
 		if ( rect2rect ( tankrect , moprect ) ) {
+			status = 2;
 			mop_inform.hp = 0;
 			TankController::Damage ( 50 );
 		}
@@ -242,7 +242,7 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 		else {
-			if ( length ( p1.ReturnRect ( ).left + 60 , p1.ReturnRect ( ).top + 60 , mop_inform.x , mop_inform.y ) > MONSTERLEN ) {
+			if ( length ( middleX( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect() ) , middleY ( ReturnRect ( ) ) ) > MONSTERLEN ) {
 
 				if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
 					mop_inform.x -= speed;
@@ -258,34 +258,35 @@ void mop::move ( Tank& p1  ) {
 				else {
 					mop_inform.y += speed;
 				}
-				/*
-				if (p1.f_ReturnRect().left > p->x) {
-					p->x += speed;
-				}
-				if (p1.f_ReturnRect().top > p->y) {
-					p->y += speed;
-				}
-				*/
 			}
 		}
 	}
-
+	/*
 	if ( move_count >= 0.1 ) {
 		frame++;
 		if ( frame >= 6 ) frame = 0;
 		move_count = 0;
 	}
 	move_count += Time::DeltaTime ( );
-
+	*/
 
 }
 
 void mop::Update( ){
 	
-	move ( PlayerManager::getInstance ( ).Tank_return ( ) );
-
 	attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
-	
+	if ( status == 0 || status == 1 ) {
+		status = 1;
+		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
+	}
+
+	if ( move_count >= 0.1 ) {
+		frame++;
+		if ( frame >= 6 ) frame = 0; status = 0;
+		move_count = 0;
+	}
+	move_count += Time::DeltaTime ( );
+
 }
 
 void mop::Render( const HDC& dc) {
@@ -373,7 +374,20 @@ int mop::ReturnHP ( ) {
 }
 
 void mop::Damage ( int damage ) {
-	mop_inform.hp -= damage;
+	if ( mop_inform.hp > 0 ) {
+		mop_inform.hp -= damage;
+	}
+	if ( mop_inform.hp < 0 ) {
+		mop_inform.hp = 0;
+	}
+
+	if ( mop_inform.hp == 0 ) {
+		status = 4;
+	}
+	else {
+		status = 3;
+	}
+
 }
 
 
