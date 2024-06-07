@@ -18,12 +18,12 @@ private:
 	HWND mHwnd;
 	HDC hDC , mDC,GameDC;
 	HINSTANCE g_hinst;
-
+	int left;
 	int Stage_num;
-
+	int top;
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
-	
+	RECT camera;
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI			너비 1024 높이 252

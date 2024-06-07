@@ -20,10 +20,16 @@ mop::mop(int type) {
 	else if ( type != 1 ) {
 		mop_inform.hp = 1;
 	}
+
 	mop_inform.type = type;
 	mop_inform.cnt = 0;
 	attack_count = 0;
 	move_count = 0;
+	switch( mop_inform.type ){
+	case 1:
+
+		break;
+	}
 }
 
 void mop::attack( Tank& p1) {
@@ -280,7 +286,10 @@ void mop::Render( const HDC& dc) {
 		HBRUSH hBrush, oldBrush;
 		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 		//Rectangle ( dc , tankrect.left +30 , tankrect.top +40 , tankrect.right+165 , tankrect.bottom+175 ); //히트박스
-
+		if ( TankController::camera.left>=mop_inform.x || 
+			TankController::camera.right<=mop.inform) {
+			return;
+		}
 
 		//OSW 적 가죽1
 		if ( mop_inform.type == 1 ) {

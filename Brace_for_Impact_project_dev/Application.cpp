@@ -41,7 +41,7 @@ void Application::f_Render() {
 	HandleResize ( );
 	SelectObject ( mDC , ( HBITMAP ) mBackBitmap );
 	
-	Rectangle ( mDC , 0 , 0 , rt.right , rt.bottom );
+	//Rectangle ( mDC , 0 , 0 , rt.right , rt.bottom );
 	
 	
 
@@ -51,8 +51,7 @@ void Application::f_Render() {
 	//Rectangle ( mDC , r_cannon.left , r_cannon.top , r_cannon.right , r_cannon.bottom );	//차체 조종실 UI
 	//Rectangle ( mDC , r_playground.left , r_playground.top , r_playground.right , r_playground.bottom );	//차체 조종실 UI
 
-	//
-	SceneManager::Render ( mDC );
+	//SceneManager::Render ( mDC );
 
 	switch ( Stage_num ) {
 	case 0:
@@ -76,32 +75,32 @@ void Application::f_Render() {
 	StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024*2 , 960*2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 960 , SRCCOPY );
 
-	RECTS tankRect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
-	int left;
-	if ( tankRect.left + 512 >= 2048 ) {
-		left = 512 * 2;
+	
+	
+	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left + 512 >= 2048 ) {
+		TankController::camera.left = 512 * 2;
 	}
 	else {
-		left = max ( 0 , tankRect.left - 512 );
+		TankController::camera.left = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left - 512 );
 	}
-	int top;
-	if ( tankRect.top + 480 >= 1920 ) {
-		top = 480 * 2;
+	
+	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 480 >= 1920 ) {
+		TankController::camera.top = 480 * 2;
 	}
 	else {
-		top = max ( 0 , tankRect.top - 480 );
+		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 480 );
 	}
-
+	
 	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ),mDC );
 	
-	StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
-
+	//StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
+	BitBlt ( mDC , 0 , 0 , 1024 , 780 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
 	TransparentBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 
-
+	
 	gameobject.Camera_UI ( mDC );
-
+	//Rectangle ( mDC , 0 , 0 , 1024 , 780 );
 	//UI 비트맵
 	
 
@@ -110,7 +109,7 @@ void Application::f_Render() {
 	//===OSW===
 	
 
-
+	
 
 	Time::Render ( mDC );
 	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
