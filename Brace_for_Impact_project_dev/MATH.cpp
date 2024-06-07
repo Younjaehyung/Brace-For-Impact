@@ -30,6 +30,13 @@ float a2bLine2 ( float y , float p1x , float p1y , float mopx , float mopy ) {
 	}
 }
 
+float middleX ( RECTS a ) {
+	return ( a.left + a.right ) / 2;
+}
+float middleY ( RECTS a ) {
+	return ( a.top + a.bottom ) / 2;
+}
+
 BOOL rect2Cir ( RECTS rect ,double& x ,double& y ,int sz ) {
 	if ( rect.left - sz<x && rect.right + sz>x && rect.top - sz<y && rect.bottom>y ) {
 		return 1;
