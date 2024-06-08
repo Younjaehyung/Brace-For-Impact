@@ -25,8 +25,8 @@ void Player1::move ( ) {
 		rect.bottom -= speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 		}
 		count+= Time::DeltaTime ( );
 	}
@@ -35,8 +35,8 @@ void Player1::move ( ) {
 		rect.right -= speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 			direct = 0;
 		}
 		count += Time::DeltaTime ( );
@@ -46,8 +46,8 @@ void Player1::move ( ) {
 		rect.bottom += speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 		}
 		count += Time::DeltaTime ( );
 	}
@@ -56,8 +56,8 @@ void Player1::move ( ) {
 		rect.right += speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 			direct = 1;
 		}
 		count += Time::DeltaTime ( );
@@ -65,12 +65,16 @@ void Player1::move ( ) {
 	}
 	//플레이어1 충돌 범위
 
+	if ( input::GetKeyUp ( eKeyCode::W ) || input::GetKeyUp ( eKeyCode::A ) || input::GetKeyUp ( eKeyCode::S ) || input::GetKeyUp ( eKeyCode::D ) ) {
+		frame = 0;
+	}
+
 }
 
 void Player1::SwitchStatus ( ) {
 	if ( input::GetKeyUp ( eKeyCode::p1_a ) ) {
 		TankController::TankMoveStatus ( )= !TankController::TankMoveStatus ( );
-	
+		direct = 2;
 	}
 }
 
@@ -86,7 +90,7 @@ void Player1::Render ( const HDC& mDC ) {
 	
 	//플레이어1
 	
-	TransparentBlt ( mDC , 1024 + rect.left,  0+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame , direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + rect.left,  0+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame * 64, direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	//Rectangle ( mDC , p1Rect.left , p1Rect.top , p1Rect.right, p1Rect.bottom );
 	//좌표 알아보기 용
 	wchar_t str1[ 50 ] = L"";
@@ -131,8 +135,8 @@ void Player2::move ( ) {
 		rect.bottom -= speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 		}
 		count += Time::DeltaTime ( );
 
@@ -142,8 +146,8 @@ void Player2::move ( ) {
 		rect.right -= speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 			direct = 0;
 		}
 		count += Time::DeltaTime ( );
@@ -153,8 +157,8 @@ void Player2::move ( ) {
 		rect.bottom += speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 		}
 		count += Time::DeltaTime ( );
 	}
@@ -163,17 +167,21 @@ void Player2::move ( ) {
 		rect.right += speed;
 		if ( count >= 0.1 ) {
 			count = 0;
-			frame += 32;
-			if ( frame >= 128 ) frame = 0;
+			frame ++;
+			if ( frame >= 5 ) frame = 0;
 			direct = 1;
 		}
 		count += Time::DeltaTime ( );
+	}
+
+	if ( input::GetKeyUp ( eKeyCode::UP ) || input::GetKeyUp ( eKeyCode::RIGHT ) || input::GetKeyUp ( eKeyCode::LEFT ) || input::GetKeyUp ( eKeyCode::DOWN ) ) {
+		frame = 0;
 	}
 }
 void Player2::SwitchStatus ( ) {
 	if ( input::GetKeyUp ( eKeyCode::p2_a ) ) {
 		TankController::TankAimingStatus ( ) = !TankController::TankAimingStatus ( );
-
+		direct = 2;
 	}
 }
 
@@ -182,7 +190,7 @@ void Player2::FixedUpdate() {
 void Player2::Render ( const HDC& mDC ) {
 	//플레이어2
 	
-	TransparentBlt ( mDC , 1024 + rect.left,  200 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame , 64 + direct * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + rect.left,  200 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 
 }
 RECTS Player2::ReturnRect() {

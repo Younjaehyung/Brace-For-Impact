@@ -267,5 +267,14 @@
     <Image Include="BFI_Bullet_2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_minibot_2-Sheet.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Cursor.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Selecet.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

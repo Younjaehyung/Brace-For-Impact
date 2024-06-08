@@ -39,6 +39,7 @@ void mop::attack( Tank& p1) {
 	if ( mop_inform.type == 1 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-200 ) {
 			status = 2;
+			direct = 1;
 			if ( mop_inform.cnt == 0 ) {
 				if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 					mop_inform.x -= speed;
@@ -67,21 +68,25 @@ void mop::attack( Tank& p1) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt =0;
+			direct = 0;
 		}
 	}
 	else if ( mop_inform.type == 2 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
+			direct = 1;
 		}
 		if ( attack_count >= 5 ) {
 			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
 			attack_count = 0;
 			status = 0;
+			direct = 0;
 		}
 	}
 	else if ( mop_inform.type == 4 ) { //몬스터 소환술사
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
+			direct = 1;
 
 		}
 		if ( attack_count >= 5 ) {
@@ -93,12 +98,14 @@ void mop::attack( Tank& p1) {
 				mop_inform.cnt++;
 				attack_count = 0;
 				status = 0;
+				direct = 0;
 			}
 		}
 	}
 	else if ( mop_inform.type == 3 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
+			direct = 1;
 		}
 		if ( attack_count <= 1 ) {
 			if ( attack_count >= 0.1 ) {
@@ -109,6 +116,7 @@ void mop::attack( Tank& p1) {
 			if ( attack_count >= 10 ) {
 				attack_count = 0;
 				status = 0;
+				direct = 0;
 			}
 		}
 	}
@@ -131,6 +139,7 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 6 ) { //춘식이 탄뿌리기
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
+			direct = 1;
 		}
 		if ( mop_inform.cnt == 0 ) {
 			double targetx = ( double ) ( middleX ( p1.ReturnRect ( ) ) );
@@ -148,6 +157,7 @@ void mop::attack( Tank& p1) {
 				mop_inform.cnt = 0;
 				attack_count = 0;
 				status = 0;
+				direct = 0;
 			}
 		}
 	}
@@ -432,11 +442,15 @@ void mop::Render( const HDC& dc) {
 		}
 		else if ( mop_inform.type == 6 ) { // 춘식이
 			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 200 , mop_inform.y + 200 );
-			
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_5" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+
 
 		}
 		else if ( mop_inform.type == 10 ) { // 쪼꼬미 4가 소환함
 			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
+			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE/2 , SIZE/2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_6" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 
 		}
@@ -511,11 +525,11 @@ void MonsterManager::SpawnMonster (  ) {
 
 	if ( count >= 10.0 ) {
 		count = 0;
-		//spawn ( 1 );
-		//spawn ( 2 );
-		//spawn ( 3 );
+		spawn ( 1 );
+		spawn ( 2 );
+		spawn ( 3 );
 		spawn ( 4 );
-		//spawn ( 5 );
+		spawn ( 5 );
 		spawn ( 6 );
 
 	}
