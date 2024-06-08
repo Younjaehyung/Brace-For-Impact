@@ -35,12 +35,38 @@ mop::mop(int type) {
 void mop::attack( Tank& p1) {
 	RECTS moprect = ReturnRect();
 	RECTS tankrect = p1.ReturnRect ( );
-
+	float speed = 300 * Time::DeltaTime ( );
 	if ( mop_inform.type == 1 ) {
-		status = 2;
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-200 ) {
+			status = 2;
+			if ( mop_inform.cnt == 0 ) {
+				if ( p1.ReturnRect ( ).left < mop_inform.x ) {
+					mop_inform.x -= speed;
+					direct = 3;
+				}
+				else {
+					mop_inform.x += speed;
+					direct = 0;
+				}
+				if ( p1.ReturnRect ( ).top < mop_inform.y ) {
+					mop_inform.y -= speed;
+				}
+				else {
+					mop_inform.y += speed;
+				}
+			}
+			if ( rect2rect ( moprect , tankrect ) ) {
+				if ( mop_inform.cnt == 0 ) {
+					TankController::Damage ( 10 );
+				}
+				mop_inform.cnt ++;
+				attack_count = 0;
+			}
+		}
 		if ( attack_count >= 5 ) {
 			attack_count = 0;
 			status = 0;
+			mop_inform.cnt =0;
 		}
 	}
 	else if ( mop_inform.type == 2 ) {
@@ -63,7 +89,6 @@ void mop::attack( Tank& p1) {
 			status = 0;
 		}
 	}
-	//몹3 용
 	else if ( mop_inform.type == 3 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
@@ -92,6 +117,43 @@ void mop::attack( Tank& p1) {
 			mop_inform.cnt = 0;
 			attack_count = 0;
 			status = 0;
+		}
+	}
+	else if ( mop_inform.type == 6 ) { //춘식이 탄뿌리기
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+			status = 2;
+		}
+		if ( mop_inform.cnt == 0 ) {
+			double targetx = ( double ) ( middleX ( p1.ReturnRect ( ) ) );
+			double targety = ( double ) ( middleY ( p1.ReturnRect ( ) ) );
+			double ang = angle ( ( double ) ( middleX ( ReturnRect ( ) ) ) , ( double ) ( middleY ( ReturnRect ( ) ) ) , targetx , targety );
+			double angle1 = 60 * ( 3.141592 / 180 );
+			for ( int i = 0; i < 6; i++ ) {
+				bullet* newbullet = new bullet ( mop_inform.x , mop_inform.y , 10 , -cos ( ang+i * angle1 ) , -sin ( ang+i * angle1 ) );
+				BulletManager::getInstance ( ).CreateBullet ( newbullet );
+			}
+			mop_inform.cnt++;
+		}
+		else {
+			if ( attack_count >= 5 ) {
+				mop_inform.cnt = 0;
+				attack_count = 0;
+				status = 0;
+			}
+		}
+	}
+	else if ( mop_inform.type == 10 ) {// 소환몹
+		if ( rect2rect ( moprect , tankrect ) ) {
+			if ( mop_inform.cnt == 0 ) {
+				TankController::Damage ( 10 );
+			}
+			mop_inform.cnt++;
+			attack_count = 0;
+		}
+		if ( attack_count >= 5 ) {
+			attack_count = 0;
+			status = 0;
+			mop_inform.cnt = 0;
 		}
 	}
 	
@@ -128,7 +190,7 @@ void mop::move ( Tank& p1  ) {
 	}
 	float len = 0;
 	BOOL ckBlock=0;
-	if ( mop_inform.type == 1 || mop_inform.type == 5 ) {
+	if ( mop_inform.type == 1 ) {
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -195,6 +257,80 @@ void mop::move ( Tank& p1  ) {
 				direct = 0;
 			}
 			if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
+				mop_inform.y -= speed;
+			}
+			else {
+				mop_inform.y += speed;
+			}
+		}
+	}
+	else if ( mop_inform.type == 5 ) {
+		if ( frame >= 6 ) frame = 0;
+		if ( blockmop ) {
+			//몹 아래 장애물
+			if ( cpyrect.top > moprect.bottom ) {
+				mop_inform.x += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopRight ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).left - moprect.right );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y -= speed;
+				}
+				ckBlock = 0;
+			}
+			if ( cpyrect.bottom < moprect.top ) {
+				mop_inform.x -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).right - moprect.left );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.y += speed;
+				}
+				ckBlock = 0;
+			}
+			if ( cpyrect.right < moprect.left ) {
+				mop_inform.y += speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopUp ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).top - moprect.bottom );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x += speed;
+				}
+				ckBlock = 0;
+			}
+			if ( cpyrect.left > moprect.right ) {
+				mop_inform.y -= speed;
+				for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+					if ( ckMopDown ( ScanBlock.ReturnRect ( ) , moprect ) ) {
+						len = abs_F ( ScanBlock.ReturnRect ( ).bottom - moprect.top );
+						ckBlock = 1;
+					}
+				}
+				if ( ckBlock && len < 10 ) {
+					mop_inform.x -= speed;
+				}
+				ckBlock = 0;
+			}
+		}
+		else {
+			if ( p1.ReturnRect ( ).left < mop_inform.x ) {
+				mop_inform.x -= speed;
+				direct = 3;
+			}
+			else {
+				mop_inform.x += speed;
+				direct = 0;
+			}
+			if ( p1.ReturnRect ( ).top < mop_inform.y ) {
 				mop_inform.y -= speed;
 			}
 			else {
@@ -293,9 +429,7 @@ void mop::move ( Tank& p1  ) {
 void mop::Update( ){
 	
 	if ( status != 3 && status != 4 ) {
-		
 		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
-		
 
 	}
 	if ( status == 0 || status == 1 ) {
@@ -360,7 +494,12 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			
 		}
-		//
+		else if ( mop_inform.type == 6 ) { // 자폭병
+			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 200 , mop_inform.y + 200 );
+			
+
+		}
+		
 
 		
 		
@@ -383,6 +522,9 @@ RECTS mop::ReturnRect ( ) {
 	}
 	else if ( mop_inform.type == 5 ) {
 		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
+	}
+	else {
+		r = { mop_inform.x, mop_inform.y , mop_inform.x + 200 , mop_inform.y + 200 };
 	}
 
 
@@ -435,10 +577,11 @@ void MonsterManager::Update (  )
 	if ( count >= 10 ) {
 		count = 0;
 		//spawn ( 1 );
-		spawn ( 2 );
-		spawn ( 3 );
+		//spawn ( 2 );
+		//spawn ( 3 );
 		//spawn ( 4 );
-		spawn ( 5 );
+		//spawn ( 5 );
+		spawn ( 6 );
 		
 	}
 	count += Time::DeltaTime ( );
