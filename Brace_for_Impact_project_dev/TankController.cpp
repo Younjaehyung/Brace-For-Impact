@@ -1,6 +1,6 @@
 ﻿#include "TankController.h"
-int TankController::tankmove = {};
-int TankController::tankaiming = {};
+bool TankController::tankmove = {};
+bool TankController::tankaiming = {};
 Frame TankController::Stage_frame = {};
 Frame TankController::Cannon_frame = {};
 int TankController::tankhp = {300};

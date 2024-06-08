@@ -8,12 +8,16 @@ Player1::Player1() {
 }
 
 void Player1::Update ( ) {
-	
+	SwitchStatus ( );
 	move ( );
 
 }
 
 void Player1::move ( ) {
+	if ( TankController::TankMoveStatus ( ) ) {
+		return;
+	}
+
 	float speed = 200 * Time::DeltaTime ( );
 
 	if ( input::GetKey ( eKeyCode::W ) ) {
@@ -60,12 +64,22 @@ void Player1::move ( ) {
 
 	}
 	//플레이어1 충돌 범위
-	p1Rect = { 1024 + rect.left , 0 + rect.top , 1024 + rect.left + PLAYERSIZE , 0 + rect.top + PLAYERSIZE };
+
 }
 
+void Player1::SwitchStatus ( ) {
+	if ( input::GetKeyUp ( eKeyCode::p1_a ) ) {
+		TankController::TankMoveStatus ( )= !TankController::TankMoveStatus ( );
+	
+	}
+}
+
+void Player1 :: Tank_control ( ) {
+
+}
 
 void Player1::FixedUpdate ( ) {
-
+	p1Rect = { 1024 + rect.left , 0 + rect.top , 1024 + rect.left + PLAYERSIZE , 0 + rect.top + PLAYERSIZE };
 }
 void Player1::Render ( const HDC& mDC ) {
 
@@ -102,6 +116,15 @@ void Player2::Init ( HINSTANCE g_hinst ) {
 }
 
 void Player2::Update() {
+	SwitchStatus ( );
+	move ( );
+
+}
+void Player2::move ( ) {
+
+	if ( TankController::TankAimingStatus ( ) ) {
+		return;
+	}
 	float speed = 200 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::UP ) ) {
 		rect.top -= speed;
@@ -147,8 +170,12 @@ void Player2::Update() {
 		count += Time::DeltaTime ( );
 	}
 }
+void Player2::SwitchStatus ( ) {
+	if ( input::GetKeyUp ( eKeyCode::p2_a ) ) {
+		TankController::TankAimingStatus ( ) = !TankController::TankAimingStatus ( );
 
-
+	}
+}
 
 void Player2::FixedUpdate() {
 }

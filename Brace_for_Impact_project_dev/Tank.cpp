@@ -12,7 +12,7 @@ Tank::Tank () {
 	angle = 90;
 	frameInterval=0;
 	headMove = 0;
-	
+	fireInterval = 0;
 }
 
 
@@ -46,62 +46,94 @@ void Tank::move ( )
 	//	rect.right += speed;
 	//	
 	//}
-	float speed = 200 * Time::DeltaTime ( );
-	float moveX = 0;
-	float moveY = 0;
 
-	BOOL ckBlock[ 4 ] = {0,0,0,0}; // 0: 몹 위 , 1: 아래 , 2: 좌 , 3: 우
-	for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-		if ( rect2rect ( ReturnRect ( ) , ScanBlock.ReturnRect ( ) ) ) {
-			if ( ckMopUp ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-				ckBlock[ 0 ] = 1;
+	if ( TankController::TankMoveStatus ( ) ) {
+		float speed = 200 * Time::DeltaTime ( );
+		float moveX = 0;
+		float moveY = 0;
+
+		BOOL ckBlock[ 4 ] = { 0,0,0,0 }; // 0: 몹 위 , 1: 아래 , 2: 좌 , 3: 우
+		/*for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+			if ( rect2rect ( ReturnRect ( ) , ScanBlock.ReturnRect ( ) ) ) {
+				if ( ckMopUp ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+					ckBlock[ 0 ] = 1;
+				}
+				if ( ckMopDown ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+					ckBlock[ 1 ] = 1;
+				}
+				if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+					ckBlock[ 2 ] = 1;
+				}
+				if ( ckMopRight ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
+					ckBlock[ 3 ] = 1;
+				}
 			}
-			if ( ckMopDown ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-				ckBlock[ 1 ] = 1;
-			}
-			if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-				ckBlock[ 2 ] = 1;
-			}
-			if ( ckMopRight ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-				ckBlock[ 3 ] = 1;
+		}*/
+
+		if ( !ckBlock[ 0 ] ) {
+			if ( input::GetKey ( eKeyCode::W ) ) {
+				moveY -= 1;
 			}
 		}
-	}
+		if ( !ckBlock[ 2 ] ) {
+			if ( input::GetKey ( eKeyCode::A ) ) {
+				moveX -= 1;
+			}
+		}
+		if ( !ckBlock[ 1 ] ) {
+			if ( input::GetKey ( eKeyCode::S ) ) {
+				moveY += 1;
+			}
+		}
+		if ( !ckBlock[ 3 ] ) {
+			if ( input::GetKey ( eKeyCode::D ) ) {
+				moveX += 1;
+			}
+		}
 
-	if ( !ckBlock[ 0 ] ) {
+		// Normalize the movement vector
+		float magnitude = sqrt ( moveX * moveX + moveY * moveY );
+		if ( magnitude > 0 ) {
+			moveX = ( moveX / magnitude ) * speed;
+			moveY = ( moveY / magnitude ) * speed;
+		}
+
+		rect.left += moveX;
+		rect.right += moveX;
+		rect.top += moveY;
+		rect.bottom += moveY;
+
+
+
 		if ( input::GetKey ( eKeyCode::W ) ) {
-			moveY -= 1;
+			Tank_car_direct = 0;
 		}
-	}
-	if ( !ckBlock[ 2 ] ) {
 		if ( input::GetKey ( eKeyCode::A ) ) {
-			moveX -= 1;
+			Tank_car_direct = 6;
 		}
-	}
-	if ( !ckBlock[ 1 ] ) {
 		if ( input::GetKey ( eKeyCode::S ) ) {
-			moveY += 1;
+			Tank_car_direct = 4;
 		}
-	}
-	if ( !ckBlock[ 3 ] ) {
 		if ( input::GetKey ( eKeyCode::D ) ) {
-			moveX += 1;
+			Tank_car_direct = 2;
+		}
+
+		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
+			Tank_car_direct = 7;
+			isMove = true;
+
+		}
+		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
+			Tank_car_direct = 1;
+		}
+		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) {
+			Tank_car_direct = 5;
+		}
+		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
+			Tank_car_direct = 3;
 		}
 	}
 
-	// Normalize the movement vector
-	float magnitude = sqrt ( moveX * moveX + moveY * moveY );
-	if ( magnitude > 0 ) {
-		moveX = ( moveX / magnitude ) * speed;
-		moveY = ( moveY / magnitude ) * speed;
-	}
-
-	rect.left += moveX;
-	rect.right += moveX;
-	rect.top += moveY;
-	rect.bottom += moveY;
-
-	moving_rander_cal ( );
 }
 
 void Tank::aiming_animation () {
@@ -146,7 +178,7 @@ void Tank::aiming_animation () {
 
 void Tank::aiming ( ) {
 	if ( headMove == 0 ) {
-		if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+		if ( input::GetKey ( eKeyCode::RIGHT ) && TankController::TankAimingStatus ( ) ) {
 			if ( ( frameInterval >= 0.1  ) ) {
 				headMove = 1;
 				headArrow = 0;
@@ -155,7 +187,7 @@ void Tank::aiming ( ) {
 			}
 			frameInterval += Time::DeltaTime ( );
 		}
-		else if ( input::GetKey ( eKeyCode::LEFT ) ) {
+		else if ( input::GetKey ( eKeyCode::LEFT ) && TankController::TankAimingStatus ( ) ) {
 			if ( ( frameInterval >= 0.1  ) ) {
 				headArrow = 1;
 				headMove = 1;
@@ -174,10 +206,10 @@ void Tank::aiming ( ) {
 
 void Tank::shooting ( )
 {
-		//OSW 24.06.02 20:12 탱크 존나 펑펑터지는 문제있음. 수정 필요함
-		if ( input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( ) == 0) {
+		
+		if ( input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( )) {
 			if ( shootingInterval >= 0.3 ) {
-				TankController::TankAimingStatus ( ) = 1;
+				fireInterval = 1;
 				
 				shootingInterval = 0;
 
@@ -194,15 +226,15 @@ void Tank::shooting ( )
 			
 			
 
-		if ( TankController::TankAimingStatus ( ) == 1 ) {
-			if ( TankController::TankCannon_frame ( ).count >= 0.1 ) {
+		if ( fireInterval == 1 ) {
+			if ( TankController::TankCannon_frame ( ).count >= 0.05 ) {
 				TankController::TankCannon_frame ( ).frame++;
 				TankController::TankCannon_frame ( ).count = 0;
 
 				if ( TankController::TankCannon_frame ( ).frame > 4 ) {
 					TankController::TankCannon_frame ( ).frame = 0;
 
-					TankController::TankAimingStatus ( ) = 0;
+					fireInterval = 0;
 					
 				}
 			}
@@ -215,13 +247,17 @@ void Tank::shooting ( )
 void Tank::Update ( )
 {
 	if ( TankController::TankHp ( ) >= 0 ) { //디버그용으로 탱크 체력 0이여도 움직임 죽게하려면 ' = ' 만 뺄것
+		
 		aiming ( );
 
 		shooting ( );
-		if ( TankController::TankOil ( ) >= 0 ) {
+		if ( TankController::TankOil ( ) >= 0  ) {
+
 			move ( );
+			moving_rander_cal ( );
 		}
 		
+
 	}
 }
 
@@ -240,33 +276,6 @@ void Tank::moving_rander_cal ( ) {
 	}
 	Tank_car_count += Time::DeltaTime ( );
 	
-	if ( input::GetKey ( eKeyCode::W ) ) {
-		Tank_car_direct = 0;
-	}
-	if ( input::GetKey ( eKeyCode::A ) ) {
-		Tank_car_direct = 6;
-	}
-	if ( input::GetKey ( eKeyCode::S ) ) {
-		Tank_car_direct = 4;
-	}
-	if ( input::GetKey ( eKeyCode::D ) ) {
-		Tank_car_direct = 2;
-	}
-
-	if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
-		Tank_car_direct = 7;
-		isMove = true;
-
-	}
-	if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
-		Tank_car_direct = 1;
-	}
-	if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) {
-		Tank_car_direct = 5;
-	}
-	if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
-		Tank_car_direct = 3;
-	}
 }
 
 void Tank::Render ( const HDC& mDC)

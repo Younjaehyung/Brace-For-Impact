@@ -24,7 +24,7 @@ private:
 	float Tank_head_count;
 	float frameInterval;
 	float shootingInterval;
-
+	int fireInterval;
 	
 	BOOL isMove;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
 	BOOL headMove;

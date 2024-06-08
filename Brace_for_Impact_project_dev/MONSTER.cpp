@@ -399,7 +399,7 @@ void mop::Damage ( int damage ) {
 	if ( mop_inform.hp > 0 ) {
 		mop_inform.hp -= damage;
 	}
-	if ( mop_inform.hp < 0 ) {
+	else if ( mop_inform.hp < 0 ) {
 		mop_inform.hp = 0;
 	}
 
@@ -421,6 +421,49 @@ void MonsterManager::spawn ( int type ) {
 	
 }
 
+void MonsterManager::SpawnMonster (  ) {
+
+	if ( count >= 10.0 ) {
+		count = 0;
+		//spawn ( 1 );
+		spawn ( 2 );
+		spawn ( 3 );
+		//spawn ( 4 );
+		spawn ( 5 );
+
+	}
+	count += Time::DeltaTime ( );
+
+}
+
+void MonsterManager::DeleteMonster () {
+
+	if ( mops.size ( ) ) {
+		deletetime += Time::DeltaTime ( );
+		if ( deletetime > 12.0 ) {
+
+
+			for ( auto iter = mops.begin ( ); iter != mops.end ( );) {
+				if ( ( *iter )->status == 0 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+					mop* del = *iter;  // 삭제할 노드의 포인터를 저장
+					iter = mops.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
+
+					delete del;  // 삭제할 노드를 메모리에서 해제
+
+					std::cout << "aa" << std::endl;
+				}
+				else {
+					++iter;  // 다음 노드로 이동
+				}
+			}
+			deletetime = 0;
+		}
+
+
+	}
+
+}
+
 
 
 void MonsterManager::Update (  )
@@ -431,17 +474,9 @@ void MonsterManager::Update (  )
 			iter->Update ( );
 		}
 	}
-
-	if ( count >= 10 ) {
-		count = 0;
-		//spawn ( 1 );
-		spawn ( 2 );
-		spawn ( 3 );
-		//spawn ( 4 );
-		spawn ( 5 );
-		
-	}
-	count += Time::DeltaTime ( );
+	DeleteMonster ( );
+	SpawnMonster ( );
+	
 
 }
 

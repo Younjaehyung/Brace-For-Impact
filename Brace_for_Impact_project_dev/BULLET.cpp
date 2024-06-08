@@ -139,7 +139,7 @@ void BulletManager::DeleteBullet() {
 			
 
 				for ( auto iter = bullets.begin ( ); iter != bullets.end ( );) {
-					if ( ( *iter )->return_type ( ) == 0 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+					if ( ( *iter )->return_type ( ) == 0   ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
 						bullet* del = *iter;  // 삭제할 노드의 포인터를 저장
 						iter = bullets.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
 					
