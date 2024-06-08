@@ -46,9 +46,9 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 2 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
 		}
 		if ( attack_count >= 5 ) {
+			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
 			attack_count = 0;
 			status = 0;
 		}
@@ -56,21 +56,21 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 4 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 12 );
 		}
 		if ( attack_count >= 5 ) {
+			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 12 );
 			attack_count = 0;
 			status = 0;
 		}
 	}
 	//몹3 용
-	if ( mop_inform.type == 3 ) {
+	else if ( mop_inform.type == 3 ) {
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+			status = 2;
+		}
 		if ( attack_count <= 1 ) {
 			if ( attack_count >= 0.1 ) {
-				if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
-					status = 2;
-					bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
-				}
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
 			}
 		}
 		else {
@@ -80,8 +80,7 @@ void mop::attack( Tank& p1) {
 			}
 		}
 	}
-
-	if ( mop_inform.type == 5 ) { //자폭이
+	else if ( mop_inform.type == 5 ) { //자폭이
 		if ( rect2rect ( tankrect , moprect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
@@ -95,8 +94,6 @@ void mop::attack( Tank& p1) {
 			status = 0;
 		}
 	}
-
-
 	
 	attack_count += Time::DeltaTime ( );
 	
@@ -438,8 +435,8 @@ void MonsterManager::Update (  )
 	if ( count >= 10 ) {
 		count = 0;
 		//spawn ( 1 );
-		//spawn ( 2 );
-		//spawn ( 3 );
+		spawn ( 2 );
+		spawn ( 3 );
 		//spawn ( 4 );
 		spawn ( 5 );
 		

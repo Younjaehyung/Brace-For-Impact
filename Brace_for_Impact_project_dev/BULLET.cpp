@@ -29,7 +29,7 @@ void bullet::move ( ) {
 		y += my * 600 * Time::DeltaTime ( );
 	}
 	else {
-		counter+= 100 * Time::DeltaTime ( );
+		counter += 100 * Time::DeltaTime ( );
 	}
 		//OSW
 		//총알 프레임
@@ -104,10 +104,9 @@ void bullet::move ( ) {
 	
 }
 void bullet::Render ( const HDC& dc ) {
-	TransparentBlt ( dc , x-4*SIZE , y-4*SIZE , SIZE * 8 , SIZE * 8 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( type != 0 ) {
-		
+		TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		Ellipse ( dc , x - SIZE -counter, y - SIZE -counter , x + SIZE +counter , y + SIZE +counter );
 	}
 }
