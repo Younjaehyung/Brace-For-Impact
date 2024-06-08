@@ -9,8 +9,8 @@ typedef struct Frame {
 class TankController
 {
 private:
-	static int tankmove;
-	static int tankaiming;
+	static bool tankmove;
+	static bool tankaiming;
 
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
 	static Frame Stage_frame , Cannon_frame , Inside_frame;
@@ -21,10 +21,10 @@ private:
 public:
 	static RECT camera;
 
-	static int& TankMoveStatus ( ) {
+	static bool& TankMoveStatus ( ) {
 		return tankmove;
 	}
-	static int& TankAimingStatus ( ) {
+	static bool& TankAimingStatus ( ) {
 		return tankaiming;
 	}
 	static Frame& TankStage_frame ( ) {

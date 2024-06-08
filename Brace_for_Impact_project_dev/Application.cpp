@@ -84,6 +84,8 @@ void Application::f_Render() {
 	else if ( input::GetKey ( eKeyCode::U ) ) {
 		Stage_num = 3;
 	}
+	BitBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , SRCCOPY );
 
 	//OSW - hmemDC추가
 
@@ -117,8 +119,6 @@ void Application::f_Render() {
 	/*TransparentBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024-50 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 	*/
-	BitBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ), 0 , 0 , SRCCOPY );
 	
 	gameobject.Camera_UI ( mDC );
 

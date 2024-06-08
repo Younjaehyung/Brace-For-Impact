@@ -49,9 +49,11 @@ private:
 
 	MonsterManager ( ) {
 		count = 0;
+		deletetime = 0;
 	};
 	std::list<mop*> mops;
 	float count;
+	float deletetime;
 public:
 	static MonsterManager& getInstance ( ) {
 		static MonsterManager instance;
@@ -59,7 +61,8 @@ public:
 	}
 
 	void spawn ( int type );
-
+	void SpawnMonster ( );
+	void DeleteMonster ( );
 	void Update ( );
 	void Render ( const HDC& );
 	std::list<mop*>& MopReturn();

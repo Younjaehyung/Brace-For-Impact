@@ -5,6 +5,7 @@
 #include "Time.h"
 #include "MATH.h"
 #include "Resource.h"
+#include "TankController.h"
 #define PLAYERSIZE 96
 
 class Player1
@@ -25,7 +26,8 @@ public:
 	Player1 ( );
 	
 	void move ( );
-	//void tank_control ( );
+	void SwitchStatus ( );
+	void Tank_control ( );
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
@@ -48,8 +50,9 @@ private:
 
 public:
 	Player2();
-	
+	void move ( );
 	//void tank_control ( );
+	void SwitchStatus ( );
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
