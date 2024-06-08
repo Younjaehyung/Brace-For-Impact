@@ -107,14 +107,18 @@ void bullet::Render ( const HDC& dc ) {
 	if ( type != 0 ) {
 		if ( PlayerBullet ) { //플레이어가 쏜 총알
 			TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 32 , 1 * 32 , 32 , 32 , RGB ( 255 , 255 , 255 ) );
 			Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 		}
 		else { // 몬스터가 쏜 총알
-			if ( type == 14 ) { // 자폭이 폭발		
+			if ( type == 14 ) { // 자폭이 폭발
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 			else { //그 외 다른애들 총알
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 		}

@@ -84,12 +84,14 @@ void mop::attack( Tank& p1) {
 		if ( rect2rect ( tankrect , moprect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
+				direct = 1;
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 14 );
 				mop_inform.cnt++;
 			}
 		}
 		if ( attack_count > 10 ) {
 			mop_inform.cnt = 0;
+			direct = 0;
 			attack_count = 0;
 			status = 0;
 		}
