@@ -107,18 +107,33 @@ void mop::attack( Tank& p1) {
 			status = 2;
 			direct = 1;
 		}
-		if ( attack_count <= 1 ) {
-			if ( attack_count >= 0.1 ) {
+		if ( attack_count <= 2 ) {
+			if ( attack_count >= 0 ) {
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
 			}
 		}
-		else {
-			if ( attack_count >= 10 ) {
-				attack_count = 0;
-				status = 0;
-				direct = 0;
+		if ( attack_count >= 10 ) {
+			if ( mop_inform.cnt ==0 ) {
+				mop* newmop = new mop ( 11 );
+				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
+				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
+				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
+				mop_inform.cnt++;
 			}
 		}
+		if ( attack_count >= 20 ) {
+			mop* newmop = new mop ( 11 );
+			newmop->mop_inform.x = middleX ( ReturnRect ( ) );
+			newmop->mop_inform.y = middleY ( ReturnRect ( ) );
+			MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
+			mop_inform.cnt = 0;
+
+			attack_count = 0;
+			status = 0;
+			direct = 0;
+		}
+		
+		
 	}
 	else if ( mop_inform.type == 5 ) { //자폭이
 		if ( rect2rect ( tankrect , moprect ) ) {
@@ -176,6 +191,21 @@ void mop::attack( Tank& p1) {
 			mop_inform.cnt = 0;
 		}
 	}
+	else if ( mop_inform.type == 11 ) {// 오줌싸개 소환몹
+		if ( rect2rect ( moprect , tankrect ) ) {
+			if ( mop_inform.cnt == 0 ) {
+				status = 2;
+				TankController::Damage ( 5 );
+			}
+			mop_inform.cnt++;
+			attack_count = 0;
+		}
+		if ( attack_count >= 5 ) {
+			attack_count = 0;
+			status = 0;
+			mop_inform.cnt = 0;
+		}
+		}
 	
 	attack_count += Time::DeltaTime ( );
 	
@@ -210,7 +240,7 @@ void mop::move ( Tank& p1  ) {
 	}
 	float len = 0;
 	BOOL ckBlock=0;
-	if ( mop_inform.type == 1 || mop_inform.type == 5 || mop_inform.type == 10 ) {
+	if ( mop_inform.type == 1 || mop_inform.type == 5 || mop_inform.type == 10 || mop_inform.type == 11 ) {
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -454,6 +484,11 @@ void mop::Render( const HDC& dc) {
 
 
 		}
+		else if ( mop_inform.type == 11 ) { // 쪼꼬미 오줌이가 소환함
+			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
+
+
+		}
 		
 
 		
@@ -478,7 +513,7 @@ RECTS mop::ReturnRect ( ) {
 	else if ( mop_inform.type == 5 ) {
 		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
 	}
-	else if( mop_inform.type == 10 ){
+	else if( mop_inform.type == 10 || mop_inform.type ==11){
 		r = { mop_inform.x, mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 };
 	}
 	else {
@@ -525,12 +560,12 @@ void MonsterManager::SpawnMonster (  ) {
 
 	if ( count >= 10.0 ) {
 		count = 0;
-		spawn ( 1 );
-		spawn ( 2 );
+		//spawn ( 1 );
+		//spawn ( 2 );
 		spawn ( 3 );
-		spawn ( 4 );
-		spawn ( 5 );
-		spawn ( 6 );
+		//spawn ( 4 );
+		//spawn ( 5 );
+		//spawn ( 6 );
 
 	}
 	count += Time::DeltaTime ( );
