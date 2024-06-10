@@ -71,22 +71,22 @@ void Tank::move ( )
 		}*/
 
 		if ( !ckBlock[ 0 ] ) {
-			if ( input::GetKey ( eKeyCode::W ) ) {
+			if ( input::GetKey ( eKeyCode::W ) &&rect.top>0) {
 				moveY -= 1;
 			}
 		}
 		if ( !ckBlock[ 2 ] ) {
-			if ( input::GetKey ( eKeyCode::A ) ) {
+			if ( input::GetKey ( eKeyCode::A ) &&rect.left > 0 ) {
 				moveX -= 1;
 			}
 		}
 		if ( !ckBlock[ 1 ] ) {
-			if ( input::GetKey ( eKeyCode::S ) ) {
+			if ( input::GetKey ( eKeyCode::S ) && rect.top<1650 ) {
 				moveY += 1;
 			}
 		}
 		if ( !ckBlock[ 3 ] ) {
-			if ( input::GetKey ( eKeyCode::D ) ) {
+			if ( input::GetKey ( eKeyCode::D ) && rect.left<1910) {
 				moveX += 1;
 			}
 		}
