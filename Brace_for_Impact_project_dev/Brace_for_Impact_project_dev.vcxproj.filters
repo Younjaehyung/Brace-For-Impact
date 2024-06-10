@@ -204,9 +204,6 @@
     <Image Include="UI)Tankinside.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="BFI_BOSS_2_sprite.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="BFI_Control_attack.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
@@ -267,13 +264,25 @@
     <Image Include="BFI_Bullet_2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="BFI_minibot_2-Sheet.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="BFI_Screen_Cursor.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="BFI_Screen_Selecet.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_BOSS_1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_BOSS_2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_BOSS_4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_BOSS_5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_BOSS_6_sprite.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

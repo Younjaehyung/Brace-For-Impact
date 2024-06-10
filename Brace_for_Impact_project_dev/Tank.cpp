@@ -268,6 +268,10 @@ void Tank::moving_rander_cal ( ) {
 		TankController::TankStage_frame().frame++;
 		if ( TankController::TankStage_frame ( ).frame >= 4 ) TankController::TankStage_frame ( ).frame = 0;
 		
+		TankController::ScreenTitle_frame ( ).frame++;
+		if ( TankController::ScreenTitle_frame ( ).frame >= 6 ) TankController::ScreenTitle_frame ( ).frame = 0;
+
+
 		//탱크 움직일 때만 ui움직이도록 바꿀꺼임
 		
 	}
@@ -283,7 +287,7 @@ void Tank::Render ( const HDC& mDC)
 	TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC( "B_Tank_car" ) , Tank_car_frame * 128, Tank_car_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	
 	//탱크 머리
-	TransparentBlt ( mDC , rect.left , -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , rect.left ,  -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	
 
 

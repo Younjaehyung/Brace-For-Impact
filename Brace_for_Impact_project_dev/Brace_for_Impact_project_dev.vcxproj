@@ -180,7 +180,11 @@
     <ResourceCompile Include="Brace_for_Impact_project_dev.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="BFI_BOSS_2_sprite.bmp" />
+    <Image Include="BFI_BOSS_1.bmp" />
+    <Image Include="BFI_BOSS_2.bmp" />
+    <Image Include="BFI_BOSS_4.bmp" />
+    <Image Include="BFI_BOSS_5.bmp" />
+    <Image Include="BFI_BOSS_6_sprite.bmp" />
     <Image Include="BFI_Building_1.bmp" />
     <Image Include="BFI_Bullet_1.bmp" />
     <Image Include="BFI_Bullet_2.bmp" />
@@ -196,7 +200,6 @@
     <Image Include="BFI_Enemy_3.bmp" />
     <Image Include="BFI_Enemy_4.bmp" />
     <Image Include="BFI_Enemy_5.bmp" />
-    <Image Include="BFI_minibot_2-Sheet.bmp" />
     <Image Include="BFI_Player.bmp" />
     <Image Include="BFI_Screen_Cursor.bmp" />
     <Image Include="BFI_Screen_Selecet.bmp" />

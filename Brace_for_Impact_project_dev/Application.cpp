@@ -84,6 +84,9 @@ void Application::f_Render() {
 	else if ( input::GetKey ( eKeyCode::U ) ) {
 		Stage_num = 3;
 	}
+	else if ( input::GetKey ( eKeyCode::Z ) ) {
+		gameStart = !gameStart;
+	}
 	BitBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , SRCCOPY );
 
@@ -122,10 +125,17 @@ void Application::f_Render() {
 	
 	gameobject.Camera_UI ( mDC );
 
-	//TITLE 출력
-	/*BitBlt ( mDC , 0 , 0 , 1024 , 1024 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_TITLE" ) , 0 , 0 , SRCCOPY );*/
+	if ( gameStart ) {
+		//TITLE 출력
+		BitBlt ( mDC , 0 , 0 , 1024 , 1024 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_TITLE" ) , TankController::ScreenTitle_frame ( ).frame * 1024 , 0 , SRCCOPY );
+		BitBlt ( mDC , 1024 - 50 , 0 , 1024 + 656 , 1024 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Select" ) , 0 , 0 , SRCCOPY );
+		TransparentBlt ( mDC , 1024 + 64*1 , 656 - 64 * 2 ,96 * 2 , 64 * 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Cursor" ) ,0 , 0 , 96 , 64 , RGB ( 255 , 255 , 255 ) );
 
+	}
+	
 	//플레이어 활동 가능 구역
 	//Rectangle ( mDC , 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 800 );
 

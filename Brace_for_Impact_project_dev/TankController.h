@@ -13,7 +13,7 @@ private:
 	static bool tankaiming;
 
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
-	static Frame Stage_frame , Cannon_frame , Inside_frame;
+	static Frame Stage_frame , Cannon_frame , Inside_frame, Title_frame;
 
 	static int tankhp;
 	static int tankoil;
@@ -29,6 +29,9 @@ public:
 	}
 	static Frame& TankStage_frame ( ) {
 		return Stage_frame;
+	}
+	static Frame& ScreenTitle_frame ( ) {
+		return Title_frame;
 	}
 	static Frame& TankCannon_frame ( ) {
 		return Cannon_frame;
