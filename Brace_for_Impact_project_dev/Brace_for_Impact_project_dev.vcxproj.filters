@@ -267,9 +267,6 @@
     <Image Include="BFI_Screen_Cursor.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="BFI_Screen_Selecet.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="BFI_BOSS_1.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
@@ -283,6 +280,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="BFI_BOSS_6_sprite.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Selecet.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

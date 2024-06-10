@@ -74,7 +74,7 @@ public:
         //스크린 화면 출력
         idBitmap.emplace ( "B_TITLE" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_TITLE ) ) );
         idBitmap.emplace ( "B_Cursor" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_CURSOR ) ) );
-        idBitmap.emplace ( "B_Select" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_SELECT ) ) );
+        idBitmap.emplace ( "B_Select" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TITLE_SELECT ) ) );
         for ( const auto& pair : idBitmap ) {
             HDC memDC = CreateCompatibleDC ( mDC );
             SelectObject ( memDC , pair.second );
