@@ -20,7 +20,7 @@ void Player1::move ( ) {
 
 	float speed = 200 * Time::DeltaTime ( );
 
-	if ( input::GetKey ( eKeyCode::W ) ) {
+	if ( input::GetKey ( eKeyCode::W ) && rect.top > 0) {
 		rect.top -= speed;
 		rect.bottom -= speed;
 		if ( count >= 0.1 ) {
@@ -30,7 +30,7 @@ void Player1::move ( ) {
 		}
 		count+= Time::DeltaTime ( );
 	}
-	if ( input::GetKey ( eKeyCode::A ) ) {
+	if ( input::GetKey ( eKeyCode::A ) && rect.left > 0) {
 		rect.left -= speed;
 		rect.right -= speed;
 		if ( count >= 0.1 ) {
@@ -41,7 +41,7 @@ void Player1::move ( ) {
 		}
 		count += Time::DeltaTime ( );
 	}
-	if ( input::GetKey ( eKeyCode::S ) ) {
+	if ( input::GetKey ( eKeyCode::S ) && rect.bottom <900) {
 		rect.top += speed;
 		rect.bottom += speed;
 		if ( count >= 0.1 ) {
@@ -51,7 +51,7 @@ void Player1::move ( ) {
 		}
 		count += Time::DeltaTime ( );
 	}
-	if ( input::GetKey ( eKeyCode::D ) ) {
+	if ( input::GetKey ( eKeyCode::D ) && rect.right <600) {
 		rect.left += speed;
 		rect.right += speed;
 		if ( count >= 0.1 ) {
@@ -130,7 +130,7 @@ void Player2::move ( ) {
 		return;
 	}
 	float speed = 200 * Time::DeltaTime ( );
-	if ( input::GetKey ( eKeyCode::UP ) ) {
+	if ( input::GetKey ( eKeyCode::UP ) && rect.top>-200 ) {
 		rect.top -= speed;
 		rect.bottom -= speed;
 		if ( count >= 0.1 ) {
@@ -141,7 +141,7 @@ void Player2::move ( ) {
 		count += Time::DeltaTime ( );
 
 	}
-	if ( input::GetKey ( eKeyCode::LEFT ) ) {
+	if ( input::GetKey ( eKeyCode::LEFT ) && rect.left>0 ) {
 		rect.left -= speed;
 		rect.right -= speed;
 		if ( count >= 0.1 ) {
@@ -152,7 +152,7 @@ void Player2::move ( ) {
 		}
 		count += Time::DeltaTime ( );
 	}
-	if ( input::GetKey ( eKeyCode::DOWN ) ) {
+	if ( input::GetKey ( eKeyCode::DOWN ) && rect.bottom<700 ) {
 		rect.top += speed;
 		rect.bottom += speed;
 		if ( count >= 0.1 ) {
@@ -162,7 +162,7 @@ void Player2::move ( ) {
 		}
 		count += Time::DeltaTime ( );
 	}
-	if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+	if ( input::GetKey ( eKeyCode::RIGHT ) && rect.right < 600) {
 		rect.left += speed;
 		rect.right += speed;
 		if ( count >= 0.1 ) {

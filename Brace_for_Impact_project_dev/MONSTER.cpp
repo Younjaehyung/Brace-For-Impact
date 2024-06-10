@@ -514,7 +514,7 @@ RECTS mop::ReturnRect ( ) {
 		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
 	}
 	else if ( mop_inform.type == 6 ) {
-		r = { mop_inform.x + 60, mop_inform.y + 20 , mop_inform.x + 200 , mop_inform.y + 250 };
+		r = { mop_inform.x + 50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 };
 	}
 	else if( mop_inform.type == 10 || mop_inform.type ==11){
 		r = { mop_inform.x, mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 };
