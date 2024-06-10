@@ -133,7 +133,7 @@ void mop::attack( Tank& p1) {
 			direct = 0;
 		}
 		
-		
+	
 	}
 	else if ( mop_inform.type == 5 ) { //자폭이
 		if ( rect2rect ( tankrect , moprect ) ) {
@@ -144,7 +144,7 @@ void mop::attack( Tank& p1) {
 				mop_inform.cnt++;
 			}
 		}
-		if ( attack_count > 10 ) {
+		if ( attack_count > 5 ) {
 			mop_inform.cnt = 0;
 			direct = 0;
 			attack_count = 0;
@@ -471,7 +471,7 @@ void mop::Render( const HDC& dc) {
 			
 		}
 		else if ( mop_inform.type == 6 ) { // 춘식이
-			Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 200 , mop_inform.y + 200 );
+			Rectangle ( dc , mop_inform.x+50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 );
 			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_5" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
@@ -512,6 +512,9 @@ RECTS mop::ReturnRect ( ) {
 	}
 	else if ( mop_inform.type == 5 ) {
 		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
+	}
+	else if ( mop_inform.type == 6 ) {
+		r = { mop_inform.x + 60, mop_inform.y + 20 , mop_inform.x + 200 , mop_inform.y + 250 };
 	}
 	else if( mop_inform.type == 10 || mop_inform.type ==11){
 		r = { mop_inform.x, mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 };
@@ -560,12 +563,12 @@ void MonsterManager::SpawnMonster (  ) {
 
 	if ( count >= 10.0 ) {
 		count = 0;
-		//spawn ( 1 );
-		//spawn ( 2 );
+		spawn ( 1 );
+		spawn ( 2 );
 		spawn ( 3 );
-		//spawn ( 4 );
-		//spawn ( 5 );
-		//spawn ( 6 );
+		spawn ( 4 );
+		spawn ( 5 );
+		spawn ( 6 );
 
 	}
 	count += Time::DeltaTime ( );
