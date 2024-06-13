@@ -207,19 +207,10 @@
     <Image Include="BFI_Control_attack.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="BFI_Control_dash.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="BFI_Control_engine.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="BFI_Control_move.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_reloader.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="BFI_Control_steam.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="BFI_Enemy_3.bmp">
@@ -285,5 +276,31 @@
     <Image Include="BFI_Screen_Selecet.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_CT_Itembox.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Item.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Control_steam_dash.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_ICON.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Gameover.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_StageStart.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Selecetframe.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Gooseworx- Industrial Elegance.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

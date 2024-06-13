@@ -9,7 +9,7 @@
 #include "Texture.h"
 #include "PlayScenes.h"
 #include "SceneManager.h"
-
+#pragma comment(lib,"winmm.lib")
 
 class Application {
 private:
@@ -21,11 +21,14 @@ private:
 	int left;
 	int Stage_num;
 	int top;
+
+	int Cursor;		//커서 위치 바꾸는 인수
+
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
 	RECT camera;
 
-	BOOL gameStart;
+	BOOL gameStart = true;
 
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI			너비 1024 높이 252
@@ -35,6 +38,7 @@ private:
 	RECT r_canMove = { 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 750 };	//플레이어의 활동 가능 구역
 
 
+	HBRUSH blackBrush;
 
 
 public:
@@ -49,6 +53,9 @@ public:
 	void f_FixedUpdate ( );
 	void f_Initialize ( HWND hWnd , HINSTANCE );
 	void HandleResize ( );
+	
+
+
 };
 
 

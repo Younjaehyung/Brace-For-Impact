@@ -10,12 +10,13 @@ private:
 	int score;
 	HBRUSH blackBrush;
 	HBRUSH redBrush;
-	
+	HBRUSH cyanBrush;
 
 public:
 	Game ( ) :score(0) {
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
+		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
 	}
 
 	void Update ( ) {

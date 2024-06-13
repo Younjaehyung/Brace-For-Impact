@@ -107,15 +107,19 @@ void Tank::move ( )
 
 		if ( input::GetKey ( eKeyCode::W ) ) {
 			Tank_car_direct = 0;
+			isMove = true;
 		}
 		if ( input::GetKey ( eKeyCode::A ) ) {
 			Tank_car_direct = 6;
+			isMove = true;
 		}
 		if ( input::GetKey ( eKeyCode::S ) ) {
 			Tank_car_direct = 4;
+			isMove = true;
 		}
 		if ( input::GetKey ( eKeyCode::D ) ) {
 			Tank_car_direct = 2;
+			isMove = true;
 		}
 
 		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
@@ -125,12 +129,44 @@ void Tank::move ( )
 		}
 		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
 			Tank_car_direct = 1;
+			isMove = true;
 		}
 		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) {
 			Tank_car_direct = 5;
+			isMove = true;
 		}
 		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
 			Tank_car_direct = 3;
+			isMove = true;
+		}
+
+
+		//손 때면
+		if ( input::GetKeyUp ( eKeyCode::W ) ) {
+			isMove = false;
+		}
+		if ( input::GetKeyUp ( eKeyCode::A ) ) {
+			isMove = false;
+		}
+		if ( input::GetKeyUp ( eKeyCode::S ) ) {
+			isMove = false;
+		}
+		if ( input::GetKeyUp ( eKeyCode::D ) ) {
+			isMove = false;
+		}
+
+		if ( input::GetKeyUp ( eKeyCode::W ) && input::GetKeyUp ( eKeyCode::A ) ) {
+			isMove = false;
+		}
+		if ( input::GetKeyUp ( eKeyCode::W ) && input::GetKeyUp ( eKeyCode::D ) ) {
+			Tank_car_direct = 1;
+			isMove = false;
+		}
+		if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::A ) ) {
+			isMove = false;
+		}
+		if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::D ) ) {
+			isMove = false;
 		}
 	}
 
@@ -228,13 +264,13 @@ void Tank::shooting ( )
 			if ( TankController::TankCannon_frame ( ).count >= 0.05 ) {
 				TankController::TankCannon_frame ( ).frame++;
 				TankController::TankCannon_frame ( ).count = 0;
-
 				if ( TankController::TankCannon_frame ( ).frame > 4 ) {
 					TankController::TankCannon_frame ( ).frame = 0;
-
 					fireInterval = 0;
-					
 				}
+				Tank_head_frame = 6;
+				Tank_head_frame++;
+				if(Tank_car_frame >= 8 ) Tank_head_frame = 0;
 			}
 			TankController::TankCannon_frame ( ).count += Time::DeltaTime ( );
 
@@ -265,14 +301,22 @@ void Tank::moving_rander_cal ( ) {
 		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
 		Tank_car_count = 0;
 
-		TankController::TankStage_frame().frame++;
-		if ( TankController::TankStage_frame ( ).frame >= 4 ) TankController::TankStage_frame ( ).frame = 0;
+		if ( isMove ) {
+			TankController::TankStage_frame ( ).frame++;
+			if ( TankController::TankStage_frame ( ).frame >= 4 ) TankController::TankStage_frame ( ).frame = 0;
+			
+		}
 		
+
+		//타이틀 화면 애니메이션 = 임시로 넣어뒀음. 나중에 타이틀.cpp에 넣어야 함
 		TankController::ScreenTitle_frame ( ).frame++;
-		if ( TankController::ScreenTitle_frame ( ).frame >= 6 ) TankController::ScreenTitle_frame ( ).frame = 0;
+		if ( TankController::ScreenTitle_frame ( ).frame >= 5 ) TankController::ScreenTitle_frame ( ).frame = 0;
 
 
-		//탱크 움직일 때만 ui움직이도록 바꿀꺼임
+
+		if ( isHit ) {
+			TankController::TankStage_frame ( ).frame = 5;
+		}
 		
 	}
 	Tank_car_count += Time::DeltaTime ( );

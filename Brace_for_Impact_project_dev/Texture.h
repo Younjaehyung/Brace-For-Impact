@@ -29,6 +29,7 @@ public:
         idBitmap.emplace ( "B_Player_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) ) );
         idBitmap.emplace ( "B_Bullet" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BULLET ) ) );
         idBitmap.emplace ( "B_Bullet_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BULLET_2 ) ) );
+        idBitmap.emplace ( "B_Item" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ITEM ) ) );
 
         //UI 비트맵 선언
         idBitmap.emplace ( "B_UI_Info_up" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) ) );
@@ -39,17 +40,16 @@ public:
         idBitmap.emplace ( "B_UI_Player" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_PLAYER ) ) );
         idBitmap.emplace ( "B_UI_Reloader" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_RELOADER ) ) );
         idBitmap.emplace ( "B_UI_Info" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO ) ) );
-
+        idBitmap.emplace ( "B_Selectframe" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_SELECTFRAME ) ) );
 
 
         //조종기 오브젝트 비트맵 선언
-        idBitmap.emplace ( "B_CT_Dash" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_DASH ) ) );
         idBitmap.emplace ( "B_CT_Engine" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ENGINE ) ) );
         idBitmap.emplace ( "B_CT_Move" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_MOVE ) ) );
         idBitmap.emplace ( "B_CT_Attack" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ATTACK ) ) );
-        idBitmap.emplace ( "B_CT_Reload" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_RELOAD ) ) );
-        idBitmap.emplace ( "B_CT_Steam" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_STEAM ) ) );
+        idBitmap.emplace ( "B_CT_Steam_Dash" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_STEAM_DASH ) ) );
         idBitmap.emplace ( "B_CT_Cannon" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_CANNON) ) );
+        idBitmap.emplace ( "B_CT_Itembox" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ITEMBOX ) ) );
 
         //스테이지 관련 비트맵 선언
         idBitmap.emplace ( "B_Building" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BUILDING ) ) );

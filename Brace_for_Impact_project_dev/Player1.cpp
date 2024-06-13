@@ -92,15 +92,9 @@ void Player1::Render ( const HDC& mDC ) {
 	
 	TransparentBlt ( mDC , 1024 + rect.left,  0+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame * 64, direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	//Rectangle ( mDC , p1Rect.left , p1Rect.top , p1Rect.right, p1Rect.bottom );
-	//좌표 알아보기 용
-	wchar_t str1[ 50 ] = L"";
-	wchar_t str2[ 50 ] = L"";
-	wsprintf ( str1 , L"X : %d" , (int)rect.left );
-	wsprintf ( str2, L"Y : %d" , ( int ) rect.top );
-	int len1 = wcsnlen_s ( str1 , 50 );
-	int len2 = wcsnlen_s ( str2 , 50 );
-	TextOut ( mDC , 100 , 200 , str1 , len1 );
-	TextOut ( mDC , 100 , 300 , str2 , len2 );
+	
+	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+	TransparentBlt ( mDC , 1024 + rect.left + 32, 0 + rect.top - 32 , PLAYERSIZE /2 , PLAYERSIZE /2 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) , frame * 64 , direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 }
 RECTS Player1::ReturnRect ( ) {
 	return rect;
@@ -111,7 +105,7 @@ RECTS Player1::ReturnRect ( ) {
 
 
 Player2::Player2() {
-	rect = { 40,40,80,80 };
+	rect = { 0,0,40,40 };
 	count = 0;
 }
 
@@ -190,7 +184,9 @@ void Player2::FixedUpdate() {
 void Player2::Render ( const HDC& mDC ) {
 	//플레이어2
 	
-	TransparentBlt ( mDC , 1024 + rect.left,  200 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + rect.left,  0 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+	TransparentBlt ( mDC , 1024 + rect.left + 32 , 0 + rect.top - 32 , PLAYERSIZE / 2 , PLAYERSIZE / 2 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) , frame * 64 , direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 
 }
 RECTS Player2::ReturnRect() {

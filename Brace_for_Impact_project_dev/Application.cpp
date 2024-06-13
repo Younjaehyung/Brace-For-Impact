@@ -31,7 +31,8 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	Time::Initailize ( );
 	HandleResize ( );
 	gameobject.Initailize ( hDC,g_hinst );
-
+	//임시 음악
+	PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 	
 	GameDC = CreateCompatibleDC ( hDC );
 	mBitmap = CreateCompatibleBitmap ( hDC , 1024 * 2 , 1024 * 2 );
@@ -72,6 +73,7 @@ void Application::f_Render() {
 
 	}
 
+
 	if ( input::GetKey ( eKeyCode::I ) ) {
 		Stage_num = 0;
 	}
@@ -84,7 +86,7 @@ void Application::f_Render() {
 	else if ( input::GetKey ( eKeyCode::U ) ) {
 		Stage_num = 3;
 	}
-	else if ( input::GetKey ( eKeyCode::Z ) ) {
+	else if ( input::GetKeyUp ( eKeyCode::Z ) ) {
 		gameStart = !gameStart;
 	}
 	BitBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
@@ -92,9 +94,6 @@ void Application::f_Render() {
 
 	//OSW - hmemDC추가
 
-	//StretchBlt ( mDC , 0 , 0 , r_stage.right , r_stage.bottom , 
-	//	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 512 , 480 , SRCCOPY );
-	
 	
 	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left + 512 >= 2048 ) {
 		TankController::camera.left = 512 * 2;
@@ -131,10 +130,37 @@ void Application::f_Render() {
 			Texture::getInstance ( ).Texture_GetDC ( "B_TITLE" ) , TankController::ScreenTitle_frame ( ).frame * 1024 , 0 , SRCCOPY );
 		BitBlt ( mDC , 1024 - 50 , 0 , 1024 + 656 , 1024 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Select" ) , 0 , 0 , SRCCOPY );
-		TransparentBlt ( mDC , 1024 + 64*1 , 656 - 64 * 2 ,96 * 2 , 64 * 2 ,
+		TransparentBlt ( mDC , 1024 + 8 + 16*1 , 32 * (9 + Cursor) ,96 , 64 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Cursor" ) ,0 , 0 , 96 , 64 , RGB ( 255 , 255 , 255 ) );
+		TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * ( 9) , 384 , 96 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 0 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
+		TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 13 , 384 , 96 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384 * 1 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
+		TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 17 , 384 , 96 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384*2 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
+
+		
+		
+		if ( input::GetKeyDown ( eKeyCode::S ) ) {
+			if(Cursor < 11 )
+			Cursor +=4;
+		}
+		else if ( input::GetKeyDown ( eKeyCode::W ) ) {
+			if(Cursor > 0 )
+			Cursor -=4;
+		}
+
+		//게임 시작 창일때
+		if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0) {
+			gameStart = !gameStart;
+		}else if (input::GetKeyDown ( eKeyCode::F ) && Cursor == 4) {
+
+		} else if (input::GetKeyDown ( eKeyCode::F ) && Cursor == 8) {
+			exit ( 1 );
+		}
 
 	}
+
 	
 	//플레이어 활동 가능 구역
 	//Rectangle ( mDC , 1024 + 100 , 0 + 150 , 1024 + 550 , 0 + 100 + 800 );
@@ -173,6 +199,6 @@ void Application::f_Run() {
 	f_Update();
 	f_FixedUpdate();
 	f_Render();
-	
+
 }
 
