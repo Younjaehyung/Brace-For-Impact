@@ -43,7 +43,8 @@ public:
 	void aiming_animation ( );
 	
 	RECTS& ReturnRect ( ) {
-		RECTS r = { rect.left + 15 , rect.top + 20 ,rect.right + 115 , rect.bottom + 120 };
+		RECTS r = { rect.left ,rect.top,rect.right  , rect.bottom};
+		std::cout << rect.left << std::endl;
 		return r;
 	}
 	void Damage ( int damage );

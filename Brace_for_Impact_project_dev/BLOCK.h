@@ -20,6 +20,7 @@ class BlockManager {
 private:
 	BlockManager ( ) {};
 	std::vector<Block> Blocks;
+	int block_size = 1024 / 32;
 
 public:
 	static BlockManager& getInstance ( ) {
@@ -29,6 +30,7 @@ public:
 
 	void Initilize ( int type );
 	void Update ( );
+	void Check (RECTS&);
 	void Render ( const HDC& );
 	std::vector<Block>& BlockReturn ( );
 };
