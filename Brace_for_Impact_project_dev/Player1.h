@@ -13,7 +13,8 @@ class Player1
 
 private:
 	RECTS rect;
-	double count;
+	float count;
+	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
 	bool tank_status;
 	HBITMAP* B_Player_1;
@@ -40,7 +41,8 @@ class Player2
 
 private:
 	RECTS rect;
-	double count;
+	float count;
+	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
 	bool tank_status;
 	HBITMAP B_Player_2;

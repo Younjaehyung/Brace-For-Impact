@@ -17,6 +17,7 @@ private:
 
 	static int tankhp;
 	static int tankoil;
+	static int tankbullet;
 	static float tankoilcount;
 public:
 	static RECT camera;
@@ -41,6 +42,9 @@ public:
 	}
 	static int& TankOil ( ) {
 		return tankoil;
+	}
+	static int& TankBullet ( ) {
+		return tankbullet;
 	}
 	static void Damage (int damage) {
 		if (tankhp > 0 ) {

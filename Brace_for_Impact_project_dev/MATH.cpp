@@ -36,7 +36,18 @@ float middleX ( RECTS a ) {
 float middleY ( RECTS a ) {
 	return ( a.top + a.bottom ) / 2;
 }
-
+BOOL inrect ( RECTS r , float x , float y ) {
+	if ( r.left<x && r.right>x && r.top<y && r.bottom>y ) return 1;
+	else return 0;
+}
+BOOL inrect_f ( float left , float top , float right , float bottom , float x , float y ) {
+	if ( left<x && right>x && top<y && bottom>y ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
 BOOL rect2Cir ( RECTS rect ,double& x ,double& y ,int sz ) {
 	if ( rect.left - sz<x && rect.right + sz>x && rect.top - sz<y && rect.bottom>y ) {
 		return 1;

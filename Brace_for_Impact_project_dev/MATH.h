@@ -24,6 +24,9 @@ float middleY ( RECTS a );
 
 float a2bLine ( float x , float p1x , float p1y , float mopx , float mopy );
 
+BOOL inrect ( RECTS r , float x , float y );
+BOOL inrect_f ( float left , float top , float right, float bottom , float x , float y );
+
 BOOL rect2Cir ( RECTS rect , double& x , double& y , int sz );
 
 BOOL rect2Line ( RECTS rect , float& p1x , float& p1y , float& mopx , float& mopy );
