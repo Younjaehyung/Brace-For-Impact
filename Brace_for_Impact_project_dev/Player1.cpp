@@ -236,11 +236,17 @@ void Player2::SwitchStatus ( ) {
 		}
 		else if ( inrect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//장전
-			
+			if ( status == 2 ) {
+				status = 0;
+				TankController::TankBullet ( )++;
+			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 16 , 16 * 46 , 1024 + 16 * 26 , 16 * 54 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//연료충전
-
+			if ( status == 1 ) {
+				status = 0;
+				TankController::TankOil ( ) += 50;
+			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//대쉬
@@ -252,11 +258,11 @@ void Player2::SwitchStatus ( ) {
 		}
 		else if ( inrect_f ( 1024 + 16 * 8 , 16 * 34 , 1024 + 16 * 15 , 16 * 40 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//연료 저장고
-
+			status = 1;
 		}
 		else if ( inrect_f ( 1024 + 16 * 26 , 16 * 34 , 1024 + 16 * 34 , 16 * 40 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//탄약 저장고
-
+			status = 2;
 		}
 
 	}

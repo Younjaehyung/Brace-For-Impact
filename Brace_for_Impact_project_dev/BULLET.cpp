@@ -10,8 +10,9 @@
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 :x(dx),y(dy),mx(dmx),my(dmy),type(dtype){
-	if ( dtype > 0 && dtype < 10 ) PlayerBullet = 1;
+	if ( (dtype > 0 && dtype < 10) || dtype==100) PlayerBullet = 1;
 	// 0: 삭제   1~9: 플레이어용   10~:몬스터용 
+	// 1~9 :플레이어 탄   100: 연막
 	//10: 기본탄 1 데미지
 	//11: 강력탄 10 데미지
 	//12: 분열탄 맞을 시 8방향으로 나뉨
@@ -24,12 +25,15 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 
 void bullet::move ( ) {
 	
-	if ( type != 14 ) {
-		x += mx * 600 * Time::DeltaTime ( );
-		y += my * 600 * Time::DeltaTime ( );
+	if ( type == 14) {
+		counter += 100 * Time::DeltaTime ( );
+	}
+	else if ( type == 100 ) {
+		counter += 500 * Time::DeltaTime ( );
 	}
 	else {
-		counter += 100 * Time::DeltaTime ( );
+		x += mx * 600 * Time::DeltaTime ( );
+		y += my * 600 * Time::DeltaTime ( );
 	}
 		//OSW
 		//총알 프레임
@@ -63,9 +67,10 @@ void bullet::move ( ) {
 			if ( PlayerBullet ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
-
-						type = 0;
-						ScanMop->Damage ( 1 );
+						if ( type != 100 ) {
+							type = 0;
+							ScanMop->Damage ( 1 );
+						}
 					}
 				}
 			}
@@ -106,9 +111,13 @@ void bullet::move ( ) {
 void bullet::Render ( const HDC& dc ) {
 	if ( type != 0 ) {
 		if ( PlayerBullet ) { //플레이어가 쏜 총알
-			
-			TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 0 , (type-1) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			if ( type != 100 ) {
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 0 , ( type - 1 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			}
+			else {
+				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+			}
 			//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 		}
 		else { // 몬스터가 쏜 총알
