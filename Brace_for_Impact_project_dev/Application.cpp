@@ -1,6 +1,5 @@
 ﻿#include "Application.h"
 
-int counter = 0;
 
 void Application::f_Update() {
 	input::Update();
@@ -102,19 +101,20 @@ void Application::f_Render() {
 		TankController::camera.left = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left - 512 );
 	}
 	
-	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 512 >= 2048 ) {
-		TankController::camera.top = 512 * 2;
+	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 384 >= 2048 ) {
+		TankController::camera.top = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top-384;
+	
 	}
 	else {
-		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 512 );
+		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 384 );
 	}
 	TankController::camera.right = TankController::camera.left + 1024;
-	TankController::camera.bottom = TankController::camera.top + 1024;
+	TankController::camera.bottom = TankController::camera.top + 768;
 	gameobject.Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ),mDC );
 	
 
 	//StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
-	BitBlt ( mDC , 0 , 0 , 1024 , 1024 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
+	BitBlt ( mDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
 
 
 
@@ -122,7 +122,7 @@ void Application::f_Render() {
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 	*/
 	
-	gameobject.Camera_UI ( mDC );
+gameobject.Camera_UI ( mDC );
 
 	if ( gameStart ) {
 		//TITLE 출력
