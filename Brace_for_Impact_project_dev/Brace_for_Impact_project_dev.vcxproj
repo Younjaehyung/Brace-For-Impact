@@ -182,6 +182,7 @@
   <ItemGroup>
     <Image Include="BFI_BOSS_1.bmp" />
     <Image Include="BFI_BOSS_2.bmp" />
+    <Image Include="BFI_BOSS_3.bmp" />
     <Image Include="BFI_BOSS_4.bmp" />
     <Image Include="BFI_BOSS_5.bmp" />
     <Image Include="BFI_BOSS_6_sprite.bmp" />
@@ -203,7 +204,9 @@
     <Image Include="BFI_Item.bmp" />
     <Image Include="BFI_Player.bmp" />
     <Image Include="BFI_Screen_Cursor.bmp" />
+    <Image Include="BFI_Screen_GameClear.bmp" />
     <Image Include="BFI_Screen_Gameover.bmp" />
+    <Image Include="BFI_Screen_Rule.bmp" />
     <Image Include="BFI_Screen_Selecet.bmp" />
     <Image Include="BFI_Screen_Selecetframe.bmp" />
     <Image Include="BFI_Screen_StageStart.bmp" />

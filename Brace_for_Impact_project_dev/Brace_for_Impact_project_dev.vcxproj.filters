@@ -297,6 +297,15 @@
     <Image Include="BFI_Screen_Selecetframe.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_BOSS_3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_GameClear.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Rule.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Gooseworx- Industrial Elegance.wav">
