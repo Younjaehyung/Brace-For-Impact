@@ -15,9 +15,27 @@ mop::mop(int type) {
 	mop_inform.x = sponsemop ( genmop );
 	mop_inform.y = sponsemop ( genmop );
 	if ( type == 1 ) {
-		mop_inform.hp = 2;
+		mop_inform.hp = 50; //꽁끼깅낑꽁깡꽁까강
 	}
-	else if ( type != 1 ) {
+	else if ( type == 2 ) { //빵빵이
+		mop_inform.hp = 50;
+	}
+	else if ( type == 3 ) { //오줌
+		mop_inform.hp = 100;
+	}
+	else if ( type == 4 ) { //튼튼이
+		mop_inform.hp = 50;
+	}
+	else if ( type == 5 ) { //자폭이
+		mop_inform.hp = 30;
+	}
+	else if ( type == 6 ) { //춘식이
+		mop_inform.hp = 50;
+	}
+	else if ( type == 10 ) { //튼튼이 소환몹
+		mop_inform.hp = 1;
+	}
+	else if ( type == 11 ) { //오줌이 소환몹
 		mop_inform.hp = 1;
 	}
 
@@ -36,7 +54,7 @@ void mop::attack( Tank& p1) {
 	RECTS moprect = ReturnRect();
 	RECTS tankrect = p1.ReturnRect ( );
 	float speed = 300 * Time::DeltaTime ( );
-	if ( mop_inform.type == 1 ) {
+	if ( mop_inform.type == 1 ) { //꽁기깅깡
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-200 ) {
 			status = 2;
 			direct = 1;
@@ -71,7 +89,7 @@ void mop::attack( Tank& p1) {
 			direct = 0;
 		}
 	}
-	else if ( mop_inform.type == 2 ) {
+	else if ( mop_inform.type == 2 ) { //빵빵이
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
 			direct = 1;
