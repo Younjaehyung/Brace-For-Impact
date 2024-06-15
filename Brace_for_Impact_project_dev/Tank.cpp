@@ -19,32 +19,43 @@ Tank::Tank () {
 void Tank::Clear ( )
 {
 
-	Tank_car_count = 0;
 	Tank_head_count = 0;
 	Tank_head_frame = 2 , Tank_car_frame = 0;
 	Tank_car_direct = 0 , Tank_head_direct = 0;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
 	Tk_c_status = 0;
 	angle = 90;
+	dashcnt2 = 0; dashcnt = 0;
+	CannonInterval = 0;
+
+	Tank_head_count = 0;
+	Tank_car_count = 0;
 	frameInterval = 0;
-	headMove = 0;
+	shootingInterval = 0;
 	fireInterval = 0;
-	isMove = 0;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
-	headMove = 0;
+
+	isMove = 0;		
+	headMove = 0;	//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
 	headArrow = 0;
 	isHit = 0;
 }
 
 void Tank::Initialize (int type ) {
+	
 	if ( type == 1 ) {
+		std::cout << "type" << std::endl;
+
 		rect = { 200,400,300,500 };
 	}
 	else if ( type == 2 ) {
+		std::cout << "type" << std::endl;
+
 		rect = { 200,400,300,500 };
 
 	}
 	else if ( type == 3 ) {
 		rect = { 200,400,300,500 };
 	}
+	TankController::TankRects ( ) = rect;
 }
 
 void Tank::move ( )
@@ -177,11 +188,10 @@ void Tank::move ( )
 				rect.bottom += moveY;
 				TankController::TankOilCount ( );
 			}
-			TankController::TankRects ( ) = rect;
+			
 		}
 
-
-
+		
 		////손 때면
 		//if ( input::GetKeyUp ( eKeyCode::W ) ) {
 		//	
@@ -373,6 +383,8 @@ void Tank::Update ( )
 		
 
 	}
+	TankController::TankRects ( ) = rect;
+
 }
 
 void Tank::moving_rander_cal ( ) {

@@ -43,11 +43,7 @@ mop::mop(int type) {
 	mop_inform.cnt = 0;
 	attack_count = 0;
 	move_count = 0;
-	switch( mop_inform.type ){
-	case 1:
 
-		break;
-	}
 }
 
 void mop::attack( Tank& p1) {
@@ -447,6 +443,7 @@ void mop::Update( ){
 			
 			if ( die_frame > 6 ) {
 				die_frame = 6;
+				status = 4;
 			}
 			else {
 				die_frame++;
@@ -636,11 +633,11 @@ void MonsterManager::DeleteMonster () {
 
 	if ( mops.size ( ) ) {
 		deletetime += Time::DeltaTime ( );
-		if ( deletetime > 12.0 ) {
+		if ( deletetime > 3.0 ) {
 
 
 			for ( auto iter = mops.begin ( ); iter != mops.end ( );) {
-				if ( ( *iter )->status == 0 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+				if ( ( *iter )->status == 4 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
 					mop* del = *iter;  // 삭제할 노드의 포인터를 저장
 					iter = mops.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
 

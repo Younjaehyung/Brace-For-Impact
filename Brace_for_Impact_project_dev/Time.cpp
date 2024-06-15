@@ -38,7 +38,7 @@ void Time::Render ( HDC hdc )	//화면 프레임 체크용 Render()
 
 
 	if ( fps < 100 ) {	//100 fps 이하시 콘솔창 출력
-		std::cout<<"time" << (int)fps << std::endl;
+	//	std::cout<<"time" << (int)fps << std::endl;
 	}
 	
 	wsprintf ( str , L"fps : %d" , (int)fps );

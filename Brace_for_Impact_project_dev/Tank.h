@@ -47,8 +47,9 @@ public:
 	void Initialize (int);
 
 	RECTS& ReturnRect ( ) {
-		RECTS r = { rect.left ,rect.top,rect.right  , rect.bottom};
-		return r;
+	
+		return rect;
+		
 	}
 	void Damage ( int damage );
 

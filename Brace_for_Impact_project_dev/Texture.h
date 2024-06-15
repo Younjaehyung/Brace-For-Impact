@@ -78,7 +78,7 @@ public:
         idBitmap.emplace ( "B_Clear" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_CLEAR ) ) );
         idBitmap.emplace ( "B_Rule" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_RULE ) ) );
         idBitmap.emplace ( "B_Over" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_OVER ) ) );
-        
+        idBitmap.emplace ( "B_Start" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGESTART ) ) );
         for ( const auto& pair : idBitmap ) {
             HDC memDC = CreateCompatibleDC ( mDC );
             SelectObject ( memDC , pair.second );

@@ -203,3 +203,12 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 	}
 
 }
+
+void GameManager::Stage_Switch_Render ( const HDC& mDC, const HDC& orimDC ) {
+	
+	BitBlt ( orimDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , Stage_Switch_x , Stage_Switch_y , SRCCOPY );
+
+	TransparentBlt ( orimDC , 0 , 768 - Stage_Switch_y , 1014 , 384 ,
+	Texture::getInstance ( ).Texture_GetDC ( "B_Start" ) , 768 * 0 , 384 * 0 , 768 , 384 , RGB ( 255 , 255 , 255 ) );
+	
+}

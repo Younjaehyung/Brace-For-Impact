@@ -15,6 +15,7 @@ void Player1::Clear ( ) {
 	frame = 0;
 	direct = 0;
 	itemtype = 6;
+	isHold = 0;
 }
 
 void Player1::Update ( ) {
@@ -483,11 +484,13 @@ void Player2::SwitchStatus ( ) {
 
 void Player2::Clear ( ) {
 	Ismove = 0 , IsAiming = 0;
-	frame = 0;
-	direct = 0;
 	count = 0;
 	status = 0;
+	frame = 0;
+	direct = 0;
 	itemtype = 6;
+	isHold = 0;
+
 }
 void Player2::Initialize (  ) {
 

@@ -13,7 +13,12 @@ private:
 		type = 0; Cursor = 0;
 		frame = 0;
 		Selected = 0;
+		Stage_Switch_y;
+		Stage_Switch_x=0;
+		SceneStatus=0;
+		SceneCount = 0;
 		Rule = 0;
+		End = 0;
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
@@ -29,6 +34,11 @@ private:
 	int SceneStatus;
 	int type;
 	int End;
+
+	int Stage_Switch_y;
+	int Stage_Switch_x ;
+	float SceneCount;
+	
 
 	float count;	//별 반짝이는 카운터
 	bool Rule;	//Rule상태인가
@@ -56,6 +66,7 @@ public:
 		MonsterManager::getInstance ( ).Clear ( );
 		PlayerManager::getInstance ( ).Clear ( );
 		BlockManager::getInstance ( ).Clear ( );
+		BulletManager::getInstance ( ).Clear ( );
 	}
 
 	void Game_Initialize ( HDC mDC , HINSTANCE g_hinst )
@@ -65,13 +76,16 @@ public:
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
 		BlockManager::getInstance ( );
+		
 	}
 
 	void Scene_Initialize ( int Scene_num )
 	{
+		Clear ( );
 		if ( Scene_num ) {
-			Clear ( );
+			TankController::Initialize ( );
 			MonsterManager::getInstance ( ).Initialize ( Scene_num );
+		
 			PlayerManager::getInstance ( ).Initialize ( Scene_num );
 			BlockManager::getInstance ( ).Initialize ( Scene_num );
 		}
@@ -79,19 +93,22 @@ public:
 
 	void Update ( )
 	{
+		if ( type==0&& End == 1 ) {
+			Stage_Switch ( );
+		}
 		if ( !type ) {
 			return;
 		}
+		
+		Stage_condition ( );
 		BulletManager::getInstance ( ).Update ( );
 		MonsterManager::getInstance ( ).Update ( );
 		PlayerManager::getInstance ( ).Update ( );
-
-		
 	}
 
 	void Render ( const HDC& mDC , const HDC& orimDC )
 	{
-		if ( type == 0 ) {
+		if ( type == 0 && SceneStatus==0 ) {
 			TitleScene ( orimDC );
 			
 		}
@@ -109,19 +126,55 @@ public:
 		Tank_Inside ( orimDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
 		BulletManager::getInstance ( ).Render ( mDC );
-		BlockManager::getInstance ( ).Render ( mDC );
+		//BlockManager::getInstance ( ).Render ( mDC );
 		
 		
 		Camera_UI_CT_1 ( orimDC );
 		PlayerManager::getInstance ( ).Render ( mDC , orimDC );
-		Camera_Cal ( mDC );
-		Camera ( orimDC );
+
+		if ( type == 0 && End == 1 ) {
+			Stage_Switch_Render (mDC, orimDC );
+		}
+		else {
+			Camera_Cal ( mDC );
+			Camera ( orimDC );
+		}
+		
 		Camera_UI_Ground ( orimDC );
 		
 		Camera_UI_CT_2 ( orimDC );
 	}
 
 
+	void Stage_condition ( ) {
+	
+		if ( MonsterManager::getInstance ( ).MopReturn ( ).size ( ) == 0 ) {
+			type = 0;
+			End = 1;
+			SceneStatus += 1;
+			Scene_Initialize ( SceneStatus );
+		}
+			
+	}
+
+	
+
+	void Stage_Switch (  ) {
+
+		if ( SceneCount >= 0.1 ) {
+			Stage_Switch_y+=3;
+			Stage_Switch_x++;
+			SceneCount = 0;
+			if ( 768 - Stage_Switch_y <= 768-384 ) {
+				type = 1;
+				End = 0;
+				Stage_Switch_x = 0;
+				Stage_Switch_y = 0;
+			}
+		}
+				
+		SceneCount += Time::DeltaTime ( );
+	}
 
 
 	void TitleScene ( const HDC& );
@@ -162,6 +215,7 @@ public:
 		}
 	}
 	void EndScene ( const HDC& );
+	void Stage_Switch_Render ( const HDC& mDC , const HDC& orimDC );
 
 };
 

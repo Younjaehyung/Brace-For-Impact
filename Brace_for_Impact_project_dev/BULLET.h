@@ -58,6 +58,9 @@ public:
 
 	//void Initailize ( const HDC& );
 	void Update ( );
+	void Clear ( ) {
+		bullets.clear ( );
+	}
 	void Render( const HDC& dc);
 	void CreateBullet ( bullet*& newbullet );
 	void DeleteBullet ( );
