@@ -15,7 +15,7 @@ private:
 		Selected = 0;
 		Stage_Switch_y;
 		Stage_Switch_x=0;
-		SceneStatus=0;
+		SceneStatus = 0;
 		SceneCount = 0;
 		Rule = 0;
 		End = 0;
@@ -88,7 +88,7 @@ public:
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
 		BlockManager::getInstance ( );
-		
+		Stage_Sound ( );
 
 	}
 
@@ -103,6 +103,7 @@ public:
 			BlockManager::getInstance ( ).Initialize ( Scene_num );
 		}
 	}
+
 
 	void Update ( )
 	{
@@ -158,18 +159,39 @@ public:
 		Camera_UI_CT_2 ( orimDC );
 	}
 
+	int& Return_SceneStatus ( ) {
+		return SceneStatus;
+	}
 
 	void Stage_condition ( ) {
 	
 		if ( MonsterManager::getInstance ( ).MopReturn ( ).size ( ) == 0 ) {
 			type = 0;
 			End = 1;
+			
 			SceneStatus += 1;
+			Stage_Sound ( );
 			Scene_Initialize ( SceneStatus );
 		}
 			
 	}
 
+	void Stage_Sound ( ) {
+		if ( SceneStatus == 0 ) {
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , Texture::getInstance().Sound_GetIT() , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
+		else if ( SceneStatus == 1 || SceneStatus == 2 ) {
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE4 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
+		else if ( SceneStatus == 3 || SceneStatus == 4 ) {
+		PlaySound ( MAKEINTRESOURCE ( IDR_WAVE3 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
+		else if ( SceneStatus == 5|| SceneStatus == 6 ) {
+		PlaySound ( MAKEINTRESOURCE ( IDR_WAVE2 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
+		
+		
+	}
 	
 
 	void Stage_Switch (  ) {
@@ -213,8 +235,7 @@ public:
 		//게임 시작 창일때
 		if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0 ) {
 			type = 1;
-			SceneStatus = 1;
-			Scene_Initialize ( 1 );
+			
 			return;
 		}
 		else if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 4 ) {

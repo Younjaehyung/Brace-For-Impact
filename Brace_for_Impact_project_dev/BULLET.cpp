@@ -115,26 +115,22 @@ void bullet::move ( ) {
 				if ( type == 14 ) {
 					if ( counter >= 300 ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
-							TankController::Damage ( 250 );
+							TankController::Damage ( 140 );
 						}
 						type = 0;
 					}
 				}
 				else {
 					if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp ( ) > 0 ) {
-						if ( type == 10 ) {
-							TankController::Damage ( 50 );
-						}
-						else if ( type == 11 ) {
-							TankController::Damage ( 20 );
-						}
-						else if ( type == 12 ) {
+						if ( type == 10 ) { //오줌이
 							TankController::Damage ( 1 );
-							double angle1 = 45 * ( 3.141592 / 180 );
-							for ( int i = 0; i < 8; i++ ) {
-								bullet* newbullet = new bullet ( x , y , 10 , -cos ( i * angle1 + angle1 / 2 ) , -sin ( i * angle1 + angle1 / 2 ) );
-								BulletManager::getInstance ( ).CreateBullet ( newbullet );
-							}
+						}
+						else if ( type == 11 ) {//빵빵이
+							TankController::Damage ( 45 );
+						}
+						else if ( type == 12 ) {//춘식이
+							TankController::Damage ( 40 );
+							
 						}
 						type = 0;
 					}
@@ -178,12 +174,24 @@ void bullet::Render ( const HDC& dc ) {
 			if ( type == 14 ) { // 자폭이 폭발
 				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+			}
+			else if (type == 10 ) { //오줌이
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( type == 11) { //빵빵이
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 2 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( type == 12 ) { //춘식이
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else { //그 외 다른애들 총알
 				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 		}
 	}

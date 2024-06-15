@@ -22,7 +22,7 @@ mop::mop(int type) {
 	}
 	else if ( type == 3 ) {
 		mop_inform.x = 15 * 64;
-		mop_inform.y = 4 * 64;
+		mop_inform.y = 6 * 64;
 	}
 	else if ( type == 4 ) {
 		mop_inform.x = 15 * 64;
@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 200; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 10; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 200;
+		mop_inform.hp = 10;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 300;
+		mop_inform.hp = 10;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 300;
+		mop_inform.hp = 10;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 300;
+		mop_inform.hp = 10;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 200;
+		mop_inform.hp = 10;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 1;
@@ -208,7 +208,7 @@ void mop::attack( Tank& p1) {
 			double ang = angle ( ( double ) ( middleX ( ReturnRect ( ) ) ) , ( double ) ( middleY ( ReturnRect ( ) ) ) , targetx , targety );
 			double angle1 = 30 * ( 3.141592 / 180 );
 			for ( int i = 0; i < 12; i++ ) {
-				bullet* newbullet = new bullet ( middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 , -cos ( ang+i * angle1 ) , -sin ( ang+i * angle1 ) );
+				bullet* newbullet = new bullet ( middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 12 , -cos ( ang+i * angle1 ) , -sin ( ang+i * angle1 ) );
 				BulletManager::getInstance ( ).CreateBullet ( newbullet );
 			}
 			mop_inform.cnt++;
@@ -511,7 +511,7 @@ void mop::Render( const HDC& dc) {
 	
 		HBRUSH hBrush, oldBrush;
 		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
-		Rectangle ( dc , tankrect.left , tankrect.top , tankrect.right , tankrect.bottom ); //히트박스
+		//Rectangle ( dc , tankrect.left , tankrect.top , tankrect.right , tankrect.bottom ); //히트박스
 		/*if ( TankController::camera.left>=mop_inform.x- MOPSIZE+SIZE ||
 			TankController::camera.right<=mop_inform.y - MOPSIZE + SIZE ) {
 			return;

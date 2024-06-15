@@ -1,6 +1,6 @@
 ﻿#pragma once
 #pragma comment(lib, "msimg32.lib")
-#pragma comment(lib,"winmm.lib")
+
 #include <Windows.h>
 #include <list>
 //#include "SceneManager.h"

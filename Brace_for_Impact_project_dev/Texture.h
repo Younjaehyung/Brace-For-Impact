@@ -1,7 +1,9 @@
 ﻿#pragma once
+#pragma comment(lib,"winmm.lib")
 #include <Windows.h>
 #include <unordered_map>
 #include <string>
+#include <mmsystem.h>
 #include "Resource.h"
 
 class Texture {

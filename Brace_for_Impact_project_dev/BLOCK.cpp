@@ -7,7 +7,7 @@ Block::Block ( ) {
 
 
 void Block::Render ( const HDC& dc ) {
-	Rectangle ( dc , rect.left , rect.top , rect.right , rect.bottom );
+	//Rectangle ( dc , rect.left , rect.top , rect.right , rect.bottom );
 }
 
 void Block::makeblock (RECTS rects,int type ) {
