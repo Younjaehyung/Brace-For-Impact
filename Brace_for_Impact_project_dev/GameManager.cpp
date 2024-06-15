@@ -235,5 +235,6 @@ void GameManager::Stage_Switch_Render ( const HDC& mDC, const HDC& orimDC ) {
 
 	TransparentBlt ( orimDC , 0 , 758 - 2*Stage_Switch_y , 1024 , 384 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_Start" ) , 1024 * BossSceneR , 384 * BossSceneC , 1024 , 384 , RGB ( 255 , 255 , 255 ) );
+
 	
 }
