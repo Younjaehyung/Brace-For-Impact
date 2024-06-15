@@ -195,9 +195,9 @@ void bullet::Render ( const HDC& dc ) {
 	}
 	else {
 		if ( PlayerBullet ) {
-			TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
-					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-
+				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+						Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			
 		}
 	}
 }
