@@ -432,13 +432,12 @@ void mop::Update( ){
 		status = 1;
 		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
 	}
+
 	if ( !(status == 4 || status == 2) ) {
 		if ( move_count >= 0.1 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 0;
-				
-				
 				if ( status == 3 ) status = 0;
 			}
 			move_count = 0;
@@ -455,6 +454,7 @@ void mop::Update( ){
 			}
 			move_count = 0;
 		}
+
 		move_count += Time::DeltaTime ( );
 	}
 	else{

@@ -58,12 +58,6 @@ void bullet::move ( ) {
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
 	}
-		//연막 프레임
-		if ( timer2 > 0.2 ) {
-			if ( gasframe >= 6 ) gasframe = 0;
-			else gasframe++;
-			timer2 = 0;
-		}timer2 += Time::DeltaTime ( );
 
 		if ( x < 0 || y < 0 ) {
 			type = 0;
