@@ -239,6 +239,12 @@ IDB_BM_SCREEN_OVER      BITMAP                  "BFI_Screen_Gameover.bmp"
 
 IDR_WAVE1               WAVE                    "Gooseworx- Industrial Elegance.wav"
 
+IDR_WAVE2               WAVE                    "BFI_Clockwork Crafter.wav"
+
+IDR_WAVE3               WAVE                    "BFI_Magnificent Machines).wav"
+
+IDR_WAVE4               WAVE                    "BFI_Steaming Superstructures.wav"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

@@ -12,8 +12,32 @@ std::mt19937 genmop;
 std::uniform_int_distribution<int> sponsemop(0, 800);
 
 mop::mop(int type) {
-	mop_inform.x = sponsemop ( genmop );
-	mop_inform.y = sponsemop ( genmop );
+	if ( type == 1 ) {
+		mop_inform.x = 29 * 64;
+		mop_inform.y = 20 * 64;
+	}
+	else if ( type == 2 ) {
+		mop_inform.x = 29 * 64;
+		mop_inform.y = 20 * 64;
+	}
+	else if ( type == 3 ) {
+		mop_inform.x = 15 * 64;
+		mop_inform.y = 4 * 64;
+	}
+	else if ( type == 4 ) {
+		mop_inform.x = 15 * 64;
+		mop_inform.y = 4 * 64;
+	}
+	else if ( type == 5) {
+		mop_inform.x = 29  * 64;
+		mop_inform.y = 12 * 64;
+	}
+	else if ( type == 6 ) {
+		mop_inform.x = 29 * 64;
+		mop_inform.y = 12 * 64;
+	}
+
+
 	if ( type == 1 ) {
 		mop_inform.hp = 50; //꽁끼깅낑꽁깡꽁까강
 	}
@@ -658,7 +682,6 @@ void MonsterManager::DeleteMonster () {
 
 					delete del;  // 삭제할 노드를 메모리에서 해제
 
-					std::cout << "aa" << std::endl;
 				}
 				else {
 					++iter;  // 다음 노드로 이동

@@ -41,7 +41,7 @@ void Player1::move ( ) {
 		return;
 	}
 
-	float speed = 200 * Time::DeltaTime ( );
+	float speed = 300 * Time::DeltaTime ( );
 
 	if ( input::GetKey ( eKeyCode::W )) { //  rect.top > 0
 		

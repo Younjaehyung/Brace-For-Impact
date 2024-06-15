@@ -19,6 +19,8 @@ private:
 		SceneCount = 0;
 		Rule = 0;
 		End = 0;
+		BossSceneC = 0;
+		BossSceneR = 0;
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
@@ -32,13 +34,16 @@ private:
 
 	int score;
 	int SceneStatus;
+
+	int BossSceneC;
+	int BossSceneR;
 	int type;
 	int End;
 
 	int Stage_Switch_y;
 	int Stage_Switch_x ;
 	float SceneCount;
-	
+	float SceneCount2;
 
 	float count;	//별 반짝이는 카운터
 	bool Rule;	//Rule상태인가
@@ -164,19 +169,26 @@ public:
 
 	void Stage_Switch (  ) {
 
-		if ( SceneCount >= 0.1 ) {
+		if ( SceneCount >= 0.1 && 758 - 2 * Stage_Switch_y >= 758 - 384 ) {
 			Stage_Switch_y+=3;
 			Stage_Switch_x++;
 			SceneCount = 0;
-			if ( 768 - Stage_Switch_y <= 768-384 ) {
-				type = 1;
-				End = 0;
-				Stage_Switch_x = 0;
-				Stage_Switch_y = 0;
-				return;
-			}
+			
 		}
-				
+		if ( SceneCount2 >= 12.0 ) {
+			type = 1;
+			End = 0;
+			Stage_Switch_x = 0;
+			Stage_Switch_y = 0;
+			SceneCount2 = 0;
+			BossSceneC++;
+			if ( BossSceneC > 1 ) {
+				BossSceneR++;
+				BossSceneC = 0;
+			}
+			return;
+		}
+		SceneCount2 += Time::DeltaTime ( );
 		SceneCount += Time::DeltaTime ( );
 	}
 
