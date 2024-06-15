@@ -126,43 +126,43 @@ void Player1::move ( ) {
 }
 
 void Player1::SwitchStatus ( ) {
-	if (isHold == false ) {
+	
 		if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 , ReturnRect ( ) ) ) {
 			//이동 조작
-			itemtype = 3;
+			itemtype = itemtype%10 +30;
 		}
 		if ( ( rect2rect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , ReturnRect ( ) )) ) {
 			//공격 조종기
-			itemtype = 3;
+			itemtype = itemtype % 10 + 30;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , ReturnRect() ) ) {
 			//장전
-			itemtype = 3;
+			itemtype = itemtype % 10 + 30;
 		}
 		else if (  rect2rect_f ( 1024 + 16 * 16 , 16 * 46 , 1024 + 16 * 26 , 16 * 54 , ReturnRect ( ) ) ) {
 			//연료충전
-			itemtype = 3;//아무것도 안들고있음
+			itemtype = itemtype % 10 + 30;//아무것도 안들고있음
 		}
 		else if (  rect2rect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , ReturnRect ( ) ) ) {
 			//대쉬
-			itemtype = 3;
+			itemtype = itemtype % 10 + 30;
 		}
 		else if (  rect2rect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , ReturnRect ( ) ) ) {
 			//증기분출
-			itemtype = 3;
+			itemtype = itemtype % 10 + 30;
 		}
 		else if (  rect2rect_f ( 1024 + 16 * 8 , 16 * 34 , 1024 + 16 * 15 , 16 * 40 , ReturnRect ( ) ) ) {
 			//연료 저장고
-			itemtype = 3;
+			itemtype = itemtype % 10 + 30;
 		}
 		else if (  rect2rect_f ( 1024 + 16 * 26 , 16 * 34 , 1024 + 16 * 34 , 16 * 40 , ReturnRect ( ) ) ) {
 			//탄약 저장고
-			itemtype = 3;
+			itemtype = itemtype % 10 + 30;
 		}
 		else {
-			itemtype = 6;
+			itemtype = itemtype % 10 + 60;
 		}
-	}
+	
 	
 
 	if ( input::GetKeyUp ( eKeyCode::p1_a ) ) {
@@ -189,7 +189,7 @@ void Player1::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , ReturnRect ( ) ) ) {
 			//장전
-			if ( status == 2 && itemtype == 1) {
+			if ( status == 2 && itemtype%10 == 1) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
@@ -198,7 +198,7 @@ void Player1::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 46 , 1024 + 16 * 26 , 16 * 54 , ReturnRect ( ) ) ) {
 			//연료충전
-			if ( status == 1 && itemtype == 0) {
+			if ( status == 1 && itemtype%10 == 0) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
@@ -248,10 +248,28 @@ void Player1::Render ( const HDC& mDC ) {
 	TransparentBlt ( mDC , 1024 + rect.left,  0+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame * 64, direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	Rectangle ( mDC , rect.left , rect.top , rect.right+20, rect.bottom+20 );
 	
-	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-	TransparentBlt ( mDC , 1024 + rect.left + 16, 0 + rect.top - 48 , 
-		64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
-		, 0 * 64 , itemtype * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	if ( isHold ) {
+		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+		if ( itemtype / 10 == 3 ) {
+			TransparentBlt ( mDC , 1024 + rect.left - 16 , 0 + rect.top - 48 ,
+				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+				, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			TransparentBlt ( mDC , 1024 + rect.left + 48 , 0 + rect.top - 48 ,
+				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+				, 0 * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
+		else {
+			TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+			, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
+	}
+	else {
+		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+		TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+			, 0 * 64 , (itemtype/10) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	}
 
 	TCHAR a00[ 20 ]= L"sdsadsd";
 	wsprintf ( a00 , L"%d  %d" , (int)(rect.left) , (int)(rect.top) );
@@ -284,7 +302,7 @@ void Player2::move ( ) {
 	if ( IsAiming || Ismove ) {
 		return;
 	}
-	float speed = 200 * Time::DeltaTime ( );
+	float speed = 300 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::UP ) ) { //rect.top > 0
 		rect.top -= speed;
 
@@ -368,43 +386,43 @@ void Player2::move ( ) {
 }
 void Player2::SwitchStatus ( ) {
 	//조종기 범위 내에서 F와 M나타나기
-	if ( isHold == false ) {
+	
 		if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 , ReturnRect ( ) ) ) {
 			//이동 조작
-			itemtype = 3;
+			itemtype = itemtype%10 +40;
 		}
 		if ( ( rect2rect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , ReturnRect ( ) ) ) ) {
 			//공격 조종기
-			itemtype = 3;
+			itemtype = itemtype % 10 + 40;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , ReturnRect ( ) ) ) {
 			//장전
-			itemtype = 3;
+			itemtype = itemtype % 10 + 40;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 46 , 1024 + 16 * 26 , 16 * 54 , ReturnRect ( ) ) ) {
 			//연료충전
-			itemtype = 3;//아무것도 안들고있음
+			itemtype = itemtype % 10 + 40;//아무것도 안들고있음
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , ReturnRect ( ) ) ) {
 			//대쉬
-			itemtype = 3;
+			itemtype = itemtype % 10 + 40;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , ReturnRect ( ) ) ) {
 			//증기분출
-			itemtype = 3;
+			itemtype = itemtype % 10 + 40;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 34 , 1024 + 16 * 15 , 16 * 40 , ReturnRect ( ) ) ) {
 			//연료 저장고
-			itemtype = 3;
+			itemtype = itemtype % 10 + 40;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 26 , 16 * 34 , 1024 + 16 * 34 , 16 * 40 , ReturnRect ( ) ) ) {
 			//탄약 저장고
-			itemtype = 3;
+			itemtype = itemtype % 10 + 40;
 		}
 		else {
-			itemtype = 6;
+			itemtype = itemtype % 10 + 60;
 		}
-	}
+	
 	
 
 
@@ -433,7 +451,7 @@ void Player2::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , ReturnRect ( ) ) ) {
 			//장전
-			if ( status == 2 && itemtype == 1) {
+			if ( status == 2 && itemtype%10 == 1) {
 				status = 0;
 				isHold = false;
 				itemtype = 6;
@@ -442,7 +460,7 @@ void Player2::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 46 , 1024 + 16 * 26 , 16 * 54 , ReturnRect ( ) ) ) {
 			//연료충전
-			if ( status == 1  && itemtype == 0) {
+			if ( status == 1  && itemtype%10 == 0) {
 				status = 0;
 				itemtype = 6;//아무것도 안들고있음
 				isHold = false;
@@ -504,9 +522,28 @@ void Player2::Render ( const HDC& mDC ) {
 	
 	TransparentBlt ( mDC , 1024 + rect.left,  0 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-	TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
-		64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
-		, 0 * 64 , itemtype * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	if ( isHold ) {
+		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+		if ( itemtype / 10 == 4 ) {
+			TransparentBlt ( mDC , 1024 + rect.left - 16 , 0 + rect.top - 48 ,
+				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+				, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			TransparentBlt ( mDC , 1024 + rect.left + 48 , 0 + rect.top - 48 ,
+				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+				, 0 * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
+		else {
+			TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+			, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
+	}
+	else {
+		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+		TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+			, 0 * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	}
 
 }
 RECTS Player2::ReturnRect() {
