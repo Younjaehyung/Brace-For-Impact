@@ -29,7 +29,7 @@ public:
 		BulletManager::getInstance ( ).Render ( mDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
 		PlayerManager::getInstance ( ).Render ( mDC, orimDC );
-		//BlockManager::getInstance ( ).Render ( mDC );
+		BlockManager::getInstance ( ).Render ( mDC );
 	}
 
 	void Initailize ( HDC mDC,HINSTANCE g_hinst ) {
@@ -37,7 +37,7 @@ public:
 		BulletManager::getInstance ( );
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
-		//BlockManager::getInstance ( ).Initilize(3);
+		BlockManager::getInstance ( ).Initilize(1);
 		
 	}
 

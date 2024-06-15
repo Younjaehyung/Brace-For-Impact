@@ -97,7 +97,17 @@ void Tank::move ( )
 			moveX = ( moveX / magnitude ) * speed;
 			moveY = ( moveY / magnitude ) * speed;
 		}
-
+		for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+			RECTS recttemp = rect;
+			RECTS block = ScanBlock.ReturnRect ( );
+			recttemp.left += moveX;
+			recttemp.right += moveX;
+			recttemp.top += moveY;
+			recttemp.bottom += moveY;
+			if ( IntersectRect_float ( block , recttemp ) ) {
+				return;
+			}
+		}
 		rect.left += moveX;
 		rect.right += moveX;
 		rect.top += moveY;

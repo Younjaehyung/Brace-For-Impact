@@ -563,14 +563,14 @@ void MonsterManager::spawn ( int type ) {
 
 void MonsterManager::SpawnMonster (  ) {
 
-	if ( count >= 10.0 ) {
+	if ( count >= 10000.0 ) {
 		count = 0;
 		spawn ( 1 );
 		spawn ( 2 );
-		spawn ( 3 );
+	/*	spawn ( 3 );
 		spawn ( 4 );
 		spawn ( 5 );
-		spawn ( 6 );
+		spawn ( 6 );*/
 
 	}
 	count += Time::DeltaTime ( );

@@ -12,7 +12,7 @@ private:
 public:
 	Block ( );
 	void Render ( const HDC& mDC );
-	void makeblock ( RECTS rects , int type );
+	void makeblock ( RECTS rects, int type );
 	RECTS ReturnRect ( );
 };
 
