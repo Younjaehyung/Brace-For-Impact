@@ -96,18 +96,18 @@ void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 
 void GameManager::Ground_Map ( const HDC& mDC )
 {
-	if ( type==1 )
+	if ( SceneStatus == 1 || SceneStatus ==2 )
 	{
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 
 	}
-	else if ( type == 2) {
+	else if ( SceneStatus == 3 || SceneStatus == 4 ) {
 
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_3" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 	}
-	else if( type == 3 ){
+	else if( SceneStatus == 5 || SceneStatus==6 ){
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_1" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 

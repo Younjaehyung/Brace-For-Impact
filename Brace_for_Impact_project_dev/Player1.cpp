@@ -25,8 +25,14 @@ void Player1::Update ( ) {
 }
 
 void Player1::Initialize ( ) {
-		
-		rect = { 200,500,296,596 };
+	Ismove = 0 , IsAiming = 0;
+	count = 0;
+	status = 0;
+	frame = 0;
+	direct = 0;
+	itemtype = 6;
+	isHold = 0;
+	rect = { 300,500,396,596 };
 	
 }
 
@@ -173,16 +179,19 @@ void Player1::SwitchStatus ( ) {
 			}
 			TankController::TankAimingStatus ( ) = !TankController::TankAimingStatus ( );
 			TankController::WhoAimingStatus ( ) = 1;
+		
 			IsAiming = !IsAiming;
 			direct = 2;
 
 		}
 		if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 , ReturnRect ( ) ) ) {
 			if ( !Ismove && TankController::TankMoveStatus ( ) ) {
+				std::cout << "T2" << std::endl;
 				return;
 			}
 			TankController::TankMoveStatus ( ) = !TankController::TankMoveStatus ( );
 			TankController::WhoMoveStatus ( ) = 1;
+			std::cout << "T" << std::endl;
 			Ismove = !Ismove;
 			direct = 2;
 		
@@ -513,7 +522,13 @@ void Player2::Clear ( ) {
 
 }
 void Player2::Initialize (  ) {
-
+	Ismove = 0 , IsAiming = 0;
+	count = 0;
+	status = 0;
+	frame = 0;
+	direct = 0;
+	itemtype = 6;
+	isHold = 0;
 	rect = { 200,500,296,596 };
 
 }

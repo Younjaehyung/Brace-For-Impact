@@ -78,15 +78,14 @@ public:
 	static void Initialize ( ) {
 		tankmove = 0;
 		tankaiming = 0;
-		dash = {};
-		Stage_frame = {};
-		Cannon_frame = {};
+		dash = {0};
+		Stage_frame = {0};
+		Cannon_frame = {0};
 		tankhp = { 300 };
 		tankoil = { 300 };
 		tankbullet = { 0 };
-		TankRect = {500,800,700,900};
-		tankoilcount = {};
-		camera = {};
+		tankoilcount = {0.0};
+		camera = {0};
 		whomove = 0;	//1 : p1 2:p2
 		whoaiming = 0;
 	}

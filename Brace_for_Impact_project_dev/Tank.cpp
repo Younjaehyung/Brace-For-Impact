@@ -45,16 +45,16 @@ void Tank::Initialize (int type ) {
 	if ( type == 1 ) {
 		std::cout << "type" << std::endl;
 
-		rect = { 200,400,300,500 };
+		rect = { 200,400,200 + TANKSIZE,400 + TANKSIZE };
 	}
 	else if ( type == 2 ) {
 		std::cout << "type" << std::endl;
 
-		rect = { 200,400,300,500 };
+		rect = { 200,400,200 + TANKSIZE,400 + TANKSIZE };
 
 	}
 	else if ( type == 3 ) {
-		rect = { 200,400,300,500 };
+		rect = { 200,400,200 + TANKSIZE,400 + TANKSIZE };
 	}
 
 	TankController::TankRects ( ) = rect;
@@ -136,6 +136,7 @@ void Tank::move ( )
 				moveX += 1;
 				isMove = true;
 			}
+		
 		}
 		else if ( TankController::WhoMoveStatus ( ) == 2 ) {
 			if ( input::GetKey ( eKeyCode::UP ) ) {
@@ -190,6 +191,7 @@ void Tank::move ( )
 				rect.top += moveY;
 				rect.bottom += moveY;
 				TankController::TankOilCount ( );
+				
 			}
 			
 		}
@@ -377,7 +379,9 @@ void Tank::Update ( )
 		shooting ( );
 		if ( TankController::TankOil ( ) >= 0   )
 		{
+		
 			if ( TankController::TankMoveStatus ( ) ) {
+				
 				move ( );
 			}
 			moving_rander_cal ( );

@@ -67,6 +67,7 @@ public:
 		PlayerManager::getInstance ( ).Clear ( );
 		BlockManager::getInstance ( ).Clear ( );
 		BulletManager::getInstance ( ).Clear ( );
+	
 	}
 
 	void Game_Initialize ( HDC mDC , HINSTANCE g_hinst )
@@ -172,6 +173,7 @@ public:
 				End = 0;
 				Stage_Switch_x = 0;
 				Stage_Switch_y = 0;
+				return;
 			}
 		}
 				
