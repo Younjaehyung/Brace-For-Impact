@@ -18,9 +18,13 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
-	RECTS object1 = { 248, 200 , 400 , 400 };
-	RECTS p1Rect;
 
+	RECTS object1 = { 248, 200 , 400 , 400 };
+
+	int itemtype;
+
+	RECTS p1Rect;
+	BOOL isHold; //아이템을 뭐라도 들고 있을 때
 public:
 
 	Player1 ( );
@@ -43,8 +47,11 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
+
 	RECTS object1 = { 248, 200 , 400 , 400 };
-	
+
+	int itemtype;
+	BOOL isHold; //아이템을 뭐라도 들고 있을 때
 
 public:
 	Player2();

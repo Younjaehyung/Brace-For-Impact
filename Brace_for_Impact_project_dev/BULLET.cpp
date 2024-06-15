@@ -6,11 +6,12 @@
 #include"MONSTER.h"
 
 #define SIZE 20
-
+HDC cpyDC;
+HWND hwnd;
 
 bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 :x(dx),y(dy),mx(dmx),my(dmy),type(dtype){
-	if ( (dtype > 0 && dtype < 10) || dtype==100) PlayerBullet = 1;
+	if ( (dtype > 0 && dtype < 10) || dtype==100 ||dtype==200) PlayerBullet = 1;
 	// 0: 삭제   1~9: 플레이어용   10~:몬스터용 
 	// 1~9 :플레이어 탄   100: 연막
 	//10: 기본탄 1 데미지
@@ -29,6 +30,9 @@ void bullet::move ( ) {
 		counter += 100 * Time::DeltaTime ( );
 	}
 	else if ( type == 100 ) {
+		counter += 10 * Time::DeltaTime ( );
+	}
+	else if ( type == 200 ) {
 		counter += 10 * Time::DeltaTime ( );
 	}
 	else {
@@ -67,11 +71,11 @@ void bullet::move ( ) {
 			if ( PlayerBullet ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
-						if ( type != 100 ) {
+						if ( type != 100 && type!=200) {
 							type = 0;
 							ScanMop->Damage ( 1 );
 						}
-						else {
+						else if(type==100){
 							if ( counter >= 5 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
 									ScanMop->Damage ( 5 );
@@ -92,6 +96,9 @@ void bullet::move ( ) {
 					}
 				}
 				if ( type==100 &&counter >= 15 ) {
+					type = 0;
+				}
+				else if ( type == 200 && counter >= 10 ) {
 					type = 0;
 				}
 			}
@@ -132,12 +139,28 @@ void bullet::move ( ) {
 void bullet::Render ( const HDC& dc ) {
 	if ( type != 0 ) {
 		if ( PlayerBullet ) { //플레이어가 쏜 총알
-			if ( type != 100 ) {
+			if ( type != 100 && type != 200 ) {
 				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
 					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 0 , ( type - 1 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
-			else { //연막
+			else if(type==100) { //연막
 				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+			}
+			else { //대쉬
+
+				BLENDFUNCTION bf;
+				bf.BlendOp = AC_SRC_OVER;
+				bf.BlendFlags = 0;
+				bf.AlphaFormat = 0;
+				bf.SourceConstantAlpha = 150;
+				
+				BitBlt ( dc , 0 , 0 , 128 , 128 , dc , x , y , SRCCOPY );
+				TransparentBlt ( dc , 0,0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_car" ) , 1 * 128 , mx * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				TransparentBlt ( dc , 0 , -10 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , 1 * 128 , my * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				
+				AlphaBlend ( dc , x , y , 128 , 128 , dc ,0,0 , 128 , 128 , bf );
+				TransparentBlt ( dc , 0 , 0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 / 2 , 0 / 2 , 128 / 2 , 128 / 2 , RGB ( 255 , 255 , 255 ) );
+
 			}
 			//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 		}
