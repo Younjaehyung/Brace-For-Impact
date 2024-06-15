@@ -3,7 +3,7 @@
 
 
 Player1::Player1() {
-	rect = { 0,0,40,40 };
+	rect = { 200,500,240,540 };
 	count = 0;
 	status = 0;
 }
@@ -22,57 +22,88 @@ void Player1::move ( ) {
 	float speed = 200 * Time::DeltaTime ( );
 
 	if ( input::GetKey ( eKeyCode::W ) && rect.top > 0 ) { //  rect.top > 0
-		if ( !((rect.left < 400 && rect.right > 220) && rect.top<460 && rect.top > 120) ) {
+		
 			rect.top -= speed;
-			rect.bottom -= speed;
-			if ( count >= 0.1 ) {
-				count = 0;
-				frame++;
-				if ( frame >= 5 ) frame = 0;
+			
+			if ( rect.top <= 16*9) {
+				rect.top += speed;
+				
 			}
-			count += Time::DeltaTime ( );
-		}
+			else {
+				rect.bottom -= speed;
+				if ( count >= 0.1 ) {
+					count = 0;
+					frame++;
+					if ( frame >= 5 ) frame = 0;
+				}
+				count += Time::DeltaTime ( );
+			}
 		
 	}
 	if ( input::GetKey ( eKeyCode::A ) && rect.left > 0) { // rect.left > 0
-		if ( !(rect.top < 460 && rect.bottom > 120 && rect.left<400 && rect.left >220) ) {
+		
 			rect.left -= speed;
-			rect.right -= speed;
-			if ( count >= 0.1 ) {
-				count = 0;
-				frame++;
-				if ( frame >= 5 ) frame = 0;
-				direct = 0;
+			
+			if ( rect.left <= 16 * 6 ) {
+				rect.left += speed;
 			}
-			count += Time::DeltaTime ( );
-		}
+			
+			else {
+				rect.right -= speed;
+				if ( count >= 0.1 ) {
+					count = 0;
+					frame++;
+					if ( frame >= 5 ) frame = 0;
+					direct = 0;
+				}
+				count += Time::DeltaTime ( );
+			}
+
+			
+		
 		
 	}
 	if ( input::GetKey ( eKeyCode::S ) && rect.bottom <900) { // rect.bottom < 900
-		if ( !( rect.bottom < 460 && rect.bottom > 120 && rect.left < 400 && rect.right >220 ) ) {
-			rect.top += speed;
+			
 			rect.bottom += speed;
-			if ( count >= 0.1 ) {
-				count = 0;
-				frame++;
-				if ( frame >= 5 ) frame = 0;
+			if ( rect.bottom >= 16*50 ) {
+				rect.bottom -= speed;
 			}
-			count += Time::DeltaTime ( );
-		}
+			else {
+				rect.top += speed;
+
+				if ( count >= 0.1 ) {
+					count = 0;
+					frame++;
+					if ( frame >= 5 ) frame = 0;
+				}
+				count += Time::DeltaTime ( );
+			}
+			
+		
 		
 	}
 	if ( input::GetKey ( eKeyCode::D ) && rect.right <600) { // rect.right <600
-		if ( !( rect.top < 460 && rect.bottom > 120 && rect.right < 400 && rect.right >220 ) ) {
-			rect.left += speed;
+			
 			rect.right += speed;
-			if ( count >= 0.1 ) {
-				count = 0;
-				frame++;
-				if ( frame >= 5 ) frame = 0;
-				direct = 1;
+			if (rect.right>=16*32){
+
+				rect.right -= speed;
 			}
-			count += Time::DeltaTime ( );
-		}
+			else {
+				rect.left += speed;
+				if ( count >= 0.1 ) {
+					count = 0;
+					frame++;
+					if ( frame >= 5 ) frame = 0;
+					direct = 1;
+				}
+				count += Time::DeltaTime ( );
+
+			}
+				
+				
+		
 
 	}
 	//플레이어1 충돌 범위
@@ -153,7 +184,7 @@ RECTS Player1::ReturnRect ( ) {
 
 
 Player2::Player2() {
-	rect = { 0,0,40,40 };
+	rect = { 340,500,380,540 };
 	count = 0;
 	status = 0;
 }
@@ -174,8 +205,13 @@ void Player2::move ( ) {
 	}
 	float speed = 200 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::UP ) && rect.top>0 ) { //rect.top > 0
-		if ( !( ( rect.left < 400 && rect.right > 220 ) && rect.top < 460 && rect.top > 120 ) ) {
-			rect.top -= speed;
+		rect.top -= speed;
+
+		if ( rect.top <= 16 * 9 ) {
+			rect.top += speed;
+
+		}
+		else {
 			rect.bottom -= speed;
 			if ( count >= 0.1 ) {
 				count = 0;
@@ -184,10 +220,17 @@ void Player2::move ( ) {
 			}
 			count += Time::DeltaTime ( );
 		}
+
+		
 	}
 	if ( input::GetKey ( eKeyCode::LEFT ) && rect.left>0 ) { // rect.left > 0
-		if ( !( rect.top < 460 && rect.bottom > 120 && rect.left < 400 && rect.left >220 ) ) {
-			rect.left -= speed;
+		rect.left -= speed;
+
+		if ( rect.left <= 16 * 6 ) {
+			rect.left += speed;
+		}
+
+		else {
 			rect.right -= speed;
 			if ( count >= 0.1 ) {
 				count = 0;
@@ -197,11 +240,17 @@ void Player2::move ( ) {
 			}
 			count += Time::DeltaTime ( );
 		}
+
+
 	}
 	if ( input::GetKey ( eKeyCode::DOWN ) && rect.bottom<900 ) { // rect.bottom < 900
-		if ( !( rect.bottom < 460 && rect.bottom > 120 && rect.left < 400 && rect.right >220 ) ) {
+		rect.bottom += speed;
+		if ( rect.bottom >= 16 * 50 ) {
+			rect.bottom -= speed;
+		}
+		else {
 			rect.top += speed;
-			rect.bottom += speed;
+
 			if ( count >= 0.1 ) {
 				count = 0;
 				frame++;
@@ -209,11 +258,16 @@ void Player2::move ( ) {
 			}
 			count += Time::DeltaTime ( );
 		}
+
 	}
 	if ( input::GetKey ( eKeyCode::RIGHT ) && rect.right < 600) { // rect.right < 600
-		if ( !( rect.top < 460 && rect.bottom > 120 && rect.right < 400 && rect.right >220 ) ) {
+		rect.right += speed;
+		if ( rect.right >= 16 * 32 ) {
+
+			rect.right -= speed;
+		}
+		else {
 			rect.left += speed;
-			rect.right += speed;
 			if ( count >= 0.1 ) {
 				count = 0;
 				frame++;
@@ -221,7 +275,10 @@ void Player2::move ( ) {
 				direct = 1;
 			}
 			count += Time::DeltaTime ( );
+
 		}
+
+
 	}
 
 	if ( input::GetKeyUp ( eKeyCode::UP ) || input::GetKeyUp ( eKeyCode::RIGHT ) || input::GetKeyUp ( eKeyCode::LEFT ) || input::GetKeyUp ( eKeyCode::DOWN ) ) {
