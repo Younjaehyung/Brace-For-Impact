@@ -96,20 +96,23 @@ void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 
 void GameManager::Ground_Map ( const HDC& mDC )
 {
-	switch ( type ) {
-	case 1:
+	if ( type==1 )
+	{
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
-		break;
-	case 2:
+
+	}
+	else if ( type == 2) {
+
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_3" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
-		break;
-	case 3:
+	}
+	else if( type == 3 ){
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_1" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
-		break;
+	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_1" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 
+
+	
 
 	}
 }
@@ -152,11 +155,11 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 
 
 
-	if ( count >= 1.0 ) {
+	if ( count >= 0.4 ) {
 		count = 0;
 		frame++;
 		if ( frame >= 5 ) {
-			frame == 0;
+			frame = 0;
 		}
 	}
 
@@ -177,36 +180,13 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 17 , 384 , 96 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384 * 2 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
 
-	if ( input::GetKeyDown ( eKeyCode::S ) && !Selected ) {
-		if ( Cursor < 11 )
-			Cursor += 4;
-	}
-	else if ( input::GetKeyDown ( eKeyCode::W ) && !Selected ) {
-		if ( Cursor > 0 )
-			Cursor -= 4;
-	}
+	MenuUpdate ( );
 
+	
 
-	//게임 시작 창일때
-	if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0 ) {
-		type = 1;
-		SceneStatus = 1;
-		Scene_Initialize ( 1 );
-		return;
-	}
-	else if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 4 ) {
-
-		Rule = !Rule;
-
-		if ( Rule ) {
-			TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
-	Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
-			Selected = 1;
-		}
-		else {
-			Selected = 0;
-		}
-
+	if ( Rule ) {
+		TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
 
 	}
 }
