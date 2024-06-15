@@ -46,139 +46,97 @@ void Tank::move ( )
 	//	rect.right += speed;
 	//	
 	//}
-
-	if ( TankController::TankMoveStatus ( ) ) {
+	isMove = false;
+	
 		float speed = 200 * Time::DeltaTime ( );
 		float moveX = 0;
 		float moveY = 0;
 
-		BOOL ckBlock[ 4 ] = { 0,0,0,0 }; // 0: 몹 위 , 1: 아래 , 2: 좌 , 3: 우
-		/*for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-			if ( rect2rect ( ReturnRect ( ) , ScanBlock.ReturnRect ( ) ) ) {
-				if ( ckMopUp ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-					ckBlock[ 0 ] = 1;
-				}
-				if ( ckMopDown ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-					ckBlock[ 1 ] = 1;
-				}
-				if ( ckMopLeft ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-					ckBlock[ 2 ] = 1;
-				}
-				if ( ckMopRight ( ScanBlock.ReturnRect ( ) , ReturnRect ( ) ) ) {
-					ckBlock[ 3 ] = 1;
-				}
-			}
-		}*/
-
-		if ( !ckBlock[ 0 ] ) {
+	
 			if ( input::GetKey ( eKeyCode::W ) &&rect.top>0) {
 				moveY -= 1;
+				isMove = true;
 			}
-		}
-		if ( !ckBlock[ 2 ] ) {
+		
+	
 			if ( input::GetKey ( eKeyCode::A ) &&rect.left > 0 ) {
 				moveX -= 1;
 			}
-		}
-		if ( !ckBlock[ 1 ] ) {
+			isMove = true;
+		
+		
 			if ( input::GetKey ( eKeyCode::S ) && rect.top<1650 ) {
 				moveY += 1;
 			}
-		}
-		if ( !ckBlock[ 3 ] ) {
+			isMove = true;
+		
+	
 			if ( input::GetKey ( eKeyCode::D ) && rect.left<1910) {
 				moveX += 1;
 			}
-		}
+			isMove = true;
+		
 
-		// Normalize the movement vector
-		float magnitude = sqrt ( moveX * moveX + moveY * moveY );
-		if ( magnitude > 0 ) {
-			moveX = ( moveX / magnitude ) * speed;
-			moveY = ( moveY / magnitude ) * speed;
-		}
-		for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-			RECTS recttemp = rect;
-			RECTS block = ScanBlock.ReturnRect ( );
-			recttemp.left += moveX;
-			recttemp.right += moveX;
-			recttemp.top += moveY;
-			recttemp.bottom += moveY;
-			if ( IntersectRect_float ( block , recttemp ) ) {
-				return;
+		if ( isMove ) {
+			// Normalize the movement vector
+			float magnitude = sqrt ( moveX * moveX + moveY * moveY );
+			if ( magnitude > 0 ) {
+				moveX = ( moveX / magnitude ) * speed;
+				moveY = ( moveY / magnitude ) * speed;
 			}
+			for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+				RECTS recttemp = rect;
+				RECTS block = ScanBlock.ReturnRect ( );
+				recttemp.left += moveX;
+				recttemp.right += moveX;
+				recttemp.top += moveY;
+				recttemp.bottom += moveY;
+				if ( IntersectRect_float ( block , recttemp ) ) {
+					isMove = false;
+					return;
+				}
+				
+			}
+			if ( isMove ) {
+				rect.left += moveX;
+				rect.right += moveX;
+				rect.top += moveY;
+				rect.bottom += moveY;
+				TankController::TankOilCount ( );
+			}
+
 		}
-		rect.left += moveX;
-		rect.right += moveX;
-		rect.top += moveY;
-		rect.bottom += moveY;
 
 
 
-		if ( input::GetKey ( eKeyCode::W ) ) {
-			Tank_car_direct = 0;
-			isMove = true;
-		}
-		if ( input::GetKey ( eKeyCode::A ) ) {
-			Tank_car_direct = 6;
-			isMove = true;
-		}
-		if ( input::GetKey ( eKeyCode::S ) ) {
-			Tank_car_direct = 4;
-			isMove = true;
-		}
-		if ( input::GetKey ( eKeyCode::D ) ) {
-			Tank_car_direct = 2;
-			isMove = true;
-		}
+		////손 때면
+		//if ( input::GetKeyUp ( eKeyCode::W ) ) {
+		//	
+		//}
+		//if ( input::GetKeyUp ( eKeyCode::A ) ) {
+		//	
+		//}
+		//if ( input::GetKeyUp ( eKeyCode::S ) ) {
+		//	
+		//}
+		//if ( input::GetKeyUp ( eKeyCode::D ) ) {
+		//	
+		//}
 
-		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
-			Tank_car_direct = 7;
-			isMove = true;
-
-		}
-		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
-			Tank_car_direct = 1;
-			isMove = true;
-		}
-		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) {
-			Tank_car_direct = 5;
-			isMove = true;
-		}
-		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
-			Tank_car_direct = 3;
-			isMove = true;
-		}
-
-
-		//손 때면
-		if ( input::GetKeyUp ( eKeyCode::W ) ) {
-			isMove = false;
-		}
-		if ( input::GetKeyUp ( eKeyCode::A ) ) {
-			isMove = false;
-		}
-		if ( input::GetKeyUp ( eKeyCode::S ) ) {
-			isMove = false;
-		}
-		if ( input::GetKeyUp ( eKeyCode::D ) ) {
-			isMove = false;
-		}
-
-		if ( input::GetKeyUp ( eKeyCode::W ) && input::GetKeyUp ( eKeyCode::A ) ) {
-			isMove = false;
-		}
-		if ( input::GetKeyUp ( eKeyCode::W ) && input::GetKeyUp ( eKeyCode::D ) ) {
-			Tank_car_direct = 1;
-			isMove = false;
-		}
-		if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::A ) ) {
-			isMove = false;
-		}
-		if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::D ) ) {
-			isMove = false;
-		}
-	}
+		//if ( input::GetKeyUp ( eKeyCode::W ) && input::GetKeyUp ( eKeyCode::A ) ) {
+		//
+		//}
+		//if ( input::GetKeyUp ( eKeyCode::W ) && input::GetKeyUp ( eKeyCode::D ) ) {
+		//	Tank_car_direct = 1;
+		//	
+		//}
+		//if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::A ) ) {
+		//	
+		//}
+		//if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::D ) ) {
+		//	
+		//}
+	
 
 }
 
@@ -295,9 +253,11 @@ void Tank::Update ( )
 		aiming ( );
 
 		shooting ( );
-		if ( TankController::TankOil ( ) >= 0  ) {
-
-			move ( );
+		if ( TankController::TankOil ( ) >= 0   )
+		{
+			if ( TankController::TankMoveStatus ( ) ) {
+				move ( );
+			}
 			moving_rander_cal ( );
 		}
 		
@@ -306,7 +266,47 @@ void Tank::Update ( )
 }
 
 void Tank::moving_rander_cal ( ) {
-	
+	if ( isMove ) {
+		if ( input::GetKey ( eKeyCode::W ) ) {
+			Tank_car_direct = 0;
+
+		}
+		if ( input::GetKey ( eKeyCode::A ) ) {
+			Tank_car_direct = 6;
+
+		}
+		if ( input::GetKey ( eKeyCode::S ) ) {
+			Tank_car_direct = 4;
+
+		}
+		if ( input::GetKey ( eKeyCode::D ) ) {
+			Tank_car_direct = 2;
+
+		}
+
+		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
+			Tank_car_direct = 7;
+
+
+		}
+		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
+			Tank_car_direct = 1;
+
+		}
+		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) {
+			Tank_car_direct = 5;
+
+		}
+		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
+			Tank_car_direct = 3;
+
+		}
+	}
+
+
+
+
+
 	if ( Tank_car_count >= 0.2 ) {
 		Tank_car_frame++;
 		if ( Tank_car_frame >= 6 ) Tank_car_frame = 0;
