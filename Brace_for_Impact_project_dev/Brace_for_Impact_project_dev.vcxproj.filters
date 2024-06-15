@@ -36,9 +36,6 @@
     <ClInclude Include="Player1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="enemy1.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="input.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -51,9 +48,6 @@
     <ClInclude Include="MATH.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MONSTER.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -64,9 +58,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Tank.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -95,9 +86,6 @@
     <ClCompile Include="Player1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="enemy1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="input.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -108,9 +96,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MATH.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MONSTER.cpp">
@@ -264,9 +249,6 @@
     <Image Include="BFI_ICON.ico">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="BFI_Screen_Gameover.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
     <Image Include="BFI_Screen_StageStart.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
@@ -280,6 +262,9 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="BFI_Screen_Rule.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Gameover.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

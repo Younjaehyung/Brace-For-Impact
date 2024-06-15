@@ -1,5 +1,7 @@
-﻿// Microsoft Visual C++ generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
+#pragma code_page(65001)
+
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
@@ -217,8 +219,6 @@ IDB_BM_ITEM             BITMAP                  "BFI_Item.bmp"
 
 IDB_BM_CT_STEAM_DASH    BITMAP                  "BFI_Control_steam_dash.bmp"
 
-IDB_BM_GAMEOVER         BITMAP                  "C:\\Users\\osw00\\OneDrive\\바탕 화면\\Brace for impact\\Brace for impact_dev\\Brace_for_Impact_project_dev\\BFI_Screen_Gameover.bmp"
-
 IDB_BM_STAGESTART       BITMAP                  "BFI_Screen_StageStart.bmp"
 
 IDB_BM_UI_SELECTFRAME   BITMAP                  "BFI_Screen_Selecetframe.bmp"
@@ -228,6 +228,8 @@ IDB_BM_BOSS_3           BITMAP                  "BFI_BOSS_3.bmp"
 IDB_BM_SCREEN_CLEAR     BITMAP                  "BFI_Screen_GameClear.bmp"
 
 IDB_BM_SCREEN_RULE      BITMAP                  "BFI_Screen_Rule.bmp"
+
+IDB_BM_SCREEN_OVER      BITMAP                  "BFI_Screen_Gameover.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
