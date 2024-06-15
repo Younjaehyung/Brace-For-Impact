@@ -11,14 +11,23 @@ private:
    std::unordered_map<std::string , HBITMAP> idBitmap;
    std::unordered_map<std::string , HDC> idDC;
 
-
+   HINSTANCE g_hinst;
 public:
     static Texture& getInstance ( ) {
         static Texture instance;
         return instance;
     }
 
+    void Sound_SetIT ( const HINSTANCE& inst ) {
+        g_hinst = inst;
+    }
+
+    HINSTANCE& Sound_GetIT () {
+        return g_hinst;
+    }
+
     void Texture_Loading (const HDC& mDC , const HINSTANCE& g_hinst ) {
+        Sound_SetIT ( g_hinst );
         HBITMAP mBitmap = CreateCompatibleBitmap ( mDC , 1024 * 2 , 1024 * 2 );
         idBitmap.emplace ( "GAME_FIELD" , mBitmap );
 

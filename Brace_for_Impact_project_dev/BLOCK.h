@@ -21,10 +21,11 @@ private:
 	BlockManager ( ) {};
 	std::vector<Block> Blocks;
 	int block_size = 1024 / 32;
-
+	
 public:
-	static BlockManager& getInstance ( ) {
+	static BlockManager& getInstance () {
 		static BlockManager instance;
+		
 		return instance;
 	}
 

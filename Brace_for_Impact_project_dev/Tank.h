@@ -6,6 +6,8 @@
 #include "MATH.h"
 #include "Resource.h"
 #include "BLOCK.h"
+#include "Windows.h"
+#pragma comment(lib,"winmm.lib")
 class Tank 
 {
 
@@ -31,7 +33,7 @@ private:
 	BOOL headMove;
 	BOOL headArrow;
 	BOOL isHit;
- 
+
 public:
 	
 	Tank ( );
