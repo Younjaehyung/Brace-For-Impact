@@ -18,7 +18,7 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
-
+	RECTS object1 = { 248, 200 , 400 , 400 };
 	RECTS p1Rect;
 
 public:
@@ -43,7 +43,7 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
-
+	RECTS object1 = { 248, 200 , 400 , 400 };
 	
 
 public:

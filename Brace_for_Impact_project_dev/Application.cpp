@@ -29,8 +29,7 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	Time::Initailize ( );
 	HandleResize ( );
 	GameManager::getInstance().Game_Initialize ( hDC , g_hinst );
-	/*gameobject.Initailize ( hDC,g_hinst );*/
-	
+
 	//임시 음악
 	//PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 	
@@ -55,21 +54,6 @@ void Application::f_Render() {
 	//SceneManager::Render ( mDC );
 
 
-	if ( input::GetKey ( eKeyCode::I ) ) {
-		Stage_num = 0;
-	}
-	else if ( input::GetKey ( eKeyCode::O ) ) {
-		Stage_num = 1;
-	}
-	else if ( input::GetKey ( eKeyCode::P ) ) {
-		Stage_num = 2;
-	}
-	else if ( input::GetKey ( eKeyCode::U ) ) {
-		Stage_num = 3;
-	}
-	else if ( input::GetKeyUp ( eKeyCode::Z ) ) {
-		gameStart = !gameStart;
-	}
 
 	GameManager::getInstance ( ).Render ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , mDC );
 	

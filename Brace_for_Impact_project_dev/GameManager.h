@@ -3,13 +3,17 @@
 #include "BULLET.h"
 #include "Player.h"
 #include"BLOCK.h"
-
+#include"Texture.h"
+#include "TankController.h"
 class GameManager
 {
 private:
 	GameManager ( ) {
 		score = 0;
-		type = 0;
+		type = 0; Cursor = 0;
+		frame = 0;
+		Selected = 0;
+		Rule = 0;
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
@@ -118,7 +122,45 @@ public:
 	}
 
 
+
+
 	void TitleScene ( const HDC& );
+	void MenuUpdate ( ) {
+		if ( input::GetKeyDown ( eKeyCode::S ) && !Selected ) {
+			if ( Cursor < 8 )
+				Cursor += 4;
+		}
+		else if ( input::GetKeyDown ( eKeyCode::W ) && !Selected ) {
+			if ( Cursor > 0 )
+				Cursor -= 4;
+		}
+
+
+		//게임 시작 창일때
+		if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0 ) {
+			type = 1;
+			SceneStatus = 1;
+			Scene_Initialize ( 1 );
+			return;
+		}
+		else if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 4 ) {
+
+			Rule = !Rule;
+
+			if ( Rule ) {
+				std::cout << "a" << std::endl;
+				Selected = 1;
+			}
+			else {
+				Selected = 0;
+			}
+
+
+		}
+		else if( input::GetKeyDown ( eKeyCode::F ) && Cursor == 8 ){
+			exit ( 1 );
+		}
+	}
 	void EndScene ( const HDC& );
 
 };

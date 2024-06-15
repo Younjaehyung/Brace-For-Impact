@@ -24,7 +24,7 @@ void Player1::Update ( ) {
 
 void Player1::Initialize ( ) {
 
-		rect = { 200,500,240,540 };
+		rect = { 200,500,296,596 };
 	
 }
 
@@ -39,7 +39,7 @@ void Player1::move ( ) {
 		
 			rect.top -= speed;
 			
-			if ( rect.top <= 16*9 || ((rect.right<=400&&rect.left>=200)&&rect.top<=400)) {
+			if ( rect.top <= 16 * 9 || ( IntersectRect_float ( rect , object1 ) ) ) {
 				rect.top += speed;
 				
 			}
@@ -58,7 +58,7 @@ void Player1::move ( ) {
 		
 			rect.left -= speed;
 			
-			if ( rect.left <= 16 * 6 ||( ( rect.left <= 400 ) && rect.top <= 400 ) ) {
+			if ( rect.left <= 16 * 6 || ( IntersectRect_float ( rect , object1 ) ) ) {
 				rect.left += speed;
 			}
 			
@@ -80,7 +80,7 @@ void Player1::move ( ) {
 	if ( input::GetKey ( eKeyCode::S )) { // rect.bottom < 900
 			
 			rect.bottom += speed;
-			if ( rect.bottom >= 16*50   ) {
+			if ( rect.bottom >= 16*51   ) {
 				rect.bottom -= speed;
 			}
 			else {
@@ -100,7 +100,7 @@ void Player1::move ( ) {
 	if ( input::GetKey ( eKeyCode::D )) { // rect.right <600
 			
 			rect.right += speed;
-			if (rect.right>=16*32 || ( ( rect.right >= 200 ) && rect.top <= 400 ) ){
+			if (rect.right>=16*35 || ( IntersectRect_float ( rect , object1 ) ) ){
 
 				rect.right -= speed;
 			}
@@ -204,7 +204,7 @@ RECTS Player1::ReturnRect ( ) {
 
 
 Player2::Player2() {
-	rect = { 340,500,380,540 };
+
 	count = 0;
 	status = 0;
 }
@@ -220,10 +220,10 @@ void Player2::move ( ) {
 		return;
 	}
 	float speed = 200 * Time::DeltaTime ( );
-	if ( input::GetKey ( eKeyCode::UP ) && rect.top>0 ) { //rect.top > 0
+	if ( input::GetKey ( eKeyCode::UP ) ) { //rect.top > 0
 		rect.top -= speed;
 
-		if ( rect.top <= 16 * 9 ) {
+		if ( rect.top <= 16 * 9 || ( IntersectRect_float ( rect , object1 ) ) ) {
 			rect.top += speed;
 
 		}
@@ -239,10 +239,10 @@ void Player2::move ( ) {
 
 		
 	}
-	if ( input::GetKey ( eKeyCode::LEFT ) && rect.left>0 ) { // rect.left > 0
+	if ( input::GetKey ( eKeyCode::LEFT )  ) { // rect.left > 0
 		rect.left -= speed;
 
-		if ( rect.left <= 16 * 6 ) {
+		if ( rect.left <= 16 * 6 || ( IntersectRect_float ( rect , object1 ) ) ) {
 			rect.left += speed;
 		}
 
@@ -259,9 +259,9 @@ void Player2::move ( ) {
 
 
 	}
-	if ( input::GetKey ( eKeyCode::DOWN ) && rect.bottom<900 ) { // rect.bottom < 900
+	if ( input::GetKey ( eKeyCode::DOWN )  ) { // rect.bottom < 900
 		rect.bottom += speed;
-		if ( rect.bottom >= 16 * 50 ) {
+		if ( rect.bottom >= 16 * 51 ) {
 			rect.bottom -= speed;
 		}
 		else {
@@ -276,9 +276,9 @@ void Player2::move ( ) {
 		}
 
 	}
-	if ( input::GetKey ( eKeyCode::RIGHT ) && rect.right < 600) { // rect.right < 600
+	if ( input::GetKey ( eKeyCode::RIGHT)) { // rect.right < 600
 		rect.right += speed;
-		if ( rect.right >= 16 * 32 ) {
+		if ( rect.right >= 16 * 32 || ( IntersectRect_float ( rect , object1 ) )  ) {
 
 			rect.right -= speed;
 		}
@@ -358,7 +358,7 @@ void Player2::Clear ( ) {
 }
 void Player2::Initialize (  ) {
 
-	rect = { 200,500,240,540 };
+	rect = { 200,500,296,596 };
 
 }
 
