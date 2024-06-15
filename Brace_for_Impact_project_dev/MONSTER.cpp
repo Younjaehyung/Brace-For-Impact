@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 50; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 500; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 50;
+		mop_inform.hp = 500;
 	}
 	else if ( type == 3 ) { //오줌
 		mop_inform.hp = 100;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 50;
+		mop_inform.hp = 500;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 30;
+		mop_inform.hp = 500;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 50;
+		mop_inform.hp = 500;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 1;
@@ -200,15 +200,15 @@ void mop::attack( Tank& p1) {
 			double targetx = ( double ) ( middleX ( p1.ReturnRect ( ) ) );
 			double targety = ( double ) ( middleY ( p1.ReturnRect ( ) ) );
 			double ang = angle ( ( double ) ( middleX ( ReturnRect ( ) ) ) , ( double ) ( middleY ( ReturnRect ( ) ) ) , targetx , targety );
-			double angle1 = 60 * ( 3.141592 / 180 );
-			for ( int i = 0; i < 6; i++ ) {
+			double angle1 = 30 * ( 3.141592 / 180 );
+			for ( int i = 0; i < 12; i++ ) {
 				bullet* newbullet = new bullet ( middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 , -cos ( ang+i * angle1 ) , -sin ( ang+i * angle1 ) );
 				BulletManager::getInstance ( ).CreateBullet ( newbullet );
 			}
 			mop_inform.cnt++;
 		}
 		else {
-			if ( attack_count >= 5 ) {
+			if ( attack_count >= 1 ) {
 				mop_inform.cnt = 0;
 				attack_count = 0;
 				status = 0;
@@ -220,7 +220,7 @@ void mop::attack( Tank& p1) {
 		if ( rect2rect ( moprect , tankrect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
-				TankController::Damage ( 5 );
+				TankController::Damage ( 10 );
 			}
 			mop_inform.cnt++;
 			attack_count = 0;
@@ -235,7 +235,7 @@ void mop::attack( Tank& p1) {
 		if ( rect2rect ( moprect , tankrect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
-				TankController::Damage ( 5 );
+				TankController::Damage ( 10 );
 			}
 			mop_inform.cnt++;
 			attack_count = 0;
@@ -245,7 +245,11 @@ void mop::attack( Tank& p1) {
 			status = 0;
 			mop_inform.cnt = 0;
 		}
-		}
+	}
+
+	if ( rect2rect ( moprect , tankrect ) ) {
+		TankController::Damage ( 1 );
+	}
 	
 	attack_count += Time::DeltaTime ( );
 	
@@ -254,6 +258,7 @@ void mop::attack( Tank& p1) {
 void mop::move ( Tank& p1  ) {
 	//OSW: 속도 300 -> 100으로 수정함
 	float speed = 100 * Time::DeltaTime ( );
+	if ( mop_inform.type == 5 )speed *= 2;
 	BOOL blockmop = 0;
 	RECTS moprect = ReturnRect ( );
 	RECTS cpyrect;
