@@ -138,15 +138,24 @@ void Player1::SwitchStatus ( ) {
 			if ( status == 1 ) {
 				status = 0;
 				TankController::TankOil() += 50;
+				if ( TankController::TankOil ( ) > 300 ) {
+					TankController::TankOil ( ) = 300;
+				}
 			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//대쉬
-
+			if ( !TankController::Dash ( ) ) {
+				TankController::Dash ( ) = 1;
+			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//증기분출
-
+			double angle = 45 * ( 3.141592 / 180 );
+			for ( int i = 0; i < 8; i++ ) {
+				bullet* newbullet = new bullet ( middleX ( TankController::TankRects ( ) ) + 150 * cos ( i * angle ) , middleY ( TankController::TankRects ( ) ) + 150 * sin ( i * angle ) , 100 , 0 , 0 );
+				BulletManager::getInstance ( ).CreateBullet ( newbullet );
+			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 8 , 16 * 34 , 1024 + 16 * 15 , 16 * 40 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//연료 저장고
@@ -302,11 +311,16 @@ void Player2::SwitchStatus ( ) {
 			if ( status == 1 ) {
 				status = 0;
 				TankController::TankOil ( ) += 50;
+				if ( TankController::TankOil ( ) > 300 ) {
+					TankController::TankOil ( ) = 300;
+				}
 			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//대쉬
-
+			if ( !TankController::Dash ( ) ) {
+				TankController::Dash ( ) = 1;
+			}
 		}
 		else if ( inrect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//증기분출
