@@ -5,6 +5,16 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , TankController::TankStage_frame ( ).frame * 1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
 
+	if ( engineCount >= 0.1 ) {
+		engineCount = 0;
+		engineframe++;
+		if ( engineframe >= 5 ) {
+			engineframe = 0;
+		}
+	}
+
+	engineCount += Time::DeltaTime ( );
+
 
 	//상호작용 범위
 	//이동 조작기
@@ -108,7 +118,7 @@ void GameManager::Camera_UI_CT_1( const HDC& mDC )
 void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 1024 + 16 * 18 , 0 + 16 * 45 , 96 , 160 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , 0 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , engineframe * 96 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
 	//대쉬
 	TransparentBlt ( mDC , 1024 + 16 * 6 , 0 + 16 * 46 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );

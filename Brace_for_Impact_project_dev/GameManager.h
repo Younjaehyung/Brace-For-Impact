@@ -51,6 +51,11 @@ private:
 	int frame;	//별이 반짝이는 프레임
 	int Cursor;		//커서 위치 바꾸는 인수
 
+	int engineframe;	
+	float engineCount;
+
+
+
 	HBRUSH blackBrush , redBrush , cyanBrush;
 public:
 	static GameManager& getInstance ( ) {

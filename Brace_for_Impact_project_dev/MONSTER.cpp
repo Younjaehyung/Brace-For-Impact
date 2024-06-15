@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 500; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 200; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 500;
+		mop_inform.hp = 200;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 100;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 500;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 500;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 500;
+		mop_inform.hp = 200;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 1;
@@ -540,32 +540,83 @@ void mop::Render( const HDC& dc) {
 		}
 		else if ( mop_inform.type == 2 ) { // 한발
 			//Rectangle ( dc , mop_inform.x +40  , mop_inform.y+20  , mop_inform.x +190 , mop_inform.y +180 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				//Rectangle ( dc , 200 , 200 , 600 , 600 );
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
 		}
 		else if ( mop_inform.type == 3 ) { //오줌
 			//Rectangle ( dc , mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				//Rectangle ( dc , 200 , 200 , 600 , 600 );
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
 		}
 		else if ( mop_inform.type == 4 ) { // 탄폭파
 			//Rectangle ( dc , mop_inform.x , mop_inform.y+30  , mop_inform.x + 210 , mop_inform.y + 180 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_3" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_3" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				//Rectangle ( dc , 200 , 200 , 600 , 600 );
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_3" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-
+			}
 		}
 		else if ( mop_inform.type == 5 ) { // 자폭병
 			//Rectangle ( dc , mop_inform.x+40, mop_inform.y+20 , mop_inform.x + 170 , mop_inform.y + 200 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_4" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_4" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				//Rectangle ( dc , 200 , 200 , 600 , 600 );
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-			
+			}
 		}
 		else if ( mop_inform.type == 6 ) { // 춘식이
 			//Rectangle ( dc , mop_inform.x+50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_5" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_5" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				//Rectangle ( dc , 200 , 200 , 600 , 600 );
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_5" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-
-
+			}
 		}
 		else if ( mop_inform.type == 10 ) { // 쪼꼬미 4가 소환함
 			//Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
