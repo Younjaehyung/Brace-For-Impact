@@ -52,8 +52,19 @@ void Tank::move ( )
 		float moveX = 0;
 		float moveY = 0;
 		if ( TankController::Dash() ) {
-			speed = 50*speed;
-			TankController::Dash() = 0 ;
+			speed = 3*speed;
+			//TankController::Dash() = 0 ;
+			dashcnt+=  100* Time::DeltaTime ( );
+			if ( dashcnt > 10 ) {
+				dashcnt2++;
+				bullet * newbullet = new bullet ( rect.left , rect.top , 200 , Tank_car_direct , Tank_head_direct );
+				BulletManager::getInstance ( ).CreateBullet ( newbullet );
+				dashcnt = 0;
+				if ( dashcnt2 == 10 ) {
+					TankController::Dash ( ) = 0;
+					dashcnt2 = 0;
+				}
+			}
 		}
 	
 			if ( input::GetKey ( eKeyCode::W ) &&rect.top>0) {
