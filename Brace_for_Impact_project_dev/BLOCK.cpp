@@ -1,7 +1,8 @@
 ﻿#include"BLOCK.h"
 
 Block::Block ( ) {
-	
+
+	//rect.left < 400 && rect.right > 220) && rect.top < 460 && rect.top > 120
 }
 
 
@@ -27,7 +28,11 @@ RECTS Block::ReturnRect ( ) {
 
 void BlockManager::Initilize ( int type )
 {
+
 	Block temp;
+	//기본 탱크 내부 포신UI
+	temp.makeblock ( { 220,120,400,460 } , 0 );
+	Blocks.push_back ( temp );
 	if ( type == 1 ) {
 		temp.makeblock ( {0,0,32,6},1 );
 		Blocks.push_back ( temp );
@@ -83,6 +88,11 @@ void BlockManager::Initilize ( int type )
 
 void BlockManager::Update ( )
 {
+}
+
+void BlockManager::Clear ( )
+{
+	Blocks.clear ( );
 }
 
 void BlockManager::Render ( const HDC& dc)

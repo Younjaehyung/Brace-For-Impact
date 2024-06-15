@@ -60,6 +60,7 @@ public:
 		return instance;
 	}
 
+	void Clear ( );
 	void spawn ( int type );
 	void SpawnMonster ( );
 	void DeleteMonster ( );

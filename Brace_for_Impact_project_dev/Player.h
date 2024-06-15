@@ -32,6 +32,12 @@ public:
 		tank.Render ( mDC );
 
 	}
+	void Clear ( ) {
+		tank.Clear ( );
+		player1.Clear ( );
+		player2.Clear ( );
+	}
+
 	void Initailize (HINSTANCE ) {
 
 	}

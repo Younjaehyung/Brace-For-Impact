@@ -18,19 +18,16 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
-	bool tank_status;
-	HBITMAP* B_Player_1;
-	HDC hmemDC;
 
 	RECTS p1Rect;
 
 public:
 
 	Player1 ( );
-	
+	void Clear ( );
 	void move ( );
 	void SwitchStatus ( );
-	void Tank_control ( );
+	
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
@@ -46,21 +43,17 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
-	bool tank_status;
-	HBITMAP B_Player_2;
-	HDC hmemDC;
 
 	
 
 public:
 	Player2();
+	void Clear ( );
 	void move ( );
-	//void tank_control ( );
 	void SwitchStatus ( );
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();
-	void Init ( HINSTANCE g_hinst );
 };
 

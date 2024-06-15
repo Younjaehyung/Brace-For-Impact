@@ -30,6 +30,7 @@ public:
 
 	void Initilize ( int type );
 	void Update ( );
+	void Clear ( );
 	void Check (RECTS&);
 	void Render ( const HDC& );
 	std::vector<Block>& BlockReturn ( );

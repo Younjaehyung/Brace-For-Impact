@@ -577,6 +577,12 @@ void MonsterManager::SpawnMonster (  ) {
 
 }
 
+void MonsterManager::Clear ( ) {
+	count = 0;
+	deletetime = 0;
+	mops.clear ( );
+}
+
 void MonsterManager::DeleteMonster () {
 
 	if ( mops.size ( ) ) {

@@ -42,7 +42,8 @@ public:
 	void moving_rander_cal ( );
 	void aiming();
 	void aiming_animation ( );
-	
+	void Clear ( );
+
 	RECTS& ReturnRect ( ) {
 		RECTS r = { rect.left ,rect.top,rect.right  , rect.bottom};
 		std::cout << rect.left << std::endl;

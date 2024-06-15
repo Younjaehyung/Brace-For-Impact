@@ -8,6 +8,12 @@ Player1::Player1() {
 	status = 0;
 }
 
+void Player1::Clear ( ) {
+	rect = { 200,500,240,540 };
+	count = 0;
+	status = 0;
+}
+
 void Player1::Update ( ) {
 	SwitchStatus ( );
 	move ( );
@@ -21,11 +27,11 @@ void Player1::move ( ) {
 
 	float speed = 200 * Time::DeltaTime ( );
 
-	if ( input::GetKey ( eKeyCode::W ) && rect.top > 0 ) { //  rect.top > 0
+	if ( input::GetKey ( eKeyCode::W )) { //  rect.top > 0
 		
 			rect.top -= speed;
 			
-			if ( rect.top <= 16*9) {
+			if ( rect.top <= 16*9 || ((rect.right<=400&&rect.left>=200)&&rect.top<=400)) {
 				rect.top += speed;
 				
 			}
@@ -40,11 +46,11 @@ void Player1::move ( ) {
 			}
 		
 	}
-	if ( input::GetKey ( eKeyCode::A ) && rect.left > 0) { // rect.left > 0
+	if ( input::GetKey ( eKeyCode::A )) { // rect.left > 0
 		
 			rect.left -= speed;
 			
-			if ( rect.left <= 16 * 6 ) {
+			if ( rect.left <= 16 * 6 ||( ( rect.left <= 400 ) && rect.top <= 400 ) ) {
 				rect.left += speed;
 			}
 			
@@ -63,10 +69,10 @@ void Player1::move ( ) {
 		
 		
 	}
-	if ( input::GetKey ( eKeyCode::S ) && rect.bottom <900) { // rect.bottom < 900
+	if ( input::GetKey ( eKeyCode::S )) { // rect.bottom < 900
 			
 			rect.bottom += speed;
-			if ( rect.bottom >= 16*50 ) {
+			if ( rect.bottom >= 16*50   ) {
 				rect.bottom -= speed;
 			}
 			else {
@@ -83,10 +89,10 @@ void Player1::move ( ) {
 		
 		
 	}
-	if ( input::GetKey ( eKeyCode::D ) && rect.right <600) { // rect.right <600
+	if ( input::GetKey ( eKeyCode::D )) { // rect.right <600
 			
 			rect.right += speed;
-			if (rect.right>=16*32){
+			if (rect.right>=16*32 || ( ( rect.right >= 200 ) && rect.top <= 400 ) ){
 
 				rect.right -= speed;
 			}
@@ -153,9 +159,6 @@ void Player1::SwitchStatus ( ) {
 	}
 }
 
-void Player1 :: Tank_control ( ) {
-
-}
 
 void Player1::FixedUpdate ( ) {
 	p1Rect = { 1024 + rect.left , 0 + rect.top , 1024 + rect.left + PLAYERSIZE , 0 + rect.top + PLAYERSIZE };
@@ -187,10 +190,6 @@ Player2::Player2() {
 	rect = { 340,500,380,540 };
 	count = 0;
 	status = 0;
-}
-
-void Player2::Init ( HINSTANCE g_hinst ) {
-	//B_Player_2 = ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_PLAYER ) );	//youn
 }
 
 void Player2::Update() {
@@ -327,6 +326,12 @@ void Player2::SwitchStatus ( ) {
 		}
 
 	}
+}
+
+void Player2::Clear ( ) {
+	rect = { 340,500,380,540 };
+	count = 0;
+	status = 0;
 }
 
 void Player2::FixedUpdate() {

@@ -41,6 +41,12 @@ public:
 		
 	}
 
+	void Clear ( ) {
+		MonsterManager::getInstance ( ).Clear ( );
+		PlayerManager::getInstance ( ).Clear ( );
+		BlockManager::getInstance ( ).Clear ( );
+	}
+
 	void Camera_UI_Ground ( const HDC& mDC );
 	void Camera_UI_CT_1 ( const HDC& mDC );
 	void Camera_UI_CT_2 ( const HDC& mDC );
