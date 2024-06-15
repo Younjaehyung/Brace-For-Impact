@@ -92,7 +92,7 @@ void Application::f_Render() {
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , SRCCOPY );
 
 	//OSW - hmemDC추가
-
+	gameobject.Camera_UI_CT_1 ( mDC );
 	
 	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left + 512 >= 2048 ) {
 		TankController::camera.left = 512 * 2;
@@ -116,14 +116,13 @@ void Application::f_Render() {
 	//StretchBlt ( mDC , 0 , 0 , 1024 , 780, Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , left , top , 1024 , 960 , SRCCOPY );
 	BitBlt ( mDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
 
-
+	gameobject.Camera_UI_Ground ( mDC );
 
 	/*TransparentBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024-50 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , 656 , 1024 , RGB ( 255 , 255 , 255 ) );
 	*/
-	
-gameobject.Camera_UI ( mDC );
 
+	gameobject.Camera_UI_CT_2 ( mDC );
 	if ( gameStart ) {
 		//TITLE 출력
 		BitBlt ( mDC , 0 , 0 , 1024 , 1024 ,

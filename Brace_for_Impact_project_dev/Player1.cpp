@@ -256,7 +256,7 @@ void Player2::SwitchStatus ( ) {
 			//증기분출
 			double angle = 45 * ( 3.141592 / 180 );
 			for ( int i = 0; i < 8; i++ ) {
-				bullet* newbullet = new bullet ( middleX ( Tank().ReturnRect() )+150*cos(i*angle ) , middleY ( Tank::Tank ( ).ReturnRect ( ) )+150*sin ( i * angle ) , 100 , 0 , 0 );
+				bullet* newbullet = new bullet ( middleX ( TankController::TankRects ( ) )+150*cos(i*angle ) , middleY ( TankController::TankRects ( ) )+150*sin ( i * angle ) , 100 , 0 , 0 );
 				BulletManager::getInstance ( ).CreateBullet ( newbullet );
 			}
 		}

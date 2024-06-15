@@ -31,7 +31,7 @@ public:
 		PlayerManager::getInstance ( ).Render ( mDC, orimDC );
 		BlockManager::getInstance ( ).Render ( mDC );
 	}
-
+	
 	void Initailize ( HDC mDC,HINSTANCE g_hinst ) {
 		Texture::getInstance ( ).Texture_Loading ( mDC , g_hinst );
 		BulletManager::getInstance ( );
@@ -41,8 +41,10 @@ public:
 		
 	}
 
-	void Camera_UI ( const HDC& mDC );
-	
+	void Camera_UI_Ground ( const HDC& mDC );
+	void Camera_UI_CT_1 ( const HDC& mDC );
+	void Camera_UI_CT_2 ( const HDC& mDC );
+		
 	void Interaction_player1$controller ( ) {
 
 	}

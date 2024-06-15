@@ -136,7 +136,7 @@ void Tank::move ( )
 		//if ( input::GetKeyUp ( eKeyCode::S ) && input::GetKeyUp ( eKeyCode::D ) ) {
 		//	
 		//}
-	
+		TankController::TankRects() = rect;
 
 }
 

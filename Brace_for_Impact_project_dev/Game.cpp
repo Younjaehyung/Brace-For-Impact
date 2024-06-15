@@ -1,6 +1,6 @@
 ﻿#include "Game.h"
 
-void Game::Camera_UI (const HDC& mDC )
+void Game::Camera_UI_Ground ( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , TankController::TankStage_frame ( ).frame * 1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
@@ -37,12 +37,12 @@ void Game::Camera_UI (const HDC& mDC )
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	//==탱크 체력
 	SelectObject ( mDC , redBrush );
-	Rectangle ( mDC , 90 , 780 , 90 +TankController::TankHp() , 780 + 64 );	//정보 UI
+	Rectangle ( mDC , 90 , 780 , 90 + TankController::TankHp ( ) , 780 + 64 );	//정보 UI
 	TransparentBlt ( mDC , 0 , 780 , 500 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
 
 	SelectObject ( mDC , cyanBrush );
-	Rectangle ( mDC , 90 , 880 , 90 +TankController::TankOil() , 880 + 64 );	//정보 UI
+	Rectangle ( mDC , 90 , 880 , 90 + TankController::TankOil ( ) , 880 + 64 );	//정보 UI
 	//==탱크 연료
 	TransparentBlt ( mDC , 0 , 880 , 500 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
@@ -59,21 +59,31 @@ void Game::Camera_UI (const HDC& mDC )
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" ) , 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
 
 
+	
+}
+
+
+void Game::Camera_UI_CT_1( const HDC& mDC )
+{
 	TransparentBlt ( mDC , 1024 + 120 , 0 + 80 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Attack" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 400 , 0 + 80 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Move" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
-	
-	
 	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
-	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , TankController::TankCannon_frame().frame * 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 1024 + 16 * 18 , 0 + 16 * 45 , 96 , 160 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , 0 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
+	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , TankController::TankCannon_frame ( ).frame * 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
+	
 	TransparentBlt ( mDC , 1024 + 16 * 4 , 0 + 16 * 33 , 128 , 128 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 16 * 29 , 0 + 16 * 33 , 128 , 128 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+
+}
+
+void Game::Camera_UI_CT_2 ( const HDC& mDC )
+{
+	TransparentBlt ( mDC , 1024 + 16 * 18 , 0 + 16 * 45 , 96 , 160 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , 0 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
 	//대쉬
 	TransparentBlt ( mDC , 1024 + 16 * 6 , 0 + 16 * 46 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );

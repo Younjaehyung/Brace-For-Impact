@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "Time.h"
-
+#include "CommonInclude.h"
 typedef struct Frame {
 	int frame;
 	float count;
@@ -11,10 +11,9 @@ class TankController
 private:
 	static bool tankmove;
 	static bool tankaiming;
-
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
 	static Frame Stage_frame , Cannon_frame , Inside_frame, Title_frame;
-
+	static RECTS TankRect;
 	static int tankhp;
 	static int tankoil;
 	static int tankbullet;
@@ -53,6 +52,9 @@ public:
 				tankhp = 0;
 			}
 		}
+	}
+	static RECTS& TankRects ( ) {
+		return TankRect;
 	}
 	static void TankOilCount ( ) {
 		if ( tankoilcount >= 1 ) {
