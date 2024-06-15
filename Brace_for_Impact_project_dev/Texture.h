@@ -67,7 +67,7 @@ public:
 
         idBitmap.emplace ( "B_Boss_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_1 ) ) );
         idBitmap.emplace ( "B_Boss_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_2 ) ) );
-        //idBitmap.emplace ( "B_Boss_3" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_3 ) ) );
+        idBitmap.emplace ( "B_Boss_3" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_3 ) ) );
         idBitmap.emplace ( "B_Boss_4" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_4 ) ) );
         idBitmap.emplace ( "B_Boss_5" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_5 ) ) );
         idBitmap.emplace ( "B_Boss_6" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_6 ) ) );
@@ -75,6 +75,8 @@ public:
         idBitmap.emplace ( "B_TITLE" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_TITLE ) ) );
         idBitmap.emplace ( "B_Cursor" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_CURSOR ) ) );
         idBitmap.emplace ( "B_Select" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_TITLE_SELECT ) ) );
+        idBitmap.emplace ( "B_Clear" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_CLEAR ) ) );
+        idBitmap.emplace ( "B_Rule" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_RULE ) ) );
         for ( const auto& pair : idBitmap ) {
             HDC memDC = CreateCompatibleDC ( mDC );
             SelectObject ( memDC , pair.second );

@@ -1,4 +1,4 @@
-#include "SceneManager.h"
+﻿#include "SceneManager.h"
 
 std::map<std::wstring, Scene*> SceneManager::mScene = {};
 Scene* SceneManager::mActiveScene = nullptr;

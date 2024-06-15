@@ -40,6 +40,7 @@ public:
 	static bool GetKeyUp(eKeyCode code) {
 		return mKeys[(UINT)code].state == eKeyState::Up;
 	}
+	
 private:
 	static std::vector<Key> mKeys; //공통된 class를 가진 객체들이 공유
 };

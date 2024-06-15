@@ -2,7 +2,6 @@
 #include "Texture.h"
 #include "TankController.h"
 #include "Player1.h"
-//#include "Player.h"
 #include "BULLET.h"
 #include "MATH.h"
 #include "Resource.h"
@@ -13,7 +12,6 @@ class Tank
 private:
 	
 	RECTS rect;
-	HBITMAP* bitmap;
 	int Tank_head_frame, Tank_car_frame;
 	int Tank_car_direct, Tank_head_direct;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
 	int Tk_c_status;
@@ -43,10 +41,9 @@ public:
 	void aiming();
 	void aiming_animation ( );
 	void Clear ( );
-
+	void Initialize (int);
 	RECTS& ReturnRect ( ) {
 		RECTS r = { rect.left ,rect.top,rect.right  , rect.bottom};
-		std::cout << rect.left << std::endl;
 		return r;
 	}
 	void Damage ( int damage );

@@ -3,7 +3,7 @@
 
 
 Tank::Tank () {
-	rect = {200,400,300,500};
+
 	Tank_car_count = 0;
 	Tank_head_count = 0;
 	Tank_head_frame=2 , Tank_car_frame=0;
@@ -15,6 +15,37 @@ Tank::Tank () {
 	fireInterval = 0;
 }
 
+
+void Tank::Clear ( )
+{
+
+	Tank_car_count = 0;
+	Tank_head_count = 0;
+	Tank_head_frame = 2 , Tank_car_frame = 0;
+	Tank_car_direct = 0 , Tank_head_direct = 0;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
+	Tk_c_status = 0;
+	angle = 90;
+	frameInterval = 0;
+	headMove = 0;
+	fireInterval = 0;
+	isMove = 0;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
+	headMove = 0;
+	headArrow = 0;
+	isHit = 0;
+}
+
+void Tank::Initialize (int type ) {
+	if ( type == 1 ) {
+		rect = { 200,400,300,500 };
+	}
+	else if ( type == 2 ) {
+		rect = { 200,400,300,500 };
+
+	}
+	else if ( type == 3 ) {
+		rect = { 200,400,300,500 };
+	}
+}
 
 void Tank::move ( )
 {
@@ -323,9 +354,7 @@ void Tank::moving_rander_cal ( ) {
 		
 
 		//타이틀 화면 애니메이션 = 임시로 넣어뒀음. 나중에 타이틀.cpp에 넣어야 함
-		TankController::ScreenTitle_frame ( ).frame++;
-		if ( TankController::ScreenTitle_frame ( ).frame >= 5 ) TankController::ScreenTitle_frame ( ).frame = 0;
-
+		
 
 
 		if ( isHit ) {
@@ -337,23 +366,6 @@ void Tank::moving_rander_cal ( ) {
 	
 }
 
-void Tank::Clear ( )
-{
-
-	Tank_car_count = 0;
-	Tank_head_count = 0;
-	Tank_head_frame = 2 , Tank_car_frame = 0;
-	Tank_car_direct = 0 , Tank_head_direct = 0;		//0: 12시방향 1: 2시방향 2: 3시방향 3: 5시방향 4: 6시방향 6: 7시방향 7: 9시방향 8: 11시 방향
-	Tk_c_status = 0;
-	angle = 90;
-	frameInterval = 0;
-	headMove = 0;
-	fireInterval = 0;
-	isMove = 0;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
-	headMove =0 ;
-	headArrow =0 ;
-	isHit= 0;
-}
 
 void Tank::Render ( const HDC& mDC)
 {

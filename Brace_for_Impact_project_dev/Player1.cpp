@@ -3,21 +3,29 @@
 
 
 Player1::Player1() {
-	rect = { 200,500,240,540 };
+	
 	count = 0;
 	status = 0;
 }
 
 void Player1::Clear ( ) {
-	rect = { 200,500,240,540 };
+
 	count = 0;
 	status = 0;
+	frame = 0;
+	direct = 0;
 }
 
 void Player1::Update ( ) {
 	SwitchStatus ( );
 	move ( );
+	
+}
 
+void Player1::Initialize ( ) {
+
+		rect = { 200,500,240,540 };
+	
 }
 
 void Player1::move ( ) {
@@ -329,9 +337,15 @@ void Player2::SwitchStatus ( ) {
 }
 
 void Player2::Clear ( ) {
-	rect = { 340,500,380,540 };
+	frame = 0;
+	direct = 0;
 	count = 0;
 	status = 0;
+}
+void Player2::Initialize (  ) {
+
+	rect = { 200,500,240,540 };
+
 }
 
 void Player2::FixedUpdate() {

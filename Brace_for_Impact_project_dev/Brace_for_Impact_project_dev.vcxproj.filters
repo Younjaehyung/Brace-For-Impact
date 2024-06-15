@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="NotUsing">
+      <UniqueIdentifier>{5f578186-9a21-45af-9e69-2d6754b34907}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -57,22 +60,7 @@
     <ClInclude Include="BULLET.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CommonInclude.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadScenes.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScenes.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Tank.h">
@@ -91,6 +79,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TankController.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,25 +119,10 @@
     <ClCompile Include="BULLET.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Gameobject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayScenes.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Tank.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Interaction.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BLOCK.cpp">
@@ -295,6 +271,15 @@
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="BFI_Screen_Selecetframe.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_BOSS_3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_GameClear.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="BFI_Screen_Rule.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

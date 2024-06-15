@@ -26,7 +26,7 @@ RECTS Block::ReturnRect ( ) {
 	return rect;
 }
 
-void BlockManager::Initilize ( int type )
+void BlockManager::Initialize ( int type )
 {
 
 	Block temp;

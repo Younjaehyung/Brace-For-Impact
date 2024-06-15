@@ -27,7 +27,7 @@ public:
 	void Clear ( );
 	void move ( );
 	void SwitchStatus ( );
-	
+	void Initialize (  );
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
@@ -51,6 +51,7 @@ public:
 	void Clear ( );
 	void move ( );
 	void SwitchStatus ( );
+	void Initialize (  );
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();

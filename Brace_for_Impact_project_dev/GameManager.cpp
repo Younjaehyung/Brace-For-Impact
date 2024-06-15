@@ -1,6 +1,6 @@
-﻿#include "Game.h"
+﻿#include "GameManager.h"
 
-void Game::Camera_UI_Ground ( const HDC& mDC )
+void GameManager::Camera_UI_Ground ( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_UI_Stage" ) , TankController::TankStage_frame ( ).frame * 1024 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
@@ -63,7 +63,7 @@ void Game::Camera_UI_Ground ( const HDC& mDC )
 }
 
 
-void Game::Camera_UI_CT_1( const HDC& mDC )
+void GameManager::Camera_UI_CT_1( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 1024 + 120 , 0 + 80 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Attack" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
@@ -80,7 +80,7 @@ void Game::Camera_UI_CT_1( const HDC& mDC )
 
 }
 
-void Game::Camera_UI_CT_2 ( const HDC& mDC )
+void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 1024 + 16 * 18 , 0 + 16 * 45 , 96 , 160 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , 0 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
@@ -90,5 +90,134 @@ void Game::Camera_UI_CT_2 ( const HDC& mDC )
 	//스팀
 	TransparentBlt ( mDC , 1024 + 16 * 27 , 0 + 16 * 46 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+
+}
+
+
+void GameManager::Ground_Map ( const HDC& mDC )
+{
+	switch ( type ) {
+	case 1:
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
+		break;
+	case 2:
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_3" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
+		break;
+	case 3:
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_1" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
+		break;
+
+
+	}
+}
+
+void GameManager::Camera_Cal ( const HDC& mDC ) {
+	
+	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left + 512 >= 2048 ) {
+		TankController::camera.left = 512 * 2;
+	}
+	else {
+		TankController::camera.left = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).left - 512 );
+	}
+	
+	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 384 >= 2048 ) {
+		TankController::camera.top = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top-384;
+	
+	}
+	else {
+		TankController::camera.top = max ( 0 , PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top - 384 );
+	}
+	TankController::camera.right = TankController::camera.left + 1024;
+	TankController::camera.bottom = TankController::camera.top + 768;
+
+}
+
+void GameManager::Camera ( const HDC& mDC ) {
+	BitBlt ( mDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , TankController::camera.left , TankController::camera.top , SRCCOPY );
+
+}
+
+void GameManager::Tank_Inside ( const HDC& mDC ) {
+
+	BitBlt ( mDC , r_playground.left , r_playground.top , 656 , 1024 - 50 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Inside" ) , 0 , 0 , SRCCOPY );
+
+}
+
+
+void GameManager::TitleScene ( const HDC& mDC ) {	//0
+
+
+
+	if ( count >= 1.0 ) {
+		count = 0;
+		frame++;
+		if ( frame >= 5 ) {
+			frame == 0;
+		}
+	}
+
+	count += Time::DeltaTime ( );
+
+
+	//TITLE 출력
+	BitBlt ( mDC , 0 , 0 , 1024 , 1024 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_TITLE" ) , frame * 1024 , 0 , SRCCOPY );
+	BitBlt ( mDC , 1024 - 50 , 0 , 1024 + 656 , 1024 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Select" ) , 0 , 0 , SRCCOPY );
+	TransparentBlt ( mDC , 1024 + 8 + 16 * 1 , 32 * ( 9 + Cursor ) , 96 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Cursor" ) , 0 , 0 , 96 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * ( 9 ) , 384 , 96 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 0 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 13 , 384 , 96 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384 * 1 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 17 , 384 , 96 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384 * 2 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
+
+	if ( input::GetKeyDown ( eKeyCode::S ) && !Selected ) {
+		if ( Cursor < 11 )
+			Cursor += 4;
+	}
+	else if ( input::GetKeyDown ( eKeyCode::W ) && !Selected ) {
+		if ( Cursor > 0 )
+			Cursor -= 4;
+	}
+
+
+	//게임 시작 창일때
+	if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0 ) {
+		type = 1;
+		return;
+	}
+	else if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 4 ) {
+
+		Rule = !Rule;
+
+		if ( Rule ) {
+			TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
+	Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
+			Selected = 1;
+		}
+		else {
+			Selected = 0;
+		}
+
+
+	}
+}
+
+void GameManager::EndScene ( const HDC& mDC ) {//2
+
+	
+	TransparentBlt ( mDC , 128 * 5 , 256 , 320 , 320 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Clear" ) , 0 , 0 , 320 , 320 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	if ( input::GetKeyDown ( eKeyCode::F ) ) {
+		type = 0;
+	}
 
 }

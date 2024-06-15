@@ -14,9 +14,7 @@ private:
 
 public:
 	Game ( ) :score(0) {
-		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
-		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
-		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
+		
 	}
 
 	void Update ( ) {
@@ -37,7 +35,7 @@ public:
 		BulletManager::getInstance ( );
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
-		BlockManager::getInstance ( ).Initilize(1);
+		BlockManager::getInstance ( ).Initialize(1);
 		
 	}
 
@@ -47,24 +45,6 @@ public:
 		BlockManager::getInstance ( ).Clear ( );
 	}
 
-	void Camera_UI_Ground ( const HDC& mDC );
-	void Camera_UI_CT_1 ( const HDC& mDC );
-	void Camera_UI_CT_2 ( const HDC& mDC );
-		
-	void Interaction_player1$controller ( ) {
 
-	}
-
-	void Interaction_player2$controller ( ) {
-
-	}
-
-	void Interaction_tank$enemy ( ) {
-
-	}
-
-	void Interaction_enemy$bullet ( ) {
-
-	}
 };
 

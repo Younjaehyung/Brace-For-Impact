@@ -561,21 +561,19 @@ void MonsterManager::spawn ( int type ) {
 	
 }
 
-void MonsterManager::SpawnMonster (  ) {
-
-	if ( count >= 10000.0 ) {
-		count = 0;
-		spawn ( 1 );
-		spawn ( 2 );
-	/*	spawn ( 3 );
-		spawn ( 4 );
-		spawn ( 5 );
-		spawn ( 6 );*/
-
-	}
-	count += Time::DeltaTime ( );
-
-}
+//void MonsterManager::SpawnMonster (int type  ) {
+//
+//
+//
+//	if ( count >= 10000.0 ) {
+//		count = 0;
+//		spawn ( 1 );
+//		spawn ( 2 );
+//	
+//	}
+//	count += Time::DeltaTime ( );
+//
+//}
 
 void MonsterManager::Clear ( ) {
 	count = 0;
@@ -623,8 +621,7 @@ void MonsterManager::Update (  )
 	}
 
 	DeleteMonster ( );
-	SpawnMonster ( );
-	
+
 
 }
 

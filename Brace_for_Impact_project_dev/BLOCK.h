@@ -28,7 +28,7 @@ public:
 		return instance;
 	}
 
-	void Initilize ( int type );
+	void Initialize ( int type );
 	void Update ( );
 	void Clear ( );
 	void Check (RECTS&);

@@ -62,7 +62,10 @@ public:
 
 	void Clear ( );
 	void spawn ( int type );
-	void SpawnMonster ( );
+	/*void SpawnMonster ( );*/
+	void Initialize ( int type ) {
+		spawn ( type );
+	}
 	void DeleteMonster ( );
 	void Update ( );
 	void Render ( const HDC& );

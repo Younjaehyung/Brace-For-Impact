@@ -38,8 +38,10 @@ public:
 		player2.Clear ( );
 	}
 
-	void Initailize (HINSTANCE ) {
-
+	void Initialize (int type ) {
+		tank.Initialize ( type );
+		player1.Initialize ( );
+		player2.Initialize ( );
 	}
 	Player1& Player1_return ( ) {
 		return player1;
