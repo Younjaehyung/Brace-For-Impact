@@ -216,6 +216,9 @@
     <Image Include="UI)Tankinside.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="BFI_Clockwork Crafter.wav" />
+    <Media Include="BFI_Magnificent Machines).wav" />
+    <Media Include="BFI_Steaming Superstructures.wav" />
     <Media Include="Gooseworx- Industrial Elegance.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

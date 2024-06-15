@@ -77,7 +77,8 @@ void mop::attack( Tank& p1) {
 	if ( mop_inform.type == 1 ) { //꽁기깅깡
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-200 ) {
 			status = 2;
-			direct = 1;
+			if ( direct == 0 ) { direct = 1; }
+			else if ( direct == 3 ) { direct = 4; }
 			if ( mop_inform.cnt == 0 ) {
 				if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 					mop_inform.x -= speed;
@@ -114,7 +115,8 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 2 ) { //빵빵이
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			direct = 1;
+			if ( direct == 0 ) { direct = 1; }
+			else if ( direct == 3 ) { direct = 4; }
 		}
 		if ( attack_count >= 5 ) {
 			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
@@ -126,7 +128,8 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 4 ) { //몬스터 소환술사
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			direct = 1;
+			if ( direct == 0 ) { direct = 1; }
+			else if ( direct == 3 ) { direct = 4; }
 
 		}
 		if ( attack_count >= 5 ) {
@@ -145,7 +148,8 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 3 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			direct = 1;
+			if ( direct == 0 ) { direct = 1; }
+			else if ( direct == 3 ) { direct = 4; }
 		}
 		if ( attack_count <= 2 ) {
 			if ( attack_count >= 0 ) {
@@ -179,7 +183,8 @@ void mop::attack( Tank& p1) {
 		if ( rect2rect ( tankrect , moprect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
-				direct = 1;
+				if ( direct == 0 ) { direct = 1; }
+				else if ( direct == 3 ) { direct = 4; }
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 14 );
 				mop_inform.cnt++;
 			}
@@ -194,7 +199,8 @@ void mop::attack( Tank& p1) {
 	else if ( mop_inform.type == 6 ) { //춘식이 탄뿌리기
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			direct = 1;
+			if ( direct == 0 ) { direct = 1; }
+			else if ( direct == 3 ) { direct = 4; }
 		}
 		if ( mop_inform.cnt == 0 ) {
 			double targetx = ( double ) ( middleX ( p1.ReturnRect ( ) ) );
