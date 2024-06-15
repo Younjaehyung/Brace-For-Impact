@@ -9,6 +9,7 @@ class GameManager
 private:
 	GameManager ( ) {
 		score = 0;
+		type = 0;
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
@@ -64,8 +65,8 @@ public:
 
 	void Scene_Initialize ( int Scene_num )
 	{
-		if ( !Scene_num ) {
-		
+		if ( Scene_num ) {
+			Clear ( );
 			MonsterManager::getInstance ( ).Initialize ( Scene_num );
 			PlayerManager::getInstance ( ).Initialize ( Scene_num );
 			BlockManager::getInstance ( ).Initialize ( Scene_num );
@@ -87,10 +88,11 @@ public:
 	void Render ( const HDC& mDC , const HDC& orimDC )
 	{
 		if ( type == 0 ) {
-			TitleScene ( mDC );
+			TitleScene ( orimDC );
+			
 		}
 		else if ( type == 10 ) {
-			EndScene ( mDC );
+			EndScene ( orimDC );
 		}
 		else {
 			GameRender ( mDC , orimDC );
@@ -100,15 +102,18 @@ public:
 	
 	void GameRender ( const HDC& mDC , const HDC& orimDC ) {
 		Ground_Map ( mDC );
-
-
+		Tank_Inside ( orimDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
 		BulletManager::getInstance ( ).Render ( mDC );
 		BlockManager::getInstance ( ).Render ( mDC );
-		Camera ( mDC );
-		Camera_UI_Ground ( orimDC );
+		
+		
 		Camera_UI_CT_1 ( orimDC );
 		PlayerManager::getInstance ( ).Render ( mDC , orimDC );
+		Camera_Cal ( mDC );
+		Camera ( orimDC );
+		Camera_UI_Ground ( orimDC );
+		
 		Camera_UI_CT_2 ( orimDC );
 	}
 
