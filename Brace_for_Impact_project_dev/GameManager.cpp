@@ -103,15 +103,15 @@ void GameManager::Ground_Map ( const HDC& mDC )
 
 	}
 	else if ( SceneStatus == 3 || SceneStatus == 4 ) {
-
-		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_3" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
-	}
-	else if( SceneStatus == 5 || SceneStatus==6 ){
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_1" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 
-
+		
+	}
+	else if( SceneStatus == 5 || SceneStatus==6 ){
+		
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_3" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 	
 
 	}
@@ -206,9 +206,9 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 
 void GameManager::Stage_Switch_Render ( const HDC& mDC, const HDC& orimDC ) {
 	
-	BitBlt ( orimDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , Stage_Switch_x , Stage_Switch_y , SRCCOPY );
+	BitBlt ( orimDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 4*Stage_Switch_x , 2*Stage_Switch_y , SRCCOPY );
 
-	TransparentBlt ( orimDC , 0 , 768 - Stage_Switch_y , 1014 , 384 ,
-	Texture::getInstance ( ).Texture_GetDC ( "B_Start" ) , 768 * 0 , 384 * 0 , 768 , 384 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( orimDC , 10 , 758 - 2*Stage_Switch_y , 990 , 384 ,
+	Texture::getInstance ( ).Texture_GetDC ( "B_Start" ) , 768 * BossSceneR , 384 * BossSceneC , 768 , 384 , RGB ( 255 , 255 , 255 ) );
 	
 }

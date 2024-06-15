@@ -42,19 +42,20 @@ void Tank::Clear ( )
 
 void Tank::Initialize (int type ) {
 	
-	if ( type == 1 ) {
+	if ( type == 1 || type == 2 ) {
 		std::cout << "type" << std::endl;
 
-		rect = { 200,400,200 + TANKSIZE,400 + TANKSIZE };
+		rect = { 0,(7*64),(2*64), (9*64) };
 	}
-	else if ( type == 2 ) {
+	else if ( type == 3 || type == 4 ) {
 		std::cout << "type" << std::endl;
 
-		rect = { 200,400,200 + TANKSIZE,400 + TANKSIZE };
+		rect = { (15 * 64),( 29 * 64 ),( 17 * 64 ), ( 31 * 64 ) };
 
 	}
-	else if ( type == 3 ) {
-		rect = { 200,400,200 + TANKSIZE,400 + TANKSIZE };
+	else if ( type == 5 || type == 6 ) {
+		rect = { ( 0 * 64 ),( 10 * 64 ),( 2 * 64 ), (12 * 64 ) };
+
 	}
 
 	TankController::TankRects ( ) = rect;
