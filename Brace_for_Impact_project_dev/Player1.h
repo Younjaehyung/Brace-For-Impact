@@ -19,8 +19,9 @@ private:
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
 
+	int itemtype;
 	RECTS p1Rect;
-
+	BOOL isHold; //아이템을 뭐라도 들고 있을 때
 public:
 
 	Player1 ( );
@@ -44,8 +45,8 @@ private:
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
 
-	
-
+	int itemtype;
+	BOOL isHold; //아이템을 뭐라도 들고 있을 때
 public:
 	Player2();
 	void Clear ( );
