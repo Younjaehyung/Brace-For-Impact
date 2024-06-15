@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "TankController.h"
 #include "Player1.h"
+//#include "Player.h"
 #include "BULLET.h"
 #include "MATH.h"
 #include "Resource.h"
@@ -50,7 +51,7 @@ public:
 	void Damage ( int damage );
 
 	void Update ( );
-	void Render ( const HDC& );
+	void Render ( const HDC & );
 
 };
 

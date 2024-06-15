@@ -6,6 +6,8 @@
 #include "MATH.h"
 #include "Resource.h"
 #include "TankController.h"
+#include "Tank.h"
+//#include "Player.h"
 #define PLAYERSIZE 96
 
 class Player1

@@ -29,7 +29,7 @@ void bullet::move ( ) {
 		counter += 100 * Time::DeltaTime ( );
 	}
 	else if ( type == 100 ) {
-		counter += 500 * Time::DeltaTime ( );
+		counter += 10 * Time::DeltaTime ( );
 	}
 	else {
 		x += mx * 600 * Time::DeltaTime ( );
@@ -71,7 +71,28 @@ void bullet::move ( ) {
 							type = 0;
 							ScanMop->Damage ( 1 );
 						}
+						else {
+							if ( counter >= 5 ) {
+								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
+									ScanMop->Damage ( 5 );
+								}
+							}
+							if ( counter >= 10 ) {
+								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
+									ScanMop->Damage ( 5 );
+								}
+							}
+							else if ( counter >= 15 ) {
+								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
+									ScanMop->Damage ( 5 );
+								}
+								type = 0;
+							}
+						}
 					}
+				}
+				if ( type==100 &&counter >= 15 ) {
+					type = 0;
 				}
 			}
 			if ( !PlayerBullet ) {
@@ -115,7 +136,7 @@ void bullet::Render ( const HDC& dc ) {
 				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
 					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 0 , ( type - 1 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
-			else {
+			else { //연막
 				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 			//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
