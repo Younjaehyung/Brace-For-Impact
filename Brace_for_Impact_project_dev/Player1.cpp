@@ -9,7 +9,7 @@ Player1::Player1() {
 }
 
 void Player1::Clear ( ) {
-
+	Ismove=0 , IsAiming=0;
 	count = 0;
 	status = 0;
 	frame = 0;
@@ -24,13 +24,13 @@ void Player1::Update ( ) {
 }
 
 void Player1::Initialize ( ) {
-
+		
 		rect = { 200,500,296,596 };
 	
 }
 
 void Player1::move ( ) {
-	if ( TankController::TankMoveStatus ( ) ) {
+	if ( IsAiming || Ismove ) {
 		return;
 	}
 
@@ -131,6 +131,10 @@ void Player1::SwitchStatus ( ) {
 			//이동 조작
 			itemtype = 3;
 		}
+		if ( inrect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
+			//공격 조종기
+			itemtype = 3;
+		}
 		else if ( inrect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//장전
 			itemtype = 3;
@@ -162,9 +166,27 @@ void Player1::SwitchStatus ( ) {
 	
 
 	if ( input::GetKeyUp ( eKeyCode::p1_a ) ) {
-		if ( inrect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 ,1024+ rect.left+20 , rect.top + 20 ) ) {
-			TankController::TankMoveStatus ( ) = !TankController::TankMoveStatus ( );
+		if ( inrect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
+			if ( !IsAiming && TankController::TankAimingStatus ( ) ) {	//조종안하고 있는데 작동중이면 리턴
+				return;
+			}
+			TankController::TankAimingStatus ( ) = !TankController::TankAimingStatus ( );
+			TankController::WhoAimingStatus ( ) = 1;
+			IsAiming = !IsAiming;
 			direct = 2;
+
+		}
+		if ( inrect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
+
+			if ( !Ismove && TankController::TankMoveStatus ( ) ) {
+				return;
+			}
+			TankController::TankMoveStatus ( ) = !TankController::TankMoveStatus ( );
+			TankController::WhoMoveStatus ( ) = 1;
+			Ismove = !Ismove;
+			direct = 2;
+		
+
 		}
 		else if ( inrect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//장전
@@ -258,7 +280,7 @@ void Player2::Update() {
 }
 void Player2::move ( ) {
 
-	if ( TankController::TankAimingStatus ( ) ) {
+	if ( IsAiming || Ismove ) {
 		return;
 	}
 	float speed = 200 * Time::DeltaTime ( );
@@ -346,6 +368,10 @@ void Player2::move ( ) {
 void Player2::SwitchStatus ( ) {
 	//조종기 범위 내에서 F와 M나타나기
 	if ( isHold == false ) {
+		if ( inrect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
+			//이동 조작
+			itemtype = 4;
+		}
 		if ( inrect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//공격 조종기
 			itemtype = 4;
@@ -382,9 +408,27 @@ void Player2::SwitchStatus ( ) {
 
 
 	if ( input::GetKeyUp ( eKeyCode::p2_a ) ) {
-		if ( inrect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , 1024 +rect.left + 20 , rect.top + 20 ) ) {
+		
+		if ( inrect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
+			if ( !IsAiming && TankController::TankAimingStatus ( ) ) {	//조종안하고 있는데 작동중이면 리턴
+				return;
+			}
 			TankController::TankAimingStatus ( ) = !TankController::TankAimingStatus ( );
+			TankController::WhoAimingStatus ( ) = 2;
+			IsAiming = !IsAiming;
 			direct = 2;
+			
+		}
+		if ( inrect_f ( 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
+			
+			if ( !Ismove && TankController::TankMoveStatus ( ) ) {
+				return;
+			}
+			TankController::TankMoveStatus ( ) = !TankController::TankMoveStatus ( );
+			TankController::WhoMoveStatus ( ) = 2;
+			Ismove = !Ismove;
+			direct = 2;
+
 		}
 		else if ( inrect_f ( 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 , 1024 + rect.left + 20 , rect.top + 20 ) ) {
 			//장전
@@ -438,10 +482,12 @@ void Player2::SwitchStatus ( ) {
 }
 
 void Player2::Clear ( ) {
+	Ismove = 0 , IsAiming = 0;
 	frame = 0;
 	direct = 0;
 	count = 0;
 	status = 0;
+	itemtype = 6;
 }
 void Player2::Initialize (  ) {
 

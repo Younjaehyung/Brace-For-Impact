@@ -97,33 +97,58 @@ void Tank::move ( )
 				}
 			}
 		}
-	
-			if ( input::GetKey ( eKeyCode::W ) &&rect.top>0) {
+		if ( TankController::WhoMoveStatus() == 1 ) {
+			if ( input::GetKey ( eKeyCode::W ) ) {
 				moveY -= 1;
 				isMove = true;
 			}
-		
-	
-			if ( input::GetKey ( eKeyCode::A ) &&rect.left > 0 ) {
+
+
+			if ( input::GetKey ( eKeyCode::A ) ) {
 				moveX -= 1;
 				isMove = true;
 			}
-			
-		
-		
-			if ( input::GetKey ( eKeyCode::S ) && rect.top<1650 ) {
+
+
+
+			if ( input::GetKey ( eKeyCode::S ) ) {
 				moveY += 1;
 				isMove = true;
 			}
-			
-		
-	
-			if ( input::GetKey ( eKeyCode::D ) && rect.left<1910) {
+
+
+
+			if ( input::GetKey ( eKeyCode::D ) ) {
 				moveX += 1;
 				isMove = true;
 			}
-		
-		
+		}
+		else if ( TankController::WhoMoveStatus ( ) == 2 ) {
+			if ( input::GetKey ( eKeyCode::UP ) ) {
+				moveY -= 1;
+				isMove = true;
+			}
+
+
+			if ( input::GetKey ( eKeyCode::LEFT ) ) {
+				moveX -= 1;
+				isMove = true;
+			}
+
+
+
+			if ( input::GetKey ( eKeyCode::DOWN ) ) {
+				moveY += 1;
+				isMove = true;
+			}
+
+
+
+			if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+				moveX += 1;
+				isMove = true;
+			}
+		}
 
 		if ( isMove ) {
 			// Normalize the movement vector
@@ -230,22 +255,43 @@ void Tank::aiming_animation () {
 
 void Tank::aiming ( ) {
 	if ( headMove == 0 ) {
-		if ( input::GetKey ( eKeyCode::RIGHT ) && TankController::TankAimingStatus ( ) ) {
-			if ( ( frameInterval >= 0.1  ) ) {
-				headMove = 1;
-				headArrow = 0;
+		if ( TankController::WhoAimingStatus ( ) == 2 ) {
+			if ( input::GetKey ( eKeyCode::RIGHT ) && TankController::TankAimingStatus ( ) ) {
+				if ( ( frameInterval >= 0.1 ) ) {
+					headMove = 1;
+					headArrow = 0;
 
-				frameInterval = 0;
+					frameInterval = 0;
+				}
+				frameInterval += Time::DeltaTime ( );
 			}
-			frameInterval += Time::DeltaTime ( );
+			else if (   input::GetKey ( eKeyCode::LEFT ) && TankController::TankAimingStatus ( ) ) {
+				if ( ( frameInterval >= 0.1 ) ) {
+					headArrow = 1;
+					headMove = 1;
+					frameInterval = 0;
+				}
+				frameInterval += Time::DeltaTime ( );
+			}
 		}
-		else if ( input::GetKey ( eKeyCode::LEFT ) && TankController::TankAimingStatus ( ) ) {
-			if ( ( frameInterval >= 0.1  ) ) {
-				headArrow = 1;
-				headMove = 1;
-				frameInterval = 0;
+		if ( TankController::WhoAimingStatus ( ) == 1 ) {
+			if (   input::GetKey ( eKeyCode::D ) && TankController::TankAimingStatus ( ) ) {
+				if ( ( frameInterval >= 0.1 ) ) {
+					headMove = 1;
+					headArrow = 0;
+
+					frameInterval = 0;
+				}
+				frameInterval += Time::DeltaTime ( );
 			}
-			frameInterval += Time::DeltaTime ( );
+			else if (  input::GetKey ( eKeyCode::A ) && TankController::TankAimingStatus ( ) ) {
+				if ( ( frameInterval >= 0.1 ) ) {
+					headArrow = 1;
+					headMove = 1;
+					frameInterval = 0;
+				}
+				frameInterval += Time::DeltaTime ( );
+			}
 		}
 	}
 	else {
@@ -257,7 +303,7 @@ void Tank::aiming ( ) {
 void Tank::shooting ( )
 {
 		
-		if ( input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( )) {
+		if ( TankController::WhoAimingStatus ( ) == 2 &&input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( )) {
 			if ( shootingInterval >= 0.3 ) {
 				fireInterval = 1;
 				
@@ -272,6 +318,22 @@ void Tank::shooting ( )
 			}
 			shootingInterval += Time::DeltaTime ( );
 				
+		}
+		else if ( TankController::WhoAimingStatus ( ) == 1 && input::GetKey ( eKeyCode::W ) && TankController::TankAimingStatus ( ) ) {
+			if ( shootingInterval >= 0.3 ) {
+				fireInterval = 1;
+
+				shootingInterval = 0;
+
+				if ( TankController::TankBullet ( ) > 0 ) {
+					bullet* newbullet = new bullet ( rect.left + TANKSIZE / 2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE / 2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , Tank_head_direct + 1 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
+					BulletManager::getInstance ( ).CreateBullet ( newbullet );
+					TankController::TankBullet ( )--;
+				}
+
+			}
+			shootingInterval += Time::DeltaTime ( );
+
 		}
 		else { shootingInterval = 0; }
 			
@@ -315,40 +377,79 @@ void Tank::Update ( )
 
 void Tank::moving_rander_cal ( ) {
 	if ( isMove ) {
-		if ( input::GetKey ( eKeyCode::W ) ) {
-			Tank_car_direct = 0;
+		if ( TankController::WhoMoveStatus ( ) == 1 ) {
+			if ( input::GetKey ( eKeyCode::W ) ) {
+				Tank_car_direct = 0;
 
+			}
+			if ( input::GetKey ( eKeyCode::A ) ) {
+				Tank_car_direct = 6;
+
+			}
+			if ( input::GetKey ( eKeyCode::S )  ) {
+				Tank_car_direct = 4;
+
+			}
+			if ( input::GetKey ( eKeyCode::D ) ) {
+				Tank_car_direct = 2;
+
+			}
+
+			if ( ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) ) {
+				Tank_car_direct = 7;
+
+
+			}
+			if ( ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) ) {
+				Tank_car_direct = 1;
+
+			}
+			if ( ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) )  ) {
+				Tank_car_direct = 5;
+
+			}
+			if ( ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) ) {
+				Tank_car_direct = 3;
+
+			}
 		}
-		if ( input::GetKey ( eKeyCode::A ) ) {
-			Tank_car_direct = 6;
+		else if ( TankController::WhoMoveStatus ( ) == 2 ) {
+			if ( input::GetKey ( eKeyCode::UP ) ) {
+				Tank_car_direct = 0;
 
+			}
+			if ( input::GetKey ( eKeyCode::LEFT ) ) {
+				Tank_car_direct = 6;
+
+			}
+			if (  input::GetKey ( eKeyCode::DOWN ) ) {
+				Tank_car_direct = 4;
+
+			}
+			if ( input::GetKey ( eKeyCode::RIGHT ) ) {
+				Tank_car_direct = 2;
+
+			}
+
+			if (  ( input::GetKey ( eKeyCode::UP ) && input::GetKey ( eKeyCode::LEFT ) ) ) {
+				Tank_car_direct = 7;
+
+
+			}
+			if (  ( input::GetKey ( eKeyCode::UP ) && input::GetKey ( eKeyCode::RIGHT ) ) ) {
+				Tank_car_direct = 1;
+
+			}
+			if (  ( input::GetKey ( eKeyCode::DOWN ) && input::GetKey ( eKeyCode::LEFT ) ) ) {
+				Tank_car_direct = 5;
+
+			}
+			if (  ( input::GetKey ( eKeyCode::DOWN ) && input::GetKey ( eKeyCode::RIGHT ) ) ) {
+				Tank_car_direct = 3;
+
+			}
 		}
-		if ( input::GetKey ( eKeyCode::S ) ) {
-			Tank_car_direct = 4;
-
-		}
-		if ( input::GetKey ( eKeyCode::D ) ) {
-			Tank_car_direct = 2;
-
-		}
-
-		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::A ) ) {
-			Tank_car_direct = 7;
-
-
-		}
-		if ( input::GetKey ( eKeyCode::W ) && input::GetKey ( eKeyCode::D ) ) {
-			Tank_car_direct = 1;
-
-		}
-		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::A ) ) {
-			Tank_car_direct = 5;
-
-		}
-		if ( input::GetKey ( eKeyCode::S ) && input::GetKey ( eKeyCode::D ) ) {
-			Tank_car_direct = 3;
-
-		}
+		
 	}
 
 

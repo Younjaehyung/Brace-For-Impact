@@ -10,3 +10,5 @@ int TankController::tankbullet = {0};
 RECTS TankController::TankRect = {};
 float TankController::tankoilcount = {};
 RECT TankController::camera = {};
+int TankController::whomove = {};	//1 : p1 2:p2
+int TankController::whoaiming = {};

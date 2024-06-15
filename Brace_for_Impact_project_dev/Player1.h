@@ -20,7 +20,7 @@ private:
 	int frame , direct;		//direct 0 : 좌 1: 우
 
 	RECTS object1 = { 248, 200 , 400 , 400 };
-
+	bool Ismove , IsAiming;
 	int itemtype;
 
 	RECTS p1Rect;
@@ -36,7 +36,7 @@ public:
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();
-	
+
 };
 
 class Player2
@@ -47,9 +47,9 @@ private:
 	float count;
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
-
+	int Controller;
 	RECTS object1 = { 248, 200 , 400 , 400 };
-
+	bool Ismove , IsAiming;
 	int itemtype;
 	BOOL isHold; //아이템을 뭐라도 들고 있을 때
 
@@ -63,5 +63,6 @@ public:
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();
+
 };
 

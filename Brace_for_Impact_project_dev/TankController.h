@@ -12,6 +12,8 @@ private:
 	static bool tankmove;
 	static bool tankaiming;
 	static bool dash;
+	static int whomove;	//1 : p1 2:p2
+	static int whoaiming;
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
 	static Frame Stage_frame , Cannon_frame , Inside_frame;
 	static RECTS TankRect;
@@ -27,6 +29,12 @@ public:
 	}
 	static bool& TankAimingStatus ( ) {
 		return tankaiming;
+	}
+	static int& WhoMoveStatus ( ) {
+		return whomove;
+	}
+	static int& WhoAimingStatus ( ) {
+		return whoaiming;
 	}
 	static bool& Dash ( ) {
 		return dash;
@@ -67,4 +75,6 @@ public:
 			tankoilcount += 5 * Time::DeltaTime ( );
 		}
 	}
+
+
 };
