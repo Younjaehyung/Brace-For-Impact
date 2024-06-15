@@ -25,7 +25,10 @@ private:
 	float counter=0;
 
 	float timer1;
-	int frame;
+	float timer2; //연막용 타이머
+	float timer3; //피격용 타이머
+	float timer4; //사망용 타이머
+	int frame, gasframe;
 	BOOL PlayerBullet;
 
 	HBITMAP B_bullet;
@@ -36,6 +39,7 @@ public:
 	void move ( );
 	void Render ( const HDC& );
 	int return_type ( ) { return type; };
+	int return_frame ( ) { return frame; };
 };
 
 class BulletManager {

@@ -76,13 +76,15 @@ void mop::attack( Tank& p1) {
 			}
 			if ( rect2rect ( moprect , tankrect ) ) {
 				if ( mop_inform.cnt == 0 ) {
-					TankController::Damage ( 10 );
+					frame = 0;
+					//status = 2;
+					TankController::Damage ( 50 );
 				}
 				mop_inform.cnt ++;
 				attack_count = 0;
 			}
 		}
-		if ( attack_count >= 5 ) {
+		if ( attack_count >= 3 ) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt =0;
@@ -422,7 +424,7 @@ void mop::move ( Tank& p1  ) {
 
 void mop::Update( ){
 	
-	if ( status != 3 && status != 4 ) {
+	if ( !(status == 3 || status == 4) ) {
 		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
 
 	}
@@ -430,17 +432,46 @@ void mop::Update( ){
 		status = 1;
 		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
 	}
-
-	if ( move_count >= 0.1 ) {
-		frame++;
-		if ( frame >= 6 ) {
-			frame = 0;
-			if ( status == 3 || status == 4 ) status = 0;
+	if ( !(status == 4 || status == 2) ) {
+		if ( move_count >= 0.1 ) {
+			frame++;
+			if ( frame >= 6 ) {
+				frame = 0;
+				
+				
+				if ( status == 3 ) status = 0;
+			}
+			move_count = 0;
 		}
-		move_count = 0;
+		move_count += Time::DeltaTime ( );
 	}
-	move_count += Time::DeltaTime ( );
+	else if ( status == 2 ) {
+		if ( move_count >=0.1 ) {
+			frame++;
+			if ( frame >= 6 ) {
+				frame = 5;
 
+				//if ( status == 3 ) status = 0;
+			}
+			move_count = 0;
+		}
+		move_count += Time::DeltaTime ( );
+	}
+	else{
+		if ( die_timer >= 0.3 ) {
+			
+			if ( die_frame > 6 ) {
+				die_frame = 6;
+			}
+			else {
+				die_frame++;
+			}
+			die_timer = 0;
+		}
+
+		die_timer += Time::DeltaTime ( );
+	
+	}
 }
 
 void mop::Render( const HDC& dc) {
@@ -460,8 +491,20 @@ void mop::Render( const HDC& dc) {
 		//OSW 적 가죽1
 		if ( mop_inform.type == 1 ) { //기본
 			//Rectangle ( dc , mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , 0, 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				//Rectangle ( dc , 200 , 200 , 600 , 600 );
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+		
 		}
 		else if ( mop_inform.type == 2 ) { // 한발
 			//Rectangle ( dc , mop_inform.x +40  , mop_inform.y+20  , mop_inform.x +190 , mop_inform.y +180 );
@@ -475,12 +518,9 @@ void mop::Render( const HDC& dc) {
 		}
 		else if ( mop_inform.type == 4 ) { // 탄폭파
 			//Rectangle ( dc , mop_inform.x , mop_inform.y+30  , mop_inform.x + 210 , mop_inform.y + 180 );
-			//hBrush = CreateSolidBrush ( RGB ( 0 , 255 , 255 ) ); // ���ο� ��ü �����: �귯��
-			//oldBrush = ( HBRUSH ) SelectObject ( dc , hBrush );
 			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_3" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-			//SelectObject ( dc , oldBrush ); // ������ �귯�÷� ���ư���
-			//DeleteObject ( hBrush );
+
 		}
 		else if ( mop_inform.type == 5 ) { // 자폭병
 			//Rectangle ( dc , mop_inform.x+40, mop_inform.y+20 , mop_inform.x + 170 , mop_inform.y + 200 );
@@ -506,14 +546,7 @@ void mop::Render( const HDC& dc) {
 			//Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
 			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-
-
 		}
-		
-
-		
-		
-	
 }
 
 RECTS mop::ReturnRect ( ) {
@@ -561,11 +594,26 @@ void mop::Damage ( int damage ) {
 		mop_inform.hp = 0;
 	}
 
-	if ( mop_inform.hp == 0 ) {
+	if ( mop_inform.hp <= 0 ) {
+		//사망시
 		status = 4;
+
+		//보고 있는 방향에 따라 죽는 모션 차이
+		if ( direct == 0 || direct == 1 ) {
+			direct = 2;
+		}
+		else if ( direct == 3 || direct == 4 ) {
+			direct = 5;
+		}
+
+		
 	}
-	else {
+	else {//피격시
 		status = 3;
+		if ( attacked_timer >= 0.1 ) {
+			direct = 2;
+		}
+		attacked_timer += Time::DeltaTime ( );
 	}
 
 }
@@ -633,9 +681,9 @@ void MonsterManager::Update (  )
 {
 
 	for ( auto iter : mops ) {
-		if ( iter->ReturnHP ( ) > 0 ) {
+		//if ( iter->ReturnHP ( ) >= 0 ) {
 			iter->Update ( );
-		}
+		//}
 	}
 
 	DeleteMonster ( );
@@ -646,9 +694,10 @@ void MonsterManager::Update (  )
 void MonsterManager::Render ( const HDC& mDC)
 {
 	for ( auto iter : mops ) {
-		if ( iter->ReturnHP ( ) > 0 ) {
+		//if ( iter->ReturnHP ( ) >= 0 ) {
 			iter->Render ( mDC );
-		}
+		//}
+		
 	}
 }
 

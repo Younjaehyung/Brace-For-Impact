@@ -25,29 +25,45 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 
 
 void bullet::move ( ) {
-	
+	//자폭이꺼
 	if ( type == 14) {
 		counter += 100 * Time::DeltaTime ( );
 	}
+	//연기
 	else if ( type == 100 ) {
 		counter += 10 * Time::DeltaTime ( );
 	}
+	//대쉬
 	else if ( type == 200 ) {
 		counter += 10 * Time::DeltaTime ( );
 	}
+	//모든 총알
 	else {
-		x += mx * 600 * Time::DeltaTime ( );
-		y += my * 600 * Time::DeltaTime ( );
+		if ( type != 0 ) {
+			x += mx * 600 * Time::DeltaTime ( );
+			y += my * 600 * Time::DeltaTime ( );
+		}
 	}
-		//OSW
 		//총알 프레임
+	if ( type != 0 ) {
 		if ( timer1 > 0.3 ) {
 			frame++;
-			if ( frame >= 3 ) frame = 0;
+			if ( frame >= 5 ) frame = 0;
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
-		// 
-		//
+	}
+	else {
+		if ( timer1 > 0.1 ) {
+			frame++;
+			timer1 = 0;
+		}timer1 += Time::DeltaTime ( );
+	}
+		//연막 프레임
+		if ( timer2 > 0.2 ) {
+			if ( gasframe >= 6 ) gasframe = 0;
+			else gasframe++;
+			timer2 = 0;
+		}timer2 += Time::DeltaTime ( );
 
 		if ( x < 0 || y < 0 ) {
 			type = 0;
@@ -64,6 +80,7 @@ void bullet::move ( ) {
 						}
 					}
 					type = 0;
+					frame = 0;
 				}
 			}
 
@@ -73,22 +90,24 @@ void bullet::move ( ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
 						if ( type != 100 && type!=200) {
 							type = 0;
-							ScanMop->Damage ( 1 );
+							frame = 0;
+							ScanMop->Damage ( 10 );
 						}
-						else if(type==100){
+						else if(type==100){ //연막
 							if ( counter >= 5 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
-									ScanMop->Damage ( 5 );
+									ScanMop->Damage ( 1 );
+
 								}
 							}
 							if ( counter >= 10 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
-									ScanMop->Damage ( 5 );
+									ScanMop->Damage ( 1 );
 								}
 							}
 							else if ( counter >= 15 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
-									ScanMop->Damage ( 5 );
+									ScanMop->Damage ( 1 );
 								}
 								type = 0;
 							}
@@ -141,10 +160,13 @@ void bullet::Render ( const HDC& dc ) {
 		if ( PlayerBullet ) { //플레이어가 쏜 총알
 			if ( type != 100 && type != 200 ) {
 				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
-					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 0 , ( type - 1 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 64 , ( type - 1 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if(type==100) { //연막
-				Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+				TransparentBlt ( dc , x - SIZE*4 - counter, y - SIZE*4 - counter , SIZE * 8 + counter * 2 , SIZE * 8 + counter * 2 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , gasframe*64 , 8 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+
 			}
 			else { //대쉬
 
@@ -177,6 +199,13 @@ void bullet::Render ( const HDC& dc ) {
 			}
 		}
 	}
+	else {
+		if ( PlayerBullet ) {
+			TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+
+		}
+	}
 }
 
 void bullet::Update ( ) {
@@ -197,7 +226,7 @@ void BulletManager::DeleteBullet() {
 			
 
 				for ( auto iter = bullets.begin ( ); iter != bullets.end ( );) {
-					if ( ( *iter )->return_type ( ) == 0   ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+					if ( ( *iter )->return_type ( ) == 0 && ( *iter )->return_frame ( ) >6 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
 						bullet* del = *iter;  // 삭제할 노드의 포인터를 저장
 						iter = bullets.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
 					

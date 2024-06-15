@@ -249,8 +249,8 @@ void Player1::Render ( const HDC& mDC ) {
 	Rectangle ( mDC , rect.left , rect.top , rect.right+20, rect.bottom+20 );
 	
 	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-	TransparentBlt ( mDC , 1024 + rect.left + 32, 0 + rect.top - 32 , 
-		PLAYERSIZE /2 , PLAYERSIZE /2 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) 
+	TransparentBlt ( mDC , 1024 + rect.left + 16, 0 + rect.top - 48 , 
+		64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 		, 0 * 64 , itemtype * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 
 	TCHAR a00[ 20 ]= L"sdsadsd";
@@ -502,8 +502,8 @@ void Player2::Render ( const HDC& mDC ) {
 	
 	TransparentBlt ( mDC , 1024 + rect.left,  0 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-	TransparentBlt ( mDC , 1024 + rect.left + 32 , 0 + rect.top - 32 , 
-		PLAYERSIZE / 2 , PLAYERSIZE / 2 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) 
+	TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+		64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 		, 0 * 64 , itemtype * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 
 }
