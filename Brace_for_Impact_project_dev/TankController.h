@@ -11,6 +11,7 @@ class TankController
 private:
 	static bool tankmove;
 	static bool tankaiming;
+	static bool dash;
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
 	static Frame Stage_frame , Cannon_frame , Inside_frame;
 	static RECTS TankRect;
@@ -26,6 +27,9 @@ public:
 	}
 	static bool& TankAimingStatus ( ) {
 		return tankaiming;
+	}
+	static bool& Dash ( ) {
+		return dash;
 	}
 	static Frame& TankStage_frame ( ) {
 		return Stage_frame;

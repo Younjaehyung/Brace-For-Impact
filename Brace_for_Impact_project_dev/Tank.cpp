@@ -82,7 +82,10 @@ void Tank::move ( )
 		float speed = 200 * Time::DeltaTime ( );
 		float moveX = 0;
 		float moveY = 0;
-
+		if ( TankController::Dash() ) {
+			speed = 50*speed;
+			TankController::Dash() = 0 ;
+		}
 	
 			if ( input::GetKey ( eKeyCode::W ) &&rect.top>0) {
 				moveY -= 1;
@@ -365,6 +368,7 @@ void Tank::moving_rander_cal ( ) {
 	Tank_car_count += Time::DeltaTime ( );
 	
 }
+
 
 
 void Tank::Render ( const HDC& mDC)

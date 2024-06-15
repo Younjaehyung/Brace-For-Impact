@@ -41,7 +41,9 @@ public:
 	void aiming();
 	void aiming_animation ( );
 	void Clear ( );
+
 	void Initialize (int);
+
 	RECTS& ReturnRect ( ) {
 		RECTS r = { rect.left ,rect.top,rect.right  , rect.bottom};
 		return r;
