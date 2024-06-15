@@ -72,11 +72,13 @@ public:
 	void Game_Initialize ( HDC mDC , HINSTANCE g_hinst )
 	{
 		Texture::getInstance ( ).Texture_Loading ( mDC , g_hinst );
+
 		BulletManager::getInstance ( );
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
 		BlockManager::getInstance ( );
 		
+
 	}
 
 	void Scene_Initialize ( int Scene_num )

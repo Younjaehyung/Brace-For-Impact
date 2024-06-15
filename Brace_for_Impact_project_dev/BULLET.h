@@ -39,6 +39,7 @@ public:
 	void move ( );
 	void Render ( const HDC& );
 	int return_type ( ) { return type; };
+	int return_frame ( ) { return frame; };
 };
 
 class BulletManager {

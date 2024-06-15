@@ -13,6 +13,7 @@ Tank::Tank () {
 	frameInterval=0;
 	headMove = 0;
 	fireInterval = 0;
+
 }
 
 
@@ -55,7 +56,9 @@ void Tank::Initialize (int type ) {
 	else if ( type == 3 ) {
 		rect = { 200,400,300,500 };
 	}
+
 	TankController::TankRects ( ) = rect;
+
 }
 
 void Tank::move ( )
@@ -310,9 +313,8 @@ void Tank::aiming ( ) {
 	
 }
 
-void Tank::shooting ( )
-{
-		
+void Tank::shooting ( ){
+	
 		if ( TankController::WhoAimingStatus ( ) == 2 &&input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( )) {
 			if ( shootingInterval >= 0.3 ) {
 				fireInterval = 1;
@@ -371,7 +373,7 @@ void Tank::Update ( )
 	if ( TankController::TankHp ( ) >= 0 ) { //디버그용으로 탱크 체력 0이여도 움직임 죽게하려면 ' = ' 만 뺄것
 		
 		aiming ( );
-
+		
 		shooting ( );
 		if ( TankController::TankOil ( ) >= 0   )
 		{

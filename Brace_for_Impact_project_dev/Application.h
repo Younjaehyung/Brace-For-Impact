@@ -64,7 +64,7 @@ public:
 	void f_FixedUpdate ( );
 	void f_Initialize ( HWND hWnd , HINSTANCE );
 	void HandleResize ( );
-	
+	HINSTANCE ReturnHinstance ( ) { return g_hinst; }
 
 
 };

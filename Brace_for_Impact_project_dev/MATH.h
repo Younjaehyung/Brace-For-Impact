@@ -33,6 +33,7 @@ BOOL rect2Line ( RECTS rect , float& p1x , float& p1y , float& mopx , float& mop
 BOOL rect2Line4 ( RECTS rect , RECTS p1 , RECTS mop );
 
 BOOL rect2rect ( RECTS block , RECTS mop );
+BOOL rect2rect_f ( float left , float top , float right , float bottom , RECTS mop );
 
 BOOL ckMopDown ( RECTS rect , RECTS mop );
 BOOL ckMopUp ( RECTS rect , RECTS mop );
