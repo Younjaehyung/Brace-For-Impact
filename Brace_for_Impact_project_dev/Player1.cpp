@@ -32,7 +32,7 @@ void Player1::Initialize ( ) {
 	direct = 0;
 	itemtype = 6;
 	isHold = 0;
-	rect = { 300,500,396,596 };
+	rect = { 321,509,379,591 };
 	
 }
 
@@ -41,13 +41,14 @@ void Player1::move ( ) {
 		return;
 	}
 
+
 	float speed = 200 * Time::DeltaTime ( );
 
 	if ( input::GetKey ( eKeyCode::W )) { //  rect.top > 0
 		
 			rect.top -= speed;
 			
-			if ( rect.top <= 16 * 9 || ( IntersectRect_float ( rect , object1 ) ) ) {
+			if ( rect.top <= 16 * 9 ||IntersectRect_float(rect, TankController::player2Rects ( ) )|| ( IntersectRect_float ( rect , object1 ) ) ) {
 				rect.top += speed;
 				
 			}
@@ -66,7 +67,7 @@ void Player1::move ( ) {
 		
 			rect.left -= speed;
 			
-			if ( rect.left <= 16 * 6 || ( IntersectRect_float ( rect , object1 ) ) ) {
+			if ( rect.left <= 16 * 6 || IntersectRect_float ( rect , TankController::player2Rects ( ) ) || ( IntersectRect_float ( rect , object1 ) ) ) {
 				rect.left += speed;
 			}
 			
@@ -88,7 +89,7 @@ void Player1::move ( ) {
 	if ( input::GetKey ( eKeyCode::S )) { // rect.bottom < 900
 			
 			rect.bottom += speed;
-			if ( rect.bottom >= 16*51   ) {
+			if ( rect.bottom >= 16*51 || IntersectRect_float ( rect , TankController::player2Rects ( ) ) ) {
 				rect.bottom -= speed;
 			}
 			else {
@@ -108,7 +109,7 @@ void Player1::move ( ) {
 	if ( input::GetKey ( eKeyCode::D )) { // rect.right <600
 			
 			rect.right += speed;
-			if (rect.right>=16*35 || ( IntersectRect_float ( rect , object1 ) ) ){
+			if (rect.right>=16*35 || IntersectRect_float ( rect , TankController::player2Rects ( ) ) || ( IntersectRect_float ( rect , object1 ) ) ){
 
 				rect.right -= speed;
 			}
@@ -125,7 +126,7 @@ void Player1::move ( ) {
 			}
 	}
 	//플레이어1 충돌 범위
-
+	TankController::player1Rects ( ) = rect;
 	if ( input::GetKeyUp ( eKeyCode::W ) || input::GetKeyUp ( eKeyCode::A ) || input::GetKeyUp ( eKeyCode::S ) || input::GetKeyUp ( eKeyCode::D ) ) {
 		frame = 0;
 	}
@@ -255,28 +256,28 @@ void Player1::FixedUpdate ( ) {
 void Player1::Render ( const HDC& mDC ) {
 	//플레이어1
 	
-	TransparentBlt ( mDC , 1024 + rect.left,  0+ rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame * 64, direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-	Rectangle ( mDC , rect.left , rect.top , rect.right+20, rect.bottom+20 );
+	TransparentBlt ( mDC , 1024 + rect.left - 21 ,  0+ rect.top - 9 , PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , frame * 64, direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	//Rectangle ( mDC , 1024 + rect.left ,  rect.top , 1024 + rect.right, rect.bottom );
 	
 	if ( isHold ) {
 		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
 		if ( itemtype / 10 == 3 ) {
-			TransparentBlt ( mDC , 1024 + rect.left - 16 , 0 + rect.top - 48 ,
+			TransparentBlt ( mDC , 1024 + rect.left - 16 - 21 , 0 + rect.top - 48 - 9 ,
 				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 				, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-			TransparentBlt ( mDC , 1024 + rect.left + 48 , 0 + rect.top - 48 ,
+			TransparentBlt ( mDC , 1024 + rect.left + 48 - 21 , 0 + rect.top - 48 - 9 ,
 				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 				, 0 * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		}
 		else {
-			TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+			TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
 			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 			, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		}
 	}
 	else {
 		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-		TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+		TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
 			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 			, 0 * 64 , (itemtype/10) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	}
@@ -305,18 +306,21 @@ Player2::Player2() {
 void Player2::Update() {
 	SwitchStatus ( );
 	move ( );
-
+	
 }
 void Player2::move ( ) {
 
 	if ( IsAiming || Ismove ) {
 		return;
 	}
+
+		
+	
 	float speed = 300 * Time::DeltaTime ( );
 	if ( input::GetKey ( eKeyCode::UP ) ) { //rect.top > 0
 		rect.top -= speed;
 
-		if ( rect.top <= 16 * 9 || ( IntersectRect_float ( rect , object1 ) ) ) {
+		if ( rect.top <= 16 * 9 || IntersectRect_float ( rect , TankController::player1Rects ( ) ) || ( IntersectRect_float ( rect , object1 ) ) ) {
 			rect.top += speed;
 
 		}
@@ -335,7 +339,7 @@ void Player2::move ( ) {
 	if ( input::GetKey ( eKeyCode::LEFT )  ) { // rect.left > 0
 		rect.left -= speed;
 
-		if ( rect.left <= 16 * 6 || ( IntersectRect_float ( rect , object1 ) ) ) {
+		if ( rect.left <= 16 * 6 || IntersectRect_float ( rect , TankController::player1Rects ( ) ) || ( IntersectRect_float ( rect , object1 ) ) ) {
 			rect.left += speed;
 		}
 
@@ -354,7 +358,7 @@ void Player2::move ( ) {
 	}
 	if ( input::GetKey ( eKeyCode::DOWN )  ) { // rect.bottom < 900
 		rect.bottom += speed;
-		if ( rect.bottom >= 16 * 51 ) {
+		if ( rect.bottom >= 16 * 51 || IntersectRect_float ( rect , TankController::player1Rects ( ) ) ) {
 			rect.bottom -= speed;
 		}
 		else {
@@ -371,7 +375,7 @@ void Player2::move ( ) {
 	}
 	if ( input::GetKey ( eKeyCode::RIGHT)) { // rect.right < 600
 		rect.right += speed;
-		if ( rect.right >= 16 * 35 || ( IntersectRect_float ( rect , object1 ) )  ) {
+		if ( rect.right >= 16 * 35 || IntersectRect_float ( rect , TankController::player1Rects ( ) ) || ( IntersectRect_float ( rect , object1 ) )  ) {
 
 			rect.right -= speed;
 		}
@@ -389,7 +393,7 @@ void Player2::move ( ) {
 
 
 	}
-
+	TankController::player2Rects ( ) = rect;
 	if ( input::GetKeyUp ( eKeyCode::UP ) || input::GetKeyUp ( eKeyCode::RIGHT ) || input::GetKeyUp ( eKeyCode::LEFT ) || input::GetKeyUp ( eKeyCode::DOWN ) ) {
 		frame = 0;
 	}
@@ -529,7 +533,7 @@ void Player2::Initialize (  ) {
 	direct = 0;
 	itemtype = 6;
 	isHold = 0;
-	rect = { 200,500,296,596 };
+	rect = { 221,509,279,591 };
 
 }
 
@@ -538,27 +542,27 @@ void Player2::FixedUpdate() {
 void Player2::Render ( const HDC& mDC ) {
 	//플레이어2
 	
-	TransparentBlt ( mDC , 1024 + rect.left,  0 +rect.top, PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + rect.left - 21 ,  0 +rect.top - 9 , PLAYERSIZE , PLAYERSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , frame * 64 , 64*4 + direct * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
 	if ( isHold ) {
 		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
 		if ( itemtype / 10 == 4 ) {
-			TransparentBlt ( mDC , 1024 + rect.left - 16 , 0 + rect.top - 48 ,
+			TransparentBlt ( mDC , 1024 + rect.left - 16-21 , 0 + rect.top - 48-9 ,
 				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 				, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-			TransparentBlt ( mDC , 1024 + rect.left + 48 , 0 + rect.top - 48 ,
+			TransparentBlt ( mDC , 1024 + rect.left + 48 - 21 , 0 + rect.top - 48 - 9 ,
 				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 				, 0 * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		}
 		else {
-			TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+			TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
 			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 			, 0 * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		}
 	}
 	else {
 		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-		TransparentBlt ( mDC , 1024 + rect.left + 16 , 0 + rect.top - 48 ,
+		TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
 			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 			, 0 * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	}

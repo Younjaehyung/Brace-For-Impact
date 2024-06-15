@@ -11,6 +11,8 @@ class TankController
 private:
 	static bool tankmove;
 	static bool tankaiming;
+	static RECTS player1;
+	static RECTS player2;
 	static bool dash;
 	static int whomove;	//1 : p1 2:p2
 	static int whoaiming;
@@ -74,6 +76,12 @@ public:
 		if ( tankoil > 0 ) {
 			tankoilcount += 5 * Time::DeltaTime ( );
 		}
+	}
+	static RECTS& player1Rects ( ) {
+		return player1;
+	}
+	static RECTS& player2Rects ( ) {
+		return player2;
 	}
 	static void Initialize ( ) {
 		tankmove = 0;

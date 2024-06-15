@@ -56,7 +56,7 @@ void BlockManager::Initialize ( int type )
 	else if ( type == 3 || type == 4 ) {
 		temp.makeblock ( { 0,0,8,32 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 24,0,32,0 } , 1 );
+		temp.makeblock ( { 24,0,32,32 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 8,7,11,9 } , 1 );
 		Blocks.push_back ( temp );
