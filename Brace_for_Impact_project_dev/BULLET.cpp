@@ -71,11 +71,11 @@ void bullet::move ( ) {
 			if ( PlayerBullet ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
-						if ( type != 100 ) {
+						if ( type != 100 && type!=200) {
 							type = 0;
 							ScanMop->Damage ( 1 );
 						}
-						else {
+						else if(type==100){
 							if ( counter >= 5 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
 									ScanMop->Damage ( 5 );
@@ -154,26 +154,13 @@ void bullet::Render ( const HDC& dc ) {
 				bf.AlphaFormat = 0;
 				bf.SourceConstantAlpha = 150;
 				
-				//1024*1024   //   512,512
-				//탱크 몸통	
-				//Rectangle ( dc , 2000,2000 , 2000 + 128 , 2000 + 128 );
-				//BitBlt ( dc , -128 , -128 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , x , y , SRCCOPY );
-				TransparentBlt ( dc ,0,0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , x/2 , y/2 , 128/2 , 128/2 , RGB ( 255 , 255 , 255 ) );
+				BitBlt ( dc , 0 , 0 , 128 , 128 , dc , x , y , SRCCOPY );
 				TransparentBlt ( dc , 0,0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_car" ) , 1 * 128 , mx * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 				TransparentBlt ( dc , 0 , -10 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , 1 * 128 , my * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-				//BitBlt ( dc , x , y , 128 , 128 , dc ,1500,1500 , SRCCOPY );
-
-				//AlphaBlend ( dc , x , y , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_car" ) , 1 * 128 , mx * 128 , 128 , 128 , bf );
+				
 				AlphaBlend ( dc , x , y , 128 , 128 , dc ,0,0 , 128 , 128 , bf );
 				TransparentBlt ( dc , 0 , 0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 / 2 , 0 / 2 , 128 / 2 , 128 / 2 , RGB ( 255 , 255 , 255 ) );
 
-				//탱크 머리
-				//AlphaBlend ( dc , x , -10 + y , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , 1 * 128 , my * 128 , 128 , 128 , bf );
-				//TransparentBlt ( dc , x , -10 + y , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , 1 * 128 , my * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-
-				//SetROP2 ( dc , R2_MASKPEN );
-				//Rectangle ( dc , x , y , x + 128 , y + 128 );
-				//SetROP2 ( dc , R2_COPYPEN );
 			}
 			//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 		}
