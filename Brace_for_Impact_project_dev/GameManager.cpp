@@ -46,19 +46,44 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	//==탱크 연료
 	TransparentBlt ( mDC , 0 , 880 , 500 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 700 , 780 , 96 , 192 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 0 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 800 , 780 , 96 , 192 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 1 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 900 , 780 , 96 , 192 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 2 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
 
+	//총알 개수 리로드
 	TransparentBlt ( mDC , 500 , 780 , 192 , 64 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" ) , 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 4 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 500 , 880 , 192 , 64 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" ) , 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 4 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 700 , 780 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 4 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 700 , 880 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 4 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+	switch ( TankController::TankBullet ( ) ) {
+	case 4:
+		TransparentBlt ( mDC , 700 , 880 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
 
+	case 3:
+		TransparentBlt ( mDC , 700 , 780 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
 
+	case 2:
+		TransparentBlt ( mDC , 500 , 880 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+
+	case 1:
+		TransparentBlt ( mDC , 500 , 780 , 192 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Reloader" )
+			, 192 * 0 , 0 , 192 , 64 , RGB ( 255 , 255 , 255 ) );
+		break;
+	}
 	
 }
 
@@ -208,7 +233,8 @@ void GameManager::Stage_Switch_Render ( const HDC& mDC, const HDC& orimDC ) {
 	
 	BitBlt ( orimDC , 0 , 0 , 1024 , 768 , Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 4*Stage_Switch_x , 2*Stage_Switch_y , SRCCOPY );
 
-	TransparentBlt ( orimDC , 10 , 758 - 2*Stage_Switch_y , 990 , 384 ,
-	Texture::getInstance ( ).Texture_GetDC ( "B_Start" ) , 768 * BossSceneR , 384 * BossSceneC , 768 , 384 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( orimDC , 0 , 758 - 2*Stage_Switch_y , 1024 , 384 ,
+	Texture::getInstance ( ).Texture_GetDC ( "B_Start" ) , 1024 * BossSceneR , 384 * BossSceneC , 1024 , 384 , RGB ( 255 , 255 , 255 ) );
+
 	
 }

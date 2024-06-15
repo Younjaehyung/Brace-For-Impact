@@ -88,18 +88,12 @@ void bullet::move ( ) {
 							ScanMop->Damage ( 10 );
 						}
 						else if(type==100){ //연막
-							if ( counter >= 5 ) {
-								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
-									ScanMop->Damage ( 1 );
-
-								}
-							}
-							if ( counter >= 10 ) {
+							if ( counter >= 14 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
 									ScanMop->Damage ( 1 );
 								}
 							}
-							else if ( counter >= 15 ) {
+							if ( counter >= 15 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
 									ScanMop->Damage ( 1 );
 								}
@@ -121,7 +115,7 @@ void bullet::move ( ) {
 				if ( type == 14 ) {
 					if ( counter >= 300 ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
-							TankController::Damage ( 50 );
+							TankController::Damage ( 250 );
 						}
 						type = 0;
 					}
@@ -129,10 +123,10 @@ void bullet::move ( ) {
 				else {
 					if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp ( ) > 0 ) {
 						if ( type == 10 ) {
-							TankController::Damage ( 1 );
+							TankController::Damage ( 50 );
 						}
 						else if ( type == 11 ) {
-							TankController::Damage ( 10 );
+							TankController::Damage ( 20 );
 						}
 						else if ( type == 12 ) {
 							TankController::Damage ( 1 );

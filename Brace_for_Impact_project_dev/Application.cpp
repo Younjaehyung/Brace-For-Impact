@@ -31,8 +31,10 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	GameManager::getInstance().Game_Initialize ( hDC , g_hinst );
 
 	//임시 음악
-	PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
-	
+	//PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+	//PlaySound ( MAKEINTRESOURCE ( IDR_WAVE2 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+	//PlaySound ( MAKEINTRESOURCE ( IDR_WAVE3 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+	PlaySound ( MAKEINTRESOURCE ( IDR_WAVE4 ) , g_hinst , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 	GameDC = CreateCompatibleDC ( hDC );
 	mBitmap = CreateCompatibleBitmap ( hDC , 1024 * 2 , 1024 * 2 );
 	SelectObject ( GameDC , ( HBITMAP ) mBitmap );

@@ -42,7 +42,7 @@ void Player1::move ( ) {
 	}
 
 
-	float speed = 200 * Time::DeltaTime ( );
+	float speed = 300 * Time::DeltaTime ( );
 
 	if ( input::GetKey ( eKeyCode::W )) { //  rect.top > 0
 		
@@ -221,8 +221,9 @@ void Player1::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , ReturnRect ( ) ) ) {
 			//대쉬
-			if ( !TankController::Dash ( ) ) {
+			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
 				TankController::Dash ( ) = 1;
+				TankController::TankOil ( ) -= 50;
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , ReturnRect ( ) ) && TankController::TankOil ( )>50 ) {
@@ -486,8 +487,9 @@ void Player2::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , ReturnRect ( ) ) ) {
 			//대쉬
-			if ( !TankController::Dash ( ) ) {
+			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
 				TankController::Dash ( ) = 1;
+				TankController::TankOil ( ) -= 50;
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , ReturnRect ( ) ) && TankController::TankOil ( ) >50) {
