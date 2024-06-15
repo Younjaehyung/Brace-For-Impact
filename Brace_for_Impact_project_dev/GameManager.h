@@ -213,8 +213,7 @@ public:
 		//게임 시작 창일때
 		if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0 ) {
 			type = 1;
-			SceneStatus = 1;
-			Scene_Initialize ( 1 );
+			
 			return;
 		}
 		else if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 4 ) {
