@@ -206,6 +206,7 @@ public:
 			SceneCount = 0;
 			
 		}
+
 		if ( SceneCount2 >= 6.0 ) {
 			type = 1;
 			End = 0;

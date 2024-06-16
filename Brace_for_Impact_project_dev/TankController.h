@@ -19,13 +19,14 @@ private:
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
 	static Frame Stage_frame , Cannon_frame , Inside_frame;
 	static RECTS TankRect;
+	
 	static int tankhp;
 	static int tankoil;
 	static int tankbullet;
 	static float tankoilcount;
 public:
-	static RECT camera;
-
+	
+	static RECTS camera;
 	static bool& TankMoveStatus ( ) {
 		return tankmove;
 	}

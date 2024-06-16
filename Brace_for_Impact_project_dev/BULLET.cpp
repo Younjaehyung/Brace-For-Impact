@@ -106,9 +106,9 @@ void bullet::move ( ) {
 				//플레이어(탱크)가 탄 맞음
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 				if ( type == 14 ) {
-					if ( counter >= 300 ) {
+					if ( counter >= 500 ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
-							TankController::Damage ( 140 );
+							TankController::Damage ( 100 );
 						}
 						type = 0;
 					}
@@ -165,24 +165,24 @@ void bullet::Render ( const HDC& dc ) {
 		}
 		else { // 몬스터가 쏜 총알
 			if ( type == 14 ) { // 자폭이 폭발
-				TransparentBlt ( dc , x -  SIZE -counter , y - SIZE-counter , 2*( SIZE +counter) ,2*( SIZE +counter) ,
+				TransparentBlt ( dc , (int)(x -  SIZE -counter) , ( int )( y - SIZE-counter) , ( int )(2*( SIZE +counter)) , ( int )( 2*( SIZE +counter)) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 			else if (type == 10 ) { //오줌이
-				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				TransparentBlt ( dc , ( int )( x - 4 * SIZE) , ( int )( y - 4 * SIZE ), ( int )( SIZE * 8 ), ( int )( SIZE * 8) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 11) { //빵빵이
-				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				TransparentBlt ( dc , ( int )( x - 4 * SIZE ), ( int )( y - 4 * SIZE) , ( int )( SIZE * 8) , ( int )( SIZE * 8) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 2 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 12 ) { //춘식이
-				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				TransparentBlt ( dc , ( int )( x - 4 * SIZE) , ( int )( y - 4 * SIZE ), ( int )(SIZE * 8) , ( int )(SIZE * 8) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else { //그 외 다른애들 총알
-				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				TransparentBlt ( dc , ( int )( x - 4 * SIZE) , ( int )( y - 4 * SIZE) , ( int )(SIZE * 8) , ( int )(SIZE * 8 ),
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
@@ -211,7 +211,7 @@ void BulletManager::CreateBullet (bullet*& newbullet ) {
 void BulletManager::DeleteBullet() {
 	if ( bullets.size()  ) {
 		 deletetime += Time::DeltaTime ( );
-		if ( deletetime > 10.0 ) {
+		if ( deletetime > 3.0 ) {
 			
 
 				for ( auto iter = bullets.begin ( ); iter != bullets.end ( );) {
@@ -247,7 +247,9 @@ void BulletManager::Update() {
 
 void BulletManager::Render( const HDC& dc) {
 	for ( auto& iter : bullets ) {
-		iter->Render (dc );
+		
+			iter->Render ( dc );
+		
 	}
 }
 
