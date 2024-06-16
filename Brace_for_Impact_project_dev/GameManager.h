@@ -62,7 +62,23 @@ public:
 		static GameManager instance;
 		return instance;
 	}
-
+	void Initialize ( ) {
+		score = 0;
+		type = 0; Cursor = 0;
+		frame = 0;
+		Selected = 0;
+		Stage_Switch_y;
+		Stage_Switch_x = 0;
+		SceneStatus = 0;
+		SceneCount = 7;
+		Rule = 0;
+		End = 0;
+		BossSceneC = 0;
+		BossSceneR = 0;
+		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
+		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
+		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
+	}
 	void Camera ( const HDC& mDC );
 	void Camera_Cal ( const HDC& mDC );
 	void Ground_Map ( const HDC& mDC );
@@ -70,7 +86,7 @@ public:
 	void Camera_UI_CT_1 ( const HDC& mDC );
 	void Camera_UI_CT_2 ( const HDC& mDC );
 	void Tank_Inside ( const HDC& mDC );
-
+	void ClearScene ( const HDC& mDC );
 	void Clear ( )
 	{
 		MonsterManager::getInstance ( ).Clear ( );
@@ -110,7 +126,7 @@ public:
 		if ( type==0&& End == 1 ) {
 			Stage_Switch ( );
 		}
-		if ( TankController::TankHp ( ) <= 0 ) {
+		if ( TankController::TankHp ( ) <= 0 && SceneCount < 7 &&type!=0) {
 			type = 10;
 			return;
 		}
@@ -132,6 +148,9 @@ public:
 		}
 		else if ( type == 10 ) {
 			EndScene ( orimDC );
+		}
+		else if ( type == 9 ) {
+			ClearScene ( orimDC );
 		}
 		else {
 			GameRender ( mDC , orimDC );
@@ -168,13 +187,23 @@ public:
 	}
 
 	void Stage_condition ( ) {
-	
+		if ( type == 9 || type == 10 ) {
+			
+			return;
+		}
+
 		if ( MonsterManager::getInstance ( ).MopReturn ( ).size ( ) == 0 ) {
 			if ( SceneCount >= 4 ) {
 				type = 0;
 				End = 1;
 				SceneCount = 0;
 				SceneStatus += 1;
+				if ( SceneStatus >= 7 ) {
+					type = 9;
+					End = 0;
+
+					return;
+				}
 				Stage_Sound ( );
 				Scene_Initialize ( SceneStatus );
 				return;
