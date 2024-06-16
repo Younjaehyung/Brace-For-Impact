@@ -35,7 +35,7 @@ public:
 	void move( Tank& );
 	void Update( );
 	void Render( const HDC& dc);
-	RECTS ReturnRect ( );
+	RECTS& ReturnRect ( );
 	int ReturnHP ( );
 	void Damage (int D);
 

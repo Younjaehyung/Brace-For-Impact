@@ -206,7 +206,7 @@ public:
 			SceneCount = 0;
 			
 		}
-		if ( SceneCount2 >= 12.0 ) {
+		if ( SceneCount2 >= 3.0 ) {
 			type = 1;
 			End = 0;
 			Stage_Switch_x = 0;
