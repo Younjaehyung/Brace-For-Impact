@@ -125,7 +125,7 @@ void mop::attack( Tank& p1) {
 			direct = 0;
 		}
 	}
-	else if ( mop_inform.type == 4 ) { //몬스터 소환술사
+	else if ( mop_inform.type == 3 ) { //몬스터 소환술사
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
@@ -145,7 +145,7 @@ void mop::attack( Tank& p1) {
 			}
 		}
 	}
-	else if ( mop_inform.type == 3 ) {
+	else if ( mop_inform.type == 6 ) {
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
@@ -179,7 +179,7 @@ void mop::attack( Tank& p1) {
 		
 	
 	}
-	else if ( mop_inform.type == 5 ) { //자폭이
+	else if ( mop_inform.type == 4 ) { //자폭이
 		if ( rect2rect ( tankrect , moprect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
@@ -196,7 +196,7 @@ void mop::attack( Tank& p1) {
 			status = 0;
 		}
 	}
-	else if ( mop_inform.type == 6 ) { //춘식이 탄뿌리기
+	else if ( mop_inform.type == 5 ) { //춘식이 탄뿌리기
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
@@ -264,7 +264,7 @@ void mop::attack( Tank& p1) {
 void mop::move ( Tank& p1  ) {
 	//OSW: 속도 300 -> 100으로 수정함
 	float speed = 100 * Time::DeltaTime ( );
-	if ( mop_inform.type == 5 )speed *= 2;
+	if ( mop_inform.type == 4 )speed *= 2;
 	BOOL blockmop = 0;
 	RECTS moprect = ReturnRect ( );
 	RECTS cpyrect;
@@ -291,7 +291,7 @@ void mop::move ( Tank& p1  ) {
 	}
 	float len = 0;
 	BOOL ckBlock=0;
-	if ( mop_inform.type == 1 || mop_inform.type == 5 || mop_inform.type == 10 || mop_inform.type == 11 ) {
+	if ( mop_inform.type == 1 || mop_inform.type == 4 || mop_inform.type == 10 || mop_inform.type == 11 ) {
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -554,7 +554,7 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
-		else if ( mop_inform.type == 3 ) { //오줌
+		else if ( mop_inform.type == 6 ) { //오줌
 			//Rectangle ( dc , mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
@@ -570,7 +570,7 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
-		else if ( mop_inform.type == 4 ) { // 탄폭파
+		else if ( mop_inform.type == 3 ) { // 
 			//Rectangle ( dc , mop_inform.x , mop_inform.y+30  , mop_inform.x + 210 , mop_inform.y + 180 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
@@ -586,7 +586,7 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_3" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
-		else if ( mop_inform.type == 5 ) { // 자폭병
+		else if ( mop_inform.type == 4 ) { // 자폭병
 			//Rectangle ( dc , mop_inform.x+40, mop_inform.y+20 , mop_inform.x + 170 , mop_inform.y + 200 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
@@ -602,7 +602,7 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
-		else if ( mop_inform.type == 6 ) { // 춘식이
+		else if ( mop_inform.type == 5 ) { // 춘식이
 			//Rectangle ( dc , mop_inform.x+50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
@@ -640,16 +640,16 @@ RECTS& mop::ReturnRect ( ) {
 	else if ( mop_inform.type == 2 ) {
 		r = { mop_inform.x + 40  , mop_inform.y + 20  , mop_inform.x + 190 , mop_inform.y + 180 };
 	}
-	else if ( mop_inform.type == 3 ) {
+	else if ( mop_inform.type == 6 ) {
 		r = { mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 };
 	}
-	else if ( mop_inform.type == 4 ) {
+	else if ( mop_inform.type == 3 ) {
 		r = { mop_inform.x , mop_inform.y + 30  , mop_inform.x + 210 , mop_inform.y + 180 };
 	}
-	else if ( mop_inform.type == 5 ) {
+	else if ( mop_inform.type == 4 ) {
 		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
 	}
-	else if ( mop_inform.type == 6 ) {
+	else if ( mop_inform.type == 5 ) {
 		r = { mop_inform.x + 50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 };
 	}
 	else if( mop_inform.type == 10 || mop_inform.type ==11){

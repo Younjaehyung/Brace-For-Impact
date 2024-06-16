@@ -204,7 +204,7 @@ void Player1::SwitchStatus ( ) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
-				if ( TankController::TankBullet ( ) < 5 )
+				if ( TankController::TankBullet ( ) < 4 )
 				TankController::TankBullet ( )++;
 			}
 		}
@@ -471,7 +471,7 @@ void Player2::SwitchStatus ( ) {
 				status = 0;
 				isHold = false;
 				itemtype = 6;
-				if ( TankController::TankBullet ( ) < 5 )
+				if ( TankController::TankBullet ( ) < 4 )
 				TankController::TankBullet ( )++;
 			}
 		}
@@ -481,7 +481,7 @@ void Player2::SwitchStatus ( ) {
 				status = 0;
 				itemtype = 6;//아무것도 안들고있음
 				isHold = false;
-				TankController::TankOil ( ) += 50;
+				TankController::TankOil ( ) += 75;
 				if ( TankController::TankOil ( ) > 300 ) {
 					TankController::TankOil ( ) = 300;
 				}

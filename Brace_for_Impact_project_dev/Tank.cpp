@@ -94,7 +94,7 @@ void Tank::move ( )
 	//}
 	isMove = false;
 	
-		float speed = 200 * Time::DeltaTime ( );
+		float speed = 250 * Time::DeltaTime ( );
 		float moveX = 0;
 		float moveY = 0;
 		if ( TankController::Dash() ) {

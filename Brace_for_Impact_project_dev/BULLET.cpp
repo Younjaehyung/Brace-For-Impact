@@ -66,13 +66,6 @@ void bullet::move ( ) {
 			//벽에 탄 맞음
 			for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
 				if ( rect2Cir ( ScanBlock.ReturnRect ( ) , x , y , SIZE ) ) {
-					if ( type == 12 ) {
-						double angle1 = 45 * ( 3.141592 / 180 );
-						for ( int i = 0; i < 8; i++ ) {
-							bullet* newbullet = new bullet ( x , y , 10 , -cos ( i * angle1 ) , -sin ( i * angle1 ) );
-							BulletManager::getInstance ( ).CreateBullet ( newbullet );
-						}
-					}
 					type = 0;
 					frame = 0;
 				}
@@ -85,7 +78,7 @@ void bullet::move ( ) {
 						if ( type != 100 && type!=200) {
 							type = 0;
 							frame = 0;
-							ScanMop->Damage ( 10 );
+							ScanMop->Damage ( 30 );
 						}
 						else if(type==100){ //연막
 							if ( counter >= 14 ) {
@@ -172,7 +165,7 @@ void bullet::Render ( const HDC& dc ) {
 		}
 		else { // 몬스터가 쏜 총알
 			if ( type == 14 ) { // 자폭이 폭발
-				TransparentBlt ( dc , x - 4 * SIZE , y - 4 * SIZE , SIZE * 8 , SIZE * 8 ,
+				TransparentBlt ( dc , x -  SIZE -counter , y - SIZE-counter , 2*( SIZE +counter) ,2*( SIZE +counter) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}

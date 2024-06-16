@@ -41,10 +41,10 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	//스테이지 UI는 tank.cpp로 이동됬음. 탱크 움직임에 맞춰서 변해야 하기 때문에.
 	TransparentBlt ( mDC , 0 , 768 , 1024 , 225 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info" ) , 0 , 0 , 1024 , 252 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
+	/*TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 760 , 640 , 128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );*/
 	//==탱크 체력
 	SelectObject ( mDC , redBrush );
 	Rectangle ( mDC , 90 , 780 , 90 + TankController::TankHp ( ) , 780 + 64 );	//정보 UI
@@ -229,10 +229,10 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 void GameManager::EndScene ( const HDC& mDC ) {//2
 
 	
-	TransparentBlt ( mDC , 128 * 5 , 256 , 320 , 320 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_Clear" ) , 0 , 0 , 320 , 320 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 6 , 256 , 288 , 480 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Over" ) , 0 , 0 , 288 , 480 , RGB ( 255 , 255 , 255 ) );
+	//TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	//TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( input::GetKeyDown ( eKeyCode::F ) ) {
 		type = 0;
 	}
