@@ -165,7 +165,7 @@ void bullet::Render ( const HDC& dc ) {
 		}
 		else { // 몬스터가 쏜 총알
 			if ( type == 14 ) { // 자폭이 폭발
-				TransparentBlt ( dc , x -  SIZE -counter, y - SIZE-counter , x+ SIZE +counter, y+SIZE +counter,
+				TransparentBlt ( dc , x -  SIZE -counter , y - SIZE-counter , 2*( SIZE +counter) ,2*( SIZE +counter) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
