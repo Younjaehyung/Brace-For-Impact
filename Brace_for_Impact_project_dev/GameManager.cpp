@@ -162,7 +162,7 @@ void GameManager::Camera_Cal ( const HDC& mDC ) {
 	}
 	
 	if ( PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top + 384 >= 2048 ) {
-		TankController::camera.top = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( ).top-384;
+		TankController::camera.top = 2048 -(384*2);
 	
 	}
 	else {
@@ -170,7 +170,7 @@ void GameManager::Camera_Cal ( const HDC& mDC ) {
 	}
 	TankController::camera.right = TankController::camera.left + 1024;
 	TankController::camera.bottom = TankController::camera.top + 768;
-
+	
 }
 
 void GameManager::Camera ( const HDC& mDC ) {

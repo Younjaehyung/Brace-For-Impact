@@ -211,7 +211,7 @@ void BulletManager::CreateBullet (bullet*& newbullet ) {
 void BulletManager::DeleteBullet() {
 	if ( bullets.size()  ) {
 		 deletetime += Time::DeltaTime ( );
-		if ( deletetime > 10.0 ) {
+		if ( deletetime > 3.0 ) {
 			
 
 				for ( auto iter = bullets.begin ( ); iter != bullets.end ( );) {
@@ -247,7 +247,9 @@ void BulletManager::Update() {
 
 void BulletManager::Render( const HDC& dc) {
 	for ( auto& iter : bullets ) {
-		iter->Render (dc );
+		
+			iter->Render ( dc );
+		
 	}
 }
 

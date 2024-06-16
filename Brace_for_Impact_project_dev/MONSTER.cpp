@@ -511,7 +511,7 @@ void mop::Render( const HDC& dc) {
 
 	
 		HBRUSH hBrush, oldBrush;
-		RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
+	
 		//Rectangle ( dc , tankrect.left , tankrect.top , tankrect.right , tankrect.bottom ); //히트박스
 		/*if ( TankController::camera.left>=mop_inform.x- MOPSIZE+SIZE ||
 			TankController::camera.right<=mop_inform.y - MOPSIZE + SIZE ) {
@@ -633,7 +633,7 @@ void mop::Render( const HDC& dc) {
 		}
 }
 
-RECTS mop::ReturnRect ( ) {
+RECTS& mop::ReturnRect ( ) {
 	RECTS r;
 	if ( mop_inform.type == 1 ) {
 		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
@@ -776,10 +776,11 @@ void MonsterManager::Update (  )
 
 void MonsterManager::Render ( const HDC& mDC)
 {
+	
 	for ( auto iter : mops ) {
-		//if ( iter->ReturnHP ( ) >= 0 ) {
+		if ( IntersectRect_float ( iter->ReturnRect ( ) , TankController::camera ) ) {
 			iter->Render ( mDC );
-		//}
+		}
 		
 	}
 }
