@@ -734,7 +734,7 @@ void MonsterManager::DeleteMonster () {
 
 	if ( mops.size ( ) ) {
 		deletetime += Time::DeltaTime ( );
-		if ( deletetime > 3.0 ) {
+		if ( deletetime > 7.0 ) {
 
 
 			for ( auto iter = mops.begin ( ); iter != mops.end ( );) {

@@ -16,7 +16,7 @@ private:
 		Stage_Switch_y;
 		Stage_Switch_x=0;
 		SceneStatus = 0;
-		SceneCount = 0;
+		SceneCount = 7;
 		Rule = 0;
 		End = 0;
 		BossSceneC = 0;
@@ -170,12 +170,16 @@ public:
 	void Stage_condition ( ) {
 	
 		if ( MonsterManager::getInstance ( ).MopReturn ( ).size ( ) == 0 ) {
-			type = 0;
-			End = 1;
-			
-			SceneStatus += 1;
-			Stage_Sound ( );
-			Scene_Initialize ( SceneStatus );
+			if ( SceneCount >= 4 ) {
+				type = 0;
+				End = 1;
+				SceneCount = 0;
+				SceneStatus += 1;
+				Stage_Sound ( );
+				Scene_Initialize ( SceneStatus );
+				return;
+			}
+			SceneCount += Time::DeltaTime ( );
 		}
 			
 	}
