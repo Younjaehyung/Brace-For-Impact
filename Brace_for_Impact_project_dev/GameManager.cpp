@@ -41,10 +41,10 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	//스테이지 UI는 tank.cpp로 이동됬음. 탱크 움직임에 맞춰서 변해야 하기 때문에.
 	TransparentBlt ( mDC , 0 , 768 , 1024 , 225 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info" ) , 0 , 0 , 1024 , 252 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
+	/*TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 760 , 640 , 128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Player" ) , 0 , 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );*/
 	//==탱크 체력
 	SelectObject ( mDC , redBrush );
 	Rectangle ( mDC , 90 , 780 , 90 + TankController::TankHp ( ) , 780 + 64 );	//정보 UI
