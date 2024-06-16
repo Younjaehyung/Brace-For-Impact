@@ -109,6 +109,10 @@ public:
 		if ( type==0&& End == 1 ) {
 			Stage_Switch ( );
 		}
+		if ( TankController::TankHp ( ) <= 0 ) {
+			type = 10;
+			return;
+		}
 		if ( !type ) {
 			return;
 		}
