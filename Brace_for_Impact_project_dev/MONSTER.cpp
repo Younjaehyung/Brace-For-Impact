@@ -456,7 +456,7 @@ void mop::move ( Tank& p1  ) {
 
 void mop::Update( ){
 	
-	if ( !(status == 3 || status == 4) ) {
+	if ( !(status == 3 || status == 4 ||status==5) ) {
 		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
 
 	}
@@ -465,14 +465,16 @@ void mop::Update( ){
 		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
 	}
 
-	if ( !(status == 4 || status == 2) ) {
+	if ( !(status == 4 || status == 2||status==5) ) {
 		if ( move_count >= 0.3 ) {
 			frame++;
+			move_count = 0;
 			if ( frame >= 6 ) {
 				frame = 0;
-				if ( status == 3 ) status = 0;
+				if ( status == 3 ) 
+				{ status = 0; }
 			}
-			move_count = 0;
+			
 		}
 		move_count += Time::DeltaTime ( );
 	}
@@ -489,12 +491,12 @@ void mop::Update( ){
 
 		move_count += Time::DeltaTime ( );
 	}
-	else{
+	else if( status == 4 ){
 		if ( die_timer >= 0.3 ) {
 			
-			if ( die_frame > 6 ) {
+			if ( die_frame > 7 ) {
 				die_frame = 6;
-				status = 4;
+				status = 5;
 			}
 			else {
 				die_frame++;
@@ -739,7 +741,7 @@ void MonsterManager::DeleteMonster () {
 
 
 			for ( auto iter = mops.begin ( ); iter != mops.end ( );) {
-				if ( ( *iter )->status == 4 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+				if ( ( *iter )->status == 5) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
 					mop* del = *iter;  // 삭제할 노드의 포인터를 저장
 					iter = mops.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
 
@@ -778,9 +780,9 @@ void MonsterManager::Render ( const HDC& mDC)
 {
 	
 	for ( auto iter : mops ) {
-		if ( IntersectRect_float ( iter->ReturnRect ( ) , TankController::camera ) ) {
+		//if ( IntersectRect_float ( iter->ReturnRect ( ) , TankController::camera ) ) {
 			iter->Render ( mDC );
-		}
+		//}
 		
 	}
 }
