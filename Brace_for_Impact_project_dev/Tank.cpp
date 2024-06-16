@@ -13,6 +13,7 @@ Tank::Tank () {
 	frameInterval=0;
 	headMove = 0;
 	fireInterval = 0;
+	//UnDieing = 0;
 
 }
 
@@ -371,27 +372,36 @@ void Tank::shooting ( ){
 		}
 }
 
-void Tank::Update ( )
-{
-	if ( TankController::TankHp ( ) > 0 ) { //디버그용으로 탱크 체력 0이여도 움직임 죽게하려면 ' = ' 만 뺄것
-		
+void Tank::Update ( ){
+	if ( !UnDieing ) {
+		if ( TankController::TankHp ( ) > 0 ) { //디버그용으로 탱크 체력 0이여도 움직임 죽게하려면 ' = ' 만 뺄것
+			aiming ( );
+			shooting ( );
+			if ( TankController::TankOil ( ) > 0 )
+			{
+				if ( TankController::TankMoveStatus ( ) ) {
+					move ( );
+				}
+				moving_rander_cal ( );
+			}
+		}
+		TankController::TankRects ( ) = rect;
+	}
+	else { //무적모드
+		if ( TankController::TankHp ( ) <= 0 ) { 
+			TankController::TankHp ( ) = 300;
+		}
 		aiming ( );
-		
 		shooting ( );
-		if ( TankController::TankOil ( ) > 0   )
+		if ( TankController::TankOil ( ) > 0 )
 		{
-		
 			if ( TankController::TankMoveStatus ( ) ) {
-				
 				move ( );
 			}
 			moving_rander_cal ( );
 		}
-		
-
+		TankController::TankRects ( ) = rect;
 	}
-	TankController::TankRects ( ) = rect;
-
 }
 
 void Tank::moving_rander_cal ( ) {

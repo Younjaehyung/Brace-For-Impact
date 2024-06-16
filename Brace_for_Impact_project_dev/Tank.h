@@ -34,6 +34,8 @@ private:
 	BOOL headArrow;
 	BOOL isHit;
 
+	BOOL UnDieing;
+
 public:
 	
 	Tank ( );
@@ -53,6 +55,10 @@ public:
 		return rect;
 		
 	}
+	BOOL& ReturnUndieing ( ) {
+		return UnDieing;
+	}
+
 	void Damage ( int damage );
 
 	void Update ( );
