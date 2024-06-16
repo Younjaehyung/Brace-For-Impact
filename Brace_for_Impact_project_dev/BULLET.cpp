@@ -78,7 +78,7 @@ void bullet::move ( ) {
 						if ( type != 100 && type!=200) {
 							type = 0;
 							frame = 0;
-							ScanMop->Damage ( 10 );
+							ScanMop->Damage ( 30 );
 						}
 						else if(type==100){ //연막
 							if ( counter >= 14 ) {

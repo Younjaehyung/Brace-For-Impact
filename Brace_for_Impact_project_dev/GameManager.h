@@ -201,12 +201,12 @@ public:
 	void Stage_Switch (  ) {
 
 		if ( SceneCount >= 0.1 && 758 - 2 * Stage_Switch_y >= 758 - 384 ) {
-			Stage_Switch_y+=3;
-			Stage_Switch_x++;
+			Stage_Switch_y+=6;
+			Stage_Switch_x+=3;
 			SceneCount = 0;
 			
 		}
-		if ( SceneCount2 >= 12.0 ) {
+		if ( SceneCount2 >= 6.0 ) {
 			type = 1;
 			End = 0;
 			Stage_Switch_x = 0;
