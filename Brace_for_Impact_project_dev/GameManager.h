@@ -54,6 +54,8 @@ private:
 	int engineframe;	
 	float engineCount;
 
+	int endframe;
+	float endcount;
 
 
 	HBRUSH blackBrush , redBrush , cyanBrush;

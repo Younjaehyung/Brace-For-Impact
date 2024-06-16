@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 10; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 200; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 10;
+		mop_inform.hp = 200;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 10;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 10;
+		mop_inform.hp = 400;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 10;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 10;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 1;
@@ -214,7 +214,7 @@ void mop::attack( Tank& p1) {
 			mop_inform.cnt++;
 		}
 		else {
-			if ( attack_count >= 1 ) {
+			if ( attack_count >= 2 ) {
 				mop_inform.cnt = 0;
 				attack_count = 0;
 				status = 0;
@@ -253,10 +253,11 @@ void mop::attack( Tank& p1) {
 		}
 	}
 
-	if ( rect2rect ( moprect , tankrect ) ) {
-		TankController::Damage ( 1 );
+	if ( !( mop_inform.type == 11 || mop_inform.type == 10 ) ) {
+		if ( rect2rect ( moprect , tankrect ) ) {
+			TankController::Damage ( 1 );
+		}
 	}
-	
 	attack_count += Time::DeltaTime ( );
 	
 }
@@ -465,7 +466,7 @@ void mop::Update( ){
 	}
 
 	if ( !(status == 4 || status == 2) ) {
-		if ( move_count >= 0.1 ) {
+		if ( move_count >= 0.3 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 0;
@@ -476,7 +477,7 @@ void mop::Update( ){
 		move_count += Time::DeltaTime ( );
 	}
 	else if ( status == 2 ) {
-		if ( move_count >=0.1 ) {
+		if ( move_count >=0.3 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 5;
