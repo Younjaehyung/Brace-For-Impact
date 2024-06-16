@@ -214,7 +214,7 @@ void mop::attack( Tank& p1) {
 			mop_inform.cnt++;
 		}
 		else {
-			if ( attack_count >= 1 ) {
+			if ( attack_count >= 2 ) {
 				mop_inform.cnt = 0;
 				attack_count = 0;
 				status = 0;
@@ -253,10 +253,11 @@ void mop::attack( Tank& p1) {
 		}
 	}
 
-	if ( rect2rect ( moprect , tankrect ) ) {
-		TankController::Damage ( 1 );
+	if ( !( mop_inform.type == 11 || mop_inform.type == 10 ) ) {
+		if ( rect2rect ( moprect , tankrect ) ) {
+			TankController::Damage ( 1 );
+		}
 	}
-	
 	attack_count += Time::DeltaTime ( );
 	
 }
