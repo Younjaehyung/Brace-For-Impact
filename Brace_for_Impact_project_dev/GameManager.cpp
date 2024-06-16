@@ -229,10 +229,20 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 void GameManager::EndScene ( const HDC& mDC ) {//2
 
 	
-	TransparentBlt ( mDC , 128 * 6 , 256 , 288 , 480 ,
+	if ( endcount >= 0.1 ) {
+		endcount = 0;
+		endframe++;
+		if ( endframe >= 6 ) {
+			endframe = 0;
+		}
+	}	endcount += Time::DeltaTime ( );
+
+	TransparentBlt ( mDC , 128 * 5 + 64 , 256 , 288 , 480 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Over" ) , 0 , 0 , 288 , 480 , RGB ( 255 , 255 , 255 ) );
-	//TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-	//TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , endframe * 128 , 128 * 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , endframe * 128 , 128 * 3 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 6 , 128 * 6 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) , 
+		0 , 64 * 3 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( input::GetKeyDown ( eKeyCode::F ) ) {
 		Clear ( );
 		Initialize ( );

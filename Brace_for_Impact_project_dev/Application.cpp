@@ -7,6 +7,10 @@ void Application::f_Update() {
 
 
 	GameManager::getInstance ( ).Update ( );
+	if ( input::GetKey ( eKeyCode::F1 ) ) {
+		GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
+		PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
+	}
 	
 }
 

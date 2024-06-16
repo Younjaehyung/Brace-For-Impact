@@ -55,6 +55,12 @@ private:
 	float engineCount;
 
 
+	bool invincibleMode;
+
+	int endframe;
+	float endcount;
+
+
 
 	HBRUSH blackBrush , redBrush , cyanBrush;
 public:
@@ -184,6 +190,11 @@ public:
 
 	int& Return_SceneStatus ( ) {
 		return SceneStatus;
+	}
+
+	bool& Return_invincibleMode ( ) {
+
+		return invincibleMode;
 	}
 
 	void Stage_condition ( ) {
