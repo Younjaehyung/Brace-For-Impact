@@ -253,8 +253,8 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 void GameManager::ClearScene ( const HDC& mDC ) {//2
 
 
-	TransparentBlt ( mDC , 128 * 5 + 64 , 256 , 288 , 480 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_Clear" ) , 0 , 0 , 288 , 480 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 5 + 64 , 256 , 320 , 320 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_Clear" ) , 0 , 0 ,320 , 320 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( input::GetKeyDown ( eKeyCode::F ) ) {

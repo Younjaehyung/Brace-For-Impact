@@ -7,7 +7,7 @@ Block::Block ( ) {
 
 
 void Block::Render ( const HDC& dc ) {
-	//Rectangle ( dc , rect.left , rect.top , rect.right , rect.bottom );
+	Rectangle ( dc , rect.left , rect.top , rect.right , rect.bottom );
 }
 
 void Block::makeblock (RECTS rects,int type ) {
@@ -72,19 +72,25 @@ void BlockManager::Initialize ( int type )
 	else if ( type == 5|| type==6 ) {
 		temp.makeblock ( { 0,0,2,7 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 10,0,20 } , 1 );
+		temp.makeblock ( { 10,0,19,11 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 30,0,32,7 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 0,14,2,17 } , 1 );
+		temp.makeblock ( { 0,14,2,20 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 11,16,19,21 } , 1 );
+		temp.makeblock ( { 11,14,19,22 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 30,16,32,21 } , 1 );
+		temp.makeblock ( { 30,15,32,20 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 11,25,20,32 } , 1 );
+		temp.makeblock ( { 11,25,19,32 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 0,30,32,32 } , 1 );
+		Blocks.push_back ( temp );
+		temp.makeblock ( { 0,0,32,1 } , 1 );
+		Blocks.push_back ( temp );
+		temp.makeblock ( { -1,0,0,32 } , 1 );
+		Blocks.push_back ( temp );
+		temp.makeblock ( { 32,0,33,32 } , 1 );
 		Blocks.push_back ( temp );
 	}
 	

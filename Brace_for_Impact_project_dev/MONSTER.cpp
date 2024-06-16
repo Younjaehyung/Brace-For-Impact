@@ -33,28 +33,28 @@ mop::mop(int type) {
 		mop_inform.y = 12 * 64;
 	}
 	else if ( type == 6 ) {
-		mop_inform.x = 29 * 64;
+		mop_inform.x = 25 * 64;
 		mop_inform.y = 12 * 64;
 	}
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 200; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 20; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 200;
+		mop_inform.hp = 20;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 300;
+		mop_inform.hp = 30;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 400;
+		mop_inform.hp = 40;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 300;
+		mop_inform.hp = 25;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 300;
+		mop_inform.hp = 30;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 1;
@@ -560,16 +560,16 @@ void mop::Render( const HDC& dc) {
 		else if ( mop_inform.type == 6 ) { //오줌
 			//Rectangle ( dc , mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 );
 			if ( status == 3 ) { //적 피격 시
-				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE, SIZE  ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( status == 4 ) {//적 사망시
-				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE  ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 				//Rectangle ( dc , 200 , 200 , 600 , 600 );
 			}
 			else {
-				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE  ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 		}

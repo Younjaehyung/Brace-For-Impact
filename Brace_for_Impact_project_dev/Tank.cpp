@@ -55,7 +55,7 @@ void Tank::Initialize (int type ) {
 
 	}
 	else if ( type == 5 || type == 6 ) {
-		rect = { ( 0 * 64 ),( 10 * 64 ),( 2 * 64 ), (12 * 64 ) };
+		rect = { ( 0 * 64 )+1,( 10 * 64 ),( 2 * 64 )+1, (12 * 64 ) };
 
 	}
 
@@ -321,11 +321,12 @@ void Tank::shooting ( ){
 	
 		if ( TankController::WhoAimingStatus ( ) == 2 &&input::GetKey ( eKeyCode::UP ) && TankController::TankAimingStatus ( )) {
 			if ( shootingInterval >= 0.3 ) {
-				fireInterval = 1;
 				
 				shootingInterval = 0;
 
 				if ( TankController::TankBullet() > 0 ) {
+					fireInterval = 1;
+
 					bullet* newbullet = new bullet ( rect.left + TANKSIZE / 2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE / 2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , Tank_head_direct + 1 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
 					BulletManager::getInstance ( ).CreateBullet ( newbullet );
 					TankController::TankBullet ( )--;
@@ -337,11 +338,12 @@ void Tank::shooting ( ){
 		}
 		else if ( TankController::WhoAimingStatus ( ) == 1 && input::GetKey ( eKeyCode::W ) && TankController::TankAimingStatus ( ) ) {
 			if ( shootingInterval >= 0.3 ) {
-				fireInterval = 1;
-
+				
 				shootingInterval = 0;
 
 				if ( TankController::TankBullet ( ) > 0 ) {
+					fireInterval = 1;
+
 					bullet* newbullet = new bullet ( rect.left + TANKSIZE / 2 + ( 40 * cos ( Radian_return ( angle ) ) ) , -10 + rect.top + TANKSIZE / 2 + ( 40 * -sin ( Radian_return ( angle ) ) ) , Tank_head_direct + 1 , cos ( Radian_return ( angle ) ) , -sin ( Radian_return ( angle ) ) );
 					BulletManager::getInstance ( ).CreateBullet ( newbullet );
 					TankController::TankBullet ( )--;
