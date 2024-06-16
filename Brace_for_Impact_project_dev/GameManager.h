@@ -169,7 +169,7 @@ public:
 		Tank_Inside ( orimDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
 		BulletManager::getInstance ( ).Render ( mDC );
-		BlockManager::getInstance ( ).Render ( mDC );
+	//	BlockManager::getInstance ( ).Render ( mDC );
 		
 		
 		Camera_UI_CT_1 ( orimDC );

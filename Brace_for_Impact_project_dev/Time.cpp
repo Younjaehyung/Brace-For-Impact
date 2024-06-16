@@ -46,7 +46,7 @@ void Time::Render ( HDC hdc )	//화면 프레임 체크용 Render()
 	
 	int len = wcsnlen_s ( str , 50 );
 	
-	TextOut ( hdc , 10 , 900 , str , len );
+//	TextOut ( hdc , 10 , 900 , str , len );
 
 
 }

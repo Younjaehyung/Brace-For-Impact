@@ -286,9 +286,8 @@ void Player1::Render ( const HDC& mDC ) {
 
 	TCHAR a00[ 20 ]= L"sdsadsd";
 	wsprintf ( a00 , L"%d  %d" , (int)(rect.left) , (int)(rect.top) );
-	TextOut ( mDC , 1600 , 0 , a00 , 20 /*lstrlen ( a00 ) */ );
-	//Rectangle ( mDC , 100,100,200,200 );
-
+	//TextOut ( mDC , 1600 , 0 , a00 , 20 /*lstrlen ( a00 ) */ );
+	
 }
 RECTS Player1::ReturnRect ( ) {//플레이어 실제 좌표 리턴하게 수정
 	RECTS r = { rect.left + 1024 , rect.top , rect.right + 1024, rect.bottom };
