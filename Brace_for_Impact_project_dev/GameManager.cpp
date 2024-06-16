@@ -101,9 +101,9 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 void GameManager::Camera_UI_CT_1( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 1024 + 120 , 0 + 80 , 128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Attack" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 1024 + 400 , 0 + 80 , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Move" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 1024 + 400 , 0 + 80 , 128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Attack" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , TankController::TankCannon_frame ( ).frame * 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
@@ -234,7 +234,7 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 	//TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	//TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( input::GetKeyDown ( eKeyCode::F ) ) {
-		type = 0;
+		type = 0; SceneStatus = 0;
 	}
 
 }
