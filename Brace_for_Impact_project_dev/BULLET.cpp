@@ -48,7 +48,7 @@ void bullet::move ( ) {
 	if ( type != 0 ) {
 		if ( timer1 > 0.3 ) {
 			frame++;
-			if ( frame >= 5 ) frame = 0;
+			if ( frame >= 2 ) frame = 0;
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
 	}

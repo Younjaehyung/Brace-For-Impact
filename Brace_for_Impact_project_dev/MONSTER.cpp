@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 10; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 200; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 10;
+		mop_inform.hp = 200;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 10;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 10;
+		mop_inform.hp = 400;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 10;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 10;
+		mop_inform.hp = 300;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 1;
@@ -466,7 +466,7 @@ void mop::Update( ){
 	}
 
 	if ( !(status == 4 || status == 2) ) {
-		if ( move_count >= 0.1 ) {
+		if ( move_count >= 0.3 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 0;
@@ -477,7 +477,7 @@ void mop::Update( ){
 		move_count += Time::DeltaTime ( );
 	}
 	else if ( status == 2 ) {
-		if ( move_count >=0.1 ) {
+		if ( move_count >=0.3 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 5;
@@ -735,7 +735,7 @@ void MonsterManager::DeleteMonster () {
 
 	if ( mops.size ( ) ) {
 		deletetime += Time::DeltaTime ( );
-		if ( deletetime > 3.0 ) {
+		if ( deletetime > 7.0 ) {
 
 
 			for ( auto iter = mops.begin ( ); iter != mops.end ( );) {
