@@ -528,7 +528,7 @@ void mop::Render( const HDC& dc) {
 			//Rectangle ( dc , mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , 0, 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , 0, direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( status == 4 ) {//적 사망시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
@@ -692,14 +692,18 @@ void mop::Damage ( int damage ) {
 			direct = 5;
 		}
 
-		
 	}
 	else {//피격시
 		status = 3;
-		if ( attacked_timer >= 0.1 ) {
+		
+		if ( direct == 0 ) {
 			direct = 2;
 		}
-		attacked_timer += Time::DeltaTime ( );
+		else if ( direct == 3 ) {
+			direct = 5;
+		}
+		
+		//attacked_timer += Time::DeltaTime ( );
 	}
 
 }
