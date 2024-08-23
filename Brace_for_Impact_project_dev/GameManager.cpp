@@ -208,13 +208,15 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 		Texture::getInstance ( ).Texture_GetDC ( "B_Select" ) , 0 , 0 , SRCCOPY );
 	TransparentBlt ( mDC , 1024 + 8 + 16 * 1 , 32 * ( 9 + Cursor ) , 96 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Cursor" ) , 0 , 0 , 96 , 64 , RGB ( 255 , 255 , 255 ) );
+
 	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * ( 9 ) , 384 , 96 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 0 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 13 , 384 , 96 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384 * 1 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 1024 + 8 + 16 * 8 , 32 * 17 , 384 , 96 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Selectframe" ) , 384 * 2 , 0 , 384 , 96 , RGB ( 255 , 255 , 255 ) );
-
+	TransparentBlt ( mDC , 1024 + 16 * 9 + 8 , 32 * ( 9 + Cursor ) + 16 , 64 , 64 ,
+	Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) , 0 , 64 * 3 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	MenuUpdate ( );
 
 	

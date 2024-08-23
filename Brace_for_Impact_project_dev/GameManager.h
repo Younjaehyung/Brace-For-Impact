@@ -271,23 +271,23 @@ public:
 
 	void TitleScene ( const HDC& );
 	void MenuUpdate ( ) {
-		if ( input::GetKeyDown ( eKeyCode::S ) && !Selected ) {
+		if (( input::GetKeyDown ( eKeyCode:: DOWN ) || input::GetKeyDown ( eKeyCode::S )) && !Selected ) {
 			if ( Cursor < 8 )
 				Cursor += 4;
 		}
-		else if ( input::GetKeyDown ( eKeyCode::W ) && !Selected ) {
+		else if (( input::GetKeyDown ( eKeyCode::UP ) || input::GetKeyDown ( eKeyCode::W )) && !Selected ) {
 			if ( Cursor > 0 )
 				Cursor -= 4;
 		}
 
 
 		//게임 시작 창일때
-		if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 0 ) {
+		if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) )&& Cursor == 0 ) {
 			type = 1;
 			
 			return;
 		}
-		else if ( input::GetKeyDown ( eKeyCode::F ) && Cursor == 4 ) {
+		else if ( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M )&& Cursor == 4 ) {
 
 			Rule = !Rule;
 
@@ -301,7 +301,7 @@ public:
 
 
 		}
-		else if( input::GetKeyDown ( eKeyCode::F ) && Cursor == 8 ){
+		else if( input::GetKeyDown ( eKeyCode::F) || input::GetKeyDown ( eKeyCode::M ) && Cursor == 8 ){
 			exit ( 1 );
 		}
 	}
