@@ -225,19 +225,27 @@ public:
 	}
 
 	void Stage_Sound ( ) {
-		if ( SceneStatus == 0 ) {
+		if ( SceneStatus == 0 ) {	//타이틀
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , Texture::getInstance().Sound_GetIT() , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
-		else if ( SceneStatus == 1 || SceneStatus == 2 ) {
+		else if ( SceneStatus == 1) {	//스테이지1
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE2 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
+		else if ( SceneStatus == 2 ) {	//스테이지
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE3 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
+		else if ( SceneStatus == 3 ) {	//스테이지
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE4 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
-		else if ( SceneStatus == 3 || SceneStatus == 4 ) {
-		PlaySound ( MAKEINTRESOURCE ( IDR_WAVE3 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		else if ( SceneStatus == 4 ) {	
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE5 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
-		else if ( SceneStatus == 5|| SceneStatus == 6 ) {
-		PlaySound ( MAKEINTRESOURCE ( IDR_WAVE2 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		else if ( SceneStatus == 5 ) {
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE6 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
-		
+		else if ( SceneStatus == 6 ) {
+			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE7 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
+		}
 		
 	}
 	
@@ -287,7 +295,7 @@ public:
 			
 			return;
 		}
-		else if ( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M )&& Cursor == 4 ) {
+		else if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ))&& Cursor == 4 ) {
 
 			Rule = !Rule;
 
@@ -301,7 +309,7 @@ public:
 
 
 		}
-		else if( input::GetKeyDown ( eKeyCode::F) || input::GetKeyDown ( eKeyCode::M ) && Cursor == 8 ){
+		else if(( input::GetKeyDown ( eKeyCode::M) || input::GetKeyDown ( eKeyCode::F )) && Cursor == 8 ){
 			exit ( 1 );
 		}
 	}

@@ -57,7 +57,6 @@
 #define IDB_BM_CT_ITEMBOX               185
 #define IDB_BM_ITEM                     186
 #define IDB_BM_CT_STEAM_DASH            187
-#define IDR_WAVE1                       189
 #define IDI_ICON1                       190
 #define IDB_BM_STAGESTART               192
 #define IDB_BITMAP4                     193
@@ -68,9 +67,14 @@
 #define IDB_BM_SCREEN_RULE              197
 #define IDB_BM_GAMEOVER                 198
 #define IDB_BM_SCREEN_OVER              198
-#define IDR_WAVE2                       200
-#define IDR_WAVE3                       201
-#define IDR_WAVE4                       202
+#define IDR_ACCELERATOR1                203
+#define IDR_WAVE1                       212
+#define IDR_WAVE2                       213
+#define IDR_WAVE3                       214
+#define IDR_WAVE4                       215
+#define IDR_WAVE5                       216
+#define IDR_WAVE6                       217
+#define IDR_WAVE7                       218
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -78,8 +82,8 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        203
-#define _APS_NEXT_COMMAND_VALUE         32771
+#define _APS_NEXT_RESOURCE_VALUE        219
+#define _APS_NEXT_COMMAND_VALUE         32772
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110
 #endif

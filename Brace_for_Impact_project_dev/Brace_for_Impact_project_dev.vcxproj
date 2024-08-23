@@ -218,7 +218,14 @@
   <ItemGroup>
     <Media Include="BFI_Clockwork Crafter.wav" />
     <Media Include="BFI_Magnificent Machines).wav" />
+    <Media Include="BFI_ST6_Dub Hub.wav" />
     <Media Include="BFI_Steaming Superstructures.wav" />
+    <Media Include="BFI_ST_1_The Origin.wav" />
+    <Media Include="BFI_ST_2_8bit Dungeon Bossc.wav" />
+    <Media Include="BFI_ST_3_Funk Modulator.wav" />
+    <Media Include="BFI_ST_4_Scrub Slayer.wav" />
+    <Media Include="BFI_ST_5_Welcome Player.wav" />
+    <Media Include="BFI_Title_Good Old Times.wav" />
     <Media Include="Gooseworx- Industrial Elegance.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

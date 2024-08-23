@@ -69,6 +69,7 @@ BEGIN
 END
 
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Dialog
@@ -237,13 +238,19 @@ IDB_BM_SCREEN_OVER      BITMAP                  "BFI_Screen_Gameover.bmp"
 // WAVE
 //
 
-IDR_WAVE1               WAVE                    "Gooseworx- Industrial Elegance.wav"
+IDR_WAVE1               WAVE                    "BFI_Title_Good Old Times.wav"
 
-IDR_WAVE2               WAVE                    "BFI_Clockwork Crafter.wav"
+IDR_WAVE2               WAVE                    "BFI_ST_1_The Origin.wav"
 
-IDR_WAVE3               WAVE                    "BFI_Magnificent Machines).wav"
+IDR_WAVE3               WAVE                    "BFI_ST_2_8bit Dungeon Bossc.wav"
 
-IDR_WAVE4               WAVE                    "BFI_Steaming Superstructures.wav"
+IDR_WAVE4               WAVE                    "BFI_ST_3_Funk Modulator.wav"
+
+IDR_WAVE5               WAVE                    "BFI_ST_4_Scrub Slayer.wav"
+
+IDR_WAVE6               WAVE                    "BFI_ST_5_Welcome Player.wav"
+
+IDR_WAVE7               WAVE                    "BFI_ST6_Dub Hub.wav"
 
 
 /////////////////////////////////////////////////////////////////////////////

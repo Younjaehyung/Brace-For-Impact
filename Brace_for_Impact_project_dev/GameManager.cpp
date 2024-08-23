@@ -222,8 +222,8 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 	
 
 	if ( Rule ) {
-		TransparentBlt ( mDC , 0 , 0 , 1024 , 768 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 768 , RGB ( 255 , 255 , 255 ) );
+		TransparentBlt ( mDC , 0 , -8 , 1024 , 1024 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 1024 , RGB ( 255 , 255 , 255 ) );
 
 	}
 }
