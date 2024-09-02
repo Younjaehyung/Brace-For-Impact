@@ -100,8 +100,8 @@ void mop::attack( Tank& p1) {
 					frame = 0;
 					//status = 2;
 					TankController::Damage ( 50 );
+					mop_inform.cnt++;
 				}
-				mop_inform.cnt ++;
 				attack_count = 0;
 			}
 		}
@@ -255,9 +255,10 @@ void mop::attack( Tank& p1) {
 
 	if ( !( mop_inform.type == 11 || mop_inform.type == 10 ) ) {
 		if ( rect2rect ( moprect , tankrect ) ) {
-			TankController::Damage ( 1 );
+			//TankController::Damage ( 1 );
 		}
 	}
+
 	attack_count += Time::DeltaTime ( );
 	
 }
@@ -456,13 +457,12 @@ void mop::move ( Tank& p1  ) {
 
 void mop::Update( ){
 	
-	if ( !(status == 3 || status == 4 ||status==5) ) {
-		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
-
-	}
 	if ( status == 0 || status == 1 ) {
 		status = 1;
 		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
+	}
+	if ( !( status == 3 || status == 4 || status == 5 ) ) {
+		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
 	}
 
 	if ( !(status == 4 || status == 2||status==5) ) {
