@@ -3,7 +3,7 @@
 
 //status // 0: 중립상태 , 1: 이동 , 2: 공격 , 3: 데미지 , 4: 사망
 //std::list<mop*> MonsterManager::mops;
-int MONSTERLEN = 500;
+int MONSTERLEN = 300;
 int MOPSIZE = 20;
 int BLOCKCOUNT = 20;
 
@@ -145,40 +145,6 @@ void mop::attack( Tank& p1) {
 			}
 		}
 	}
-	else if ( mop_inform.type == 6 ) {
-		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
-			status = 2;
-			if ( direct == 0 ) { direct = 1; }
-			else if ( direct == 3 ) { direct = 4; }
-		}
-		if ( attack_count <= 2 ) {
-			if ( attack_count >= 0 ) {
-				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
-			}
-		}
-		if ( attack_count >= 10 ) {
-			if ( mop_inform.cnt ==0 ) {
-				mop* newmop = new mop ( 11 );
-				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
-				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
-				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
-				mop_inform.cnt++;
-			}
-		}
-		if ( attack_count >= 20 ) {
-			mop* newmop = new mop ( 11 );
-			newmop->mop_inform.x = middleX ( ReturnRect ( ) );
-			newmop->mop_inform.y = middleY ( ReturnRect ( ) );
-			MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
-			mop_inform.cnt = 0;
-
-			attack_count = 0;
-			status = 0;
-			direct = 0;
-		}
-		
-	
-	}
 	else if ( mop_inform.type == 4 ) { //자폭이
 		if ( rect2rect ( tankrect , moprect ) ) {
 			if ( mop_inform.cnt == 0 ) {
@@ -222,6 +188,40 @@ void mop::attack( Tank& p1) {
 			}
 		}
 	}
+	else if ( mop_inform.type == 6 ) {
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+			status = 2;
+			if ( direct == 0 ) { direct = 1; }
+			else if ( direct == 3 ) { direct = 4; }
+		}
+		if ( attack_count <= 2 ) {
+			if ( attack_count >= 0 ) {
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
+			}
+		}
+		if ( attack_count >= 10 ) {
+			if ( mop_inform.cnt == 0 ) {
+				mop* newmop = new mop ( 11 );
+				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
+				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
+				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
+				mop_inform.cnt++;
+			}
+		}
+		if ( attack_count >= 20 ) {
+			mop* newmop = new mop ( 11 );
+			newmop->mop_inform.x = middleX ( ReturnRect ( ) );
+			newmop->mop_inform.y = middleY ( ReturnRect ( ) );
+			MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
+			mop_inform.cnt = 0;
+
+			attack_count = 0;
+			status = 0;
+			direct = 0;
+		}
+
+
+		}
 	else if ( mop_inform.type == 10 ) {// 소환몹
 		if ( rect2rect ( moprect , tankrect ) ) {
 			if ( mop_inform.cnt == 0 ) {
@@ -255,7 +255,7 @@ void mop::attack( Tank& p1) {
 
 	if ( !( mop_inform.type == 11 || mop_inform.type == 10 ) ) {
 		if ( rect2rect ( moprect , tankrect ) ) {
-			//TankController::Damage ( 1 );
+			//TankController::Damage ( 1 );  // 몬스터 틱뎀 원인
 		}
 	}
 
@@ -643,15 +643,39 @@ void mop::Render( const HDC& dc) {
 		}
 		else if ( mop_inform.type == 10 ) { // 쪼꼬미 4가 소환함
 			//Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE/2 , SIZE/2 ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 5 ) {//적 사망시
 
-
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
 		}
 		else if ( mop_inform.type == 11 ) { // 쪼꼬미 오줌이가 소환함
 			//Rectangle ( dc , mop_inform.x , mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 );
-			TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
+			if ( status == 3 ) { //적 피격 시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 4 ) {//적 사망시
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( status == 5 ) {//적 사망시
+
+			}
+			else {
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			}
 		}
 }
 
@@ -783,7 +807,6 @@ void MonsterManager::DeleteMonster () {
 	}
 
 }
-
 
 
 void MonsterManager::Update (  )
