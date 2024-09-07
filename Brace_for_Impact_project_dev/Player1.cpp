@@ -486,33 +486,33 @@ void Player2::SwitchStatus ( ) {
 				}
 			}
 		}
-		else if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 4 , 16 * 33 , 1024 + 16 * 8 , 16 * 37 , ReturnRect ( ) ) ) {
 			//대쉬
 			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 50;
 			}
 		}
-		else if ( rect2rect_f ( 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 , ReturnRect ( ) ) && TankController::TankOil ( ) >50) {
+		else if ( rect2rect_f ( 1024 + 16 * 29 , 16 * 33 , 1024 + 16 * 37 , 16 * 41 , ReturnRect ( ) ) && TankController::TankOil ( ) > 50 ) {
 			//증기분출
 			double angle = 45 * ( 3.141592 / 180 );
 			for ( int i = 0; i < 8; i++ ) {
-				bullet* newbullet = new bullet ( middleX ( TankController::TankRects ( ) )+150*cos(i*angle ) , middleY ( TankController::TankRects ( ) )+150*sin ( i * angle ) , 100 , 0 , 0 );
+				bullet* newbullet = new bullet ( middleX ( TankController::TankRects ( ) ) + 150 * cos ( i * angle ) , middleY ( TankController::TankRects ( ) ) + 150 * sin ( i * angle ) , 100 , 0 , 0 );
 				BulletManager::getInstance ( ).CreateBullet ( newbullet );
 			}
 			TankController::TankOil ( ) -= 50;
 		}
-		else if ( rect2rect_f ( 1024 + 16 * 8 , 16 * 34 , 1024 + 16 * 15 , 16 * 40 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 4 , 16 * 46 , 1024 + 16 * 10 , 16 * 50 , ReturnRect ( ) ) ) {
 			//연료 저장고
+			status = 1;
 			itemtype = 0;
 			isHold = true;
-			status = 1;
 		}
-		else if ( rect2rect_f ( 1024 + 16 * 26 , 16 * 34 , 1024 + 16 * 34 , 16 * 40 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 29 , 16 * 46 , 1024 + 16 * 33 , 16 * 50 , ReturnRect ( ) ) ) {
 			//탄약 저장고
+			status = 2;
 			itemtype = 1;
 			isHold = true;
-			status = 2;
 		}
 
 	}

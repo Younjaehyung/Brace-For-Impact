@@ -12,33 +12,9 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 			engineframe = 0;
 		}
 	}
-
 	engineCount += Time::DeltaTime ( );
 
 
-	//상호작용 범위
-	//이동 조작기
-	//Rectangle ( mDC , 1024 + 16 * 8 , 16 * 9 , 1024 + 16 * 16 , 16 * 18 );
-	//공격 조작기
-	//Rectangle ( mDC , 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 );
-	//플레이어 이동 불가구역(대포)
-	//Rectangle ( mDC , 1024 + 16 * 16 , 16 * 9 , 1024 + 16 * 26 , 16 * 30 );
-	//장전 가능 구역
-	//Rectangle ( mDC , 1024 + 16 * 16 , 16 * 28 , 1024 + 16 * 26 , 16 * 35 );
-
-	//연료 충전 구역
-	//Rectangle ( mDC , 1024 + 16 * 16 , 16 * 46 , 1024 + 16 * 26 , 16 * 54 );
-
-	//대쉬 가능 구역
-	//Rectangle ( mDC , 1024 + 16 * 8 , 16 * 46 , 1024 + 16 * 16 , 16 * 54 );
-	//증기 분출 가능 구역
-	//Rectangle ( mDC , 1024 + 16 * 26 , 16 * 46 , 1024 + 16 * 34 , 16 * 54 );
-	//연료 저장고
-	//Rectangle ( mDC , 1024 + 16 * 8 , 16 * 34 , 1024 + 16 * 15 , 16 * 40 );
-	//탄약 저장고
-	//Rectangle ( mDC , 1024 + 16 * 26 , 16 * 34 , 1024 + 16 * 34 , 16 * 40 );
-
-	//스테이지 UI는 tank.cpp로 이동됬음. 탱크 움직임에 맞춰서 변해야 하기 때문에.
 	TransparentBlt ( mDC , 0 , 768 , 1024 , 225 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info" ) , 0 , 0 , 1024 , 252 , RGB ( 255 , 255 , 255 ) );
 	/*TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
@@ -58,6 +34,16 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 900 , 780 , 96 , 192 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Cooltime" ) , 96 * 2 , 0 , 96 , 192 , RGB ( 255 , 255 , 255 ) );
+
+	//경고
+	if ( TankController::TankHp ( ) <= 50 ) {
+		TransparentBlt ( mDC , 64 , 32 , 416 , 64 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Alert" ) , engineframe * 208 , 0 , 416 , 64 , RGB ( 255 , 255 , 255 ) );
+	}
+	if ( TankController::TankOil ( ) <= 50 ) {
+		TransparentBlt ( mDC , 64 * 8 , 32 , 416 , 64 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_UI_Alert" ) , engineframe * 208 , 64 , 416 , 64 , RGB ( 255 , 255 , 255 ) );
+	}
 
 	//총알 개수 리로드
 	TransparentBlt ( mDC , 500 , 780 , 192 , 64 ,

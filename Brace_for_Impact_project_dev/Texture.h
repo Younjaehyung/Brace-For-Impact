@@ -51,6 +51,7 @@ public:
         idBitmap.emplace ( "B_UI_Player" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_PLAYER ) ) );
         idBitmap.emplace ( "B_UI_Reloader" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_RELOADER ) ) );
         idBitmap.emplace ( "B_UI_Info" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO ) ) );
+        idBitmap.emplace ( "B_UI_Alert" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_ALERT ) ) );
         idBitmap.emplace ( "B_Selectframe" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_SELECTFRAME ) ) );
 
 
