@@ -16,17 +16,19 @@
 class SoundManager {
 public:
 	FMOD::System* m_pSystem = nullptr;
-	std::map<std::string, FMOD::Sound*> m_pSound;
+	std::unordered_map<std::string, std::pair<FMOD::Sound*, FMOD::Channel*>> SoundChannel;
 
-	std::map<std::string, FMOD::Channel*>  m_pChannel;
 	FMOD_RESULT result;
 
 	unsigned int MID;
 	bool Init ( );
-	void playSound ( );
+	void playSound ( std::string filename );
 	void CreateSoundlist ( );
 	void PlayingSound ( );
-	unsigned int CreateSound (std::string filename );
+	void PauseSound ( std::string filename );
+	void SetVolume ( std::string filename , float volume );
+	FMOD::Sound* FindSoundlist (std::string filename );
+	FMOD::Sound* CreateSound (std::string filename );
 	static SoundManager& getInstance ( ) {
 		static SoundManager instance;
 		return instance;
@@ -55,37 +57,83 @@ bool SoundManager::Init ( ) {
 	
 }
 
+inline void SoundManager::CreateSoundlist ( ) {
+	SoundChannel.emplace ( "testMP3" , CreateSound ( "Whale_06_R.P.G._Shine.mp3" ) );
 
 
-inline void SoundManager::playSound ( )
+
+}
+
+FMOD::Sound* SoundManager::FindSoundlist ( std::string filename ) {
+	auto it = SoundChannel.find ( filename );
+	if ( it != SoundChannel.end ( ) ) {
+		return it->second.first;
+	}
+	return nullptr;
+}
+
+inline void SoundManager::playSound (std::string filename )
 {
-	result = m_pSystem->playSound ( m_pSound , 0 , false , &m_pChannel );
+	FMOD::Channel* newChannel = nullptr;
+	result = m_pSystem->playSound ( FindSoundlist(filename ) , 0 , false , &newChannel );
+	SoundChannel.find ( filename )->second.second = newChannel;
+
+
+	if ( result != FMOD_OK ) {
+		std::cerr << filename<<" : play sound err" << std::endl;
+	}
+}
+
+void SoundManager :: PauseSound ( std::string filename ) {
+	FMOD::Channel* channel = SoundChannel.find ( filename )->second.second;
+	if ( channel != nullptr ) {
+		bool isPaused;
+		channel->getPaused ( &isPaused );
+		channel->setPaused ( !isPaused ); // 현재 상태에 따라 재생/일시 정지 전환
+	}
+}
+
+void ReplaySound ( int soundID ) {
+	FMOD::Channel* channel = channelMap[ soundID ];
+	if ( channel != nullptr ) {
+		bool isPlaying = false;
+		channel->isPlaying ( &isPlaying );  // 현재 재생 중인지 확인
+
+		if ( !isPlaying ) {
+			// 사운드가 끝났으므로 위치를 처음으로 설정
+			unsigned int position = 0;
+			channel->setPosition ( position , FMOD_TIMEUNIT_MS ); // 위치를 처음으로 설정
+			PlaySound ( soundID );  // 사운드 재생
+		}
+	}
 }
 
 
 
-inline void SoundManager::CreateSoundlist ( ){
-	m_pSound.emplace("testMP3" , CreateSound ( "Whale_06_R.P.G._Shine.mp3" );
-	
-	
-
+void SoundManager::SetVolume ( std::string filename , float volume ) {
+	FMOD::Channel* channel = SoundChannel.find ( filename )->second.second; // 채널 가져오기
+	if ( channel != nullptr ) {
+		channel->setVolume ( volume );
+	}
 }
 
-unsigned int SoundManager::CreateSound (std::string filename ) {
-	m_pSystem->createSound ( "filename" , FMOD_LOOP_OFF , 0 , &m_pSound );
+
+FMOD::Sound* SoundManager::CreateSound (std::string filename ) {
+	FMOD::Sound* newSound = nullptr;
+	m_pSystem->createSound ( "filename" , FMOD_LOOP_OFF , 0 , &newSound );
 
 	if ( result != FMOD_OK ) {
 		std::cerr << filename << std::endl;
 	}
 
-	
+	return newSound;
 
-	return MID++;
 }
+
 
 inline void SoundManager::PlayingSound ( )
 {
-	playSound ( );
+
 	m_pSystem->update ( );
 	
 	/*while ( 1 ) {
