@@ -62,7 +62,8 @@ private:
 
 
 
-	HBRUSH blackBrush , redBrush , cyanBrush;
+	HBRUSH blackBrush , redBrush , cyanBrush, whiteBrush;
+
 public:
 	static GameManager& getInstance ( ) {
 		static GameManager instance;
@@ -84,6 +85,8 @@ public:
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
+		whiteBrush = CreateSolidBrush ( RGB ( 255 , 255 , 255 ) );
+		
 	}
 	void Camera ( const HDC& mDC );
 	void Camera_Cal ( const HDC& mDC );

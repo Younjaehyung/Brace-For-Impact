@@ -71,7 +71,7 @@ public:
 	}
 	static void TankOilCount ( ) {
 		if ( tankoilcount >= 1 ) {
-			tankoil -= 1;
+			tankoil -= 2;
 			tankoilcount = 0;
 		}
 		if ( tankoil > 0 ) {

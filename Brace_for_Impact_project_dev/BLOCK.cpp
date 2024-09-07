@@ -36,7 +36,7 @@ void BlockManager::Initialize ( int type )
 	if ( type == 1 || type == 2 ) {
 		temp.makeblock ( { 0,0,32,6 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 0,10,4,32 } , 1 );
+		temp.makeblock ( { 0,10,3,32 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 0,28,32,32 } , 1 );
 		Blocks.push_back ( temp );
@@ -44,7 +44,7 @@ void BlockManager::Initialize ( int type )
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 3,19,8,23 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 6,11,7,13 } , 1 );
+		temp.makeblock ( { 6,12,7,13 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 13,10,20,13 } , 1 );
 		Blocks.push_back ( temp );
@@ -82,7 +82,8 @@ void BlockManager::Initialize ( int type )
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 30,15,32,20 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 11,25,19,32 } , 1 );
+		temp.makeblock ( { 11,27,19,32 } , 1 );
+		//장애물 위치 변경
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 0,30,32,32 } , 1 );
 		Blocks.push_back ( temp );

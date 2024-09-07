@@ -108,10 +108,25 @@ void GameManager::Camera_UI_CT_1( const HDC& mDC )
 	TransparentBlt ( mDC , 1024 + 200 , 0 - 30 , 240 , 512 ,
 	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Cannon" ) , TankController::TankCannon_frame ( ).frame * 240 , 0 , 240 , 512 , RGB ( 255 , 255 , 255 ) );
 	
-	TransparentBlt ( mDC , 1024 + 16 * 4 , 0 + 16 * 33 , 128 , 128 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 1024 + 16 * 29 , 0 + 16 * 33 , 128 , 128 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	////탄약 상자
+	//TransparentBlt ( mDC , 1024 + 16 * 4 , 0 + 16 * 33 , 128 , 128 ,
+	//		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	////연료 상자
+	//TransparentBlt ( mDC , 1024 + 16 * 29 , 0 + 16 * 33 , 128 , 128 ,
+	//		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+
+	//대쉬
+	TransparentBlt ( mDC , 1024 + 16 * 4 , 0 + 16 * 33 , 144 , 144 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	//증기
+	TransparentBlt ( mDC , 1024 + 16 * 29 , 0 + 16 * 33 , 144 , 144 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	//탄약
+	TransparentBlt ( mDC , 1024 + 16 * 4 , 0 + 16 * 46 , 128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	//연료
+	TransparentBlt ( mDC , 1024 + 16 * 29 , 0 + 16 * 46 , 128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
 }
 
@@ -119,13 +134,14 @@ void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 {
 	TransparentBlt ( mDC , 1024 + 16 * 18 , 0 + 16 * 45 , 96 , 160 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Engine" ) , engineframe * 96 , 0 , 96 , 160 , RGB ( 255 , 255 , 255 ) );
-	//대쉬
-	TransparentBlt ( mDC , 1024 + 16 * 6 , 0 + 16 * 46 , 128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-	//스팀
-	TransparentBlt ( mDC , 1024 + 16 * 27 , 0 + 16 * 46 , 128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	////대쉬
+	//TransparentBlt ( mDC , 1024 + 16 * 6 , 0 + 16 * 46 , 128 , 128 ,
+	//	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	////스팀
+	//TransparentBlt ( mDC , 1024 + 16 * 27 , 0 + 16 * 46 , 128 , 128 ,
+	//	Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
+	
 }
 
 
