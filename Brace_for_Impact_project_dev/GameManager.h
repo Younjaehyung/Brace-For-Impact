@@ -5,6 +5,7 @@
 #include"BLOCK.h"
 #include"Texture.h"
 #include "TankController.h"
+#include "Sound.h"
 class GameManager
 {
 private:
@@ -226,6 +227,7 @@ public:
 
 	void Stage_Sound ( ) {
 		if ( SceneStatus == 0 ) {	//타이틀
+
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , Texture::getInstance().Sound_GetIT() , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 1) {	//스테이지1

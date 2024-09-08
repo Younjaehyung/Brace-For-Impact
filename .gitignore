@@ -30,6 +30,7 @@
 *.a
 *.lib
 
+
 # Executables
 *.exe
 *.out
@@ -452,6 +453,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+!fmod/*.dll
+!fmod/*.lib
+!fmod.dll
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
