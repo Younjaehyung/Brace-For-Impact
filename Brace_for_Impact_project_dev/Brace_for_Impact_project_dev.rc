@@ -233,6 +233,8 @@ IDB_BM_SCREEN_OVER      BITMAP                  "BFI_Screen_Gameover.bmp"
 
 IDB_BM_UI_ALERT         BITMAP                  "BFI_UI_Alert.bmp"
 
+IDB_BM_STAGE_2_NIGHT    BITMAP                  "BFI_Stage_2_Night.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

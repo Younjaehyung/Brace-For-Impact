@@ -14,6 +14,15 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	}
 	engineCount += Time::DeltaTime ( );
 
+	if ( alertCount >= 0.5 ) {
+		alertCount = 0;
+		alertframe++;
+		if ( alertframe >= 2 ) {
+			alertframe = 0;
+		}
+	}
+	alertCount += Time::DeltaTime ( );
+
 
 	TransparentBlt ( mDC , 0 , 768 , 1024 , 225 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info" ) , 0 , 0 , 1024 , 252 , RGB ( 255 , 255 , 255 ) );
@@ -38,11 +47,11 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	//경고
 	if ( TankController::TankHp ( ) <= 50 ) {
 		TransparentBlt ( mDC , 64 , 32 , 416 , 64 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Alert" ) , engineframe * 208 , 0 , 416 , 64 , RGB ( 255 , 255 , 255 ) );
+		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Alert" ) , alertframe * 416 , 0 , 416 , 64 , RGB ( 255 , 255 , 255 ) );
 	}
 	if ( TankController::TankOil ( ) <= 50 ) {
 		TransparentBlt ( mDC , 64 * 8 , 32 , 416 , 64 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_UI_Alert" ) , engineframe * 208 , 64 , 416 , 64 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_UI_Alert" ) , alertframe * 416 , 64 , 416 , 64 , RGB ( 255 , 255 , 255 ) );
 	}
 
 	//총알 개수 리로드
@@ -133,11 +142,15 @@ void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 
 void GameManager::Ground_Map ( const HDC& mDC )
 {
-	if ( SceneStatus == 1 || SceneStatus ==2 )
+	if ( SceneStatus == 1)
 	{
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 
+	}
+	else if ( SceneStatus == 2 ) {
+		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_4" ) , 0 , 0 , 1024 , 1024 , SRCCOPY );
 	}
 	else if ( SceneStatus == 3 || SceneStatus == 4 ) {
 		StretchBlt ( Texture::getInstance ( ).Texture_GetDC ( "GAME_FIELD" ) , 0 , 0 , 1024 * 2 , 1024 * 2 ,

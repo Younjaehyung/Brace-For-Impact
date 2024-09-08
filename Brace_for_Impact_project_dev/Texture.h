@@ -68,6 +68,7 @@ public:
         idBitmap.emplace ( "B_STAGE_1_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1_1 ) ) );
         idBitmap.emplace ( "B_STAGE_1_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1_2 ) ) );
         idBitmap.emplace ( "B_STAGE_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2 ) ) );
+        idBitmap.emplace ( "B_STAGE_4" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2_NIGHT ) ) );
         idBitmap.emplace ( "B_STAGE_3" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_3 ) ) );
         idBitmap.emplace ( "B_STAGE_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_1 ) ) );
         //적 비트맵 선언

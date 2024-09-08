@@ -270,6 +270,9 @@
     <Image Include="BFI_UI_Alert.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_Stage_2_Night.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="Gooseworx- Industrial Elegance.wav">
