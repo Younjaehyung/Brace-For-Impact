@@ -1,11 +1,10 @@
 ﻿#include "Application.h"
-#include "Sound.h"
 
 void Application::f_Update() {
 	input::Update();
 	Time::Update ( );
 	
-	SoundManager::getInstance ( ).PlayingSound ( );
+	
 	GameManager::getInstance ( ).Update ( );
 	if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
 		GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
@@ -14,7 +13,7 @@ void Application::f_Update() {
 	
 }
 
-void Application::f_FixedUpdate() {
+void Application::f_FixedUpdate ( ) {
 	
 
 
@@ -31,7 +30,7 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	g_hinst = hInst_temp;
 	input::Initialize ( );
 	Time::Initailize ( );
-	SoundManager::getInstance ( ).Init ( );
+	
 	HandleResize ( );
 	GameManager::getInstance().Game_Initialize ( hDC , g_hinst );
 
