@@ -466,7 +466,7 @@ void mop::Update( ){
 	}
 
 	if ( !(status == 4 || status == 2||status==5) ) {
-		if ( move_count >= 0.3 ) {
+		if ( move_count >= 0.15 ) {
 			frame++;
 			move_count = 0;
 			if ( frame >= 6 ) {
@@ -479,7 +479,7 @@ void mop::Update( ){
 		move_count += Time::DeltaTime ( );
 	}
 	else if ( status == 2 ) {
-		if ( move_count >=0.3 ) {
+		if ( move_count >=0.15 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 5;
@@ -492,7 +492,7 @@ void mop::Update( ){
 		move_count += Time::DeltaTime ( );
 	}
 	else if( status == 4 ){
-		if ( die_timer >= 0.3 ) {
+		if ( die_timer >= 0.25 ) {
 			
 			if ( die_frame > 6 ) {
 				die_frame = 5;
