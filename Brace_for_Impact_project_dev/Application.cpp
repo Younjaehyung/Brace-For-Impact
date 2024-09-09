@@ -30,6 +30,7 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	g_hinst = hInst_temp;
 	input::Initialize ( );
 	Time::Initailize ( );
+	SoundManager::getInstance().Init ( );
 	
 	HandleResize ( );
 	GameManager::getInstance().Game_Initialize ( hDC , g_hinst );

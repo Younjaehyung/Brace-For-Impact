@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Texture.h"
+
 #include "TankController.h"
 #include "Player1.h"
 #include "BULLET.h"
@@ -7,7 +8,7 @@
 #include "Resource.h"
 #include "BLOCK.h"
 #include "Windows.h"
-#pragma comment(lib,"winmm.lib")
+
 class Tank 
 {
 

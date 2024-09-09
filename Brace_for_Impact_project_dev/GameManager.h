@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Sound.h"
 #include "MONSTER.h"
 #include "BULLET.h"
 #include "Player.h"
@@ -233,7 +234,7 @@ public:
 
 	void Stage_Sound ( ) {
 		if ( SceneStatus == 0 ) {	//타이틀
-
+			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , Texture::getInstance().Sound_GetIT() , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 1) {	//스테이지1

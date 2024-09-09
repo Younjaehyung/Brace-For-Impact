@@ -11,7 +11,7 @@
 
 #include "Time.h"
 #include "Texture.h"
-
+#include "Sound.h"
 class Application {
 private:
 

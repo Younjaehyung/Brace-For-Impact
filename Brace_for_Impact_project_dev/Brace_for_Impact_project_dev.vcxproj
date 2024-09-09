@@ -158,6 +158,7 @@
     <ClCompile Include="MATH.cpp" />
     <ClCompile Include="MONSTER.cpp" />
     <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankController.cpp" />
     <ClCompile Include="Time.cpp" />
