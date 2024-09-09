@@ -287,18 +287,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="Gooseworx- Industrial Elegance.wav">
-      <Filter>리소스 파일</Filter>
-    </Media>
-    <Media Include="BFI_Clockwork Crafter.wav">
-      <Filter>리소스 파일</Filter>
-    </Media>
-    <Media Include="BFI_Magnificent Machines).wav">
-      <Filter>리소스 파일</Filter>
-    </Media>
-    <Media Include="BFI_Steaming Superstructures.wav">
-      <Filter>리소스 파일</Filter>
-    </Media>
     <Media Include="BFI_ST_1_The Origin.wav">
       <Filter>리소스 파일</Filter>
     </Media>
