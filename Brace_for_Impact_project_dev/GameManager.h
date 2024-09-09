@@ -6,12 +6,14 @@
 #include"BLOCK.h"
 #include"Texture.h"
 #include "TankController.h"
+#include <random>
 
 class GameManager
 {
 private:
 	GameManager ( ) {
 		score = 0;
+		prevTankHp = 0;
 		type = 0; Cursor = 0;
 		frame = 0;
 		Selected = 0;
@@ -26,6 +28,7 @@ private:
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
+		TankInsideCamera = 0;
 	}
 	RECT r_stage = { 0, 0, 1024, 768 };			//스테이지 UI
 	RECT r_info = { 0, 768, 1024, 1020 };		//정보 UI			너비 1024 높이 252
@@ -59,13 +62,15 @@ private:
 	int alertframe;
 	float alertCount;
 
-
+	int prevTankHp;	//이전 탱크 피
 	bool invincibleMode;
 
 	int endframe;
 	float endcount;
 
-
+	int CameraMx;
+	int CameraMy;
+	float TankInsideCamera;
 
 	HBRUSH blackBrush , redBrush , cyanBrush, whiteBrush;
 
