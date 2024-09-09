@@ -202,9 +202,11 @@
     <Image Include="BFI_Stage_1.bmp" />
     <Image Include="BFI_Stage_1_1.bmp" />
     <Image Include="BFI_Stage_1_2.bmp" />
+    <Image Include="BFI_Stage_1_Night.bmp" />
     <Image Include="BFI_Stage_2.bmp" />
     <Image Include="BFI_Stage_2_Night.bmp" />
     <Image Include="BFI_Stage_3.bmp" />
+    <Image Include="BFI_Stage_3_Night.bmp" />
     <Image Include="BFI_Tank_car.bmp" />
     <Image Include="BFI_Tank_head.bmp" />
     <Image Include="BFI_UI_Alert.bmp" />
