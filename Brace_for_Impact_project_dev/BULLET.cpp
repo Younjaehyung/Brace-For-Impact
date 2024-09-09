@@ -48,15 +48,6 @@ void bullet::move ( ) {
 	if ( type != 0 ) {
 		if ( timer1 > 0.3 ) {
 			frame++;
-			if ( type == 100 ) {
-				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
-					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
-						if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
-							ScanMop->Damage ( 5 );
-						}
-					}
-				}
-			}
 			if ( frame >= 2 ) frame = 0;
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
@@ -90,7 +81,6 @@ void bullet::move ( ) {
 							ScanMop->Damage ( 30 );
 						}
 						else if(type==100){ //연막
-							/*
 							if ( counter >= 14 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
 									ScanMop->Damage ( 1 );
@@ -102,7 +92,6 @@ void bullet::move ( ) {
 								}
 								type = 0;
 							}
-							*/
 						}
 					}
 				}
@@ -162,7 +151,7 @@ void bullet::Render ( const HDC& dc ) {
 				bf.BlendOp = AC_SRC_OVER;
 				bf.BlendFlags = 0;
 				bf.AlphaFormat = 0;
-				bf.SourceConstantAlpha = 200 - counter*15;
+				bf.SourceConstantAlpha = 150;
 				
 				BitBlt ( dc , 0 , 0 , 128 , 128 , dc , x , y , SRCCOPY );
 				TransparentBlt ( dc , 0,0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_car" ) , 1 * 128 , mx * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
