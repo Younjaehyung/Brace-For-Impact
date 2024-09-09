@@ -17,12 +17,10 @@
 #define IDB_BITMAP2                     130
 #define IDB_BM_PLAYER                   141
 #define IDB_BM_TANK_CAR                 142
-#define IDB_BM_BUILDING                 144
 #define IDB_BM_BULLET                   145
 #define IDB_BM_ENEMY_1                  146
 #define IDB_BM_ENEMY_2                  147
 #define IDB_BM_STAGE_2                  150
-#define IDB_BM_UI_INFO_UP               151
 #define IDB_BM_UI_INSIDE                152
 #define IDB_BM_BOSS_2                   153
 #define IDB_BM_CT_ATTACK                154
