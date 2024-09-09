@@ -43,7 +43,6 @@ public:
         idBitmap.emplace ( "B_Item" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_ITEM ) ) );
 
         //UI 비트맵 선언
-        idBitmap.emplace ( "B_UI_Info_up" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INFO_UP ) ) );
         idBitmap.emplace ( "B_UI_Inside" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_INSIDE ) ) );
         idBitmap.emplace ( "B_UI_Stage" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_STAGE ) ) );
         idBitmap.emplace ( "B_UI_Cooltime" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_UI_COOLTIME ) ) );
@@ -64,7 +63,6 @@ public:
         idBitmap.emplace ( "B_CT_Itembox" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_CT_ITEMBOX ) ) );
 
         //스테이지 관련 비트맵 선언
-        idBitmap.emplace ( "B_Building" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BUILDING ) ) );
         idBitmap.emplace ( "B_STAGE_1" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2 ) ) );
         idBitmap.emplace ( "B_STAGE_2" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_2_NIGHT ) ) );
         idBitmap.emplace ( "B_STAGE_5" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_STAGE_3 ) ) );

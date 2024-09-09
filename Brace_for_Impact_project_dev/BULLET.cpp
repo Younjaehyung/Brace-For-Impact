@@ -46,7 +46,7 @@ void bullet::move ( ) {
 	}
 		//총알 프레임
 	if ( type != 0 ) {
-		if ( timer1 > 0.3 ) {
+		if ( timer1 > 0.1 ) {
 			frame++;
 			if ( type == 100 ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
