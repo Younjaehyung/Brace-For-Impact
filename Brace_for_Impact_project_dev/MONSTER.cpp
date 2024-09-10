@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 20; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 130; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 20;
+		mop_inform.hp = 130;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 30;
+		mop_inform.hp = 150;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 40;
+		mop_inform.hp = 120;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 25;
+		mop_inform.hp = 100;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 30;
+		mop_inform.hp = 100;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 10;

@@ -245,27 +245,27 @@ public:
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE1 ) , Texture::getInstance().Sound_GetIT() , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 1) {	//스테이지1
-			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
+			/*SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );*/
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE2 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 2 ) {	//스테이지
-			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
+			/*SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );*/
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE3 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 3 ) {	//스테이지
-			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
+			/*SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );*/
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE4 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 4 ) {	
-			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
+			/*SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );*/
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE5 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 5 ) {
-			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
+			/*SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );*/
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE6 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		else if ( SceneStatus == 6 ) {
-			SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
+			/*SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );*/
 			PlaySound ( MAKEINTRESOURCE ( IDR_WAVE7 ) , Texture::getInstance ( ).Sound_GetIT ( ) , SND_RESOURCE | SND_ASYNC | SND_LOOP );
 		}
 		
