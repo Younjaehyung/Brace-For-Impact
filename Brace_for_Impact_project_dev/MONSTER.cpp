@@ -353,11 +353,15 @@ void mop::move ( Tank& p1  ) {
 		else {
 			if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
 				mop_inform.x -= speed;
+
 				direct = 3;
+
 			}
 			else {
 				mop_inform.x += speed;
-				direct = 0;
+				if ( p1.ReturnRect ( ).left > mop_inform.x +1) {
+					direct = 0;
+				}
 			}
 			if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 				mop_inform.y -= speed;
@@ -433,7 +437,9 @@ void mop::move ( Tank& p1  ) {
 				}
 				else {
 					mop_inform.x += speed;
-					direct = 0;
+					if ( p1.ReturnRect ( ).left > mop_inform.x + 1 ) {
+						direct = 0;
+					}
 				}
 				if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 					mop_inform.y -= speed;
