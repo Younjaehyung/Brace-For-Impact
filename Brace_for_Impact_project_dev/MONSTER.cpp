@@ -75,8 +75,9 @@ void mop::attack( Tank& p1) {
 	RECTS tankrect = p1.ReturnRect ( );
 	float speed = 300 * Time::DeltaTime ( );
 	if ( mop_inform.type == 1 ) { //꽁기깅깡
-		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-200 ) {
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
+			speed *= 1.5;
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 			if ( mop_inform.cnt == 0 ) {
@@ -86,7 +87,9 @@ void mop::attack( Tank& p1) {
 				}
 				else {
 					mop_inform.x += speed;
-					direct = 0;
+					if ( p1.ReturnRect ( ).left > mop_inform.x + 1 ) {
+						direct = 0;
+					}
 				}
 				if ( p1.ReturnRect ( ).top < mop_inform.y ) {
 					mop_inform.y -= speed;
