@@ -46,7 +46,7 @@ void bullet::move ( ) {
 	}
 		//총알 프레임
 	if ( type != 0 ) {
-		if ( timer1 > 0.3 ) {
+		if ( timer1 > 0.1 ) {
 			frame++;
 			if ( type == 100 ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
@@ -57,6 +57,7 @@ void bullet::move ( ) {
 					}
 				}
 			}
+
 			if ( frame >= 2 ) frame = 0;
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
@@ -177,7 +178,7 @@ void bullet::Render ( const HDC& dc ) {
 		else { // 몬스터가 쏜 총알
 			if ( type == 14 ) { // 자폭이 폭발
 				TransparentBlt ( dc , (int)(x -  SIZE -counter) , ( int )( y - SIZE-counter) , ( int )(2*( SIZE +counter)) , ( int )( 2*( SIZE +counter)) ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 3 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 			else if (type == 10 ) { //오줌이

@@ -203,9 +203,11 @@
     <Image Include="BFI_Stage_1.bmp" />
     <Image Include="BFI_Stage_1_1.bmp" />
     <Image Include="BFI_Stage_1_2.bmp" />
+    <Image Include="BFI_Stage_1_Night.bmp" />
     <Image Include="BFI_Stage_2.bmp" />
     <Image Include="BFI_Stage_2_Night.bmp" />
     <Image Include="BFI_Stage_3.bmp" />
+    <Image Include="BFI_Stage_3_Night.bmp" />
     <Image Include="BFI_Tank_car.bmp" />
     <Image Include="BFI_Tank_head.bmp" />
     <Image Include="BFI_UI_Alert.bmp" />
@@ -221,17 +223,13 @@
     <Image Include="UI)Tankinside.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="BFI_Clockwork Crafter.wav" />
-    <Media Include="BFI_Magnificent Machines).wav" />
     <Media Include="BFI_ST6_Dub Hub.wav" />
-    <Media Include="BFI_Steaming Superstructures.wav" />
     <Media Include="BFI_ST_1_The Origin.wav" />
     <Media Include="BFI_ST_2_8bit Dungeon Bossc.wav" />
     <Media Include="BFI_ST_3_Funk Modulator.wav" />
     <Media Include="BFI_ST_4_Scrub Slayer.wav" />
     <Media Include="BFI_ST_5_Welcome Player.wav" />
     <Media Include="BFI_Title_Good Old Times.wav" />
-    <Media Include="Gooseworx- Industrial Elegance.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

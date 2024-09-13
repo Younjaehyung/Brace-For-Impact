@@ -139,7 +139,7 @@ void Player1::SwitchStatus ( ) {
 			//이동 조작
 			itemtype = itemtype%10 +30;
 		}
-		if ( ( rect2rect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , ReturnRect ( ) )) ) {
+		else if ( ( rect2rect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , ReturnRect ( ) )) ) {
 			//공격 조종기
 			itemtype = itemtype % 10 + 30;
 		}
@@ -406,7 +406,7 @@ void Player2::SwitchStatus ( ) {
 			//이동 조작
 			itemtype = itemtype%10 +40;
 		}
-		if ( ( rect2rect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , ReturnRect ( ) ) ) ) {
+		else if ( ( rect2rect_f ( 1024 + 16 * 26 , 16 * 9 , 1024 + 16 * 34 , 16 * 18 , ReturnRect ( ) ) ) ) {
 			//공격 조종기
 			itemtype = itemtype % 10 + 40;
 		}

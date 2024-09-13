@@ -39,22 +39,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 20; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 130; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 20;
+		mop_inform.hp = 130;
 	}
 	else if ( type == 3 ) { //오줌
-		mop_inform.hp = 30;
+		mop_inform.hp = 150;
 	}
 	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 40;
+		mop_inform.hp = 120;
 	}
 	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 25;
+		mop_inform.hp = 100;
 	}
 	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 30;
+		mop_inform.hp = 100;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 10;
@@ -75,7 +75,7 @@ void mop::attack( Tank& p1) {
 	RECTS tankrect = p1.ReturnRect ( );
 	float speed = 300 * Time::DeltaTime ( );
 	if ( mop_inform.type == 1 ) { //꽁기깅깡
-		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-200 ) {
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
@@ -86,7 +86,9 @@ void mop::attack( Tank& p1) {
 				}
 				else {
 					mop_inform.x += speed;
-					direct = 0;
+					if ( p1.ReturnRect ( ).left > mop_inform.x + 1 ) {
+						direct = 0;
+					}
 				}
 				if ( p1.ReturnRect ( ).top < mop_inform.y ) {
 					mop_inform.y -= speed;
@@ -353,11 +355,15 @@ void mop::move ( Tank& p1  ) {
 		else {
 			if ( p1.ReturnRect ( ).left  < mop_inform.x ) {
 				mop_inform.x -= speed;
+
 				direct = 3;
+
 			}
 			else {
 				mop_inform.x += speed;
-				direct = 0;
+				if ( p1.ReturnRect ( ).left > mop_inform.x +1) {
+					direct = 0;
+				}
 			}
 			if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 				mop_inform.y -= speed;
@@ -433,7 +439,9 @@ void mop::move ( Tank& p1  ) {
 				}
 				else {
 					mop_inform.x += speed;
-					direct = 0;
+					if ( p1.ReturnRect ( ).left > mop_inform.x + 1 ) {
+						direct = 0;
+					}
 				}
 				if ( p1.ReturnRect ( ).top  < mop_inform.y ) {
 					mop_inform.y -= speed;
@@ -466,7 +474,7 @@ void mop::Update( ){
 	}
 
 	if ( !(status == 4 || status == 2||status==5) ) {
-		if ( move_count >= 0.3 ) {
+		if ( move_count >= 0.15 ) {
 			frame++;
 			move_count = 0;
 			if ( frame >= 6 ) {
@@ -479,7 +487,7 @@ void mop::Update( ){
 		move_count += Time::DeltaTime ( );
 	}
 	else if ( status == 2 ) {
-		if ( move_count >=0.3 ) {
+		if ( move_count >=0.15 ) {
 			frame++;
 			if ( frame >= 6 ) {
 				frame = 5;
@@ -492,7 +500,7 @@ void mop::Update( ){
 		move_count += Time::DeltaTime ( );
 	}
 	else if( status == 4 ){
-		if ( die_timer >= 0.3 ) {
+		if ( die_timer >= 0.25 ) {
 			
 			if ( die_frame > 6 ) {
 				die_frame = 5;

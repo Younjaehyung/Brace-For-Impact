@@ -147,21 +147,13 @@ IDB_BM_TANK_CAR         BITMAP                  "BFI_Tank_car.bmp"
 
 IDB_BM_TANK_HEAD        BITMAP                  "BFI_Tank_head.bmp"
 
-IDB_BM_BUILDING         BITMAP                  "BFI_Building_1.bmp"
-
 IDB_BM_BULLET           BITMAP                  "BFI_Bullet_1.bmp"
 
 IDB_BM_ENEMY_1          BITMAP                  "BFI_Enemy_1.bmp"
 
 IDB_BM_ENEMY_2          BITMAP                  "BFI_Enemy_2.bmp"
 
-IDB_BM_STAGE_1_1        BITMAP                  "BFI_Stage_1_1.bmp"
-
-IDB_BM_STAGE_1_2        BITMAP                  "BFI_Stage_1_2.bmp"
-
 IDB_BM_STAGE_2          BITMAP                  "BFI_Stage_2.bmp"
-
-IDB_BM_UI_INFO_UP       BITMAP                  "UI)info_up.bmp"
 
 IDB_BM_UI_INSIDE        BITMAP                  "UI)Tankinside.bmp"
 
@@ -234,6 +226,10 @@ IDB_BM_SCREEN_OVER      BITMAP                  "BFI_Screen_Gameover.bmp"
 IDB_BM_UI_ALERT         BITMAP                  "BFI_UI_Alert.bmp"
 
 IDB_BM_STAGE_2_NIGHT    BITMAP                  "BFI_Stage_2_Night.bmp"
+
+IDB_BM_STAGE_1_NIGHT    BITMAP                  "BFI_Stage_1_Night.bmp"
+
+IDB_BM_STAGE_3_NIGHT    BITMAP                  "BFI_Stage_3_Night.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
