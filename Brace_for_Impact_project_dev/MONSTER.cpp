@@ -77,7 +77,6 @@ void mop::attack( Tank& p1) {
 	if ( mop_inform.type == 1 ) { //꽁기깅깡
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
-			speed *= 1.5;
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 			if ( mop_inform.cnt == 0 ) {
