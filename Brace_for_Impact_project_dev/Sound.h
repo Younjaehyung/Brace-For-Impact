@@ -32,7 +32,7 @@ public:
 
 class SoundManager  {
 public:
-
+	
 	unsigned int MID;
 	bool Init ( );
 	

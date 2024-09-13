@@ -459,7 +459,7 @@ void Tank::moving_rander_cal ( ) {
 			}
 			if ( input::GetKey ( eKeyCode::RIGHT ) ) {
 				Tank_car_direct = 2;
-
+				
 			}
 
 			if (  ( input::GetKey ( eKeyCode::UP ) && input::GetKey ( eKeyCode::LEFT ) ) ) {
@@ -526,4 +526,11 @@ void Tank::Render ( const HDC& mDC)
 	
 
 
+}
+
+void Tank::sound ( )
+{
+	SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->ReplaySound ( );
+
+	
 }

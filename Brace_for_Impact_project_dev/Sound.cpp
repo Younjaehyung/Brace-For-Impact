@@ -97,15 +97,18 @@ void Sounds::ReplaySound ( ) {
 		bool isPlaying = false;
 		Channel->isPlaying ( &isPlaying );  // 현재 재생 중인지 확인
 		unsigned int position = 0;
-		if ( !isPlaying ) {
-			// 사운드가 끝났으므로 위치를 처음으로 설정
-			
-			Channel->setPosition ( position , FMOD_TIMEUNIT_MS ); // 위치를 처음으로 설정
-			playSound ( );  // 사운드 재생
-		}
-		else {
-			Channel->setPosition ( position , FMOD_TIMEUNIT_MS );
-		}
+		Channel->stop ( );
+		Channel->setPosition ( position , FMOD_TIMEUNIT_MS ); // 위치를 처음으로 설정
+		playSound ( );  // 사운드 재생
+		//if ( !isPlaying ) {
+		//	// 사운드가 끝났으므로 위치를 처음으로 설정
+		//	
+		//	Channel->setPosition ( position , FMOD_TIMEUNIT_MS ); // 위치를 처음으로 설정
+		//	playSound ( );  // 사운드 재생
+		//}
+		//else {
+		//	Channel->setPosition ( position , FMOD_TIMEUNIT_MS );
+		//}
 	}
 }
 

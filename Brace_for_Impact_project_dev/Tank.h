@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "Texture.h"
-
+#include "Sound.h"
 #include "TankController.h"
 #include "Player1.h"
 #include "BULLET.h"
@@ -65,5 +65,6 @@ public:
 	void Update ( );
 	void Render ( const HDC & );
 
+	void sound ( );
 };
 
