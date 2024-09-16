@@ -164,6 +164,8 @@ public:
 
 	void Render ( const HDC& mDC , const HDC& orimDC )
 	{
+		
+
 		if ( type == 0 && SceneStatus==0 ) {
 			TitleScene ( orimDC );
 			
@@ -177,6 +179,8 @@ public:
 		else {
 			GameRender ( mDC , orimDC );
 		}
+
+		
 	}
 
 	
@@ -185,8 +189,14 @@ public:
 		Tank_Inside ( orimDC );
 		MonsterManager::getInstance ( ).Render ( mDC );
 		BulletManager::getInstance ( ).Render ( mDC );
-	//	BlockManager::getInstance ( ).Render ( mDC );
-		
+		if ( Debugging::ReturnMod ( ) ) {
+			HBRUSH myBrush = ( HBRUSH ) GetStockObject ( RGB(120,120,120) );
+			HBRUSH oldBrush = ( HBRUSH ) SelectObject (mDC, myBrush );
+			BlockManager::getInstance ( ).Render ( mDC );
+			SelectObject ( mDC , oldBrush );
+			DeleteObject ( myBrush );
+			DeleteObject ( oldBrush );
+		}
 		
 		Camera_UI_CT_1 ( orimDC );
 		PlayerManager::getInstance ( ).Render ( mDC , orimDC );

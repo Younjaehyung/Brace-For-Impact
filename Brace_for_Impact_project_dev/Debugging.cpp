@@ -1,11 +1,12 @@
 ﻿#include "Debugging.h"
 int Debugging::debuggingMod = 0;
-
+int Debugging::count = 0;
 void Debugging::InputMod ( )
 {
 
 	if ( input::GetKey ( eKeyCode::U ) ) {//mod off
 		debuggingMod = 0;
+		count = 0;
 	}
 	else if ( input::GetKey ( eKeyCode::I ) ) {//mod on :1 
 		debuggingMod = 1;
@@ -17,7 +18,8 @@ void Debugging::InputMod ( )
 		debuggingMod = 3;
 	}
 
-	if ( debuggingMod ) {
+	if ( debuggingMod && !count ) {
 		std::cerr << "DebuggingMOD ON"<<std::endl;
+		count++;
 	}
 }

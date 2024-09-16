@@ -524,13 +524,33 @@ void Tank::Render ( const HDC& mDC)
 	//탱크 머리
 	TransparentBlt ( mDC , rect.left ,  -10 + rect.top , TANKSIZE , TANKSIZE , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , Tank_head_frame *128 , Tank_head_direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	
+	
+	
+	if ( Debugging::ReturnMod ( ) ) {
+		
+		HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 22 , 111 ) );
 
+		HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
+		HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , myBrush );
+		SelectObject ( mDC , hPen );
+		Rectangle ( mDC , rect.left  , rect.top , rect.left + TANKSIZE , rect.top + TANKSIZE );
+		DeleteObject ( hPen );
+		hPen = CreatePen ( PS_DOT , 1 , RGB ( 125 , 212 , 111 ) );
+		SelectObject ( mDC , hPen );
+		SelectObject ( mDC , myBrush );
 
+		Rectangle ( mDC , rect.left , rect.top , rect.right , rect.bottom );
+		Rectangle ( mDC , rect.left , rect.top - 10 , rect.left + TANKSIZE , rect.top + TANKSIZE );
+
+		SelectObject ( mDC , oldBrush );
+		DeleteObject ( myBrush );
+		DeleteObject ( hPen );
+	}
 }
 
 void Tank::sound ( )
 {
 	SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->ReplaySound ( );
-
+	
 	
 }

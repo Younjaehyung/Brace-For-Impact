@@ -317,10 +317,10 @@ void Player1::RenderRect ( const HDC& mDC )
 	HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 0 , 0 ) );
 
 	HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
-	SelectObject ( mDC , myBrush );
-	
-	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , myBrush );
 
+	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+	SelectObject ( mDC , oldBrush );
 	DeleteObject ( myBrush );
 	DeleteObject ( hPen );
 }
@@ -635,10 +635,10 @@ void Player2::RenderRect ( const HDC& mDC )
 	HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 0 , 0 ) );
 
 	HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
-	SelectObject ( mDC , myBrush );
+	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , myBrush );
 	
 	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
-
+	SelectObject ( mDC , oldBrush );
 	DeleteObject ( myBrush );
 	DeleteObject ( hPen );
 }

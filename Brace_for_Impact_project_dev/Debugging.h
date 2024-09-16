@@ -9,8 +9,8 @@ public:
 	}
 	
 	static void InputMod ( );
-
+	
 private:
 	static int debuggingMod;
-	
+	static int count;
 };
