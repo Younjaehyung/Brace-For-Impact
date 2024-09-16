@@ -133,6 +133,7 @@
     <ClInclude Include="Brace_for_Impact_project_dev.h" />
     <ClInclude Include="BULLET.h" />
     <ClInclude Include="CommonInclude.h" />
+    <ClInclude Include="Debugging.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="input.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="BLOCK.cpp" />
     <ClCompile Include="Brace_for_Impact_project_dev.cpp" />
     <ClCompile Include="BULLET.cpp" />
+    <ClCompile Include="Debugging.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="MATH.cpp" />

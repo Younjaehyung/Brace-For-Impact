@@ -7,7 +7,7 @@
 #include "Resource.h"
 #include "TankController.h"
 #include "Tank.h"
-
+#include "Debugging.h"
 #define PLAYERSIZE 96
 
 class Player1
@@ -38,8 +38,9 @@ public:
 	void Render ( const HDC& );
 	void Update();
 	void FixedUpdate();
-	RECTS ReturnRect();
-
+	
+	RECTS ReturnRect ( );
+	void RenderRect ( const HDC& mDC );
 };
 
 class Player2
@@ -69,6 +70,6 @@ public:
 	void Update();
 	void FixedUpdate();
 	RECTS ReturnRect();
-
+	void RenderRect ( const HDC& mDC );
 };
 

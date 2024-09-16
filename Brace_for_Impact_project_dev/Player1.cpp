@@ -297,6 +297,9 @@ void Player1::Render ( const HDC& mDC ) {
 			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 			, itemframe * 64 , (itemtype/10) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	}
+	if ( Debugging::ReturnMod ( ) ) {
+		RenderRect ( mDC );
+	}
 
 	TCHAR a00[ 20 ]= L"sdsadsd";
 	wsprintf ( a00 , L"%d  %d" , (int)(rect.left) , (int)(rect.top) );
@@ -306,6 +309,20 @@ void Player1::Render ( const HDC& mDC ) {
 RECTS Player1::ReturnRect ( ) {//플레이어 실제 좌표 리턴하게 수정
 	RECTS r = { rect.left + 1024 , rect.top , rect.right + 1024, rect.bottom };
 	return r;
+}
+
+void Player1::RenderRect ( const HDC& mDC )
+{
+	Rectangle ( mDC , rect.left + 10 , rect.top , rect.right + 10 , rect.bottom );
+	HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 0 , 0 ) );
+
+	HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
+	SelectObject ( mDC , myBrush );
+	
+	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+
+	DeleteObject ( myBrush );
+	DeleteObject ( hPen );
 }
 
 
@@ -602,8 +619,26 @@ void Player2::Render ( const HDC& mDC ) {
 			, itemframe * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	}
 
+	if ( Debugging:: ReturnMod ( ) ) {
+		RenderRect ( mDC );
+	}
+
 }
 RECTS Player2::ReturnRect() {
 	RECTS r = { rect.left + 1024 , rect.top , rect.right + 1024, rect.bottom };
 	return r;
+}
+
+void Player2::RenderRect ( const HDC& mDC )
+{
+	Rectangle ( mDC , rect.left + 10 , rect.top , rect.right + 10 , rect.bottom );
+	HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 0 , 0 ) );
+
+	HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
+	SelectObject ( mDC , myBrush );
+	
+	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+
+	DeleteObject ( myBrush );
+	DeleteObject ( hPen );
 }

@@ -686,6 +686,31 @@ void mop::Render( const HDC& dc) {
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_4" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
+		
+		if(Debugging::ReturnMod )
+		{
+			int mopSize;
+			if ( mop_inform.type == 10 || mop_inform.type == 11 ) {
+				mopSize = SIZE / 2;
+			}
+			else if ( mop_inform.type == 6 ) {
+				mopSize = SIZE * 2;
+			}
+			else {
+				mopSize = SIZE ;
+			}
+			
+			HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 122 , 255 , 122 ) );
+
+			HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
+			SelectObject ( dc , myBrush );
+			SelectObject ( dc , hPen );
+			Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x - MOPSIZE+ mopSize , mop_inform.y - MOPSIZE+ mopSize );
+
+			DeleteObject ( myBrush );
+			DeleteObject ( hPen );
+		}
+
 }
 
 RECTS& mop::ReturnRect ( ) {

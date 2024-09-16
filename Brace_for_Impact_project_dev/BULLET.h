@@ -3,7 +3,7 @@
 #include "Time.h"
 #include <list>
 #include "Texture.h"
-
+#include "Sound.h"
 //struct bullet{
 //	double x;
 //	double y;

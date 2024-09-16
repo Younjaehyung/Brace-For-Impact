@@ -7,7 +7,7 @@
 #include"Texture.h"
 #include "TankController.h"
 #include <random>
-
+#include "Debugging.h"
 class GameManager
 {
 private:
@@ -159,7 +159,7 @@ public:
 		BulletManager::getInstance ( ).Update ( );
 		MonsterManager::getInstance ( ).Update ( );
 		PlayerManager::getInstance ( ).Update ( );
-		
+		Debugging::InputMod ( );
 	}
 
 	void Render ( const HDC& mDC , const HDC& orimDC )

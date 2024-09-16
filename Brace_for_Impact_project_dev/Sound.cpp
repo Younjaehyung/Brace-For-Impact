@@ -84,8 +84,6 @@ inline void Sounds::playSound ( )
 
 }
 
-
-
 void Sounds::PauseSound ( ) {
 
 	if ( Channel != nullptr ) {
@@ -113,6 +111,9 @@ void Sounds::ReplaySound ( ) {
 		//else {
 		//	Channel->setPosition ( position , FMOD_TIMEUNIT_MS );
 		//}
+	}
+	else {
+		playSound ( );
 	}
 }
 

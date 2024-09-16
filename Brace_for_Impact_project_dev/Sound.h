@@ -21,6 +21,7 @@ class Sounds {
 public:
 
 	void playSound ( );	//음악재생 => 무조건 이걸 한번 해야지 나중에 다시 틀거나 멈추기가 가능함
+	void playSound2( );	//음악재생 => 무조건 이걸 한번 해야지 나중에 다시 틀거나 멈추기가 가능함
 	void PauseSound ( ); //음악중지 => 현재 음악 중지
 	void SetVolume ( float volume ); //함수 인자로 숫자넣어주면 해당 값만큼 소리를 바꿔줌
 	void ReplaySound ( ); //음악재반복, 같은 음원파일이면 이걸 실행시키면 음원을 처음부터 다시 재생시켜줌
