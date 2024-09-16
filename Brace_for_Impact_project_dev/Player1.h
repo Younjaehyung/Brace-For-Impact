@@ -19,6 +19,9 @@ private:
 	int status;
 	int frame , direct;		//direct 0 : 좌 1: 우
 
+	int itemframe;
+	float itemCountTime;
+
 	RECTS object1 = { 248, 200 , 400 , 400 };
 	bool Ismove , IsAiming;
 	int itemtype;
@@ -52,6 +55,9 @@ private:
 	bool Ismove , IsAiming;
 	int itemtype;
 	BOOL isHold; //아이템을 뭐라도 들고 있을 때
+
+	int itemframe;
+	float itemCountTime;
 
 public:
 	Player2();

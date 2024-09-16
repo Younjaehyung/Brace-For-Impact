@@ -75,6 +75,13 @@
 #define IDB_BM_STAGE_2_NIGHT            220
 #define IDB_BM_STAGE_1_NIGHT            221
 #define IDB_BM_STAGE_3_NIGHT            222
+#define IDR_WAVE8                       223
+#define IDR_WAVE9                       224
+#define IDR_WAVE10                      225
+#define IDR_WAVE11                      226
+#define IDR_WAVE12                      227
+#define IDR_WAVE13                      228
+#define IDR_WAVE14                      229
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -82,7 +89,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        223
+#define _APS_NEXT_RESOURCE_VALUE        230
 #define _APS_NEXT_COMMAND_VALUE         32772
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110

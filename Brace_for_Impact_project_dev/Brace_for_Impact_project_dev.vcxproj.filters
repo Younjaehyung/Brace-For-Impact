@@ -308,5 +308,24 @@
     <Media Include="BFI_ST6_Dub Hub.wav">
       <Filter>리소스 파일</Filter>
     </Media>
+    <Media Include="BFI_Explosion.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BFI_Hit.mp3" />
+    <Media Include="BFI_Menu.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BFI_Start.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BFI_Item.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BFI_Laser.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BFI_Shoot.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

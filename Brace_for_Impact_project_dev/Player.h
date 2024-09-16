@@ -13,6 +13,7 @@ private:
 	Tank tank;
 
 	
+	
 public:
 
 	static PlayerManager& getInstance ( ) {

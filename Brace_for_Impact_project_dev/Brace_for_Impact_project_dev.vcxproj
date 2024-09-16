@@ -223,7 +223,14 @@
     <Image Include="UI)Tankinside.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="BFI_Explosion.wav" />
+    <Media Include="BFI_Hit.mp3" />
+    <Media Include="BFI_Item.wav" />
+    <Media Include="BFI_Laser.wav" />
+    <Media Include="BFI_Menu.wav" />
+    <Media Include="BFI_Shoot.wav" />
     <Media Include="BFI_ST6_Dub Hub.wav" />
+    <Media Include="BFI_Start.wav" />
     <Media Include="BFI_ST_1_The Origin.wav" />
     <Media Include="BFI_ST_2_8bit Dungeon Bossc.wav" />
     <Media Include="BFI_ST_3_Funk Modulator.wav" />

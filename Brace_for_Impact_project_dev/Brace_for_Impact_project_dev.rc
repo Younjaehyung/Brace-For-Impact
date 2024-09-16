@@ -32,11 +32,13 @@ LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_BRACEFORIMPACTPROJECTDEV ICON                    "Brace_for_Impact_project_dev.ico"
+IDI_BRACEFORIMPACTPROJECTDEV ICON                    "BFI_ICON.ico"
 
-IDI_SMALL               ICON                    "small.ico"
+IDI_SMALL               ICON                    "BFI_ICON.ico"
 
 IDI_ICON1               ICON                    "BFI_ICON.ico"
+
+MAINICON                ICON                    "BFI_ICON.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -250,6 +252,20 @@ IDR_WAVE5               WAVE                    "BFI_ST_4_Scrub Slayer.wav"
 IDR_WAVE6               WAVE                    "BFI_ST_5_Welcome Player.wav"
 
 IDR_WAVE7               WAVE                    "BFI_ST6_Dub Hub.wav"
+
+IDR_WAVE8               WAVE                    "BFI_Explosion.wav"
+
+IDR_WAVE9               WAVE                    "BFI_Hit.mp3"
+
+IDR_WAVE10              WAVE                    "BFI_Menu.wav"
+
+IDR_WAVE11              WAVE                    "BFI_Start.wav"
+
+IDR_WAVE12              WAVE                    "BFI_Item.wav"
+
+IDR_WAVE13              WAVE                    "BFI_Laser.wav"
+
+IDR_WAVE14              WAVE                    "BFI_Shoot.wav"
 
 
 /////////////////////////////////////////////////////////////////////////////

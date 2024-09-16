@@ -52,6 +52,7 @@ void bullet::move ( ) {
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
 						if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
 							ScanMop->Damage ( 5 );
 						}
 					}
@@ -88,6 +89,7 @@ void bullet::move ( ) {
 						if ( type != 100 && type!=200) {
 							type = 0;
 							frame = 0;
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
 							ScanMop->Damage ( 30 );
 						}
 						else if(type==100){ //연막
@@ -120,6 +122,7 @@ void bullet::move ( ) {
 				if ( type == 14 ) {
 					if ( counter >= 500 ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
 							TankController::Damage ( 100 );
 						}
 						type = 0;
@@ -128,12 +131,15 @@ void bullet::move ( ) {
 				else {
 					if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp ( ) > 0 ) {
 						if ( type == 10 ) { //오줌이
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
 							TankController::Damage ( 1 );
 						}
 						else if ( type == 11 ) {//빵빵이
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
 							TankController::Damage ( 45 );
 						}
 						else if ( type == 12 ) {//춘식이
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
 							TankController::Damage ( 40 );
 							
 						}

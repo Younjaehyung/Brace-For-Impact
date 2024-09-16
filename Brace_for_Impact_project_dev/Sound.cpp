@@ -22,9 +22,13 @@ bool SoundManager::Init ( ) {
 inline void SoundManager::CreateSoundlist ( ) {
 	//기본 음원을 넣는 포멧. 마지막에 숫자 0 : 음원루프x /숫자 1 : 음원루프O
 	Channel.emplace ( "testMP3" , CreateSound ( "Whale_06_R.P.G._Shine.mp3",1 ) );
-
-
-
+	Channel.emplace ( "Explosion" , CreateSound ( "BFI_Explosion.wav" , 0 ) );
+	Channel.emplace ( "Menu" , CreateSound ( "BFI_Menu.wav" , 0 ) );
+	Channel.emplace ( "Hit" , CreateSound ( "BFI_Hit.mp3" , 0 ) );
+	Channel.emplace ( "Start" , CreateSound ( "BFI_Start.wav" , 0 ) );
+	Channel.emplace ( "Shoot" , CreateSound ( "BFI_Shoot.wav" , 0 ) );
+	Channel.emplace ( "Item" , CreateSound ( "BFI_Item.wav" , 0 ) );
+	Channel.emplace ( "Laser" , CreateSound ( "BFI_Laser.wav" , 0 ) );
 }
 
 Sounds* SoundManager::FindSoundlist ( std::string filename ) {

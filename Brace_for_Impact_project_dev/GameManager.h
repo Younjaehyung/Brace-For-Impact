@@ -65,6 +65,8 @@ private:
 	int prevTankHp;	//이전 탱크 피
 	bool invincibleMode;
 
+	
+
 	int endframe;
 	float endcount;
 
@@ -306,21 +308,24 @@ public:
 		if (( input::GetKeyDown ( eKeyCode:: DOWN ) || input::GetKeyDown ( eKeyCode::S )) && !Selected ) {
 			if ( Cursor < 8 )
 				Cursor += 4;
+			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->playSound ( );
 		}
 		else if (( input::GetKeyDown ( eKeyCode::UP ) || input::GetKeyDown ( eKeyCode::W )) && !Selected ) {
 			if ( Cursor > 0 )
 				Cursor -= 4;
+			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->playSound ( );
 		}
 
 
 		//게임 시작 창일때
 		if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) )&& Cursor == 0 ) {
+			SoundManager::getInstance ( ).GetSoundID ( "Start" )->playSound ( );
 			type = 1;
 			
 			return;
 		}
 		else if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ))&& Cursor == 4 ) {
-
+			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->playSound ( );
 			Rule = !Rule;
 
 			if ( Rule ) {

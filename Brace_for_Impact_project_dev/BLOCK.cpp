@@ -58,11 +58,11 @@ void BlockManager::Initialize ( int type )
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 24,0,32,32 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 8,7,11,9 } , 1 );
-		Blocks.push_back ( temp );
-		temp.makeblock ( { 19,12,24,13 } , 1 );
-		Blocks.push_back ( temp );
-		temp.makeblock ( { 8,18,11,20 } , 1 );
+		//temp.makeblock ( { 8,7,11,9 } , 1 );
+		//Blocks.push_back ( temp );
+		//temp.makeblock ( { 19,12,24,13 } , 1 );
+		//Blocks.push_back ( temp );
+		//temp.makeblock ( { 8,18,11,20 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 0,31,32,32 } , 1 );
 		Blocks.push_back ( temp );

@@ -28,6 +28,8 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 	alertCount += Time::DeltaTime ( );
 
 
+	
+
 	TransparentBlt ( mDC , 0 , 768 , 1024 , 225 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Info" ) , 0 , 0 , 1024 , 252 , RGB ( 255 , 255 , 255 ) );
 	/*TransparentBlt ( mDC , 0 , 640 , 128 , 128 ,
@@ -114,18 +116,28 @@ void GameManager::Camera_UI_CT_1( const HDC& mDC )
 	//TransparentBlt ( mDC , 1024 + 16 * 29 , 0 + 16 * 33 , 128 , 128 ,
 	//		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 
+	//이 아래에 있는 조종기들은 실제 상호작용 +- 4만큼 씩 적용됨
 	//대쉬
-	TransparentBlt ( mDC , 1024 + 16 * 4 + CameraMx , 0 + 16 * 33 + CameraMy , 144 , 144 ,
+	TransparentBlt ( mDC , 1024 + 16 * 30 + CameraMx , 0 + 16 * 20 + CameraMy , 144 , 144 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	//증기
-	TransparentBlt ( mDC , 1024 + 16 * 29 + CameraMx , 0 + 16 * 33 + CameraMy , 144 , 144 ,
+	TransparentBlt ( mDC , 1024 + 16 * 2 + CameraMx , 0 + 16 * 20 + CameraMy , 144 , 144 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_CT_Steam_Dash" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 	//탄약
-	TransparentBlt ( mDC , 1024 + 16 * 4 + CameraMx , 0 + 16 * 46 + CameraMy , 128 , 128 ,
-		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-	//연료
-	TransparentBlt ( mDC , 1024 + 16 * 29 + CameraMx , 0 + 16 * 46 +CameraMy , 128 , 128 ,
+	TransparentBlt ( mDC , 1024 + 16 * 29 + CameraMx , 0 + 16 * 34 + CameraMy , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 128 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	//연료
+	TransparentBlt ( mDC , 1024 + 16 * 3 + CameraMx , 0 + 16 * 34 +CameraMy , 128 , 128 ,
+		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+	/*Rectangle ( mDC, 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11 );
+	Rectangle ( mDC , 1024 + 16 * 7 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 );
+	Rectangle ( mDC , 1024 + 16 * 16 , 16 * 26 , 1024 + 16 * 24 , 16 * 30 );
+	Rectangle ( mDC , 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 );
+	Rectangle ( mDC , 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 );
+	Rectangle ( mDC , 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 );
+	Rectangle ( mDC , 1024 + 16 * 7 , 16 * 34 , 1024 + 16 * 16 , 16 * 38 );
+	Rectangle ( mDC , 1024 + 16 * 25 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 );*/
+
 
 }
 
@@ -261,7 +273,6 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 	if ( Rule ) {
 		TransparentBlt ( mDC , 0 , -8 , 1024 , 1024 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 1024 , RGB ( 255 , 255 , 255 ) );
-
 	}
 }
 
@@ -291,11 +302,18 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 
 void GameManager::ClearScene ( const HDC& mDC ) {//2
 
+	if ( endcount >= 0.1 ) {
+		endcount = 0;
+		endframe++;
+		if ( endframe >= 6 ) {
+			endframe = 0;
+		}
+	}	endcount += Time::DeltaTime ( );
 
 	TransparentBlt ( mDC , 128 * 5 + 64 , 256 , 320 , 320 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Clear" ) , 0 , 0 ,320 , 320 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 128 * 8 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
-	TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 8 , 128 * 5 - (endframe * 5) , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_2" ) , 0 , 64 * 2 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+	TransparentBlt ( mDC , 128 * 4 , 128 * 5 - ( endframe * 5 ) , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Player_1" ) , 0 , 64 * 7 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	if ( input::GetKeyDown ( eKeyCode::F ) ) {
 		Clear ( );
 		Initialize ( );
