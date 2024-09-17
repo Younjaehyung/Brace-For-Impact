@@ -330,3 +330,4 @@ void GameManager::Stage_Switch_Render ( const HDC& mDC, const HDC& orimDC ) {
 
 	
 }
+

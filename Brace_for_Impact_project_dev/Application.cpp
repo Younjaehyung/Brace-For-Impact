@@ -3,13 +3,10 @@
 void Application::f_Update() {
 	input::Update();
 	Time::Update ( );
-	
+	Debugging::InputMod ( );
 	
 	GameManager::getInstance ( ).Update ( );
-	if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
-		GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
-		PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
-	}
+	
 	
 }
 

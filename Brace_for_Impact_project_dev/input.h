@@ -14,6 +14,7 @@ enum class eKeyCode {
 	Q, W, E, R, T, Y, U, I, O, P,
 	A, S, D, F, G, H, J, K, L,
 	Z, X, C, V, B, N, M, LEFT, RIGHT, DOWN, UP,p1_a,p1_b,p2_a,p2_b,F1,SPACE, ESCAPE,
+	NUM1, NUM2, NUM3, NUM4, NUM5,NUM6,
 	End,
 };
 

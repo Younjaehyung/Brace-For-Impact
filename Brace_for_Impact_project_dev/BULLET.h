@@ -4,6 +4,7 @@
 #include <list>
 #include "Texture.h"
 #include "Sound.h"
+#include "Debugging.h"
 //struct bullet{
 //	double x;
 //	double y;

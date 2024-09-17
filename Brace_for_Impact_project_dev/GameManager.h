@@ -156,10 +156,12 @@ public:
 		}
 		
 		Stage_condition ( );
+		Debugging_Switch_Mod ( );
+
 		BulletManager::getInstance ( ).Update ( );
 		MonsterManager::getInstance ( ).Update ( );
 		PlayerManager::getInstance ( ).Update ( );
-		Debugging::InputMod ( );
+		
 	}
 
 	void Render ( const HDC& mDC , const HDC& orimDC )
@@ -354,6 +356,50 @@ public:
 	}
 	void EndScene ( const HDC& );
 	void Stage_Switch_Render ( const HDC& mDC , const HDC& orimDC );
+
+
+	void Debugging_Kill_Enemy ( ) {
+		if ( Debugging::ReturnMod ( ) ) {
+			MonsterManager::getInstance().Clear ( );
+		}
+	}
+
+	void Debugging_Switch_Mod ( ) {
+		if ( Debugging::ReturnMod ( ) ) {
+			if (  input::GetKeyDown ( eKeyCode::NUM1 )) {
+				Debugging_Kill_Enemy ( );
+				SceneStatus = 0;
+			}
+			else if ( input::GetKeyDown ( eKeyCode::NUM2 )  ) {
+				Debugging_Kill_Enemy ( );
+				SceneStatus = 1;
+			}
+			else if ( input::GetKeyDown ( eKeyCode::NUM3 ) ) {
+				Debugging_Kill_Enemy ( );
+				SceneStatus = 2;
+			}
+			else if ( input::GetKeyDown ( eKeyCode::NUM4 ) ) {
+				Debugging_Kill_Enemy ( );
+				SceneStatus =3;
+			}
+			else if ( input::GetKeyDown ( eKeyCode::NUM5 ) ) {
+				Debugging_Kill_Enemy ( );
+				SceneStatus = 4;
+			}
+			else if ( input::GetKeyDown ( eKeyCode::NUM6 ) ) {
+				Debugging_Kill_Enemy ( );
+				SceneStatus = 5;
+			}
+			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
+				GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
+				PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
+			}
+			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
+				Debugging_Kill_Enemy ( );
+			}
+			
+		}
+	}
 
 };
 

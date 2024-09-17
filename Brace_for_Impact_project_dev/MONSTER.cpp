@@ -690,8 +690,9 @@ void mop::Render( const HDC& dc) {
 		if ( Debugging::ReturnMod ( ) )
 		{
 			int mopSize;
+			HBRUSH oldBrush;
 			HPEN hPen;
-
+			HPEN oldPen;
 			
 			if ( mop_inform.type == 10 || mop_inform.type == 11 ) {
 				mopSize = SIZE / 2;
@@ -705,38 +706,38 @@ void mop::Render( const HDC& dc) {
 
 			
 			if ( status == 0 ) {
-				hPen = CreatePen ( 1 , 1 , RGB ( 111 , 111 , 222 ) );
+				hPen = Debugging::whitepen;
 			}
 			else if ( status == 1 ) {
-				hPen = CreatePen ( 1 , 1 , RGB ( 111 , 222 , 111 ) );
+				hPen = Debugging::yellowpen;
 			}
 			else if ( status == 2 ) {
-				hPen = CreatePen ( 1 , 1 , RGB ( 255 , 51 , 111 ) );
+				hPen = Debugging::redpen;
 			}
 			else if ( status == 3 ) {
-				hPen = CreatePen (1 , 1 , RGB ( 255 , 255 , 255 ) );
+				hPen = Debugging::blackpen;
 			}
 			else {
-				hPen = CreatePen ( 1 , 1 , RGB ( 0 , 0 , 0 ) );
+				hPen = Debugging::blackpen;
 			}
 
 			
 			std::cerr << "적 status :" << status << std::endl;
 
 			
-			HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
-			SelectObject ( dc , myBrush );
+			
+			oldBrush=(HBRUSH)SelectObject ( dc , Debugging::NULLBRUSH );
 
 			
-			HPEN oldPen = ( HPEN ) SelectObject ( dc , hPen );
+			oldPen = ( HPEN ) SelectObject ( dc , hPen );
 
 		
 			Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x - MOPSIZE + mopSize , mop_inform.y - MOPSIZE + mopSize );
 
 			
+			SelectObject ( dc , oldBrush );
 			SelectObject ( dc , oldPen );
-			DeleteObject ( myBrush );
-			DeleteObject ( hPen );
+			
 		}
 
 

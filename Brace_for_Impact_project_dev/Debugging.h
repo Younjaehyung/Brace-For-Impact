@@ -10,7 +10,15 @@ public:
 	
 	static void InputMod ( );
 	
+
+	static HBRUSH NULLBRUSH;
+	static HPEN redpen;
+	static HPEN yellowpen;
+	static HPEN bluepen;
+	static HPEN whitepen;
+	static HPEN blackpen;
 private:
 	static int debuggingMod;
 	static int count;
+	
 };

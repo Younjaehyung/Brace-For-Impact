@@ -314,15 +314,13 @@ RECTS Player1::ReturnRect ( ) {//플레이어 실제 좌표 리턴하게 수정
 void Player1::RenderRect ( const HDC& mDC )
 {
 	Rectangle ( mDC , rect.left + 10 , rect.top , rect.right + 10 , rect.bottom );
-	HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 0 , 0 ) );
-
-	HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
-	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , myBrush );
+	HPEN oldPen = (HPEN)SelectObject ( mDC , Debugging::bluepen );
+	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , Debugging::NULLBRUSH );
 
 	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+
 	SelectObject ( mDC , oldBrush );
-	DeleteObject ( myBrush );
-	DeleteObject ( hPen );
+	SelectObject ( mDC , oldPen );
 }
 
 
@@ -632,13 +630,11 @@ RECTS Player2::ReturnRect() {
 void Player2::RenderRect ( const HDC& mDC )
 {
 	Rectangle ( mDC , rect.left + 10 , rect.top , rect.right + 10 , rect.bottom );
-	HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 0 , 0 ) );
+	HPEN oldPen = ( HPEN ) SelectObject ( mDC , Debugging::redpen );
+	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , Debugging::NULLBRUSH );
 
-	HBRUSH myBrush = ( HBRUSH ) GetStockObject ( NULL_BRUSH );
-	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , myBrush );
-	
 	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+
 	SelectObject ( mDC , oldBrush );
-	DeleteObject ( myBrush );
-	DeleteObject ( hPen );
+	SelectObject ( mDC , oldPen );
 }

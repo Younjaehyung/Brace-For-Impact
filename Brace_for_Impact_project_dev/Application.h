@@ -8,7 +8,7 @@
 //#include "PlayScenes.h"
 #include "GameManager.h"
 #include "input.h"
-
+#include "Debugging.h"
 #include "Time.h"
 #include "Texture.h"
 #include "Sound.h"

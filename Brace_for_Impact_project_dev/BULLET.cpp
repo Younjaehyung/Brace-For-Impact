@@ -213,6 +213,70 @@ void bullet::Render ( const HDC& dc ) {
 			
 		}
 	}
+
+
+
+	if ( Debugging::ReturnMod ( ) ) {
+		float size;
+		if ( type != 0 ) {
+			if ( PlayerBullet ) { //플레이어가 쏜 총알
+				if ( type != 100 && type != 200 ) {
+					size = 4 * SIZE;
+
+				}
+				else if ( type == 100 ) { //연막
+					size = 4 * SIZE + counter;
+					//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+
+
+				}
+				else { //대쉬
+					size = 128;
+
+					//BLENDFUNCTION bf;
+					//bf.BlendOp = AC_SRC_OVER;
+					//bf.BlendFlags = 0;
+					//bf.AlphaFormat = 0;
+					//bf.SourceConstantAlpha = 200 - counter * 15;
+
+					//BitBlt ( dc , 0 , 0 , 128 , 128 , dc , x , y , SRCCOPY );
+					//TransparentBlt ( dc , 0 , 0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_car" ) , 1 * 128 , mx * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+					//TransparentBlt ( dc , 0 , -10 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Tank_head" ) , 1 * 128 , my * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+
+					//AlphaBlend ( dc , x , y , 128 , 128 , dc , 0 , 0 , 128 , 128 , bf );
+					//TransparentBlt ( dc , 0 , 0 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_STAGE_2" ) , 0 / 2 , 0 / 2 , 128 / 2 , 128 / 2 , RGB ( 255 , 255 , 255 ) );
+
+				}
+				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+			}
+			else {  // 몬스터가 쏜 총알
+				if ( type == 14 ) { // 자폭이 폭발
+					size = SIZE + counter;
+
+					//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+				}
+				else { //오줌이
+					size = 4 * SIZE;
+
+				}
+
+			}
+		}
+		else {
+			if ( PlayerBullet ) {
+				size = 4 * SIZE;
+
+			}
+		}
+		
+		Rectangle ( dc , x - size , y - size , x + size , y + size );
+
+
+
+		
+
+	}
+
 }
 
 void bullet::Update ( ) {
@@ -264,11 +328,25 @@ void BulletManager::Update() {
 
 
 void BulletManager::Render( const HDC& dc) {
+	HBRUSH oldBrush=0;
+
+	if ( Debugging::ReturnMod ( ) ) {
+		
+		oldBrush=(HBRUSH)SelectObject ( dc ,Debugging::NULLBRUSH );
+
+	}
+
 	for ( auto& iter : bullets ) {
 		
 			iter->Render ( dc );
 		
 	}
+
+	if ( Debugging::ReturnMod ( ) ) {
+		SelectObject ( dc,oldBrush );
+
+	}
+	
 }
 
 
