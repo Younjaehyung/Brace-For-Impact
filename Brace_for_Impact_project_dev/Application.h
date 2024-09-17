@@ -66,7 +66,7 @@ public:
 	void HandleResize ( );
 	HINSTANCE ReturnHinstance ( ) { return g_hinst; }
 
-
+	
 };
 
 

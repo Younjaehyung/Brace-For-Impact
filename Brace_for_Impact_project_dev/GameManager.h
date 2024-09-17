@@ -364,8 +364,11 @@ public:
 		}
 	}
 
+	
+
 	void Debugging_Switch_Mod ( ) {
-		if ( Debugging::ReturnMod ( ) ) {
+
+		 if ( Debugging::ReturnMod ( ) ) {
 			if (  input::GetKeyDown ( eKeyCode::NUM1 )) {
 				Debugging_Kill_Enemy ( );
 				SceneStatus = 0;
@@ -390,13 +393,14 @@ public:
 				Debugging_Kill_Enemy ( );
 				SceneStatus = 5;
 			}
-			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
+			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {	//무적
 				GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
 				PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
 			}
 			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
 				Debugging_Kill_Enemy ( );
 			}
+			
 			
 		}
 	}

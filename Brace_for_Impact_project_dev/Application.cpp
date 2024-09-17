@@ -5,8 +5,9 @@ void Application::f_Update() {
 	Time::Update ( );
 	Debugging::InputMod ( );
 	
-	GameManager::getInstance ( ).Update ( );
-	
+	if ( Debugging::ReturnMod ( ) != 3 ) {	//Debugging pause
+		GameManager::getInstance ( ).Update ( );
+	}
 	
 }
 
@@ -91,6 +92,7 @@ void Application::HandleResize ( ) {
 }
 
 void Application::f_Run() {
+
 	f_Update();
 	f_FixedUpdate();
 	f_Render();
