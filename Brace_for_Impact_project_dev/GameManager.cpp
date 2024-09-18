@@ -239,7 +239,7 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 
 
 
-	if ( count >= 0.4 ) {
+	if ( count >= 0.3 ) {
 		count = 0;
 		frame++;
 		if ( frame >= 5 ) {

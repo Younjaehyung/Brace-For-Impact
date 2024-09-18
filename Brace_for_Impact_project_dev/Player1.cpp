@@ -135,7 +135,7 @@ void Player1::move ( ) {
 
 void Player1::SwitchStatus ( ) {
 	
-		if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
+		if ( rect2rect_f ( 1024 + 16 * 9 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
 			//이동 조작
 			itemtype = itemtype%10 +30;
 		}
@@ -174,7 +174,7 @@ void Player1::SwitchStatus ( ) {
 	
 
 	if ( input::GetKeyUp ( eKeyCode::p1_a ) ) {
-		if (rect2rect_f( 1024 + 16 * 25 , 16 * 9 , 1024 + 16 * 34 , 16 * 15 ,ReturnRect()) ) {
+		if (rect2rect_f( 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11 ,ReturnRect()) ) {
 			if ( !IsAiming && TankController::TankAimingStatus ( ) ) {	//조종안하고 있는데 작동중이면 리턴
 				return;
 			}
@@ -185,7 +185,7 @@ void Player1::SwitchStatus ( ) {
 			direct = 2;
 
 		}
-		if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 9 , 1024 + 16 * 16 , 16 * 15 , ReturnRect ( ) ) ) {
+		if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
 			if ( !Ismove && TankController::TankMoveStatus ( ) ) {
 				std::cout << "T2" << std::endl;
 				return;
@@ -472,7 +472,7 @@ void Player2::SwitchStatus ( ) {
 
 	if ( input::GetKeyUp ( eKeyCode::p2_b ) ) {
 		
-		if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 9 , 1024 + 16 * 34 , 16 * 15 , ReturnRect ( ) ) ) {
+		if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11 , ReturnRect ( ) ) ) {
 			if ( !IsAiming && TankController::TankAimingStatus ( ) ) {	//조종안하고 있는데 작동중이면 리턴
 				return;
 			}
@@ -483,7 +483,7 @@ void Player2::SwitchStatus ( ) {
 			direct = 2;
 
 		}
-		if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 9 , 1024 + 16 * 16 , 16 * 15 , ReturnRect ( ) ) ) {
+		if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
 			if ( !Ismove && TankController::TankMoveStatus ( ) ) {
 				std::cout << "T2" << std::endl;
 				return;
