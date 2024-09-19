@@ -201,7 +201,7 @@ void Tank::move ( )
 			}
 			
 		}
-
+		
 		
 		////손 때면
 		//if ( input::GetKeyUp ( eKeyCode::W ) ) {
@@ -387,8 +387,9 @@ void Tank::Update ( ){
 			{
 				if ( TankController::TankMoveStatus ( ) ) {
 					move ( );
+					moving_rander_cal ( );
 				}
-				moving_rander_cal ( );
+				
 			}
 		}
 		TankController::TankRects ( ) = rect;

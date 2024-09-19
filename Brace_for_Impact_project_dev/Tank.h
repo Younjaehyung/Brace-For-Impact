@@ -64,6 +64,10 @@ public:
 		return OILMODE;
 	}
 
+	BOOL& ReturnIsmove ( ) {
+		return isMove;
+	}
+
 	void Damage ( int damage );
 
 	void Update ( );

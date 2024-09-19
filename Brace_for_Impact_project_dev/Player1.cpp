@@ -191,6 +191,7 @@ void Player1::SwitchStatus ( ) {
 				std::cout << "T2" << std::endl;
 				return;
 			}
+			
 			TankController::TankMoveStatus ( ) = !TankController::TankMoveStatus ( );
 			TankController::WhoMoveStatus ( ) = 1;
 			std::cout << "T" << std::endl;
@@ -199,7 +200,8 @@ void Player1::SwitchStatus ( ) {
 		
 
 		}
-		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 24 , 1024 + 16 * 24 , 16 * 30 , ReturnRect ( ) ) ) {
+		
+		if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 24 , 1024 + 16 * 24 , 16 * 30 , ReturnRect ( ) ) ) {
 			//장전
 			if ( status == 2 && itemtype%10 == 1) {
 				status = 0;
@@ -490,6 +492,7 @@ void Player2::SwitchStatus ( ) {
 				std::cout << "T2" << std::endl;
 				return;
 			}
+		
 			TankController::TankMoveStatus ( ) = !TankController::TankMoveStatus ( );
 			TankController::WhoMoveStatus ( ) = 2;
 			std::cout << "T" << std::endl;
