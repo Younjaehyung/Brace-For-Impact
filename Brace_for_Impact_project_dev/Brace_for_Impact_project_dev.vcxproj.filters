@@ -333,5 +333,13 @@
     <Media Include="BFI_Shoot.wav">
       <Filter>리소스 파일</Filter>
     </Media>
+    <Media Include="BFI_ST6_The_FinalBattle.mp3" />
+    <Media Include="BFI_Dash.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="BFI_Move.mp3" />
+    <Media Include="BFI_Reload.wav">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

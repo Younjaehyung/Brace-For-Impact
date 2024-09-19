@@ -267,6 +267,14 @@ IDR_WAVE13              WAVE                    "BFI_Laser.wav"
 
 IDR_WAVE14              WAVE                    "BFI_Shoot.wav"
 
+IDR_WAVE15              WAVE                    "BFI_ST6_The_FinalBattle.mp3"
+
+IDR_WAVE16              WAVE                    "BFI_Dash.wav"
+
+IDR_WAVE17              WAVE                    "BFI_Move.mp3"
+
+IDR_WAVE18              WAVE                    "BFI_Reload.wav"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

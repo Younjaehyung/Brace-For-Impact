@@ -101,7 +101,7 @@ void Tank::move ( )
 		if ( TankController::Dash() ) {
 			speed = 3*speed;
 			//TankController::Dash() = 0 ;
-			dashcnt+=  100* Time::DeltaTime ( );
+			dashcnt+=  300* Time::DeltaTime ( );
 			if ( dashcnt > 10 ) {
 				dashcnt2++;
 				bullet * newbullet = new bullet ( rect.left , rect.top , 200 , Tank_car_direct , Tank_head_direct );
@@ -116,12 +116,14 @@ void Tank::move ( )
 		if ( TankController::WhoMoveStatus() == 1 ) {
 			if ( input::GetKey ( eKeyCode::W ) ) {
 				moveY -= 1;
+				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
 				isMove = true;
 			}
 
 
 			if ( input::GetKey ( eKeyCode::A ) ) {
 				moveX -= 1;
+				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
 				isMove = true;
 			}
 
@@ -129,6 +131,7 @@ void Tank::move ( )
 
 			if ( input::GetKey ( eKeyCode::S ) ) {
 				moveY += 1;
+				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
 				isMove = true;
 			}
 
@@ -136,6 +139,7 @@ void Tank::move ( )
 
 			if ( input::GetKey ( eKeyCode::D ) ) {
 				moveX += 1;
+				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
 				isMove = true;
 			}
 		

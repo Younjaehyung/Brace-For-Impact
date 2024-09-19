@@ -29,6 +29,17 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "Shoot" , CreateSound ( "BFI_Shoot.wav" , 0 ) );
 	Channel.emplace ( "Item" , CreateSound ( "BFI_Item.wav" , 0 ) );
 	Channel.emplace ( "Laser" , CreateSound ( "BFI_Laser.wav" , 0 ) );
+	Channel.emplace ( "Stage1" , CreateSound ( "BFI_ST_1_The Origin.wav" , 1 ));
+	Channel.emplace ( "Stage2" , CreateSound ( "BFI_ST_2_8bit Dungeon Bossc.wav" , 1 ));
+	Channel.emplace ( "Stage3" , CreateSound ( "BFI_ST_3_Funk Modulator.wav" , 1 ));
+	Channel.emplace ( "Stage4" , CreateSound ( "BFI_ST_4_Scrub Slayer.wav" , 1 ));
+	Channel.emplace ( "Stage5" , CreateSound ( "BFI_ST_5_Welcome Player.wav" , 1 ));
+	Channel.emplace( "Stage6", CreateSound ("BFI_ST6_The_FinalBattle.mp3" , 1 ) );
+	Channel.emplace ( "Title" , CreateSound ( "BFI_Title_Good Old Times.wav" , 1 ) );
+	Channel.emplace ( "Dash" , CreateSound ( "BFI_Dash.wav" , 0 ) );
+	Channel.emplace ( "Reload" , CreateSound ( "BFI_Reload.wav" , 0 ) );
+	Channel.emplace ( "Move" , CreateSound ( "BFI_Move.mp3" , 0 ) );
+
 }
 
 Sounds* SoundManager::FindSoundlist ( std::string filename ) {
