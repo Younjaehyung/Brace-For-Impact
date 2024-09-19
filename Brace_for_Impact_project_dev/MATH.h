@@ -12,6 +12,9 @@ double angle(double x1, double y1, double x2, double y2);
 
 void bulletshot ( float x1 , float y1 , float x2 , float y2 , int type );
 
+bool ck8 ( int map[ 32 ][ 32 ] , int x , int y , int ck );
+int ck8_move ( int map[ 32 ][ 32 ] , int x , int y , int ck );
+
 typedef struct RECTS {
 	float left;
 	float top;

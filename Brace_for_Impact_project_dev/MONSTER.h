@@ -34,6 +34,7 @@ public:
 	
 	void attack(Tank&);
 	void move( Tank& );
+	void move2( Tank& );
 	void Update( );
 	void Render( const HDC& dc);
 	RECTS& ReturnRect ( );
