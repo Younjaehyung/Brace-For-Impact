@@ -452,6 +452,8 @@ void mop::move ( Tank& p1  ) {
 			}
 		}
 	}
+
+	
 	/*
 	if ( move_count >= 0.1 ) {
 		frame++;
@@ -462,6 +464,101 @@ void mop::move ( Tank& p1  ) {
 	*/
 
 }
+
+//이동 업그레이드 버전 (개발중)
+void mop::move2 ( Tank& p1 ) {
+	//OSW: 속도 300 -> 100으로 수정함
+	float speed = 100 * Time::DeltaTime ( );
+	if ( mop_inform.type == 4 )speed *= 2;
+	
+	int map[ 32 ][ 32 ] = {0};
+	int n = 1;
+	for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
+		for ( int i = ScanBlock.ReturnRect().left-n ; i < ScanBlock.ReturnRect ( ).right +n; i++ ) {
+			for ( int j = ScanBlock.ReturnRect ( ).top -n; j < ScanBlock.ReturnRect ( ).bottom + n; j++ ) {
+				if ( i >= 0 && i < 32 && j >= 0 && j < 32 ) {
+					map[ i ][ j ] = -1;
+				}
+			}
+		}
+	}
+
+	std::cout << "ttt" << std::endl;
+
+	int px = (int) (middleX ( p1.ReturnRect ( ) )/64 );
+	int py = (int) (middleY ( p1.ReturnRect ( ) )/64 );
+	int mx = (int) (middleX ( ReturnRect ( ) )/64);
+	int my = (int) (middleY ( ReturnRect ( ) )/64);
+
+	map[ px ][ py ] = -2;
+	map[ mx ][ my ] = -3;
+
+	for ( int i = px - 1; i < px + 2; i++ ) {
+		for ( int j = py - 1; j < py + 2; j++ ) {
+			if ( map[ i ][ j ] == 0 ) {
+				map[ i ][ j ] += 1;
+			}
+		}
+	}
+
+	int cnt = 2;
+
+	//std::cout << "ttt" << std::endl;
+	
+	while ( 1 ) {
+		for ( int i = px - cnt; i <= px + cnt; i++ ) {
+			for ( int j = py - cnt; j <= py + cnt; j++ ) {
+				if ( i >= 0 && i < 32 && j >= 0 && j < 32 ) {
+					if ( map[ i ][ j ] == 0 ) {
+						if ( ck8 ( map , i , j , cnt - 1 ) )
+							map[ i ][ j ] = cnt;
+					}
+				}
+			}
+		}
+		if ( ck8 ( map , mx , my , cnt ) ) {
+			break;
+		}
+		cnt++;
+	}
+
+	//std::cout << "test:" << mx << "," << my << std::endl;
+
+
+	if ( ck8_move ( map , mx , my , cnt ) ==1 ) {
+		mop_inform.x += speed;
+		mop_inform.y -= speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 2 ) {
+		mop_inform.x += speed;
+		mop_inform.y += speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 3 ) {
+		mop_inform.x -= speed;
+		mop_inform.y += speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 4 ) {
+		mop_inform.x -= speed;
+		mop_inform.y -= speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 5 ) {
+		mop_inform.y -= speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 6 ) {
+		mop_inform.x += speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 7 ) {
+		mop_inform.y += speed;
+	}
+	else if ( ck8_move ( map , mx , my , cnt ) == 8 ) {
+		mop_inform.x -= speed;
+	}
+
+
+	if ( frame >= 6 ) frame = 0;
+
+}
+
 
 void mop::Update( ){
 	

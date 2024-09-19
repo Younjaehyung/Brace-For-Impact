@@ -30,6 +30,63 @@ float a2bLine2 ( float y , float p1x , float p1y , float mopx , float mopy ) {
 	}
 }
 
+bool ck8 ( int map[ 32 ][ 32 ] , int x , int y , int ck ) {
+	for ( int i = x - 1; i < x + 2; i++ ) {
+		for ( int j = y - 1; j < y + 2; j++ ) {
+			if ( i >= 0 && i < 32 && j >= 0 && j < 32 ) {
+				if ( map[ i ][ j ] == ck ) {
+					return 1;
+				}
+			}
+		}
+	}
+	return 0;
+}
+int ck8_move ( int map[ 32 ][ 32 ] , int x , int y , int ck ) {
+	for ( int i = x - 1; i < x + 2; i++ ) {
+		for ( int j = y - 1; j < y + 2; j++ ) {
+			if ( i >= 0 && i < 32 && j >= 0 && j < 32 ) {
+				if ( map[ i ][ j ] == ck ) {
+					if ( i == x - 1 && j == y - 1 ) {
+						//↖
+						return 4;
+					}
+					else if ( i == x && j == y - 1 ) {
+						//↑
+						return 5;
+					}
+					else if ( i == x+1 && j == y - 1 ) {
+						//↗
+						return 1;
+					}
+					else if ( i == x-1 && j == y ) {
+						//←
+						return 8;
+					}
+					else if ( i == x+1 && j == y ) {
+						//→
+						return 6;
+					}
+					else if ( i == x - 1 && j == y + 1 ) {
+						//↙
+						return 3;
+					}
+					else if ( i == x && j == y + 1 ) {
+						//↓
+						return 7;
+					}
+					else if ( i == x + 1 && j == y + 1 ) {
+						//↘
+						return 2;
+					}
+
+				}
+			}
+		}
+	}
+	return 0;
+}
+
 float middleX ( RECTS a ) {
 	return ( a.left + a.right ) / 2;
 }
