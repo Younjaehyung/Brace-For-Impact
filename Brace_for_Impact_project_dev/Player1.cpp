@@ -206,7 +206,7 @@ void Player1::SwitchStatus ( ) {
 				isHold = false;
 				if ( TankController::TankBullet ( ) < 4 )
 				TankController::TankBullet ( )++;
-				SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+				SoundManager::getInstance ( ).GetSoundID ( "Reload" )->ReplaySound ( );
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 , ReturnRect ( ) ) ) {
@@ -227,6 +227,7 @@ void Player1::SwitchStatus ( ) {
 			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 50;
+				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 , ReturnRect ( ) ) && TankController::TankBullet ( ) >= 1 ) {
@@ -504,7 +505,7 @@ void Player2::SwitchStatus ( ) {
 				isHold = false;
 				
 				if ( TankController::TankBullet ( ) < 4 )
-					SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+					SoundManager::getInstance ( ).GetSoundID ( "Reload" )->ReplaySound ( );
 					TankController::TankBullet ( )++;
 			}
 		}
@@ -524,6 +525,7 @@ void Player2::SwitchStatus ( ) {
 		else if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 , ReturnRect ( ) ) ) {
 			//대쉬
 			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
+				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 50;
 			}
