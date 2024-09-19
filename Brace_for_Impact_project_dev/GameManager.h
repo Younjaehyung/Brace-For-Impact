@@ -64,7 +64,7 @@ private:
 
 	int prevTankHp;	//이전 탱크 피
 	bool invincibleMode;
-
+	bool oilMode;//탱크 기름모드
 	
 
 	int endframe;
@@ -144,6 +144,7 @@ public:
 
 	void Update ( )
 	{
+		Debugging_Switch_Mod ( );
 		if ( type==0&& End == 1 ) {
 			Stage_Switch ( );
 		}
@@ -156,12 +157,13 @@ public:
 		}
 		
 		Stage_condition ( );
-		Debugging_Switch_Mod ( );
-
+		
 		BulletManager::getInstance ( ).Update ( );
 		MonsterManager::getInstance ( ).Update ( );
 		PlayerManager::getInstance ( ).Update ( );
 		
+		
+
 	}
 
 	void Render ( const HDC& mDC , const HDC& orimDC )
@@ -364,6 +366,7 @@ public:
 		}
 	}
 
+	void Debugging_UI ( const HDC& mDC );
 	
 
 	void Debugging_Switch_Mod ( ) {
@@ -394,15 +397,37 @@ public:
 				SceneStatus = 5;
 			}
 			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {	//무적
-				GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
-				PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
+				if ( !GameManager::getInstance ( ).Return_invincibleMode ( ) ) {
+					GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
+					PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
+					Debugging::STRINPUT ( "UNDEAD ON" );
+				}
+				else {
+					GameManager::getInstance ( ).Return_invincibleMode ( ) = !GameManager::getInstance ( ).Return_invincibleMode ( );
+					PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnUndieing ( );
+					Debugging::STRDELETE ( "UNDEAD ON" );
+				}
 			}
-			else if ( input::GetKeyDown ( eKeyCode::F1 ) ) {
+			else if ( input::GetKeyDown ( eKeyCode::F2 ) ) {	//연료 무제한
+				if ( !oilMode ) {
+					oilMode = !oilMode;
+					PlayerManager::getInstance ( ).Tank_return ( ).ReturnOILMode ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnOILMode ( );
+					Debugging::STRINPUT ( "OILMODE ON" );
+				}
+				else {
+					oilMode = !oilMode;
+					PlayerManager::getInstance ( ).Tank_return ( ).ReturnOILMode ( ) = !PlayerManager::getInstance ( ).Tank_return ( ).ReturnOILMode ( );
+					Debugging::STRDELETE ( "OILMODE ON" );
+				}
+			}
+			else if ( input::GetKeyDown ( eKeyCode::F3 ) ) {	//올킬
 				Debugging_Kill_Enemy ( );
 			}
 			
 			
-		}
+			Debugging::STRPRINT ( );
+
+		 }
 	}
 
 };

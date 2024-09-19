@@ -129,17 +129,37 @@ void GameManager::Camera_UI_CT_1( const HDC& mDC )
 	//연료
 	TransparentBlt ( mDC , 1024 + 16 * 3 + CameraMx , 0 + 16 * 34 +CameraMy , 128 , 128 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_CT_Itembox" ) , 0 , 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-	/*Rectangle ( mDC, 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11 );
+
+
+	if ( Debugging::ReturnMod() ) {
+		Debugging_UI ( mDC );
+	}
+}
+
+void GameManager::Debugging_UI ( const HDC& mDC )
+{
+	
+	HBRUSH oldBrush;
+	HPEN oldPen;
+	oldBrush = ( HBRUSH ) SelectObject ( mDC , Debugging::NULLBRUSH );
+
+
+	oldPen = ( HPEN ) SelectObject ( mDC , Debugging::redpen );
+
+
+	Rectangle ( mDC , 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11 );
 	Rectangle ( mDC , 1024 + 16 * 7 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 );
 	Rectangle ( mDC , 1024 + 16 * 16 , 16 * 26 , 1024 + 16 * 24 , 16 * 30 );
 	Rectangle ( mDC , 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 );
 	Rectangle ( mDC , 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 );
 	Rectangle ( mDC , 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 );
 	Rectangle ( mDC , 1024 + 16 * 7 , 16 * 34 , 1024 + 16 * 16 , 16 * 38 );
-	Rectangle ( mDC , 1024 + 16 * 25 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 );*/
+	Rectangle ( mDC , 1024 + 16 * 25 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 );
 
-
+	SelectObject ( mDC , oldBrush );
+	SelectObject ( mDC , oldPen );
 }
+
 
 void GameManager::Camera_UI_CT_2 ( const HDC& mDC )
 {

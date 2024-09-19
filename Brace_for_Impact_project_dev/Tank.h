@@ -36,7 +36,7 @@ private:
 	BOOL isHit;
 
 	BOOL UnDieing;
-
+	BOOL OILMODE;
 public:
 	
 	Tank ( );
@@ -58,6 +58,10 @@ public:
 	}
 	BOOL& ReturnUndieing ( ) {
 		return UnDieing;
+	}
+
+	BOOL& ReturnOILMode ( ) {
+		return OILMODE;
 	}
 
 	void Damage ( int damage );

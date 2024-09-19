@@ -689,7 +689,7 @@ void mop::Render( const HDC& dc) {
 		
 		if ( Debugging::ReturnMod ( ) )
 		{
-			int mopSize;
+			int mopSize=0;
 			HBRUSH oldBrush;
 			HPEN hPen;
 			HPEN oldPen;

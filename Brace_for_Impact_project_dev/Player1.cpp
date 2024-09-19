@@ -178,6 +178,7 @@ void Player1::SwitchStatus ( ) {
 			if ( !IsAiming && TankController::TankAimingStatus ( ) ) {	//조종안하고 있는데 작동중이면 리턴
 				return;
 			}
+			
 			TankController::TankAimingStatus ( ) = !TankController::TankAimingStatus ( );
 			TankController::WhoAimingStatus ( ) = 1;
 		

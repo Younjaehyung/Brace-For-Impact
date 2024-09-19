@@ -217,7 +217,7 @@ void bullet::Render ( const HDC& dc ) {
 
 
 	if ( Debugging::ReturnMod ( ) ) {
-		float size;
+		float size=SIZE;
 		if ( type != 0 ) {
 			if ( PlayerBullet ) { //플레이어가 쏜 총알
 				if ( type != 100 && type != 200 ) {

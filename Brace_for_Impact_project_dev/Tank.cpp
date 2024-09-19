@@ -13,8 +13,8 @@ Tank::Tank () {
 	frameInterval=0;
 	headMove = 0;
 	fireInterval = 0;
-	//UnDieing = 0;
-
+	UnDieing = 0;
+	OILMODE = 0;
 }
 
 
@@ -379,7 +379,7 @@ void Tank::Update ( ){
 		if ( TankController::TankHp ( ) > 0 ) { //디버그용으로 탱크 체력 0이여도 움직임 죽게하려면 ' = ' 만 뺄것
 			aiming ( );
 			shooting ( );
-			if ( TankController::TankOil ( ) > 0 )
+			if ( TankController::TankOil ( ) > 0 || OILMODE)
 			{
 				if ( TankController::TankMoveStatus ( ) ) {
 					move ( );
