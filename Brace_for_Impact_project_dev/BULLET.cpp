@@ -19,7 +19,7 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 	//12: 분열탄 맞을 시 8방향으로 나뉨
 	//13: 회전탄 회전하면서 날아감
 	//14: 충격파 제자리에서 점점 커짐
-	//15: 
+	//15: 데미지 입히는 지형 생성
 }
 
 
@@ -28,6 +28,10 @@ void bullet::move ( ) {
 	//자폭이꺼
 	if ( type == 14) {
 		counter += 100 * Time::DeltaTime ( );
+	}
+	//장판뎀
+	else if ( type == 15 ) {
+		counter += 10 * Time::DeltaTime ( );
 	}
 	//연기
 	else if ( type == 100 ) {
@@ -114,8 +118,8 @@ void bullet::move ( ) {
 					type = 0;
 				}
 			}
+			//플레이어(탱크)가 탄 맞음
 			if ( !PlayerBullet ) {
-				//플레이어(탱크)가 탄 맞음
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 				if ( type == 14 ) {
 					if ( counter >= 500 ) {
@@ -126,7 +130,17 @@ void bullet::move ( ) {
 						type = 0;
 					}
 				}
+				else if ( type == 15 ) {
+					if ( counter >=  20) {
+						if ( rect2Cir ( tankrect , x , y , 4*SIZE ) && TankController::TankHp ( ) > 0 ) {
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
+							TankController::Damage ( 100 );
+						}
+						type = 0;
+					}
+				}
 				else {
+					
 					if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp ( ) > 0 ) {
 						if ( type == 10 ) { //오줌이
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
@@ -148,6 +162,8 @@ void bullet::move ( ) {
 		}
 	
 }
+
+
 void bullet::Render ( const HDC& dc ) {
 	if ( type != 0 ) {
 		if ( PlayerBullet ) { //플레이어가 쏜 총알
@@ -188,6 +204,10 @@ void bullet::Render ( const HDC& dc ) {
 			else if (type == 10 ) { //오줌이
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE) , ( int )( y - 4 * SIZE ), ( int )( SIZE * 8 ), ( int )( SIZE * 8) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( type == 15 ) { //오줌이 장판
+				Ellipse ( dc , x - 4*SIZE , y - 4*SIZE  , x + 4*SIZE , y + 4*SIZE  );
+
 			}
 			else if ( type == 11) { //빵빵이
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE ), ( int )( y - 4 * SIZE) , ( int )( SIZE * 8) , ( int )( SIZE * 8) ,

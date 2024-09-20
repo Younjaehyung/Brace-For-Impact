@@ -191,17 +191,25 @@ void mop::attack( Tank& p1) {
 		}
 	}
 	else if ( mop_inform.type == 6 ) {
+		//공격상태로 변경
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 		}
+
+
+
+
 		if ( attack_count <= 2 ) {
+			//2초간 탄 발사
 			if ( attack_count >= 0 ) {
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 15 );
 			}
 		}
 		if ( attack_count >= 10 ) {
+			//몹 소환
 			if ( mop_inform.cnt == 0 ) {
 				mop* newmop = new mop ( 11 );
 				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
@@ -211,6 +219,7 @@ void mop::attack( Tank& p1) {
 			}
 		}
 		if ( attack_count >= 20 ) {
+			//몹 소환2
 			mop* newmop = new mop ( 11 );
 			newmop->mop_inform.x = middleX ( ReturnRect ( ) );
 			newmop->mop_inform.y = middleY ( ReturnRect ( ) );
