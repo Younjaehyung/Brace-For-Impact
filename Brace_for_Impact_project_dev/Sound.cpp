@@ -123,6 +123,7 @@ void Sounds::PauseSound ( ) {
 	}
 }
 
+
 void Sounds::ReplaySound (float volume ) {
 	bool isPlaying = false;
 	Channel->isPlaying ( &isPlaying );  // 현재 재생 중인지 확인

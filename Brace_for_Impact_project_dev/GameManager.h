@@ -338,7 +338,9 @@ public:
 
 		//게임 시작 창일때
 		if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) )&& Cursor == 0 ) {
+
 			SoundManager::getInstance ( ).GetSoundID ( "Start" )->SetVolume ( 100 );
+
 			SoundManager::getInstance ( ).GetSoundID ( "Start" )->ReplaySound ( );
 			type = 1;
 			
