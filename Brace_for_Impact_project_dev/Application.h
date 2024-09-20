@@ -26,7 +26,7 @@ private:
 	int top;
 
 
-
+	RECT Initrt;
 	RECT rt;
 	HBITMAP mBackBitmap , mBitmap , B_Stage_1_1 , B_Stage_1_2 , B_Player , B_Tank_car , B_Tank_head;
 	RECT camera;

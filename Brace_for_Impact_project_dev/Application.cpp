@@ -31,6 +31,8 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	SoundManager::getInstance().Init ( );
 	
 	HandleResize ( );
+	Initrt.right = rt.right;
+	Initrt.bottom = rt.bottom;
 	GameManager::getInstance().Game_Initialize ( hDC , g_hinst );
 
 	//임시 음악
@@ -68,8 +70,16 @@ void Application::f_Render() {
 	
 
 	Time::Render ( mDC );
-	BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
-
+	if ( Initrt.right == rt.right && rt.bottom== Initrt.bottom ) {
+		BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
+		//std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 1" << std::endl;
+	}
+	else {
+		StretchBlt ( hDC , 0 , 0 , rt.right , rt.bottom , mDC , 0 , 0 , 1680 , 1024 - 30 , SRCCOPY );
+		//( 1024 * 2 ) - 390
+		//std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 2" << std::endl;
+	}
+	
 	DeleteDC(mDC);
 	DeleteObject(mBackBitmap);
 	
@@ -87,8 +97,9 @@ void Application::HandleResize ( ) {
 	GetClientRect ( mHwnd , &rt );
 	mDC = CreateCompatibleDC ( hDC );
 	
-	mBackBitmap = CreateCompatibleBitmap ( hDC , rt.right , rt.bottom );
+	mBackBitmap = CreateCompatibleBitmap ( hDC , 1680 , 1050 );	//rt.right rt.bottom
 
+	
 }
 
 void Application::f_Run() {

@@ -33,7 +33,7 @@ mop::mop(int type) {
 		mop_inform.y = 12 * 64;
 	}
 	else if ( type == 6 ) {
-		mop_inform.x = 25 * 64;
+		mop_inform.x = 23 * 64;
 		mop_inform.y = 12 * 64;
 	}
 
@@ -74,6 +74,7 @@ void mop::attack( Tank& p1) {
 	RECTS moprect = ReturnRect();
 	RECTS tankrect = p1.ReturnRect ( );
 	float speed = 300 * Time::DeltaTime ( );
+	
 	if ( mop_inform.type == 1 ) { //꽁기깅깡
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
 			status = 2;
@@ -191,39 +192,85 @@ void mop::attack( Tank& p1) {
 		}
 	}
 	else if ( mop_inform.type == 6 ) {
-		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
+		//공격상태로 변경
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < 3*MONSTERLEN && status != 2) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
+			attack_count = 0;
+			//atk_type = rand ( ) % 3;
 		}
-		if ( attack_count <= 2 ) {
-			if ( attack_count >= 0 ) {
-				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
+		/*
+		if ( status == 2 ) {
+			if ( attack_count <= 2 ) {
+				//2초간 탄 발사
+				if ( attack_count >= 0 ) {
+					bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
+				}
 			}
-		}
-		if ( attack_count >= 10 ) {
-			if ( mop_inform.cnt == 0 ) {
+			if ( attack_count >= 10 ) {
+				//몹 소환
+				if ( mop_inform.cnt == 0 ) {
+					int boom_x , boom_y;
+					for ( int i = 0; i < 5; i++ ) {
+						boom_x = middleX ( ReturnRect ( ) ) + rand()%1000 - 500 ;
+						boom_y = middleY ( ReturnRect ( ) ) + rand()%1000 - 500;
+						bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , boom_x , boom_y , 15 );
+					}
+					mop_inform.cnt++;
+				}
+			}
+			if ( attack_count >= 20 ) {
+				//몹 소환2
 				mop* newmop = new mop ( 11 );
 				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
 				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
 				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
-				mop_inform.cnt++;
+				//bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 15 );
+				mop_inform.cnt = 0;
+
+				attack_count = 0;
+				status = 0;
+				direct = 0;
 			}
 		}
-		if ( attack_count >= 20 ) {
-			mop* newmop = new mop ( 11 );
-			newmop->mop_inform.x = middleX ( ReturnRect ( ) );
-			newmop->mop_inform.y = middleY ( ReturnRect ( ) );
-			MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
-			mop_inform.cnt = 0;
+		*/
+		///*
+		
+		if ( status == 2 ) {
+			if ( mop_inform.cnt == 0 ) {
+				mop_inform.cnt = rand ( ) % 1000  + 1;
+				//mop_inform.cnt++;
+			}
 
-			attack_count = 0;
-			status = 0;
-			direct = 0;
+			if ( mop_inform.cnt>0 && mop_inform.cnt < 500 ) {
+				int boom_x , boom_y;
+				for ( int i = 0; i < 5; i++ ) {
+					boom_x = middleX ( ReturnRect ( ) ) + rand ( ) % 1000 - 500;
+					boom_y = middleY ( ReturnRect ( ) ) + rand ( ) % 1000 - 500;
+					bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , boom_x , boom_y , 15 );
+				}
+				mop_inform.cnt = 1001;
+			}
+			else if ( mop_inform.cnt >= 500 &&mop_inform.cnt < 1000 ) {
+				if ( attack_count <= 2 ) {
+					//2초간 탄 발사
+					if ( attack_count >= 0 ) {
+						bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
+					}
+				}
+			}
+
+			if ( attack_count >= 5 ) {
+				attack_count = 0;
+				mop_inform.cnt=0;
+				status = 0;
+				direct = 0;
+			}
+
 		}
-
-
-		}
+		//*/
+	}
 	else if ( mop_inform.type == 10 ) {// 소환몹
 		if ( rect2rect ( moprect , tankrect ) ) {
 			if ( mop_inform.cnt == 0 ) {
@@ -453,7 +500,7 @@ void mop::move ( Tank& p1  ) {
 		}
 	}
 
-	
+	status = 0;
 	/*
 	if ( move_count >= 0.1 ) {
 		frame++;
@@ -557,14 +604,18 @@ void mop::move2 ( Tank& p1 ) {
 
 	if ( frame >= 6 ) frame = 0;
 
+	status = 0;
+
 }
 
 
 void mop::Update( ){
 	
-	if ( status == 0 || status == 1 ) {
-		status = 1;
-		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
+	if ( status == 0 ) {
+		if ( mop_inform.type != 6 ) {
+			status = 1;
+			move ( PlayerManager::getInstance ( ).Tank_return ( ) );
+		}
 	}
 	if ( !( status == 3 || status == 4 || status == 5 ) ) {
 		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
@@ -636,7 +687,7 @@ void mop::Render( const HDC& dc) {
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , 0, direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-				SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
+				SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 			}
 			else if ( status == 4 ) {//적 사망시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
