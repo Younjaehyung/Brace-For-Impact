@@ -72,12 +72,12 @@ void Application::f_Render() {
 	Time::Render ( mDC );
 	if ( Initrt.right == rt.right && rt.bottom== Initrt.bottom ) {
 		BitBlt(hDC, 0, 0, rt.right, rt.bottom, mDC, 0, 0, SRCCOPY);
-		std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 1" << std::endl;
+		//std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 1" << std::endl;
 	}
 	else {
 		StretchBlt ( hDC , 0 , 0 , rt.right , rt.bottom , mDC , 0 , 0 , 1680 , 1024 - 30 , SRCCOPY );
 		//( 1024 * 2 ) - 390
-		std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 2" << std::endl;
+		//std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 2" << std::endl;
 	}
 	
 	DeleteDC(mDC);

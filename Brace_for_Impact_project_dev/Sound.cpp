@@ -40,6 +40,14 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "Reload" , CreateSound ( "BFI_Reload.wav" , 0 ) );
 	Channel.emplace ( "Move" , CreateSound ( "BFI_Move.mp3" , 0 ) );
 
+
+	
+}
+
+void SoundManager::Update ( )
+{
+	m_pSystem->update ( );
+
 }
 
 Sounds* SoundManager::FindSoundlist ( std::string filename ) {
@@ -50,13 +58,13 @@ Sounds* SoundManager::FindSoundlist ( std::string filename ) {
 	return nullptr;
 }
 
-Sounds* SoundManager::CreateSound ( std::string filename,int mode=0 ) {
+Sounds* SoundManager::CreateSound ( std::string filename,int mode) {
 	FMOD::Sound* newSound = nullptr;
 	m_pSystem->createSound ( filename.c_str ( ) , FMOD_LOOP_OFF+mode , 0 , &newSound );
 	
-	Sounds* createsound = new Sounds;
+	Sounds* createsound = new Sounds; 
 	createsound->GetData ( newSound , m_pSystem );
-
+	createsound->ReturnMod ( ) = mode;
 	if ( result != FMOD_OK ) {
 		std::cerr << filename << std::endl;
 	}
@@ -64,6 +72,16 @@ Sounds* SoundManager::CreateSound ( std::string filename,int mode=0 ) {
 	return createsound;
 
 }
+void SoundManager::TagMute ( int mode, std::string filename ) {
+	
+	for ( auto& pair : Channel ) {
+		FMOD::Channel* channel = pair.second->GetChannel ( );
+		if ( channel && pair.second->ReturnMod()==mode ) {
+			channel->stop ( );
+		}
+	}
+}
+
 
 Sounds* SoundManager::GetSoundID ( std::string filename ) {
 	auto it = Channel.find ( filename );
@@ -81,17 +99,18 @@ void SoundManager::StopAllChannels () {
 			channel->stop ( );
 		}
 	}
-	std::cerr << Channel.size ( ) << std::endl;
+	//std::cerr << Channel.size ( ) << std::endl;
 }
 
 
-inline void Sounds::playSound ( )
+inline void Sounds::playSound ( float volume )
 {
+
 	FMOD::Channel* newChannel = nullptr;
 	result = m_pSystem->playSound ( Soundfile , 0 , false , &newChannel );
 	Channel = newChannel;
 
-
+	SetVolume ( volume );
 
 }
 
@@ -104,15 +123,15 @@ void Sounds::PauseSound ( ) {
 	}
 }
 
-void Sounds::ReplaySound ( ) {
+void Sounds::ReplaySound (float volume ) {
+	bool isPlaying = false;
+	Channel->isPlaying ( &isPlaying );  // 현재 재생 중인지 확인
+	if ( isPlaying == false && Channel != nullptr ) {
 
-	if ( Channel != nullptr ) {
-		bool isPlaying = false;
-		Channel->isPlaying ( &isPlaying );  // 현재 재생 중인지 확인
 		unsigned int position = 0;
 		Channel->stop ( );
 		Channel->setPosition ( position , FMOD_TIMEUNIT_MS ); // 위치를 처음으로 설정
-		playSound ( );  // 사운드 재생
+		playSound ( volume );  // 사운드 재생
 		//if ( !isPlaying ) {
 		//	// 사운드가 끝났으므로 위치를 처음으로 설정
 		//	
@@ -122,9 +141,11 @@ void Sounds::ReplaySound ( ) {
 		//else {
 		//	Channel->setPosition ( position , FMOD_TIMEUNIT_MS );
 		//}
+		Debugging::STRINPUT ( "if" );
 	}
 	else {
-		playSound ( );
+		playSound ( volume );
+		Debugging::STRINPUT ( "else" );
 	}
 }
 

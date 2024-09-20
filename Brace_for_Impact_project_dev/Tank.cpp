@@ -116,14 +116,14 @@ void Tank::move ( )
 		if ( TankController::WhoMoveStatus() == 1 ) {
 			if ( input::GetKey ( eKeyCode::W ) ) {
 				moveY -= 1;
-				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
+				
 				isMove = true;
 			}
 
 
 			if ( input::GetKey ( eKeyCode::A ) ) {
 				moveX -= 1;
-				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
+				
 				isMove = true;
 			}
 
@@ -131,7 +131,7 @@ void Tank::move ( )
 
 			if ( input::GetKey ( eKeyCode::S ) ) {
 				moveY += 1;
-				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
+				
 				isMove = true;
 			}
 
@@ -139,7 +139,7 @@ void Tank::move ( )
 
 			if ( input::GetKey ( eKeyCode::D ) ) {
 				moveX += 1;
-				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
+				
 				isMove = true;
 			}
 		
@@ -499,8 +499,10 @@ void Tank::moving_rander_cal ( ) {
 
 		if ( isMove ) {
 			TankController::TankStage_frame ( ).frame++;
-			if ( TankController::TankStage_frame ( ).frame >= 4 ) TankController::TankStage_frame ( ).frame = 0;
-			
+			if ( TankController::TankStage_frame ( ).frame >= 4 ) {
+				TankController::TankStage_frame ( ).frame = 0;
+				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( 40);
+			}
 		}
 		
 
@@ -555,6 +557,7 @@ void Tank::Render ( const HDC& mDC)
 
 void Tank::sound ( )
 {
+	
 	SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->ReplaySound ( );
 	
 	

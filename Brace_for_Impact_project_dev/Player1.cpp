@@ -222,7 +222,7 @@ void Player1::SwitchStatus ( ) {
 				if ( TankController::TankOil ( ) > 300 ) {
 					TankController::TankOil ( ) = 300;
 				}
-				SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+				SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 , ReturnRect ( ) ) ) {
@@ -240,21 +240,21 @@ void Player1::SwitchStatus ( ) {
 				bullet* newbullet = new bullet ( middleX ( TankController::TankRects ( ) ) + 150 * cos ( i * angle ) , middleY ( TankController::TankRects ( ) ) + 150 * sin ( i * angle ) , 100 , 0 , 0 );
 				BulletManager::getInstance ( ).CreateBullet ( newbullet );
 			}
-			SoundManager::getInstance ( ).GetSoundID ( "Explosion" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Explosion" )->ReplaySound ( );
 			TankController::TankBullet ( )--;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 34 , 1024 + 16 * 14 , 16 * 38 , ReturnRect ( ) ) ) {
 			//연료 저장고
 			status = 1;
 			itemtype = 0;
-			SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 			isHold = true;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 27 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 , ReturnRect ( ) ) ) {
 			//탄약 저장고
 			status = 2;
 			itemtype = 1;
-			SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 			isHold = true;
 		}
 	}
@@ -519,7 +519,7 @@ void Player2::SwitchStatus ( ) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
-				SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+				SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 				TankController::TankOil ( ) += 50;
 				if ( TankController::TankOil ( ) > 300 ) {
 					TankController::TankOil ( ) = 300;
@@ -541,21 +541,21 @@ void Player2::SwitchStatus ( ) {
 				bullet* newbullet = new bullet ( middleX ( TankController::TankRects ( ) ) + 150 * cos ( i * angle ) , middleY ( TankController::TankRects ( ) ) + 150 * sin ( i * angle ) , 100 , 0 , 0 );
 				BulletManager::getInstance ( ).CreateBullet ( newbullet );
 			}
-			SoundManager::getInstance ( ).GetSoundID ( "Explosion" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Explosion" )->ReplaySound ( );
 			TankController::TankBullet ( )--;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 34 , 1024 + 16 * 14 , 16 * 38 , ReturnRect ( ) ) ) {
 			//연료 저장고
 			status = 1;
 			itemtype = 0;
-			SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 			isHold = true;
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 27 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 , ReturnRect ( ) ) ) {
 			//탄약 저장고
 			status = 2;
 			itemtype = 1;
-			SoundManager::getInstance ( ).GetSoundID ( "Item" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 			isHold = true;
 		}
 

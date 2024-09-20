@@ -73,7 +73,7 @@ private:
 	int CameraMx;
 	int CameraMy;
 	float TankInsideCamera;
-
+	int Debugging_Stop_BackgroundMusic;
 	HBRUSH blackBrush , redBrush , cyanBrush, whiteBrush;
 
 public:
@@ -94,6 +94,7 @@ public:
 		End = 0;
 		BossSceneC = 0;
 		BossSceneR = 0;
+		Debugging_Stop_BackgroundMusic = 0;
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
 		cyanBrush = CreateSolidBrush ( RGB ( 0 , 120 , 140 ) );
@@ -161,7 +162,7 @@ public:
 		BulletManager::getInstance ( ).Update ( );
 		MonsterManager::getInstance ( ).Update ( );
 		PlayerManager::getInstance ( ).Update ( );
-		
+		SoundManager::getInstance ( ).Update ( );
 		
 
 	}
@@ -256,6 +257,10 @@ public:
 	}
 
 	void Stage_Sound ( ) {
+		if ( Debugging_Stop_BackgroundMusic ) {
+			return;
+		}
+
 		if ( SceneStatus == 0 ) {	//타이틀
 			//SoundManager::getInstance ( ).GetSoundID ( "testMP3" )->playSound ( );
 			SoundManager::getInstance ( ).GetSoundID ( "Title" )->ReplaySound ( );
@@ -322,24 +327,25 @@ public:
 		if (( input::GetKeyDown ( eKeyCode:: DOWN ) || input::GetKeyDown ( eKeyCode::S )) && !Selected ) {
 			if ( Cursor < 8 )
 				Cursor += 4;
-			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->ReplaySound ( );
 		}
 		else if (( input::GetKeyDown ( eKeyCode::UP ) || input::GetKeyDown ( eKeyCode::W )) && !Selected ) {
 			if ( Cursor > 0 )
 				Cursor -= 4;
-			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->ReplaySound ( );
 		}
 
 
 		//게임 시작 창일때
 		if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) )&& Cursor == 0 ) {
-			SoundManager::getInstance ( ).GetSoundID ( "Start" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Start" )->SetVolume ( 100 );
+			SoundManager::getInstance ( ).GetSoundID ( "Start" )->ReplaySound ( );
 			type = 1;
 			
 			return;
 		}
 		else if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ))&& Cursor == 4 ) {
-			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->playSound ( );
+			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->ReplaySound ( );
 			Rule = !Rule;
 
 			if ( Rule ) {
@@ -423,7 +429,16 @@ public:
 			else if ( input::GetKeyDown ( eKeyCode::F3 ) ) {	//올킬
 				Debugging_Kill_Enemy ( );
 			}
+			else if( input::GetKeyDown ( eKeyCode::F4 ) ) {	//올킬
+				if ( Debugging_Stop_BackgroundMusic ) {
+					Debugging_Stop_BackgroundMusic = false;
+				}
+				else {
+					Debugging_Stop_BackgroundMusic = true;
+					SoundManager::getInstance().TagMute ( 1 );
+				}
 			
+			}
 			
 			Debugging::STRPRINT ( );
 

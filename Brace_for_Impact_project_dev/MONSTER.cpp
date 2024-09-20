@@ -687,7 +687,7 @@ void mop::Render( const HDC& dc) {
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_1" ) , 0, direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
-				SoundManager::getInstance ( ).GetSoundID ( "Hit" )->playSound ( );
+				SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 			}
 			else if ( status == 4 ) {//적 사망시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
