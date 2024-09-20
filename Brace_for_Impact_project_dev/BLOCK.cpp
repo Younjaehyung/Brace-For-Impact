@@ -48,11 +48,12 @@ void BlockManager::Initialize ( int type )
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 6,12,7,13 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 13,10,20,13 } , 1 );
+		temp.makeblock ( { 13*64,620,20*64,13* 64 } , 2 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 13,10,20,13 } , 1 );
+		
+		temp.makeblock ( { 13 * 64,1190,1580,23 * 64 } , 2 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 13,19,26,23 } , 1 );
+		temp.makeblock ( { 2030,1024,2040,28*64 } , 2 );
 		Blocks.push_back ( temp );
 	}
 	else if ( type == 3 || type == 4 ) {
