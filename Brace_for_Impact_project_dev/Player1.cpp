@@ -322,7 +322,13 @@ void Player1::RenderRect ( const HDC& mDC )
 	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , Debugging::NULLBRUSH );
 
 	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+	wchar_t str[ 50 ] = L"";
 
+	// wsprintf는 float을 처리할 수 없으므로 sprintf_s로 대체
+	swprintf_s ( str , 50 , L"%.2f %.2f %.2f %.2f" , ( float ) rect.left + 1024 , ( float ) rect.top , ( float ) rect.right + 1024 , ( float ) rect.bottom );
+
+	// 문자열의 길이를 안전하게 계산하여 출력
+	TextOut ( mDC , rect.left + 1024 , rect.top , str , wcsnlen_s ( str , 50 ) );
 	SelectObject ( mDC , oldBrush );
 	SelectObject ( mDC , oldPen );
 }
@@ -640,6 +646,14 @@ void Player2::RenderRect ( const HDC& mDC )
 	HBRUSH oldBrush = ( HBRUSH ) SelectObject ( mDC , Debugging::NULLBRUSH );
 
 	Rectangle ( mDC , rect.left + 1024 , rect.top , rect.right + 1024 , rect.bottom );
+
+	wchar_t str[ 50 ] = L"";
+
+	// wsprintf는 float을 처리할 수 없으므로 sprintf_s로 대체
+	swprintf_s ( str , 50 , L"%.2f %.2f %.2f %.2f" , ( float ) rect.left + 1024 , ( float ) rect.top , ( float ) rect.right + 1024 , ( float ) rect.bottom );
+
+	// 문자열의 길이를 안전하게 계산하여 출력
+	TextOut ( mDC , rect.left + 1024 , rect.top , str , wcsnlen_s ( str , 50 ) );
 
 	SelectObject ( mDC , oldBrush );
 	SelectObject ( mDC , oldPen );

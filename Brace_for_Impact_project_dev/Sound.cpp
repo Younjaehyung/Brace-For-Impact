@@ -105,10 +105,11 @@ void Sounds::PauseSound ( ) {
 }
 
 void Sounds::ReplaySound ( ) {
-
-	if ( Channel != nullptr ) {
-		bool isPlaying = false;
-		Channel->isPlaying ( &isPlaying );  // 현재 재생 중인지 확인
+	bool isPlaying = false;
+	Channel->isPlaying ( &isPlaying );
+	if ( Channel != nullptr &&  !isPlaying){
+		
+		;  // 현재 재생 중인지 확인
 		unsigned int position = 0;
 		Channel->stop ( );
 		Channel->setPosition ( position , FMOD_TIMEUNIT_MS ); // 위치를 처음으로 설정

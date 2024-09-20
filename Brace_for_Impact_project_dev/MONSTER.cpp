@@ -830,7 +830,14 @@ void mop::Render( const HDC& dc) {
 
 		
 			Rectangle ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x - MOPSIZE + mopSize , mop_inform.y - MOPSIZE + mopSize );
+			
+			wchar_t str[ 50 ] = L"";
 
+			// wsprintf는 float을 처리할 수 없으므로 sprintf_s로 대체
+			swprintf_s ( str , 50 , L"%.2f %.2f %.2f %.2f" , ( float ) mop_inform.x - MOPSIZE , ( float ) mop_inform.y - MOPSIZE , ( float ) mop_inform.x - MOPSIZE + mopSize , ( float ) mop_inform.y - MOPSIZE + mopSize );
+
+			// 문자열의 길이를 안전하게 계산하여 출력
+			TextOut ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , str , wcsnlen_s ( str , 50 ) );
 			
 			SelectObject ( dc , oldBrush );
 			SelectObject ( dc , oldPen );

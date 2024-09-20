@@ -546,6 +546,14 @@ void Tank::Render ( const HDC& mDC)
 
 		Rectangle ( mDC , rect.left , rect.top , rect.right , rect.bottom );
 		Rectangle ( mDC , rect.left , rect.top - 10 , rect.left + TANKSIZE , rect.top + TANKSIZE );
+		
+		wchar_t str[ 50 ] = L"";
+
+		// wsprintf는 float을 처리할 수 없으므로 sprintf_s로 대체
+		swprintf_s ( str , 50 , L"%.2f %.2f %.2f %.2f" , ( float ) rect.left , ( float ) rect.top , ( float ) rect.right , ( float ) rect.bottom );
+
+		// 문자열의 길이를 안전하게 계산하여 출력
+		TextOut ( mDC , rect.left , rect.top , str , wcsnlen_s ( str , 50 ) );
 
 		SelectObject ( mDC , oldBrush );
 		DeleteObject ( myBrush );
