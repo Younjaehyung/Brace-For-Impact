@@ -501,7 +501,7 @@ void Tank::moving_rander_cal ( ) {
 			TankController::TankStage_frame ( ).frame++;
 			if ( TankController::TankStage_frame ( ).frame >= 4 ) {
 				TankController::TankStage_frame ( ).frame = 0;
-				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( 40);
+				SoundManager::getInstance ( ).GetSoundID ( "Move" )->ReplaySound ( );
 			}
 		}
 		
