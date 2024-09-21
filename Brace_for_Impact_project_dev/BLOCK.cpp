@@ -72,7 +72,7 @@ void BlockManager::Initialize ( int type )
 		temp.makeblock ( { 0,0,32,1 } , 1 );
 		Blocks.push_back ( temp );
 	}
-	else if ( type == 5|| type==6 ) {
+	else if ( type == 5) {
 		temp.makeblock ( { 0,0,2,7 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 10,0,19,11 } , 1 );
@@ -97,7 +97,33 @@ void BlockManager::Initialize ( int type )
 		temp.makeblock ( { 32,0,33,32 } , 1 );
 		Blocks.push_back ( temp );
 	}
+	else if ( type == 6 ) {
 	
+			temp.makeblock ( { 0,0,2,7 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 10,0,19,11 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 30,0,32,7 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 0,14,2,20 } , 1 );
+			Blocks.push_back ( temp );
+			/*temp.makeblock ( { 11,14,19,22 } , 1 );
+			Blocks.push_back ( temp );*/
+			temp.makeblock ( { 30,15,32,20 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 11,27,19,32 } , 1 );
+			//장애물 위치 변경
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 0,30,32,32 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 0,0,32,1 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { -1,0,0,32 } , 1 );
+			Blocks.push_back ( temp );
+			temp.makeblock ( { 32,0,33,32 } , 1 );
+			Blocks.push_back ( temp );
+	
+	}
 }
 
 void BlockManager::Update ( )

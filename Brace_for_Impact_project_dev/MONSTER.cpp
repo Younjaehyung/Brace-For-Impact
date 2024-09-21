@@ -679,13 +679,19 @@ void mop::Render( const HDC& dc) {
 
 	
 		HBRUSH hBrush, oldBrush;
-	
+		RECTS CameraMopSize = {  mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , mop_inform.x - MOPSIZE + ( 2 * SIZE ),mop_inform.y - MOPSIZE + ( 2 * SIZE ) };
 		//Rectangle ( dc , tankrect.left , tankrect.top , tankrect.right , tankrect.bottom ); //히트박스
 		/*if ( TankController::camera.left>=mop_inform.x- MOPSIZE+SIZE ||
 			TankController::camera.right<=mop_inform.y - MOPSIZE + SIZE ) {
 			return;
 		}*/
-		if (( mop_inform.x - MOPSIZE + SIZE < TankController::camera.left || mop_inform.x - MOPSIZE  > TankController::camera.right || mop_inform.y - MOPSIZE + SIZE  < TankController::camera.top || mop_inform.y - MOPSIZE > TankController::camera.bottom )) {
+
+		//if (( mop_inform.x - MOPSIZE + SIZE < TankController::camera.left || mop_inform.x - MOPSIZE  > TankController::camera.right || mop_inform.y - MOPSIZE + SIZE  < TankController::camera.top || mop_inform.y - MOPSIZE > TankController::camera.bottom )) {
+		//	//std::cout << "extrude" << std::endl;
+		//	return;
+		//}
+
+		if ( !(IntersectRect_float(CameraMopSize, TankController::camera) ) ) {
 			//std::cout << "extrude" << std::endl;
 			return;
 		}
