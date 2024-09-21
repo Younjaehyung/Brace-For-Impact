@@ -799,11 +799,11 @@ void mop::Render( const HDC& dc) {
 			//Rectangle ( dc , mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , 0 , 4 * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( status == 4 ) {//적 사망시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , die_frame * 256 , direct * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 				//Rectangle ( dc , 200 , 200 , 600 , 600 );
 			}
 			else if ( status == 5 ) {//적 사망시
@@ -811,7 +811,7 @@ void mop::Render( const HDC& dc) {
 			}
 			else {
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_6" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , frame * 256 , direct * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
 		else if ( mop_inform.type == 10 ) { // 쪼꼬미 4가 소환함

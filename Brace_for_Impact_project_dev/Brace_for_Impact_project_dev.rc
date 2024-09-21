@@ -233,6 +233,8 @@ IDB_BM_STAGE_1_NIGHT    BITMAP                  "BFI_Stage_1_Night.bmp"
 
 IDB_BM_STAGE_3_NIGHT    BITMAP                  "BFI_Stage_3_Night.bmp"
 
+IDB_BM_BOSS_7           BITMAP                  "BFI_BOSS_7.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
