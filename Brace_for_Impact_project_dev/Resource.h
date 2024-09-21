@@ -86,6 +86,8 @@
 #define IDR_WAVE16                      231
 #define IDR_WAVE17                      232
 #define IDR_WAVE18                      233
+#define IDB_BITMAP6                     234
+#define IDB_BM_BOSS_7                   234
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -93,7 +95,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        234
+#define _APS_NEXT_RESOURCE_VALUE        235
 #define _APS_NEXT_COMMAND_VALUE         32772
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110
