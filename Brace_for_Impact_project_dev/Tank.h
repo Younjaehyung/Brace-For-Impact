@@ -9,6 +9,8 @@
 #include "BLOCK.h"
 #include "Windows.h"
 
+class MonsterManager;
+
 class Tank 
 {
 

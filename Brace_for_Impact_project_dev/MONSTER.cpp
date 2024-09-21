@@ -329,6 +329,23 @@ void mop::move ( Tank& p1  ) {
 	BOOL blockmop = 0;
 	RECTS moprect = ReturnRect ( );
 	RECTS cpyrect;
+	RECTS tankRects = TankController::TankRects ( );
+	if ( IntersectRect_float ( ReturnRect ( ) , tankRects ) ) {
+		/*if ( moprect.top <= TankController::TankRects ( ).top ) {
+			mop_inform.y -= 2 * speed;
+		}
+		if ( TankController::TankRects ( ).bottom >= moprect.bottom ) {
+			mop_inform.y += 2 * speed;
+		}
+		if ( TankController::TankRects ( ).right <= moprect.right ) {
+			mop_inform.x += 2 * speed;
+		}
+		if ( TankController::TankRects ( ).left >= moprect.left ) {
+			mop_inform.x -= 2 * speed;
+		}*/
+		return;
+	}
+
 	for ( auto& ScanBlock : BlockManager::getInstance().BlockReturn()) {
 		//벽과 몹 충돌
 		if ( rect2rect ( ScanBlock.ReturnRect ( ) , moprect ) ) {
@@ -350,6 +367,8 @@ void mop::move ( Tank& p1  ) {
 			cpyrect = ScanBlock.ReturnRect ( );
 		}
 	}
+	
+
 	float len = 0;
 	BOOL ckBlock=0;
 	if ( mop_inform.type == 1 || mop_inform.type == 4 || mop_inform.type == 10 || mop_inform.type == 11 ) {
@@ -901,11 +920,18 @@ void mop::Render( const HDC& dc) {
 			wchar_t str[ 50 ] = L"";
 
 			// wsprintf는 float을 처리할 수 없으므로 sprintf_s로 대체
-			swprintf_s ( str , 50 , L"%.2f %.2f %.2f %.2f" , ( float ) mop_inform.x - MOPSIZE , ( float ) mop_inform.y - MOPSIZE , ( float ) mop_inform.x - MOPSIZE + mopSize , ( float ) mop_inform.y - MOPSIZE + mopSize );
+			swprintf_s ( str , 50 , L"size %.2f %.2f %.2f %.2f" , ( float ) mop_inform.x - MOPSIZE , ( float ) mop_inform.y - MOPSIZE , ( float ) mop_inform.x - MOPSIZE + mopSize , ( float ) mop_inform.y - MOPSIZE + mopSize );
 
 			// 문자열의 길이를 안전하게 계산하여 출력
 			TextOut ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , str , wcsnlen_s ( str , 50 ) );
-			
+		
+			swprintf_s ( str , 50 , L"mop_inform%.2f %.2f " , ( float ) mop_inform.x , ( float ) mop_inform.y  );
+
+			TextOut ( dc , mop_inform.x , mop_inform.y , str , wcsnlen_s ( str , 50 ) );
+
+			swprintf_s ( str , 50 , L"Returnrect %.2f %.2f %.2f %.2f " , ( float ) ReturnRect ( ).left , ( float ) ReturnRect ( ).top, ( float ) ReturnRect ( ).right, ( float ) ReturnRect ( ).bottom );
+
+			TextOut ( dc , mop_inform.x , mop_inform.y , str , wcsnlen_s ( str , 50 ) );
 			SelectObject ( dc , oldBrush );
 			SelectObject ( dc , oldPen );
 			
@@ -935,6 +961,39 @@ RECTS& mop::ReturnRect ( ) {
 		r = { mop_inform.x + 50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 };
 	}
 	else if( mop_inform.type == 10 || mop_inform.type ==11){
+		r = { mop_inform.x, mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 };
+	}
+	else {
+		r = { mop_inform.x, mop_inform.y , mop_inform.x + 200 , mop_inform.y + 200 };
+	}
+
+
+	//RECTS r = { mop_inform.x,mop_inform.y, mop_inform.x+200 , mop_inform.y+200 };  //256 * 256
+
+	return r;
+}
+
+RECTS& mop::ReturnRect_T ( ) {
+	RECTS r;
+	if ( mop_inform.type == 1 ) {
+		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
+	}
+	else if ( mop_inform.type == 2 ) {
+		r = { mop_inform.x + 40  , mop_inform.y + 20  , mop_inform.x + 190 , mop_inform.y + 180 };
+	}
+	else if ( mop_inform.type == 6 ) {
+		r = { mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 };
+	}
+	else if ( mop_inform.type == 3 ) {
+		r = { mop_inform.x , mop_inform.y + 30  , mop_inform.x + 210 , mop_inform.y + 180 };
+	}
+	else if ( mop_inform.type == 4 ) {
+		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
+	}
+	else if ( mop_inform.type == 5 ) {
+		r = { mop_inform.x + 50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 };
+	}
+	else if ( mop_inform.type == 10 || mop_inform.type == 11 ) {
 		r = { mop_inform.x, mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 };
 	}
 	else {

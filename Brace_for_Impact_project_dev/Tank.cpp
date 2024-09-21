@@ -1,4 +1,5 @@
 ﻿#include "Tank.h"
+#include "MONSTER.h"
 #define TANKSIZE 128//192
 
 
@@ -98,6 +99,7 @@ void Tank::move ( )
 		float speed = 250 * Time::DeltaTime ( );
 		float moveX = 0;
 		float moveY = 0;
+		
 		if ( TankController::Dash() ) {
 			speed = 3*speed;
 			//TankController::Dash() = 0 ;
@@ -179,8 +181,9 @@ void Tank::move ( )
 				moveY = ( moveY / magnitude ) * speed;
 			}
 			for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
-				RECTS recttemp = rect;
+				
 				RECTS block = ScanBlock.ReturnRect ( );
+				RECTS recttemp = rect;
 				recttemp.left += moveX;
 				recttemp.right += moveX;
 				recttemp.top += moveY;
@@ -190,7 +193,27 @@ void Tank::move ( )
 					return;
 				}
 				
+				
 			}
+			for ( auto& mop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
+				RECTS recttemp = rect;
+				recttemp.left += moveX;
+				recttemp.right += moveX;
+				recttemp.top += moveY;
+				recttemp.bottom += moveY;
+				
+				if ( IntersectRect_float ( mop->ReturnRect() , recttemp ) ) {//적과 플레이어 탱크 충돌
+					isMove = false;
+					rect.left -= moveX;
+					rect.right-= moveX;
+					rect.top -= moveY;
+					rect.bottom -= moveY;
+
+
+					return;
+				}
+			}
+		
 			if ( isMove ) {
 				rect.left += moveX;
 				rect.right += moveX;
