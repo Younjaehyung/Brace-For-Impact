@@ -17,7 +17,7 @@ mop::mop(int type) {
 		mop_inform.y = 20 * 64;
 	}
 	else if ( type == 2 ) {
-		mop_inform.x = 29 * 64;
+		mop_inform.x = 28 * 64;
 		mop_inform.y = 20 * 64;
 	}
 	else if ( type == 3 ) {
@@ -121,11 +121,13 @@ void mop::attack( Tank& p1) {
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 		}
-		if ( attack_count >= 5 ) {
-			bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
-			attack_count = 0;
-			status = 0;
-			direct = 0;
+		if ( status == 2 ) {
+			if ( attack_count >= 5 ) {
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
+				attack_count = 0;
+				status = 0;
+				direct = 0;
+			}
 		}
 	}
 	else if ( mop_inform.type == 3 ) { //몬스터 소환술사
@@ -715,11 +717,11 @@ void mop::Render( const HDC& dc) {
 			//Rectangle ( dc , mop_inform.x +40  , mop_inform.y+20  , mop_inform.x +190 , mop_inform.y +180 );
 			if ( status == 3 ) { //적 피격 시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , 0 , 2 * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , 0 , 2 * 128/2 , 128/2 , 128/2 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( status == 4 ) {//적 사망시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , die_frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , die_frame * 128/2 , direct * 128/2 , 128/2 , 128/2 , RGB ( 255 , 255 , 255 ) );
 				//Rectangle ( dc , 200 , 200 , 600 , 600 );
 			}
 			else if ( status == 5 ) {//적 사망시
@@ -727,7 +729,7 @@ void mop::Render( const HDC& dc) {
 			}
 			else {
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE , SIZE ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_2" ) , frame * 128/2 , direct * 128/2 , 128/2 , 128/2 , RGB ( 255 , 255 , 255 ) );
 			}
 		}
 		else if ( mop_inform.type == 3 ) { // 
