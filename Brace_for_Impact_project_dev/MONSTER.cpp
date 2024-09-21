@@ -239,8 +239,12 @@ void mop::attack( Tank& p1) {
 		
 		if ( status == 2 ) {
 			if ( mop_inform.cnt == 0 ) {
-				mop_inform.cnt = rand ( ) % 1000  + 1;
-				//mop_inform.cnt++;
+				if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN-100 ) {
+					mop_inform.cnt = 1002;
+				}
+				else {
+					mop_inform.cnt = rand ( ) % 1000 + 1;
+				}
 			}
 
 			if ( mop_inform.cnt>0 && mop_inform.cnt < 500 ) {
@@ -259,6 +263,10 @@ void mop::attack( Tank& p1) {
 						bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 10 );
 					}
 				}
+			}
+			else if ( mop_inform.cnt == 1002 ) {
+				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 16 );
+				mop_inform.cnt = 1001;
 			}
 
 			if ( attack_count >= 5 ) {

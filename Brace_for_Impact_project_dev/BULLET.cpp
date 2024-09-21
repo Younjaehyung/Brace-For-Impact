@@ -20,6 +20,7 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 	//13: 회전탄 회전하면서 날아감
 	//14: 충격파 제자리에서 점점 커짐
 	//15: 데미지 입히는 지형 생성
+	//16: 근접 데미지 (내려찍기)
 }
 
 
@@ -30,7 +31,7 @@ void bullet::move ( ) {
 		counter += 100 * Time::DeltaTime ( );
 	}
 	//장판뎀
-	else if ( type == 15 ) {
+	else if ( type == 15 || type==16) {
 		counter += 10 * Time::DeltaTime ( );
 	}
 	//연기
@@ -139,6 +140,17 @@ void bullet::move ( ) {
 						type = 0;
 					}
 				}
+				else if ( type == 16 ) {
+					if ( counter >= 1 && counter < 2 ) {
+						if ( rect2Cir ( tankrect , x , y , 10 * SIZE ) && TankController::TankHp ( ) > 0 ) {
+							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
+							TankController::Damage ( 3 );
+						}
+					}
+					else if ( counter >= 3 ) {
+						type = 0;
+					}
+				}
 				else {
 					
 					if ( rect2Cir ( tankrect , x , y , SIZE ) && TankController::TankHp ( ) > 0 ) {
@@ -207,6 +219,9 @@ void bullet::Render ( const HDC& dc ) {
 			}
 			else if ( type == 15 ) { //오줌이 장판
 				Ellipse ( dc , x - 6*SIZE , y - 6*SIZE  , x + 6*SIZE , y + 6*SIZE  );
+			}
+			else if ( type == 16 ) { //오줌이 내려찍기
+				Ellipse ( dc , x - 10 * SIZE , y - 10 * SIZE , x + 10 * SIZE , y + 10 * SIZE );
 			}
 			else if ( type == 11) { //빵빵이
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE ), ( int )( y - 4 * SIZE) , ( int )( SIZE * 8) , ( int )( SIZE * 8) ,
