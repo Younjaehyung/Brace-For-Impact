@@ -38,7 +38,7 @@ public:
 	void Update( );
 	void Render( const HDC& dc);
 	RECTS& ReturnRect ( );	//공격 범위
-	RECTS& ReturnRect_T ( );	//충돌방지범위
+	RECTS& ReturnRect_T ( monster mop_inform );	//충돌방지범위
 	int ReturnHP ( );
 	void Damage (int D);
 

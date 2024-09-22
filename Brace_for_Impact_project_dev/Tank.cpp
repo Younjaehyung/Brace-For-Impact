@@ -199,19 +199,19 @@ void Tank::move ( )
 				RECTS recttemp = rect;
 				recttemp.left += moveX;
 				recttemp.right += moveX;
+				
+				
+				//적과 플레이어 탱크 충돌
+				recttemp.left += moveX;
+				recttemp.right += moveX;
 				recttemp.top += moveY;
 				recttemp.bottom += moveY;
-				
-				if ( IntersectRect_float ( mop->ReturnRect() , recttemp ) ) {//적과 플레이어 탱크 충돌
+				if ( IntersectRect_float ( mop->ReturnRect ( ) , recttemp ) ) {
 					isMove = false;
-					rect.left -= moveX;
-					rect.right-= moveX;
-					rect.top -= moveY;
-					rect.bottom -= moveY;
-
-
 					return;
 				}
+				
+				
 			}
 		
 			if ( isMove ) {

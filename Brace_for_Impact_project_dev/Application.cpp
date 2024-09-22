@@ -28,7 +28,7 @@ void Application::f_Initialize ( HWND hWnd , HINSTANCE  hInst_temp ) {
 	g_hinst = hInst_temp;
 	input::Initialize ( );
 	Time::Initailize ( );
-	SoundManager::getInstance().Init ( );
+
 	
 	HandleResize ( );
 	Initrt.right = rt.right;
@@ -80,6 +80,8 @@ void Application::f_Render() {
 		//std::cerr << rt.left << " " << rt.top << " " << rt.right << rt.bottom <<" 2" << std::endl;
 	}
 	
+
+
 	DeleteDC(mDC);
 	DeleteObject(mBackBitmap);
 	

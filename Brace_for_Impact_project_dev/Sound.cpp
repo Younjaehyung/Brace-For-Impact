@@ -1,7 +1,7 @@
 ﻿#include "Sound.h"
 
 
-bool SoundManager::Init ( ) {
+bool SoundManager::Initialize ( ) {
 	FMOD_RESULT ret;
 	//FMOD 시스템 디바이스 생성
 

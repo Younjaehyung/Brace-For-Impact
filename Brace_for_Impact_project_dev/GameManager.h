@@ -121,7 +121,7 @@ public:
 	void Game_Initialize ( HDC mDC , HINSTANCE g_hinst )
 	{
 		Texture::getInstance ( ).Texture_Loading ( mDC , g_hinst );
-
+		SoundManager::getInstance ( ).Initialize ( );
 		BulletManager::getInstance ( );
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
@@ -136,9 +136,14 @@ public:
 		if ( Scene_num ) {
 			TankController::Initialize ( );
 			MonsterManager::getInstance ( ).Initialize ( Scene_num );
-		
+			
 			PlayerManager::getInstance ( ).Initialize ( Scene_num );
 			BlockManager::getInstance ( ).Initialize ( Scene_num );
+		}
+		if ( Scene_num == 0 ) {
+			
+			SoundManager::getInstance ( ).Clear ( );
+			SoundManager::getInstance ( ).Initialize ( );
 		}
 	}
 

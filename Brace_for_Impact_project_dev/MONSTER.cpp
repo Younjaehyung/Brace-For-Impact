@@ -81,6 +81,7 @@ void mop::attack( Tank& p1) {
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 			if ( mop_inform.cnt == 0 ) {
+				monster mop_inform = this->mop_inform;
 				if ( p1.ReturnRect ( ).left < mop_inform.x ) {
 					mop_inform.x -= speed;
 					direct = 3;
@@ -97,7 +98,15 @@ void mop::attack( Tank& p1) {
 				else {
 					mop_inform.y += speed;
 				}
+				
+				if (! IntersectRect_float ( ReturnRect ( ) , tankrect ) ) {//적과 플레이어 탱크 충돌
+
+					this->mop_inform.x = mop_inform.x;
+					this->mop_inform.y = mop_inform.y;
+				}
+				
 			}
+			RECTS moprect = { mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE ,mop_inform.x - MOPSIZE + SIZE  , mop_inform.y - MOPSIZE + SIZE };
 			if ( rect2rect ( moprect , tankrect ) ) {
 				if ( mop_inform.cnt == 0 ) {
 					frame = 0;
@@ -114,6 +123,7 @@ void mop::attack( Tank& p1) {
 			mop_inform.cnt =0;
 			direct = 0;
 		}
+		//충돌 수정
 	}
 	else if ( mop_inform.type == 2 ) { //빵빵이
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
@@ -329,23 +339,12 @@ void mop::move ( Tank& p1  ) {
 	BOOL blockmop = 0;
 	RECTS moprect = ReturnRect ( );
 	RECTS cpyrect;
+	
 	RECTS tankRects = TankController::TankRects ( );
-	if ( IntersectRect_float ( ReturnRect ( ) , tankRects ) ) {
-		/*if ( moprect.top <= TankController::TankRects ( ).top ) {
-			mop_inform.y -= 2 * speed;
-		}
-		if ( TankController::TankRects ( ).bottom >= moprect.bottom ) {
-			mop_inform.y += 2 * speed;
-		}
-		if ( TankController::TankRects ( ).right <= moprect.right ) {
-			mop_inform.x += 2 * speed;
-		}
-		if ( TankController::TankRects ( ).left >= moprect.left ) {
-			mop_inform.x -= 2 * speed;
-		}*/
-		return;
-	}
 
+	
+	
+		
 	for ( auto& ScanBlock : BlockManager::getInstance().BlockReturn()) {
 		//벽과 몹 충돌
 		if ( rect2rect ( ScanBlock.ReturnRect ( ) , moprect ) ) {
@@ -367,7 +366,7 @@ void mop::move ( Tank& p1  ) {
 			cpyrect = ScanBlock.ReturnRect ( );
 		}
 	}
-	
+	monster mop_inform = this->mop_inform;
 
 	float len = 0;
 	BOOL ckBlock=0;
@@ -538,6 +537,20 @@ void mop::move ( Tank& p1  ) {
 	}
 	move_count += Time::DeltaTime ( );
 	*/
+
+
+	std::cerr <<"=" << mop_inform.x << std::endl;
+	std::cerr <<"=="<< this->mop_inform.x << std::endl;
+
+	if ( IntersectRect_float ( ReturnRect_T ( mop_inform ) , tankRects ) ) {//적과 플레이어 탱크 충돌
+
+		return;
+
+	}
+	
+
+	this->mop_inform.x = mop_inform.x;
+	this->mop_inform.y = mop_inform.y;
 
 }
 
@@ -973,7 +986,7 @@ RECTS& mop::ReturnRect ( ) {
 	return r;
 }
 
-RECTS& mop::ReturnRect_T ( ) {
+RECTS& mop::ReturnRect_T (monster mop_inform ) {
 	RECTS r;
 	if ( mop_inform.type == 1 ) {
 		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };

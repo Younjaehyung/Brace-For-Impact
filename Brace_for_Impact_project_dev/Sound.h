@@ -48,7 +48,7 @@ class SoundManager  {
 public:
 	
 	unsigned int MID;
-	bool Init ( );
+	bool Initialize ( );
 	void Update ( );
 	void CreateSoundlist ( );
 	void PlayingSound ( );
@@ -57,6 +57,10 @@ public:
 	void StopAllChannels ();
 	Sounds* FindSoundlist (std::string filename );
 	void TagMute ( int mode , std::string filename = {} );
+
+	void Clear ( ) {
+		Channel.clear ( );
+	}
 
 	static SoundManager& getInstance ( ) {
 		static SoundManager instance;
