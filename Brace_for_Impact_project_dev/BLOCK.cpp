@@ -48,7 +48,7 @@ void BlockManager::Initialize ( int type )
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 6,12,7,13 } , 1 );
 		Blocks.push_back ( temp );
-		temp.makeblock ( { 13*64,620,20*64,13* 64 } , 2 );
+		temp.makeblock ( { 13*64,620,20*64,14* 64 } , 2 );
 		Blocks.push_back ( temp );
 		
 		temp.makeblock ( { 13 * 64,1190,1580,23 * 64 } , 2 );

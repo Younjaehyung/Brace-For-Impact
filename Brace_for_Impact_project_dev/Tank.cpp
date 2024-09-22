@@ -183,7 +183,7 @@ void Tank::move ( )
 			for ( auto& ScanBlock : BlockManager::getInstance ( ).BlockReturn ( ) ) {
 				
 				RECTS block = ScanBlock.ReturnRect ( );
-				RECTS recttemp = rect;
+				RECTS recttemp = { rect.left,rect.top + 10,rect.right,rect.bottom };
 				recttemp.left += moveX;
 				recttemp.right += moveX;
 				recttemp.top += moveY;
@@ -196,7 +196,7 @@ void Tank::move ( )
 				
 			}
 			for ( auto& mop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
-				RECTS recttemp = rect;
+				RECTS recttemp = { rect.left,rect.top+30,rect.right,rect.bottom };
 				recttemp.left += moveX;
 				recttemp.right += moveX;
 				

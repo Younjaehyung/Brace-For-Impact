@@ -992,7 +992,7 @@ RECTS& mop::ReturnRect_T (monster mop_inform ) {
 		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
 	}
 	else if ( mop_inform.type == 2 ) {
-		r = { mop_inform.x + 40  , mop_inform.y + 20  , mop_inform.x + 190 , mop_inform.y + 180 };
+		r = { mop_inform.x + 40  , mop_inform.y + 40  , mop_inform.x + 190 , mop_inform.y + 180 };	//수정1
 	}
 	else if ( mop_inform.type == 6 ) {
 		r = { mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 };
