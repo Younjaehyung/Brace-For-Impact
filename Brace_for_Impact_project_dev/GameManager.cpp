@@ -257,8 +257,6 @@ void GameManager::Tank_Inside ( const HDC& mDC ) {
 
 void GameManager::TitleScene ( const HDC& mDC ) {	//0
 
-
-
 	if ( count >= 0.3 ) {
 		count = 0;
 		frame++;
@@ -266,9 +264,7 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 			frame = 0;
 		}
 	}
-
 	count += Time::DeltaTime ( );
-
 
 	//TITLE 출력
 	BitBlt ( mDC , 0 , 0 , 1024 , 1024 ,
@@ -288,13 +284,21 @@ void GameManager::TitleScene ( const HDC& mDC ) {	//0
 	Texture::getInstance ( ).Texture_GetDC ( "B_Item" ) , 0 , 64 * 3 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 	MenuUpdate ( );
 
-	
-
 	if ( Rule ) {
-		TransparentBlt ( mDC , 0 , -8 , 1024 , 1024 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , 0 , 0 , 1024 , 1024 , RGB ( 255 , 255 , 255 ) );
+		TransparentBlt ( mDC , 0 , 64 , 960 , 832 ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Rule" ) , rulepage * 960 , 0 , 960 , 832 , RGB ( 255 , 255 , 255 ) );
+
+		if ( input::GetKeyDown ( eKeyCode::F ) && rulepage < 3 ) {
+			rulepage++;  // rulepage를 1씩 증가
+		}
+		else if ( input::GetKeyDown ( eKeyCode::F ) && rulepage == 3 ) {
+			rulepage = -1;  // 마지막 페이지를 본 후 다시 0으로 초기화
+			Rule = false;  // 룰북 닫기
+			Selected = 0;  // 메뉴 조작을 다시 활성화
+		}
 	}
 }
+
 
 void GameManager::EndScene ( const HDC& mDC ) {//2
 
@@ -321,7 +325,6 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 }
 
 void GameManager::ClearScene ( const HDC& mDC ) {//2
-
 	if ( endcount >= 0.1 ) {
 		endcount = 0;
 		endframe++;

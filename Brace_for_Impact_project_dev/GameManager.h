@@ -66,6 +66,7 @@ private:
 	bool invincibleMode;
 	bool oilMode;//탱크 기름모드
 	
+	int rulepage = -1;
 
 	int endframe;
 	float endcount;
@@ -342,28 +343,27 @@ public:
 
 
 		//게임 시작 창일때
-		if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) )&& Cursor == 0 ) {
+		if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) )
+			&& Cursor == 0 ) {
 
 			SoundManager::getInstance ( ).GetSoundID ( "Start" )->SetVolume ( 100 );
-
 			SoundManager::getInstance ( ).GetSoundID ( "Start" )->ReplaySound ( );
 			type = 1;
 			
 			return;
 		}
-		else if (( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ))&& Cursor == 4 ) {
+		else if ( ( input::GetKeyDown ( eKeyCode::F ) || input::GetKeyDown ( eKeyCode::M ) ) && Cursor == 4 ) {
 			SoundManager::getInstance ( ).GetSoundID ( "Menu" )->ReplaySound ( );
-			Rule = !Rule;
+			Rule = true;
+			Selected = 1;  // Rule이 열렸을 때 Selected 설정
 
 			if ( Rule ) {
 				std::cout << "a" << std::endl;
-				Selected = 1;
+				Selected = 1;  // Rule이 활성화되면 Selected를 1로 설정
 			}
 			else {
-				Selected = 0;
+				Selected = 0;  // Rule이 닫히면 Selected를 0으로 설정
 			}
-
-
 		}
 		else if(( input::GetKeyDown ( eKeyCode::M) || input::GetKeyDown ( eKeyCode::F )) && Cursor == 8 ){
 			exit ( 1 );

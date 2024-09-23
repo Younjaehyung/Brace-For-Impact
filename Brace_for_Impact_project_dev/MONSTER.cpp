@@ -341,7 +341,7 @@ void mop::move ( Tank& p1  ) {
 	if ( mop_inform.type == 4 )speed *= 2;
 	BOOL blockmop = 0;
 	RECTS moprect = ReturnRect ( );
-	RECTS cpyrect;
+	RECTS cpyrect;	//길찾기
 	
 	RECTS tankRects = TankController::TankRects ( );
 
@@ -683,7 +683,7 @@ void mop::Update( ){
 		if ( move_count >=0.15 ) {
 			frame++;
 			if ( frame >= 6 ) {
-				frame = 0;
+				frame = 5;
 				//if ( status == 3 ) status = 0;
 			}
 			move_count = 0;
@@ -705,9 +705,7 @@ void mop::Update( ){
 			}
 			die_timer = 0;
 		}
-
 		die_timer += Time::DeltaTime ( );
-	
 	}
 }
 
@@ -961,7 +959,7 @@ void mop::Render( const HDC& dc) {
 
 }
 
-RECTS& mop::ReturnRect ( ) {
+RECTS& mop::ReturnRect ( ) {//피격범위
 	RECTS r;
 	if ( mop_inform.type == 1 ) {
 		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
@@ -994,7 +992,7 @@ RECTS& mop::ReturnRect ( ) {
 	return r;
 }
 
-RECTS& mop::ReturnRect_T (monster mop_inform ) {
+RECTS& mop::ReturnRect_T (monster mop_inform ) {//충돌
 	RECTS r;
 	if ( mop_inform.type == 1 ) {
 		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
