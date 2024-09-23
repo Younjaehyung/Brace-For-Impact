@@ -150,6 +150,17 @@ void mop::attack( Tank& p1) {
 
 		}
 		if ( attack_count >= 5 ) {
+			if ( status == 2 ) {
+				mop* newmop = new mop ( 10 );
+				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
+				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
+				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
+
+				attack_count = 0;
+				status = 0;
+				direct = 0;
+			}
+			/*
 			int ddakkariSpawn = 0;
 			for ( auto& ddakkari : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 				if ( ddakkari->Returnmop_inform ( ).type == 10 ) {
@@ -166,6 +177,7 @@ void mop::attack( Tank& p1) {
 				status = 0;
 				direct = 0;
 			}
+			*/
 		}
 	}
 	else if ( mop_inform.type == 4 ) { //자폭이
@@ -305,11 +317,9 @@ void mop::attack( Tank& p1) {
 		if ( rect2rect ( moprect , tankrect ) ) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
-				TankController::Damage ( 10 );
-				//attack_count = 0;
+				TankController::Damage ( 30 );
+				mop_inform.cnt++;
 			}
-			mop_inform.cnt++;
-
 		}
 		if ( attack_count >= 2 ) {
 			attack_count = 0;
