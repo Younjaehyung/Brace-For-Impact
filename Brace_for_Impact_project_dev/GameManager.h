@@ -59,7 +59,7 @@ private:
 	int engineframe;	
 	float engineCount;
 
-
+	int SoundStatus;
 
 	int alertframe;
 	float alertCount;
@@ -162,7 +162,12 @@ public:
 			Stage_Switch ( );
 		}
 		if ( TankController::TankHp ( ) <= 0 && SceneCount < 7 &&type!=0) {
+			if ( type != 10 ) { //게임 패배시 음악 출력
+				SoundManager::getInstance ( ).StopAllChannels ( );
+				SoundManager::getInstance ( ).GetSoundID ( "Over" )->ReplaySound ( );
+			}
 			type = 10;
+			
 			return;
 		}
 		if ( !type ) {
@@ -188,6 +193,7 @@ public:
 			
 		}
 		else if ( type == 10 ) {
+			
 			EndScene ( orimDC );
 		}
 		else if ( type == 9 ) {
@@ -256,7 +262,8 @@ public:
 				if ( SceneStatus >= 7 ) {
 					type = 9;
 					End = 0;
-
+					SoundManager::getInstance ( ).StopAllChannels ( );
+					SoundManager::getInstance ( ).GetSoundID ( "Clear" )->ReplaySound ( );
 					return;
 				}
 				Stage_Sound ( );

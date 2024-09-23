@@ -279,6 +279,10 @@ IDR_WAVE17              WAVE                    "BFI_Move.mp3"
 
 IDR_WAVE18              WAVE                    "BFI_Reload.wav"
 
+IDR_WAVE19              WAVE                    "BFI_GameClear.wav"
+
+IDR_WAVE20              WAVE                    "BFI_Gameover.wav"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

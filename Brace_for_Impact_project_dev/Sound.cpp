@@ -39,7 +39,8 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "Dash" , CreateSound ( "BFI_Dash.wav" , 0 ) );
 	Channel.emplace ( "Reload" , CreateSound ( "BFI_Reload.wav" , 0 ) );
 	Channel.emplace ( "Move" , CreateSound ( "BFI_Move.mp3" , 0 ) );
-
+	Channel.emplace ( "Clear" , CreateSound ( "BFI_GameClear.wav" , 0 ) );
+	Channel.emplace ( "Over" , CreateSound ( "BFI_Gameover.wav" , 1 ) );
 
 	
 }

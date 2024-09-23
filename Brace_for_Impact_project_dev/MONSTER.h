@@ -51,6 +51,9 @@ public:
 	float sixCount;
 	int sixframe;
 
+	float fourCount;
+	int fourframe;
+
 };
 
 class MonsterManager {
