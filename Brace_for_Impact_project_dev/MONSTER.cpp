@@ -114,11 +114,12 @@ void mop::attack( Tank& p1) {
 					//status = 2;
 					TankController::Damage ( 50 );
 					mop_inform.cnt++;
+					attack_count = 0;
 				}
-				attack_count = 0;
+				//attack_count = 0; 원래 위치
 			}
 		}
-		if ( attack_count >= 3 ) {
+		if ( attack_count >= 1.1 ) {//원래3
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt =0;
