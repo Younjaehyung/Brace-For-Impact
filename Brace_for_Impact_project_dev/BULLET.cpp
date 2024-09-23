@@ -124,7 +124,7 @@ void bullet::move ( ) {
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 				if ( type == 14 ) {
 					if ( counter >= 500 ) {
-						if ( rect2Cir ( tankrect , x , y , SIZE + 2*counter ) && TankController::TankHp ( ) > 0 ) {
+						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 100 );
 						}

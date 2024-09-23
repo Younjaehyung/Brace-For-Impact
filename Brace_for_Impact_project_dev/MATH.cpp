@@ -106,7 +106,7 @@ BOOL inrect_f ( float left , float top , float right , float bottom , float x , 
 	}
 }
 BOOL rect2Cir ( RECTS rect ,double& x ,double& y ,int sz ) {
-	if ( rect.left - sz<x && rect.right + sz>x && rect.top - sz<y && rect.bottom>y ) {
+	if ( rect.left - sz<x && rect.right + sz > x && rect.top - sz < y && rect.bottom+sz > y ) {
 		return 1;
 	}
 	else {
