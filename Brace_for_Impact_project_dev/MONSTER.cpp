@@ -14,7 +14,7 @@ std::uniform_int_distribution<int> sponsemop(0, 800);
 
 mop::mop(int type) {
 	if ( type == 1 ) {
-		mop_inform.x = 29 * 64;
+		mop_inform.x = 28 * 64;
 		mop_inform.y = 20 * 64;
 	}
 	else if ( type == 2 ) {
