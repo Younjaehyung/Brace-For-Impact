@@ -1,5 +1,6 @@
 ﻿#include "MONSTER.h"
 #define SIZE 256
+#define BIGSIZE 768
 
 //status // 0: 중립상태 , 1: 이동 , 2: 공격 , 3: 데미지 , 4: 사망
 //std::list<mop*> MonsterManager::mops;
@@ -33,8 +34,8 @@ mop::mop(int type) {
 		mop_inform.y = 12 * 64;
 	}
 	else if ( type == 6 ) {
-		mop_inform.x = 23 * 64;
-		mop_inform.y = 12 * 64;
+		mop_inform.x = 11 * 64;
+		mop_inform.y = 13 * 64;
 	}
 
 
@@ -261,6 +262,7 @@ void mop::attack( Tank& p1) {
 
 			if ( mop_inform.cnt>0 && mop_inform.cnt < 500 ) {
 				int boom_x , boom_y;
+				ATKStatus = 3; //미사일
 				for ( int i = 0; i < 5; i++ ) {
 					boom_x = middleX ( ReturnRect ( ) ) + rand ( ) % 1000 - 500;
 					boom_y = middleY ( ReturnRect ( ) ) + rand ( ) % 1000 - 500;
@@ -269,6 +271,7 @@ void mop::attack( Tank& p1) {
 				mop_inform.cnt = 1001;
 			}
 			else if ( mop_inform.cnt >= 500 &&mop_inform.cnt < 1000 ) {
+				ATKStatus = 2; //레이저
 				if ( attack_count <= 2 ) {
 					//2초간 탄 발사
 					if ( attack_count >= 0 ) {
@@ -277,6 +280,7 @@ void mop::attack( Tank& p1) {
 				}
 			}
 			else if ( mop_inform.cnt == 1002 ) {
+				ATKStatus = 1; //근접
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 16 );
 				mop_inform.cnt = 1001;
 			}
@@ -289,7 +293,6 @@ void mop::attack( Tank& p1) {
 			}
 
 		}
-		//*/
 	}
 	else if ( mop_inform.type == 10 ) {// 소환몹
 		if ( rect2rect ( moprect , tankrect ) ) {
@@ -680,8 +683,7 @@ void mop::Update( ){
 		if ( move_count >=0.15 ) {
 			frame++;
 			if ( frame >= 6 ) {
-				frame = 5;
-
+				frame = 0;
 				//if ( status == 3 ) status = 0;
 			}
 			move_count = 0;
@@ -830,11 +832,11 @@ void mop::Render( const HDC& dc) {
 		else if ( mop_inform.type == 6 ) { //오줌
 			//Rectangle ( dc , mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 );
 			if ( status == 3 ) { //적 피격 시
-				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE*2 , mop_inform.y - MOPSIZE * 2 , BIGSIZE , BIGSIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , 0 , 4 * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( status == 4 ) {//적 사망시
-				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
+				TransparentBlt ( dc , mop_inform.x - MOPSIZE * 2 , mop_inform.y - MOPSIZE * 2 , BIGSIZE , BIGSIZE ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , die_frame * 256 , direct * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 				//Rectangle ( dc , 200 , 200 , 600 , 600 );
 			}
@@ -842,8 +844,14 @@ void mop::Render( const HDC& dc) {
 
 			}
 			else {
-				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE * 2 , SIZE * 2 ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , frame * 256 , direct * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
+				if (ATKStatus != 0) { //공격모션
+					TransparentBlt ( dc , mop_inform.x - MOPSIZE * 2 , mop_inform.y - MOPSIZE * 2 , BIGSIZE , BIGSIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , frame * 256 , ATKStatus * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
+				}
+				else {
+					TransparentBlt ( dc , mop_inform.x - MOPSIZE * 2 , mop_inform.y - MOPSIZE * 2 , BIGSIZE , BIGSIZE ,
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , frame * 256 , frame * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
+				}
 			}
 		}
 		else if ( mop_inform.type == 10 ) { // 쪼꼬미 4가 소환함

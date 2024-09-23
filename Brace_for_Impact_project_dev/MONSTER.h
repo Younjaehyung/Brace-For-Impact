@@ -43,6 +43,8 @@ public:
 	void Damage (int D);
 
 	int status = 0; // 0: 중립상태 , 1: 이동 , 2: 공격 , 3: 데미지 , 4: 사망
+	int ATKStatus = 0; //0: 1:근접 2: 레이저 3: 미사일
+
 
 	//OSW 몬스터 프레임과 방향. 근데 몹이 여러 종류라서 배열로 선언 필요할듯
 	int frame , direct;		//direct 0 : 좌 1: 우

@@ -178,6 +178,7 @@
     <Image Include="BFI_BOSS_5.bmp" />
     <Image Include="BFI_BOSS_6_sprite.bmp" />
     <Image Include="BFI_BOSS_7.bmp" />
+    <Image Include="BFI_BOSS_7_R.bmp" />
     <Image Include="BFI_Building_1.bmp" />
     <Image Include="BFI_Bullet_1.bmp" />
     <Image Include="BFI_Bullet_2.bmp" />

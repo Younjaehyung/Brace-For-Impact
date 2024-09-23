@@ -83,6 +83,7 @@ public:
         idBitmap.emplace ( "B_Boss_5" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_5 ) ) );
         idBitmap.emplace ( "B_Boss_6" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_6 ) ) );
         idBitmap.emplace ( "B_Boss_7" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_7 ) ) );
+        idBitmap.emplace ( "B_Boss_7_R" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_BOSS_7_R ) ) );
         //스크린 화면 출력
         idBitmap.emplace ( "B_TITLE" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_TITLE ) ) );
         idBitmap.emplace ( "B_Cursor" , ( HBITMAP ) LoadBitmap ( g_hinst , MAKEINTRESOURCE ( IDB_BM_SCREEN_CURSOR ) ) );

@@ -294,6 +294,9 @@
     <Image Include="BFI_BOSS_7.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="BFI_BOSS_7_R.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="BFI_ST_1_The Origin.wav">
