@@ -258,6 +258,7 @@ void GameManager::Tank_Inside ( const HDC& mDC ) {
 void GameManager::TitleScene ( const HDC& mDC ) {	//0
 
 
+	TankInsideCamera = 0;
 
 	if ( count >= 0.3 ) {
 		count = 0;

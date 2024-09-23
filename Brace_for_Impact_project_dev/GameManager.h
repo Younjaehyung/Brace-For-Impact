@@ -92,8 +92,10 @@ public:
 		SceneCount = 7;
 		Rule = 0;
 		End = 0;
+		TankInsideCamera = 0;
 		BossSceneC = 0;
 		BossSceneR = 0;
+		prevTankHp = TankController::TankHp ( );
 		Debugging_Stop_BackgroundMusic = 0;
 		blackBrush = CreateSolidBrush ( RGB ( 20 , 20 , 20 ) );
 		redBrush = CreateSolidBrush ( RGB ( 200 , 50 , 50 ) );
@@ -126,6 +128,8 @@ public:
 		MonsterManager::getInstance ( );
 		PlayerManager::getInstance ( );
 		BlockManager::getInstance ( );
+
+		Initialize ( );
 		Stage_Sound ( );
 
 	}
