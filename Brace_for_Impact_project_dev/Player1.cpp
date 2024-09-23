@@ -207,9 +207,10 @@ void Player1::SwitchStatus ( ) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
-				if ( TankController::TankBullet ( ) < 4 )
-				TankController::TankBullet ( )++;
-				SoundManager::getInstance ( ).GetSoundID ( "Reload" )->ReplaySound ( );
+				if ( TankController::TankBullet ( ) < 4 ) {
+					TankController::TankBullet ( )++;
+					SoundManager::getInstance ( ).GetSoundID ( "Reload" )->ReplaySound ( );
+				}
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 , ReturnRect ( ) ) ) {
@@ -514,9 +515,11 @@ void Player2::SwitchStatus ( ) {
 				itemtype = 6;
 				isHold = false;
 				
-				if ( TankController::TankBullet ( ) < 4 )
+				if ( TankController::TankBullet ( ) < 4 ){
 					SoundManager::getInstance ( ).GetSoundID ( "Reload" )->ReplaySound ( );
 					TankController::TankBullet ( )++;
+				}
+					
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 , ReturnRect ( ) ) ) {

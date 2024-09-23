@@ -64,7 +64,7 @@ void bullet::move ( ) {
 					}
 				}
 			}
-			if ( frame >= 2 ) frame = 0;
+			if ( frame >= 5 ) frame = 0;
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
 	}
@@ -218,10 +218,14 @@ void bullet::Render ( const HDC& dc ) {
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 0 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 15 ) { //오줌이 장판
-				Ellipse ( dc , x - 6*SIZE , y - 6*SIZE  , x + 6*SIZE , y + 6*SIZE  );
+				//Ellipse ( dc , x - 6*SIZE , y - 6*SIZE  , x + 6*SIZE , y + 6*SIZE  );
+				TransparentBlt ( dc , x - SIZE * 4 - counter , y - SIZE * 4 - counter , SIZE * 8 + counter * 4 , SIZE * 8 + counter * 4 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 4 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 16 ) { //오줌이 내려찍기
 				Ellipse ( dc , x - 10 * SIZE , y - 10 * SIZE , x + 10 * SIZE , y + 10 * SIZE );
+				TransparentBlt ( dc , x - SIZE * 4 - counter , y - SIZE * 4 - counter , SIZE * 8 + counter * 2 , SIZE * 8 + counter * 2 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , gasframe * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 11) { //빵빵이
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE ), ( int )( y - 4 * SIZE) , ( int )( SIZE * 8) , ( int )( SIZE * 8) ,

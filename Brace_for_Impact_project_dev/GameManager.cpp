@@ -315,6 +315,7 @@ void GameManager::EndScene ( const HDC& mDC ) {//2
 		}
 	}	endcount += Time::DeltaTime ( );
 
+	
 	TransparentBlt ( mDC , 128 * 5 + 64 , 256 , 288 , 480 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Over" ) , 0 , 0 , 288 , 480 , RGB ( 255 , 255 , 255 ) );
 	TransparentBlt ( mDC , 128 * 4 , 128 * 5 , 128 , 128 , Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , endframe * 128 , 128 * 0 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
@@ -336,6 +337,7 @@ void GameManager::ClearScene ( const HDC& mDC ) {//2
 			endframe = 0;
 		}
 	}	endcount += Time::DeltaTime ( );
+	
 
 	TransparentBlt ( mDC , 128 * 5 + 64 , 256 , 320 , 320 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_Clear" ) , 0 , 0 ,320 , 320 , RGB ( 255 , 255 , 255 ) );
