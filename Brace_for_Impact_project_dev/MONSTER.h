@@ -48,7 +48,9 @@ public:
 
 	//OSW 몬스터 프레임과 방향. 근데 몹이 여러 종류라서 배열로 선언 필요할듯
 	int frame , direct;		//direct 0 : 좌 1: 우
-	
+	float sixCount;
+	int sixframe;
+
 };
 
 class MonsterManager {
