@@ -150,12 +150,18 @@ void mop::attack( Tank& p1) {
 
 		}
 		if ( attack_count >= 5 ) {
-			if ( mop_inform.cnt < 10 ) {
+			int ddakkariSpawn = 0;
+			for ( auto& ddakkari : MonsterManager::getInstance ( ).MopReturn ( ) ) {
+				if ( ddakkari->Returnmop_inform ( ).type == 10 ) {
+					ddakkariSpawn += 1;
+				}
+			}
+			if (  ddakkariSpawn <=8 ) {
 				mop* newmop = new mop ( 10 );
 				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
 				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
 				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
-				mop_inform.cnt++;
+				
 				attack_count = 0;
 				status = 0;
 				direct = 0;
@@ -172,7 +178,7 @@ void mop::attack( Tank& p1) {
 				mop_inform.cnt++;
 			}
 		}
-		if ( attack_count > 5 ) {
+		if ( attack_count > 8 ) {
 			mop_inform.cnt = 0;
 			direct = 0;
 			attack_count = 0;
@@ -300,11 +306,12 @@ void mop::attack( Tank& p1) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
 				TankController::Damage ( 10 );
+				//attack_count = 0;
 			}
 			mop_inform.cnt++;
-			attack_count = 0;
+
 		}
-		if ( attack_count >= 5 ) {
+		if ( attack_count >= 2 ) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt = 0;
@@ -315,11 +322,12 @@ void mop::attack( Tank& p1) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
 				TankController::Damage ( 10 );
+				//attack_count = 0;
 			}
 			mop_inform.cnt++;
-			attack_count = 0;
+			
 		}
-		if ( attack_count >= 5 ) {
+		if ( attack_count >= 2 ) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt = 0;
@@ -1008,13 +1016,13 @@ RECTS& mop::ReturnRect_T (monster mop_inform ) {//충돌
 		r = { mop_inform.x , mop_inform.y + 30  , mop_inform.x + 210 , mop_inform.y + 180 };
 	}
 	else if ( mop_inform.type == 4 ) {
-		r = { mop_inform.x + 40, mop_inform.y + 20 , mop_inform.x + 170 , mop_inform.y + 200 };
+		r = { mop_inform.x + 50, mop_inform.y + 30 , mop_inform.x + 160 , mop_inform.y + 190 };
 	}
 	else if ( mop_inform.type == 5 ) {
 		r = { mop_inform.x + 50 , mop_inform.y , mop_inform.x + 170 , mop_inform.y + 230 };
 	}
 	else if ( mop_inform.type == 10 || mop_inform.type == 11 ) {
-		r = { mop_inform.x, mop_inform.y , mop_inform.x + 100 , mop_inform.y + 100 };
+		r = { mop_inform.x+10, mop_inform.y+10 , mop_inform.x + 90 , mop_inform.y + 90 };
 	}
 	else {
 		r = { mop_inform.x, mop_inform.y , mop_inform.x + 200 , mop_inform.y + 200 };
