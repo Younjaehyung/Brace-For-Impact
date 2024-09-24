@@ -29,7 +29,8 @@ private:
 	float timer2; //연막용 타이머
 	float timer3; //피격용 타이머
 	float timer4; //사망용 타이머
-	int frame, gasframe;
+	int frame;
+	int gasframe = 0;
 	BOOL PlayerBullet;
 
 	HBITMAP B_bullet;

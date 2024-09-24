@@ -77,6 +77,8 @@ void bullet::move ( ) {
 			frame++;
 			timer1 = 0;
 		}timer1 += Time::DeltaTime ( );
+
+		
 	}
 
 		if ( x < 0 || y < 0 ) {
@@ -202,6 +204,15 @@ void bullet::move ( ) {
 
 
 void bullet::Render ( const HDC& dc ) {
+
+	if ( timer2 > 0.2 ) {
+		gasframe++;
+		if ( gasframe >= 5 ) {
+			gasframe = 0;
+		}
+		timer2 = 0;
+	}timer2 += Time::DeltaTime ( );
+
 	if ( type != 0 ) {
 		if ( PlayerBullet ) { //플레이어가 쏜 총알
 			if ( type != 100 && type != 200 ) {
@@ -211,7 +222,7 @@ void bullet::Render ( const HDC& dc ) {
 			else if(type==100) { //연막
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 				TransparentBlt ( dc , x - SIZE*4 - counter, y - SIZE*4 - counter , SIZE * 8 + counter * 2 , SIZE * 8 + counter * 2 ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame*64 , 8 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , gasframe*64 , 8 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 
 			}
 			else { //대쉬
