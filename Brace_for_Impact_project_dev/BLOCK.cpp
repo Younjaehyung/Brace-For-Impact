@@ -38,6 +38,8 @@ void BlockManager::Initialize ( int type )
 	if ( type == 1 || type == 2 ) {
 		temp.makeblock ( { 0,0,32,6 } , 1 );
 		Blocks.push_back ( temp );
+		temp.makeblock ( { -10,0,0,10 } , 1 );
+		Blocks.push_back ( temp );
 		temp.makeblock ( { 0,10,3,32 } , 1 );
 		Blocks.push_back ( temp );
 		temp.makeblock ( { 0,28,32,32 } , 1 );

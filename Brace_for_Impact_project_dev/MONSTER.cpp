@@ -332,25 +332,63 @@ void mop::attack( Tank& p1) {
 				mop_inform.cnt=0;
 				status = 0;
 				direct = 0;
+				frame__2 = 0;
+				frame__2Count = 0;
 			}
+
+			if ( ATKStatus == 1 ) {
+				if ( frame__2Count >= 0.3f ) {
+					frame__2Count = 0;
+					frame__2++;
+					if ( frame__2 >= 6 ) {
+						frame__2 = 0;
+					}
+				}
+				frame__2Count += Time::DeltaTime ( );
+			}
+			else {
+				frame__2 = 0;
+				frame__2Count = 0;
+			}
+		
+		
 
 		}
 	}
 	else if ( mop_inform.type == 10 ) {// 소환몹
 		if ( rect2rect ( moprect , tankrect ) ) {
-			if ( random_sound ( genmop ) /5 ) {
+			if ( random_sound ( genmop ) / 5 ) {
 				SoundManager::getInstance ( ).GetSoundID ( "cute" )->ReplaySound ( 0.15f );
 			}
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
 				TankController::Damage ( 30 );
 				mop_inform.cnt++;
+
+				
 			}
+
+			if ( frame__2Count >= 0.3f ) {
+				frame__2Count = 0;
+				frame__2++;
+				if ( frame__2 >= 6 ) {
+					frame__2 = 0;
+				}
+			}
+			frame__2Count += Time::DeltaTime ( );
+			
 		}
+		else {
+			frame__2 = 0;
+			frame__2Count = 0;
+		}
+
 		if ( attack_count >= 2 ) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt = 0;
+			frame__2 = 0;
+			frame__2Count = 0;
 		}
 	}
 	else if ( mop_inform.type == 11 ) {// 오줌싸개 소환몹
@@ -379,8 +417,7 @@ void mop::attack( Tank& p1) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt = 0;
-			frame__2 = 0;
-			frame__2Count = 0;
+			
 		}
 	}
 
@@ -800,6 +837,9 @@ void mop::Update( ){
 			if ( sixframe >= 6 ) {
 				sixframe = 0;
 			}
+			if ( sixframe == 3 ) {	//소리 추가
+				SoundManager::getInstance ( ).GetSoundID ( "stomp1" )->ReplaySound ( 0.9f );
+			}
 			sixCount = 0;
 		}sixCount += Time::DeltaTime ( );
 	}
@@ -956,6 +996,10 @@ void mop::Render( const HDC& dc) {
 				}
 				else {
 					if ( ATKStatus != 0 ) { //공격모션
+						if ( ATKStatus == 1 ) {
+							TransparentBlt ( dc , ( mop_inform.x - MOPSIZE * 1 + mop_inform.x - MOPSIZE * 1 + BIGSIZE ) / 2 - 20 * 20 , ( mop_inform.y - MOPSIZE * 10 + mop_inform.y - MOPSIZE * 10 + BIGSIZE ) / 2 - 20 * 20 , 40 * 20 , 40 * 20 ,
+					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame__2 * 64 , 3 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+						}
 						TransparentBlt ( dc , mop_inform.x - MOPSIZE * 2 , mop_inform.y - MOPSIZE * 10 , BIGSIZE , BIGSIZE ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , sixframe * 256 , ATKStatus * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 					}
@@ -980,6 +1024,11 @@ void mop::Render( const HDC& dc) {
 				}
 				else {
 					if ( ATKStatus != 0 ) { //공격모션
+						if ( ATKStatus == 1 ) {
+							TransparentBlt ( dc , ( mop_inform.x - MOPSIZE * 1 + mop_inform.x - MOPSIZE * 1 + BIGSIZE ) / 2 - 20 * 20 , ( mop_inform.y - MOPSIZE * 10 + mop_inform.y - MOPSIZE * 10 + BIGSIZE ) / 2 - 20 * 20 , 40 * 20 , 40 * 20 ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame__2 * 64 , 3 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+						}
+					
 						TransparentBlt ( dc , mop_inform.x - MOPSIZE * 2 , mop_inform.y - MOPSIZE * 10 , BIGSIZE , BIGSIZE ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7_R" ) , sixframe * 256 , ATKStatus * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 					}
@@ -1009,6 +1058,8 @@ void mop::Render( const HDC& dc) {
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
 				if ( status == 2 ) {
+					std::cerr << status << std::endl;
+					std::cerr << frame__2 << std::endl;
 					TransparentBlt ( dc , ( int ) ( mop_inform.x ) , ( int ) ( mop_inform.y ) , ( int ) ( ( SIZE )/2) , ( int ) (  ( SIZE )/2 ) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame__2 * 64 , 3 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 					//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
