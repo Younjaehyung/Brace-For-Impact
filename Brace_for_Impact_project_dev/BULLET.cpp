@@ -62,7 +62,7 @@ void bullet::move ( ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
 						if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
-							ScanMop->Damage ( 5 );
+							ScanMop->Damage ( 3 ); // 총 15딜
 						}
 					}
 				}
