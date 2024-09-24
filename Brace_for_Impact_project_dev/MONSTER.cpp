@@ -44,22 +44,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 130; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 150; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 130;
-	}
-	else if ( type == 3 ) { //오줌
 		mop_inform.hp = 150;
 	}
-	else if ( type == 4 ) { //튼튼이
-		mop_inform.hp = 120;
+	else if ( type == 3 ) { //소환하는애
+		mop_inform.hp = 200;
 	}
-	else if ( type == 5 ) { //자폭이
-		mop_inform.hp = 100;
+	else if ( type == 4 ) { //자폭이
+		mop_inform.hp = 230;
 	}
-	else if ( type == 6 ) { //춘식이
-		mop_inform.hp = 100;
+	else if ( type == 5 ) { //춘식이
+		mop_inform.hp = 250;
+	}
+	else if ( type == 6 ) { //최종보스
+		mop_inform.hp = 450;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 10;

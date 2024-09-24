@@ -232,7 +232,7 @@ void Player1::SwitchStatus ( ) {
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 30;
 				if ( TankController::TankHp ( ) <= 270 ) {
-					TankController::TankHp ( ) += 20;
+					TankController::TankHp ( ) += 30;
 				}
 				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 			}
@@ -545,7 +545,7 @@ void Player2::SwitchStatus ( ) {
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 30;
 				if ( TankController::TankHp ( ) <= 270 ) {
-					TankController::TankHp ( ) += 20;
+					TankController::TankHp ( ) += 50;
 				}
 			}
 		}

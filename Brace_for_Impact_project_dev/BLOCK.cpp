@@ -101,10 +101,10 @@ void BlockManager::Initialize ( int type )
 	
 			temp.makeblock ( { 0,0,2,7 } , 1 );
 			Blocks.push_back ( temp );
-			temp.makeblock ( { 10,0,19,11 } , 1 );
-			Blocks.push_back ( temp );
-			temp.makeblock ( { 30,0,32,7 } , 1 );
-			Blocks.push_back ( temp );
+			//temp.makeblock ( { 10,0,19,11 } , 1 );
+			//Blocks.push_back ( temp );
+			//temp.makeblock ( { 30,0,32,7 } , 1 );
+			//Blocks.push_back ( temp );
 			temp.makeblock ( { 0,14,2,20 } , 1 );
 			Blocks.push_back ( temp );
 			/*temp.makeblock ( { 11,14,19,22 } , 1 );
