@@ -862,7 +862,7 @@ void mop::Render( const HDC& dc) {
 			}
 			else if ( status == 4 ) {//적 사망시
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE * 1 , mop_inform.y - MOPSIZE * 10 , BIGSIZE , BIGSIZE ,
-			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , die_frame * 256 , direct * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
+			Texture::getInstance ( ).Texture_GetDC ( "B_Boss_7" ) , die_frame * 256 , 4 * 256 , 256 , 256 , RGB ( 255 , 255 , 255 ) );
 				//Rectangle ( dc , 200 , 200 , 600 , 600 );
 			}
 			else if ( status == 5 ) {//적 사망시

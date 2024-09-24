@@ -103,7 +103,8 @@ void Tank::move ( )
 		if ( TankController::Dash() ) {
 			speed = 3*speed;
 			//TankController::Dash() = 0 ;
-			dashcnt+=  300* Time::DeltaTime ( );
+			//대쉬 거리 조절
+			dashcnt+=  200* Time::DeltaTime ( );
 			if ( dashcnt > 10 ) {
 				dashcnt2++;
 				bullet * newbullet = new bullet ( rect.left , rect.top , 200 , Tank_car_direct , Tank_head_direct );

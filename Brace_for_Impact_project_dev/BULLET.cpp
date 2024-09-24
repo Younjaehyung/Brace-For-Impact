@@ -210,7 +210,7 @@ void bullet::Render ( const HDC& dc ) {
 		else { // 몬스터가 쏜 총알
 			if ( type == 14 ) { // 자폭이 폭발
 				TransparentBlt ( dc , (int)(x -  SIZE -counter) , ( int )( y - SIZE-counter) , ( int )(2*( SIZE +counter)) , ( int )( 2*( SIZE +counter)) ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 3 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 5 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 			}
 			else if (type == 10 ) { //오줌이
@@ -225,7 +225,7 @@ void bullet::Render ( const HDC& dc ) {
 			else if ( type == 16 ) { //오줌이 내려찍기
 				Ellipse ( dc , x - 10 * SIZE , y - 10 * SIZE , x + 10 * SIZE , y + 10 * SIZE );
 				TransparentBlt ( dc , x - SIZE * 4 - counter , y - SIZE * 4 - counter , SIZE * 8 + counter * 2 , SIZE * 8 + counter * 2 ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , gasframe * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 5 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 11) { //빵빵이
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE ), ( int )( y - 4 * SIZE) , ( int )( SIZE * 8) , ( int )( SIZE * 8) ,

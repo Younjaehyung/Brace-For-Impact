@@ -219,7 +219,7 @@ void Player1::SwitchStatus ( ) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
-				TankController::TankOil() += 50;
+				TankController::TankOil ( ) += 75;
 				if ( TankController::TankOil ( ) > 300 ) {
 					TankController::TankOil ( ) = 300;
 				}
@@ -228,9 +228,9 @@ void Player1::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 , ReturnRect ( ) ) ) {
 			//대쉬
-			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
+			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 30 ) {
 				TankController::Dash ( ) = 1;
-				TankController::TankOil ( ) -= 50;
+				TankController::TankOil ( ) -= 30;
 				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 			}
 		}
@@ -529,7 +529,7 @@ void Player2::SwitchStatus ( ) {
 				itemtype = 6;
 				isHold = false;
 				SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
-				TankController::TankOil ( ) += 50;
+				TankController::TankOil ( ) += 75;
 				if ( TankController::TankOil ( ) > 300 ) {
 					TankController::TankOil ( ) = 300;
 				}
@@ -537,10 +537,10 @@ void Player2::SwitchStatus ( ) {
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 , ReturnRect ( ) ) ) {
 			//대쉬
-			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 50 ) {
+			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 30 ) {
 				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 				TankController::Dash ( ) = 1;
-				TankController::TankOil ( ) -= 50;
+				TankController::TankOil ( ) -= 30;
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 , ReturnRect ( ) ) && TankController::TankBullet ( ) >= 1 ) {
