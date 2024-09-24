@@ -8,6 +8,10 @@ int MONSTERLEN = 300;
 int MOPSIZE = 20;
 int BLOCKCOUNT = 20;
 
+std::random_device rd_mop;
+std::mt19937 gen_mop ( rd_mop ( ) );
+std::uniform_int_distribution<int> rand_atk ( 1 , 1000 );
+
 std::random_device rdmop;
 std::mt19937 genmop;
 std::uniform_int_distribution<int> sponsemop(0, 800);
@@ -75,6 +79,7 @@ void mop::attack( Tank& p1) {
 	RECTS moprect = ReturnRect();
 	RECTS tankrect = p1.ReturnRect ( );
 	float speed = 300 * Time::DeltaTime ( );
+
 	
 	if ( mop_inform.type == 1 ) { //꽁기깅깡
 		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < MONSTERLEN ) {
@@ -278,11 +283,11 @@ void mop::attack( Tank& p1) {
 					mop_inform.cnt = 1002;
 				}
 				else {
-					mop_inform.cnt = rand ( ) % 1000 + 1;
+					mop_inform.cnt = rand_atk(rd_mop);
 				}
 			}
 
-			if ( mop_inform.cnt>0 && mop_inform.cnt < 500 ) {
+			if ( mop_inform.cnt>0 && mop_inform.cnt < 650 ) {
 				int boom_x , boom_y;
 				ATKStatus = 3; //미사일
 				for ( int i = 0; i < 20; i++ ) {
@@ -292,7 +297,7 @@ void mop::attack( Tank& p1) {
 				}
 				mop_inform.cnt = 1001;
 			}
-			else if ( mop_inform.cnt >= 500 &&mop_inform.cnt < 1000 ) {
+			else if ( mop_inform.cnt >= 650 &&mop_inform.cnt < 1000 ) {
 				ATKStatus = 2; //레이저
 				SoundManager::getInstance ( ).GetSoundID ( "Trim" )->ReplaySound ();
 				if ( attack_count <= 2 ) {
