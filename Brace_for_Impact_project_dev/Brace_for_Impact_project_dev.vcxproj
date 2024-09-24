@@ -237,6 +237,7 @@
     <Media Include="BFI_Item.wav" />
     <Media Include="BFI_Laser.wav" />
     <Media Include="BFI_Menu.wav" />
+    <Media Include="BFI_monster_angry.mp3" />
     <Media Include="BFI_Move.mp3" />
     <Media Include="BFI_Reload.wav" />
     <Media Include="BFI_Shoot.wav" />

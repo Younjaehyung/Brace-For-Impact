@@ -353,5 +353,6 @@
     <Media Include="BFI_Gameover.wav">
       <Filter>리소스 파일</Filter>
     </Media>
+    <Media Include="BFI_monster_angry.mp3" />
   </ItemGroup>
 </Project>

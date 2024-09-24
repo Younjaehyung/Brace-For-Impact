@@ -14,3 +14,4 @@ int TankController::whomove = {};	//1 : p1 2:p2
 int TankController::whoaiming = {};
 RECTS TankController::player1 = {};
  RECTS TankController::player2 = {};
+ int TankController::tankHit = {};

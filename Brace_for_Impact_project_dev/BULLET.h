@@ -66,7 +66,9 @@ public:
 	void Render( const HDC& dc);
 	void CreateBullet ( bullet*& newbullet );
 	void DeleteBullet ( );
-
+	std::list<bullet*>& ReturnBullet ( ) {
+		return bullets;
+	}
 };
 
 

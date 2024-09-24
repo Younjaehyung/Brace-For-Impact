@@ -16,6 +16,9 @@ Tank::Tank () {
 	fireInterval = 0;
 	UnDieing = 0;
 	OILMODE = 0;
+	Hitframe=0;
+	HitTimer=0;
+	HitCounter = 0;
 }
 
 
@@ -39,7 +42,12 @@ void Tank::Clear ( )
 	isMove = 0;		
 	headMove = 0;	//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
 	headArrow = 0;
-	isHit = 0;
+	
+	UnDieing = 0;
+	OILMODE = 0;
+	Hitframe = 0;
+	HitTimer = 0;
+	HitCounter = 0;
 }
 
 void Tank::Initialize (int type ) {
@@ -534,9 +542,7 @@ void Tank::moving_rander_cal ( ) {
 		
 
 
-		if ( isHit ) {
-			TankController::TankStage_frame ( ).frame = 5;
-		}
+
 		
 	}
 	Tank_car_count += Time::DeltaTime ( );
@@ -557,6 +563,35 @@ void Tank::Render ( const HDC& mDC)
 	
 	
 	
+	if ( TankController::TankHit ( )) {
+		int SIZE{ 20 };
+		
+		if ( HitTimer > 0.1 ) {
+			Hitframe++;
+
+			if ( Hitframe >= 5 ) { 
+			HitTimer = 0;
+			Hitframe = 0;
+			HitCounter = 0;
+			TankController::TankHit ( ) = false;
+			}
+			HitTimer = 0;
+		}
+		
+		if ( HitCounter <= 25 ) {
+			TransparentBlt ( mDC , rect.left , rect.top , TANKSIZE , TANKSIZE ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , Hitframe * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
+		else {
+			HitTimer = 0;
+			Hitframe = 0;
+			HitCounter = 0;
+			TankController::TankHit ( ) = false;
+		}
+		HitCounter +=10* Time::DeltaTime ( );
+		HitTimer += Time::DeltaTime ( );
+	}
+
 	if ( Debugging::ReturnMod ( ) ) {
 		
 		HPEN hPen = CreatePen ( PS_DOT , 1 , RGB ( 255 , 22 , 111 ) );

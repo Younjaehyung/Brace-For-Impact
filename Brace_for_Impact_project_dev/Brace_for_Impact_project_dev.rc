@@ -283,6 +283,8 @@ IDR_WAVE19              WAVE                    "BFI_GameClear.wav"
 
 IDR_WAVE20              WAVE                    "BFI_Gameover.wav"
 
+IDR_WAVE21              WAVE                    "BFI_monster_angry.mp3"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

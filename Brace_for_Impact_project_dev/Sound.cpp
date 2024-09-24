@@ -41,8 +41,9 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "Move" , CreateSound ( "BFI_Move.mp3" , 0 ) );
 	Channel.emplace ( "Clear" , CreateSound ( "BFI_GameClear.wav" , 0 ) );
 	Channel.emplace ( "Over" , CreateSound ( "BFI_Gameover.wav" , 1 ) );
-
-	
+	Channel.emplace ( "Trim" , CreateSound ( "BFI_monster_trim1.mp3" , 0 ) );
+	Channel.emplace ( "Trim2" , CreateSound ( "BFI_monster_trim2.mp3" , 0 ) );
+	Channel.emplace ( "angry" , CreateSound ( "BFI_monster_angry.mp3" , 0 ) );
 }
 
 void SoundManager::Update ( )

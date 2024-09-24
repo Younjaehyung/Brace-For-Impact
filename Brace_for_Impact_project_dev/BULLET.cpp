@@ -21,6 +21,7 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 	//14: 충격파 제자리에서 점점 커짐
 	//15: 데미지 입히는 지형 생성
 	//16: 근접 데미지 (내려찍기)
+	//17: 6번 미사일 터진후 연기 (딜 없음)
 }
 
 
@@ -31,7 +32,7 @@ void bullet::move ( ) {
 		counter += 100 * Time::DeltaTime ( );
 	}
 	//장판뎀
-	else if ( type == 15 || type==16) {
+	else if ( type == 15 || type==16 || type ==17) {
 		counter += 10 * Time::DeltaTime ( );
 	}
 	//연기
@@ -123,6 +124,7 @@ void bullet::move ( ) {
 				else if ( type == 200 && counter >= 10 ) {
 					type = 0;
 				}
+			
 			}
 			//플레이어(탱크)가 탄 맞음
 			if ( !PlayerBullet ) {
@@ -132,6 +134,7 @@ void bullet::move ( ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 100 );
+							TankController::TankHit ( ) = true;
 						}
 						type = 0;
 					}
@@ -141,20 +144,33 @@ void bullet::move ( ) {
 						if ( rect2Cir ( tankrect , x , y , 6*SIZE ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 100 );
+							TankController::TankHit ( ) = true;
 						}
-						type = 0;
+						frame = 0;
+						counter = 0;
+						type = 17;
 					}
+				
+					
 				}
 				else if ( type == 16 ) {
 					if ( counter >= 1 && counter < 2 ) {
 						if ( rect2Cir ( tankrect , x , y , 20 * SIZE ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 3 );
+							TankController::TankHit ( ) = true;
 						}
 					}
 					else if ( counter >= 3 ) {
 						type = 0;
 					}
+				}
+				else if ( type == 17 ) {
+					
+					if ( counter >= 5 ) {
+						type = 0;
+					}
+					
 				}
 				else {
 					
@@ -162,19 +178,23 @@ void bullet::move ( ) {
 						if ( type == 10 ) { //오줌이
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 1 );
+							TankController::TankHit ( ) = true;
 						}
 						else if ( type == 11 ) {//빵빵이
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 45 );
+							TankController::TankHit ( ) = true;
 						}
 						else if ( type == 12 ) {//춘식이
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 40 );
+							TankController::TankHit ( ) = true;
 							
 						}
 						type = 0;
 					}
 				}
+				
 			}
 		}
 	
@@ -224,8 +244,10 @@ void bullet::Render ( const HDC& dc ) {
 			}
 			else if ( type == 15 ) { //오줌이 장판
 				//Ellipse ( dc , x - 6*SIZE , y - 6*SIZE  , x + 6*SIZE , y + 6*SIZE  );
-				TransparentBlt ( dc , x - SIZE * 4 - counter , y - SIZE * 4 - counter , SIZE * 8 + counter * 4 , SIZE * 8 + counter * 4 ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 4 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				
+					TransparentBlt ( dc , x - SIZE * 4 - counter , y - SIZE * 4 - counter , SIZE * 8 + counter * 4 , SIZE * 8 + counter * 4 ,
+					Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 4 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				
 			}
 			else if ( type == 16 ) { //오줌이 내려찍기
 				Ellipse ( dc , x - 20 * SIZE , y - 20 * SIZE , x + 20 * SIZE , y + 20 * SIZE );
@@ -239,6 +261,16 @@ void bullet::Render ( const HDC& dc ) {
 			else if ( type == 12 ) { //춘식이
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE) , ( int )( y - 4 * SIZE ), ( int )(SIZE * 8) , ( int )(SIZE * 8) ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 1 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			}
+			else if ( type == 17 ) {
+				if ( counter <= 2.5 ) {
+					TransparentBlt ( dc , x - 6 * SIZE , y - 6 * SIZE , SIZE * 12 , SIZE * 12 ,
+						Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 64 , 9 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				}
+				else {
+					TransparentBlt ( dc , x - 6 * SIZE , y - 6 * SIZE , SIZE * 12 , SIZE * 12 ,
+						Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame * 64 , 8 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				}
 			}
 			else { //그 외 다른애들 총알
 				TransparentBlt ( dc , ( int )( x - 4 * SIZE) , ( int )( y - 4 * SIZE) , ( int )(SIZE * 8) , ( int )(SIZE * 8 ),
@@ -338,7 +370,8 @@ void BulletManager::DeleteBullet() {
 			
 
 				for ( auto iter = bullets.begin ( ); iter != bullets.end ( );) {
-					if ( ( *iter )->return_type ( ) == 0 && ( *iter )->return_frame ( ) >6 ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+					if ( ( *iter )->return_type ( ) == 0  ) {  // 반복자가 가리키는 객체에 접근하기 위해 *iter 사용
+						//&& ( *iter )->return_frame ( ) >6 삭제 
 						bullet* del = *iter;  // 삭제할 노드의 포인터를 저장
 						iter = bullets.erase ( iter );  // 삭제한 노드의 다음 노드의 반복자를 반환
 					

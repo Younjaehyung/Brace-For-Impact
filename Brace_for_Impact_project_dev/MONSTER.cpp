@@ -11,7 +11,7 @@ int BLOCKCOUNT = 20;
 std::random_device rdmop;
 std::mt19937 genmop;
 std::uniform_int_distribution<int> sponsemop(0, 800);
-
+std::uniform_int_distribution<int> random_sound (0,10 );
 mop::mop(int type) {
 	if ( type == 1 ) {
 		mop_inform.x = 28 * 64;
@@ -230,6 +230,9 @@ void mop::attack( Tank& p1) {
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 			attack_count = 0;
+			if ( 1 ) {//사운드 랜덤 재생 함수
+				SoundManager::getInstance ( ).GetSoundID ( "angry" )->ReplaySound ( );
+			}
 			//atk_type = rand ( ) % 3;
 		}
 		/*
@@ -291,6 +294,7 @@ void mop::attack( Tank& p1) {
 			}
 			else if ( mop_inform.cnt >= 500 &&mop_inform.cnt < 1000 ) {
 				ATKStatus = 2; //레이저
+				SoundManager::getInstance ( ).GetSoundID ( "Trim" )->ReplaySound ();
 				if ( attack_count <= 2 ) {
 					//2초간 탄 발사
 					if ( attack_count >= 0 ) {

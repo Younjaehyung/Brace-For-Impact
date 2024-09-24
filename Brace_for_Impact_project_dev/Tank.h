@@ -35,10 +35,14 @@ private:
 	BOOL isMove;			//탱크가 움직이고 있지 않으면 FRAME 0으로 만들 목적
 	BOOL headMove;
 	BOOL headArrow;
-	BOOL isHit;
+	
 
 	BOOL UnDieing;
 	BOOL OILMODE;
+	//탱크 피격 이미지
+	int Hitframe;
+	float HitTimer;
+	float HitCounter;
 public:
 	
 	Tank ( );

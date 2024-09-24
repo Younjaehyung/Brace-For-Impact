@@ -19,7 +19,7 @@ private:
 	//OSW 스테이지프레임, 대포 프레임, 대포 타이머
 	static Frame Stage_frame , Cannon_frame , Inside_frame;
 	static RECTS TankRect;
-	
+	static int tankHit;
 	static int tankhp;
 	static int tankoil;
 	static int tankbullet;
@@ -48,6 +48,9 @@ public:
 
 	static Frame& TankCannon_frame ( ) {
 		return Cannon_frame;
+	}
+	static int& TankHit ( ) {
+		return tankHit;
 	}
 	static int& TankHp ( ) {
 		return tankhp;
