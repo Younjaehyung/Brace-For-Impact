@@ -184,12 +184,12 @@ void bullet::move ( ) {
 						}
 						else if ( type == 11 ) {//빵빵이
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
-							TankController::Damage ( 45 );
+							TankController::Damage ( 60 );
 							TankController::TankHit ( ) = true;
 						}
 						else if ( type == 12 ) {//춘식이
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
-							TankController::Damage ( 40 );
+							TankController::Damage ( 10 );
 							TankController::TankHit ( ) = true;
 							
 						}
