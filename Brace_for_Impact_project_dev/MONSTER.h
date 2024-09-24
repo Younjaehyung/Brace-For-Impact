@@ -37,6 +37,7 @@ public:
 	void move2( Tank& );
 	void Update( );
 	void Render( const HDC& dc);
+	void length_sound ( );
 	RECTS& ReturnRect ( );	//공격 범위
 	RECTS& ReturnRect_T ( monster mop_inform );	//충돌방지범위
 	monster& Returnmop_inform(){

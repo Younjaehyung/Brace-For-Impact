@@ -206,16 +206,13 @@ void Tank::move ( )
 			}
 			for ( auto& mop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 				RECTS recttemp = { rect.left,rect.top+30,rect.right,rect.bottom };
-				recttemp.left += moveX;
-				recttemp.right += moveX;
-				
-				
+			
 				//적과 플레이어 탱크 충돌
 				recttemp.left += moveX;
 				recttemp.right += moveX;
 				recttemp.top += moveY;
 				recttemp.bottom += moveY;
-				if ( IntersectRect_float ( mop->ReturnRect ( ) , recttemp ) ) {
+				if ( IntersectRect_float ( mop->ReturnRect_T(mop->Returnmop_inform()) , recttemp ) ) {
 					isMove = false;
 					return;
 				}

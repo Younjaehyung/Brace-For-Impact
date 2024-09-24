@@ -117,14 +117,17 @@ void mop::attack( Tank& p1) {
 				if ( mop_inform.cnt == 0 ) {
 					frame = 0;
 					//status = 2;
-					TankController::Damage ( 50 );
+					TankController::Damage ( 15 );
 					mop_inform.cnt++;
+					SoundManager::getInstance ( ).GetSoundID ( "stomp1" )->ReplaySound ( );
 					attack_count = 0;
+					
 				}
 				//attack_count = 0; 원래 위치
 			}
 		}
 		if ( attack_count >= 1.1 ) {//원래3
+			
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt =0;
@@ -160,7 +163,7 @@ void mop::attack( Tank& p1) {
 				newmop->mop_inform.x = middleX ( ReturnRect ( ) );
 				newmop->mop_inform.y = middleY ( ReturnRect ( ) );
 				MonsterManager::getInstance ( ).MopReturn ( ).push_back ( newmop );
-
+				SoundManager::getInstance ( ).GetSoundID ( "bip" )->ReplaySound ( );
 				attack_count = 0;
 				status = 0;
 				direct = 0;
@@ -238,7 +241,7 @@ void mop::attack( Tank& p1) {
 			attack_count = 0;
 			//사운드 랜덤 재생 함수
 				SoundManager::getInstance ( ).GetSoundID ( "cine" )->ReplaySound ( );
-			
+				
 			//atk_type = rand ( ) % 3;
 		}
 		/*
@@ -328,6 +331,9 @@ void mop::attack( Tank& p1) {
 	}
 	else if ( mop_inform.type == 10 ) {// 소환몹
 		if ( rect2rect ( moprect , tankrect ) ) {
+			if ( random_sound ( genmop ) /5 ) {
+				SoundManager::getInstance ( ).GetSoundID ( "cute" )->ReplaySound ( 0.15f );
+			}
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
 				TankController::Damage ( 30 );
@@ -585,17 +591,19 @@ void mop::move ( Tank& p1  ) {
 	move_count += Time::DeltaTime ( );
 	*/
 
+	
+		
+			
+	
 
-	std::cerr <<"=" << mop_inform.x << std::endl;
-	std::cerr <<"=="<< this->mop_inform.x << std::endl;
-
+	
 	if ( IntersectRect_float ( ReturnRect_T ( mop_inform ) , tankRects ) ) {//적과 플레이어 탱크 충돌
 
 		return;
 
 	}
 	
-
+	
 	this->mop_inform.x = mop_inform.x;
 	this->mop_inform.y = mop_inform.y;
 
@@ -697,6 +705,17 @@ void mop::move2 ( Tank& p1 ) {
 
 }
 
+void mop::length_sound ( ) {
+	RECTS tankrect =  TankController::TankRects ( );
+	float lengthxy = length ( tankrect.right , tankrect.bottom , mop_inform.x , mop_inform.y );
+
+	float soundM = ( 0.6f / 1599.0f ) * ( 1599.0f - lengthxy );
+
+	
+	SoundManager::getInstance ( ).GetSoundID ( "stomp3" )->ReplaySound ( soundM );
+	std::cerr << soundM << std::endl;
+
+}
 
 void mop::Update( ){
 	
@@ -707,13 +726,21 @@ void mop::Update( ){
 		
 	}
 	if ( !( status == 3 || status == 4 || status == 5 ) ) {
+	
 		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
 	}
 
 	if ( !(status == 4 || status == 2||status==5) ) {
 		if ( move_count >= 0.15 ) {
+
+			if (( mop_inform.type == 1 || mop_inform.type == 2 || mop_inform.type == 5)&& (frame==2 || frame==5) ) {
+				
+				length_sound ( );
+				
+			}
 			frame++;
 			move_count = 0;
+
 			if ( frame >= 6 ) {
 				frame = 0;
 				if ( status == 3 ) 
@@ -726,6 +753,7 @@ void mop::Update( ){
 	else if ( status == 2 ) {
 		if ( move_count >=0.15 ) {
 			frame++;
+			
 			if ( frame >= 6 ) {
 				frame = 5;
 				//if ( status == 3 ) status = 0;
@@ -1047,7 +1075,7 @@ RECTS& mop::ReturnRect ( ) {//피격범위
 RECTS& mop::ReturnRect_T (monster mop_inform ) {//충돌
 	RECTS r;
 	if ( mop_inform.type == 1 ) {
-		r = { mop_inform.x + 30 , mop_inform.y + 20 , mop_inform.x + 190 , mop_inform.y + 220 };
+		r = { mop_inform.x + 30 , mop_inform.y + 40 , mop_inform.x + 190 , mop_inform.y + 220 };
 	}
 	else if ( mop_inform.type == 2 ) {
 		r = { mop_inform.x + 40  , mop_inform.y + 40  , mop_inform.x + 190 , mop_inform.y + 180 };	//수정1

@@ -48,8 +48,11 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "missile2" , CreateSound ( "BFI_monster_missile2.mp3" , 0 ) );
 	Channel.emplace ( "ele" , CreateSound ( "BFI_monster_ele.mp3" , 0 ) );
 	Channel.emplace ( "cine" , CreateSound ( "BFI_monster_Cinematic.mp3" , 0 ) );
-
-
+	Channel.emplace ( "stomp1" , CreateSound ( "BFI_monster_stomp1.mp3" , 0 ) );
+	Channel.emplace ( "stomp2" , CreateSound ( "BFI_monster_stomp2.mp3" , 0 ) );
+	Channel.emplace ( "stomp3" , CreateSound ( "BFI_monster_stomp3.mp3" , 0 ) );
+	Channel.emplace ( "cute" , CreateSound ( "BFI_monster_cute.mp3" , 0 ) );
+	Channel.emplace ( "bip" , CreateSound ( "BFI_monster_bipbip.mp3" , 0 ) );
 }
 
 void SoundManager::Update ( )
