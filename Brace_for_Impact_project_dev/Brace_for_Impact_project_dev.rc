@@ -285,6 +285,14 @@ IDR_WAVE20              WAVE                    "BFI_Gameover.wav"
 
 IDR_WAVE21              WAVE                    "BFI_monster_angry.mp3"
 
+IDR_WAVE22              WAVE                    "BFI_monster_missile.mp3"
+
+IDR_WAVE23              WAVE                    "BFI_monster_ele.mp3"
+
+IDR_WAVE24              WAVE                    "BFI_monster_missile2.mp3"
+
+IDR_WAVE25              WAVE                    "BFI_monster_Cinematic.mp3"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

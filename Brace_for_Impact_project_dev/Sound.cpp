@@ -44,6 +44,12 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "Trim" , CreateSound ( "BFI_monster_trim1.mp3" , 0 ) );
 	Channel.emplace ( "Trim2" , CreateSound ( "BFI_monster_trim2.mp3" , 0 ) );
 	Channel.emplace ( "angry" , CreateSound ( "BFI_monster_angry.mp3" , 0 ) );
+	Channel.emplace ( "missile1" , CreateSound ( "BFI_monster_missile.mp3" , 0 ) );
+	Channel.emplace ( "missile2" , CreateSound ( "BFI_monster_missile2.mp3" , 0 ) );
+	Channel.emplace ( "ele" , CreateSound ( "BFI_monster_ele.mp3" , 0 ) );
+	Channel.emplace ( "cine" , CreateSound ( "BFI_monster_Cinematic.mp3" , 0 ) );
+
+
 }
 
 void SoundManager::Update ( )

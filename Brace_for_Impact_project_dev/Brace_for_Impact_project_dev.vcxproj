@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -238,6 +238,10 @@
     <Media Include="BFI_Laser.wav" />
     <Media Include="BFI_Menu.wav" />
     <Media Include="BFI_monster_angry.mp3" />
+    <Media Include="BFI_monster_Cinematic.mp3" />
+    <Media Include="BFI_monster_ele.mp3" />
+    <Media Include="BFI_monster_missile.mp3" />
+    <Media Include="BFI_monster_missile2.mp3" />
     <Media Include="BFI_Move.mp3" />
     <Media Include="BFI_Reload.wav" />
     <Media Include="BFI_Shoot.wav" />

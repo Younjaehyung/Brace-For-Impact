@@ -186,6 +186,7 @@ void mop::attack( Tank& p1) {
 				status = 2;
 				if ( direct == 0 ) { direct = 1; }
 				else if ( direct == 3 ) { direct = 4; }
+				SoundManager::getInstance ( ).GetSoundID ( "ele" )->ReplaySound ( );
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 14 );
 				mop_inform.cnt++;
 			}
@@ -230,9 +231,9 @@ void mop::attack( Tank& p1) {
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
 			attack_count = 0;
-			if ( 1 ) {//사운드 랜덤 재생 함수
-				SoundManager::getInstance ( ).GetSoundID ( "angry" )->ReplaySound ( );
-			}
+			//사운드 랜덤 재생 함수
+				SoundManager::getInstance ( ).GetSoundID ( "cine" )->ReplaySound ( );
+			
 			//atk_type = rand ( ) % 3;
 		}
 		/*
@@ -285,6 +286,8 @@ void mop::attack( Tank& p1) {
 			if ( mop_inform.cnt>0 && mop_inform.cnt < 500 ) {
 				int boom_x , boom_y;
 				ATKStatus = 3; //미사일
+				SoundManager::getInstance ( ).GetSoundID ( "missile2" )->ReplaySound ( );
+				SoundManager::getInstance ( ).GetSoundID ( "missile1" )->ReplaySound ( );
 				for ( int i = 0; i < 20; i++ ) {
 					boom_x = middleX ( ReturnRect ( ) ) + rand ( ) % 2000 - 1000;
 					boom_y = middleY ( ReturnRect ( ) ) + rand ( ) % 2000 - 1000;
@@ -304,6 +307,7 @@ void mop::attack( Tank& p1) {
 			}
 			else if ( mop_inform.cnt == 1002 ) {
 				ATKStatus = 1; //근접
+
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 16 );
 				mop_inform.cnt = 1001;
 			}
