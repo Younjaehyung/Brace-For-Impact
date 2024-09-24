@@ -156,7 +156,7 @@ void bullet::move ( ) {
 					
 				}
 				else if ( type == 16 ) {
-					if ( counter >= 1 && counter < 3 ) {
+					if ( counter >= 1 && counter < 2 ) {
 						if ( rect2Cir ( tankrect , x , y , 20 * SIZE ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 2 );
