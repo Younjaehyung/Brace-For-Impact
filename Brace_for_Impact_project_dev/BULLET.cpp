@@ -29,7 +29,7 @@ bullet::bullet ( double dx, double dy, int dtype, double dmx, double dmy)
 void bullet::move ( ) {
 	//자폭이꺼
 	if ( type == 14) {
-		counter += 100 * Time::DeltaTime ( );
+		counter += 66 * Time::DeltaTime ( );
 	}
 	//장판뎀
 	else if ( type == 15 || type==16 || type ==17) {
@@ -132,7 +132,7 @@ void bullet::move ( ) {
 			if ( !PlayerBullet ) {
 				RECTS tankrect = PlayerManager::getInstance ( ).Tank_return ( ).ReturnRect ( );
 				if ( type == 14 ) {
-					if ( counter >= 500 ) {
+					if ( counter >= 300 ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 100 );
