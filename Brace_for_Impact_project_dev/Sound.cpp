@@ -53,6 +53,7 @@ inline void SoundManager::CreateSoundlist ( ) {
 	Channel.emplace ( "stomp3" , CreateSound ( "BFI_monster_stomp3.mp3" , 0 ) );
 	Channel.emplace ( "cute" , CreateSound ( "BFI_monster_cute.mp3" , 0 ) );
 	Channel.emplace ( "bip" , CreateSound ( "BFI_monster_bipbip.mp3" , 0 ) );
+	Channel.emplace ( "charge" , CreateSound ( "BFI_monster_Charge.mp3" , 0 ));
 }
 
 void SoundManager::Update ( )

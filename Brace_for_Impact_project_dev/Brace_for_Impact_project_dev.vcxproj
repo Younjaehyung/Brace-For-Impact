@@ -239,6 +239,7 @@
     <Media Include="BFI_Menu.wav" />
     <Media Include="BFI_monster_angry.mp3" />
     <Media Include="BFI_monster_bipbip.mp3" />
+    <Media Include="BFI_monster_Charge.mp3" />
     <Media Include="BFI_monster_Cinematic.mp3" />
     <Media Include="BFI_monster_cute.mp3" />
     <Media Include="BFI_monster_ele.mp3" />

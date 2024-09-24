@@ -72,7 +72,8 @@ mop::mop(int type) {
 	mop_inform.cnt = 0;
 	attack_count = 0;
 	move_count = 0;
-
+	frame__2 = 0;
+	frame__2Count = 0;
 }
 
 void mop::attack( Tank& p1) {
@@ -142,7 +143,11 @@ void mop::attack( Tank& p1) {
 			else if ( direct == 3 ) { direct = 4; }
 		}
 		if ( status == 2 ) {
+			if ( attack_count <= 4.5 && attack_count <= 3 ) {
+				SoundManager::getInstance ( ).GetSoundID ( "charge" )->ReplaySound (0.3f );
+			}
 			if ( attack_count >= 5 ) {
+				SoundManager::getInstance ( ).GetSoundID ( "Laser" )->ReplaySound ( );
 				bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) , 11 );
 				attack_count = 0;
 				status = 0;
@@ -234,7 +239,7 @@ void mop::attack( Tank& p1) {
 	}
 	else if ( mop_inform.type == 6 ) {
 		//공격상태로 변경
-		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < 3*MONSTERLEN && status != 2) {
+		if ( length ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( ReturnRect ( ) ) , middleY ( ReturnRect ( ) ) ) < 6*MONSTERLEN && status != 2) {
 			status = 2;
 			if ( direct == 0 ) { direct = 1; }
 			else if ( direct == 3 ) { direct = 4; }
@@ -296,16 +301,18 @@ void mop::attack( Tank& p1) {
 				ATKStatus = 3; //미사일
 				SoundManager::getInstance ( ).GetSoundID ( "missile2" )->ReplaySound ( );
 				SoundManager::getInstance ( ).GetSoundID ( "missile1" )->ReplaySound ( );
-				for ( int i = 0; i < 20; i++ ) {
-					boom_x = middleX ( ReturnRect ( ) ) + rand ( ) % 2000 - 1000;
-					boom_y = middleY ( ReturnRect ( ) ) + rand ( ) % 2000 - 1000;
-					bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , boom_x , boom_y , 15 );
+				for ( int i = 0; i < 10; i++ ) {
+					//boom_x = middleX ( ReturnRect ( ) ) + rand ( ) % 2000 - 1000;
+					//boom_y = middleY ( ReturnRect ( ) ) + rand ( ) % 2000 - 1000;
+					boom_x =  rand ( ) % 1000-500;
+					boom_y = rand ( ) % 1000-500;
+					bulletshot ( middleX ( p1.ReturnRect ( ) ) , middleY ( p1.ReturnRect ( ) ) , middleX ( p1.ReturnRect ( ) ) + boom_x , middleY ( p1.ReturnRect ( ) ) + boom_y , 15 );
 				}
 				mop_inform.cnt = 1001;
 			}
 			else if ( mop_inform.cnt >= 650 &&mop_inform.cnt < 1000 ) {
 				ATKStatus = 2; //레이저
-				SoundManager::getInstance ( ).GetSoundID ( "Trim" )->ReplaySound ();
+				SoundManager::getInstance ( ).GetSoundID ( "Trim" )->ReplaySound (0.3f);
 				if ( attack_count <= 2 ) {
 					//2초간 탄 발사
 					if ( attack_count >= 0 ) {
@@ -351,15 +358,29 @@ void mop::attack( Tank& p1) {
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
 				TankController::Damage ( 10 );
+
 				//attack_count = 0;
 			}
 			mop_inform.cnt++;
-			
+			if ( frame__2Count >=0.3f ) {
+				frame__2Count = 0;
+				frame__2++;
+				if ( frame__2 >= 6 ) {
+					frame__2 = 0;
+				}
+			}
+			frame__2Count += Time::DeltaTime ( );
+		}
+		else {
+			frame__2 = 0;
+			frame__2Count = 0;
 		}
 		if ( attack_count >= 2 ) {
 			attack_count = 0;
 			status = 0;
 			mop_inform.cnt = 0;
+			frame__2 = 0;
+			frame__2Count = 0;
 		}
 	}
 
@@ -427,6 +448,7 @@ void mop::move ( Tank& p1  ) {
 	}
 	else if ( mop_inform.type == 1 || mop_inform.type == 4 || mop_inform.type == 10 || mop_inform.type == 11 ) {
 		if ( frame >= 6 ) frame = 0;
+		
 		if ( blockmop ) {
 			//몹 아래 장애물
 			if ( cpyrect.top > moprect.bottom ) {
@@ -711,10 +733,16 @@ void mop::length_sound ( ) {
 	RECTS tankrect =  TankController::TankRects ( );
 	float lengthxy = length ( tankrect.right , tankrect.bottom , mop_inform.x , mop_inform.y );
 
-	float soundM = ( 0.6f / 1599.0f ) * ( 1599.0f - lengthxy );
+	float soundM = ( 0.8f / 1599.0f ) * ( 1599.0f - lengthxy );
 
-	
-	SoundManager::getInstance ( ).GetSoundID ( "stomp3" )->ReplaySound ( soundM );
+	float soundm = ( 0.4f / 1599.0f ) * ( 1599.0f - lengthxy );
+	if ( ( mop_inform.type == 1 || mop_inform.type == 2 ||  mop_inform.type == 5 ) ) {
+		SoundManager::getInstance ( ).GetSoundID ( "stomp3" )->ReplaySound ( soundM );
+	}
+	else if( mop_inform.type == 3 ){
+		SoundManager::getInstance ( ).GetSoundID ( "stomp3" )->ReplaySound ( soundm );
+	}
+
 	std::cerr << soundM << std::endl;
 
 }
@@ -735,11 +763,12 @@ void mop::Update( ){
 	if ( !(status == 4 || status == 2||status==5) ) {
 		if ( move_count >= 0.15 ) {
 
-			if (( mop_inform.type == 1 || mop_inform.type == 2 || mop_inform.type == 5)&& (frame==2 || frame==5) ) {
+			if (( mop_inform.type == 1 || mop_inform.type == 2 || mop_inform.type == 3 || mop_inform.type == 5)&& (frame==2 || frame==5) ) {
 				
 				length_sound ( );
 				
 			}
+			
 			frame++;
 			move_count = 0;
 
@@ -760,6 +789,7 @@ void mop::Update( ){
 				frame = 5;
 				//if ( status == 3 ) status = 0;
 			}
+			
 			move_count = 0;
 		}
 		move_count += Time::DeltaTime ( );
@@ -975,8 +1005,14 @@ void mop::Render( const HDC& dc) {
 
 			}
 			else {
+
 				TransparentBlt ( dc , mop_inform.x - MOPSIZE , mop_inform.y - MOPSIZE , SIZE / 2 , SIZE / 2 ,
 			Texture::getInstance ( ).Texture_GetDC ( "B_Enemy_1" ) , frame * 128 , direct * 128 , 128 , 128 , RGB ( 255 , 255 , 255 ) );
+				if ( status == 2 ) {
+					TransparentBlt ( dc , ( int ) ( mop_inform.x ) , ( int ) ( mop_inform.y ) , ( int ) ( ( SIZE )/2) , ( int ) (  ( SIZE )/2 ) ,
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame__2 * 64 , 3 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+					//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
+				}
 			}
 		}
 		else if ( mop_inform.type == 11 ) { // 쪼꼬미 오줌이가 소환함
@@ -1110,7 +1146,7 @@ RECTS& mop::ReturnRect_T (monster mop_inform ) {//충돌
 		r = { mop_inform.x + 40  , mop_inform.y + 40  , mop_inform.x + 190 , mop_inform.y + 180 };	//수정1
 	}
 	else if ( mop_inform.type == 6 ) {
-		r = { mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 350 };
+		r = { mop_inform.x , mop_inform.y + 70 , mop_inform.x + 490 , mop_inform.y + 450 };
 	}
 	else if ( mop_inform.type == 3 ) {
 		r = { mop_inform.x , mop_inform.y + 30  , mop_inform.x + 210 , mop_inform.y + 180 };

@@ -363,5 +363,8 @@
     <Media Include="BFI_monster_stomp3.mp3" />
     <Media Include="BFI_monster_cute.mp3" />
     <Media Include="BFI_monster_bipbip.mp3" />
+    <Media Include="BFI_monster_Charge.mp3">
+      <Filter>리소스 파일</Filter>
+    </Media>
   </ItemGroup>
 </Project>

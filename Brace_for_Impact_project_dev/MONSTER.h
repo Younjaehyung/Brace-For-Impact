@@ -55,7 +55,8 @@ public:
 	int finalDirect;
 	float sixCount;
 	int sixframe;
-
+	int frame__2;
+	float frame__2Count;
 	float fourCount;
 	int fourframe;
 

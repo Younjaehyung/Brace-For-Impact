@@ -100,6 +100,7 @@
 #define IDR_WAVE28                      245
 #define IDR_WAVE29                      246
 #define IDR_WAVE30                      247
+#define IDR_WAVE31                      248
 #define IDC_STATIC                      -1
 
 // Next default values for new objects
@@ -107,7 +108,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        248
+#define _APS_NEXT_RESOURCE_VALUE        249
 #define _APS_NEXT_COMMAND_VALUE         32772
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           110
