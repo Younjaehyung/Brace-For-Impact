@@ -401,7 +401,19 @@ void mop::move ( Tank& p1  ) {
 
 	float len = 0;
 	BOOL ckBlock=0;
-	if ( mop_inform.type == 1 || mop_inform.type == 4 || mop_inform.type == 10 || mop_inform.type == 11 ) {
+	if ( mop_inform.type == 6 ) {
+		//여따 방향바꾸기 만드세연
+		if ( p1.ReturnRect ( ).left < mop_inform.x ) {
+			direct = 3;
+		}
+		else {
+			if ( p1.ReturnRect ( ).left > mop_inform.x + 1 ) {
+				direct = 0;
+			}
+		}
+		std::cout << "direct:" << direct << std::endl;
+	}
+	else if ( mop_inform.type == 1 || mop_inform.type == 4 || mop_inform.type == 10 || mop_inform.type == 11 ) {
 		if ( frame >= 6 ) frame = 0;
 		if ( blockmop ) {
 			//몹 아래 장애물
@@ -685,10 +697,10 @@ void mop::move2 ( Tank& p1 ) {
 void mop::Update( ){
 	
 	if ( status == 0 ) {
-		if ( mop_inform.type != 6 ) {
-			status = 1;
-			move ( PlayerManager::getInstance ( ).Tank_return ( ) );
-		}
+		
+		status = 1;
+		move ( PlayerManager::getInstance ( ).Tank_return ( ) );
+		
 	}
 	if ( !( status == 3 || status == 4 || status == 5 ) ) {
 		attack ( PlayerManager::getInstance ( ).Tank_return ( ) );
