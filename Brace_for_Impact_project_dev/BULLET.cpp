@@ -147,7 +147,7 @@ void bullet::move ( ) {
 				}
 				else if ( type == 16 ) {
 					if ( counter >= 1 && counter < 2 ) {
-						if ( rect2Cir ( tankrect , x , y , 10 * SIZE ) && TankController::TankHp ( ) > 0 ) {
+						if ( rect2Cir ( tankrect , x , y , 20 * SIZE ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							TankController::Damage ( 3 );
 						}
@@ -228,7 +228,7 @@ void bullet::Render ( const HDC& dc ) {
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 4 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
 			else if ( type == 16 ) { //오줌이 내려찍기
-				Ellipse ( dc , x - 10 * SIZE , y - 10 * SIZE , x + 10 * SIZE , y + 10 * SIZE );
+				Ellipse ( dc , x - 20 * SIZE , y - 20 * SIZE , x + 20 * SIZE , y + 20 * SIZE );
 				TransparentBlt ( dc , x - SIZE * 4 - counter , y - SIZE * 4 - counter , SIZE * 8 + counter * 2 , SIZE * 8 + counter * 2 ,
 				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet_2" ) , frame * 64 , 5 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 			}
