@@ -55,6 +55,9 @@ void bullet::move ( ) {
 			frame++;
 
 			if ( type == 100 ) {
+				if ( frame == 5 ) {
+					type = 0;
+				}
 				for ( auto& ScanMop : MonsterManager::getInstance ( ).MopReturn ( ) ) {
 					if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE ) && ScanMop->ReturnHP ( ) > 0 ) {
 						if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
@@ -97,6 +100,7 @@ void bullet::move ( ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
 							ScanMop->Damage ( 30 );
 						}
+						/*
 						else if(type==100){ //연막
 							if ( counter >= 14 ) {
 								if ( rect2Cir ( ScanMop->ReturnRect ( ) , x , y , SIZE + counter ) && ScanMop->ReturnHP ( ) > 0 ) {
@@ -110,9 +114,10 @@ void bullet::move ( ) {
 								type = 0;
 							}
 						}
+						*/
 					}
 				}
-				if ( type==100 &&counter >= 15 ) {
+				if ( type==100 &&frame==5 ) {
 					type = 0;
 				}
 				else if ( type == 200 && counter >= 10 ) {
@@ -186,7 +191,7 @@ void bullet::Render ( const HDC& dc ) {
 			else if(type==100) { //연막
 				//Ellipse ( dc , x - SIZE - counter , y - SIZE - counter , x + SIZE + counter , y + SIZE + counter );
 				TransparentBlt ( dc , x - SIZE*4 - counter, y - SIZE*4 - counter , SIZE * 8 + counter * 2 , SIZE * 8 + counter * 2 ,
-				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , gasframe*64 , 8 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+				Texture::getInstance ( ).Texture_GetDC ( "B_Bullet" ) , frame*64 , 8 * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 
 			}
 			else { //대쉬
