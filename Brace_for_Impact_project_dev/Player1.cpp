@@ -231,6 +231,9 @@ void Player1::SwitchStatus ( ) {
 			if ( !TankController::Dash ( ) && TankController::TankOil ( ) > 30 ) {
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 30;
+				if ( TankController::TankHp ( ) <= 270 ) {
+					TankController::TankHp ( ) += 20;
+				}
 				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 			}
 		}
@@ -541,6 +544,9 @@ void Player2::SwitchStatus ( ) {
 				SoundManager::getInstance ( ).GetSoundID ( "Dash" )->ReplaySound ( );
 				TankController::Dash ( ) = 1;
 				TankController::TankOil ( ) -= 30;
+				if ( TankController::TankHp ( ) <= 270 ) {
+					TankController::TankHp ( ) += 20;
+				}
 			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 , ReturnRect ( ) ) && TankController::TankBullet ( ) >= 1 ) {
