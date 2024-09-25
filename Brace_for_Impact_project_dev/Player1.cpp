@@ -137,33 +137,33 @@ void Player1::SwitchStatus ( ) {
 	
 		if ( rect2rect_f ( 1024 + 16 * 9 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
 			//이동 조작
-			itemtype = itemtype%10 +30;
+			itemtype = itemtype % 10 + 30;
 		}
-		else if ( ( rect2rect_f ( 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11, ReturnRect ( ) )) ) {
+		else if ( ( rect2rect_f ( 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11 , ReturnRect ( ) ) ) ) {
 			//공격 조종기
 			itemtype = itemtype % 10 + 30;
 		}
-		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 24 , 1024 + 16 * 24 , 16 * 30, ReturnRect() ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 24 , 1024 + 16 * 24 , 16 * 30 , ReturnRect ( ) ) ) {
 			//장전
 			itemtype = itemtype % 10 + 30;
 		}
-		else if (  rect2rect_f ( 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 48 , 1024 + 16 * 24 , 16 * 54 , ReturnRect ( ) ) ) {
 			//연료충전
 			itemtype = itemtype % 10 + 30;//아무것도 안들고있음
 		}
-		else if (  rect2rect_f ( 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26, ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 25 , 16 * 20 , 1024 + 16 * 34 , 16 * 26 , ReturnRect ( ) ) ) {
 			//대쉬
 			itemtype = itemtype % 10 + 30;
 		}
-		else if (  rect2rect_f ( 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 20 , 1024 + 16 * 16 , 16 * 26 , ReturnRect ( ) ) ) {
 			//증기분출
 			itemtype = itemtype % 10 + 30;
 		}
-		else if (  rect2rect_f ( 1024 + 16 * 7 , 16 * 34 , 1024 + 16 * 14 , 16 * 38 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 34 , 1024 + 16 * 14 , 16 * 38 , ReturnRect ( ) ) ) {
 			//연료 저장고
 			itemtype = itemtype % 10 + 30;
 		}
-		else if (  rect2rect_f ( 1024 + 16 * 27 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 , ReturnRect ( ) ) ) {
+		else if ( rect2rect_f ( 1024 + 16 * 27 , 16 * 34 , 1024 + 16 * 34 , 16 * 38 , ReturnRect ( ) ) ) {
 			//탄약 저장고
 			itemtype = itemtype % 10 + 30;
 		}
@@ -294,16 +294,22 @@ void Player1::Render ( const HDC& mDC ) {
 				, itemframe * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
 		}
 		else {
+			
 			TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
 			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
 			, itemframe * 64 , ( itemtype % 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+			
 		}
 	}
 	else {
-		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-		TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
-			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
-			, itemframe * 64 , (itemtype/10) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		bool movep1 = ( TankController::WhoAimingStatus ( ) == 1 && TankController::TankAimingStatus ( ) == 1 );
+		bool amingp1 = ( TankController::WhoMoveStatus ( ) == 1 && TankController::TankMoveStatus ( ) == 1 );
+		if ( !movep1 && !amingp1 ) {
+			//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+			TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
+				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+				, itemframe * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
 	}
 	if ( Debugging::ReturnMod ( ) ) {
 		RenderRect ( mDC );
@@ -632,10 +638,14 @@ void Player2::Render ( const HDC& mDC ) {
 		}
 	}
 	else {
-		//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
-		TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
-			64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
-			, itemframe * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		bool movep1 = ( TankController::WhoAimingStatus ( ) == 2 && TankController::TankAimingStatus ( ) == 1 );
+		bool amingp1 = ( TankController::WhoMoveStatus ( ) == 2 && TankController::TankMoveStatus ( ) == 1 );
+		if ( !movep1 && !amingp1 ) {
+			//플레이어가 아이템을 들었을 때 출력 할 아이템 이미지
+			TransparentBlt ( mDC , 1024 + rect.left + 16 - 21 , 0 + rect.top - 48 - 9 ,
+				64 , 64 , Texture::getInstance ( ).Texture_GetDC ( "B_Item" )
+				, itemframe * 64 , ( itemtype / 10 ) * 64 , 64 , 64 , RGB ( 255 , 255 , 255 ) );
+		}
 	}
 
 	if ( Debugging:: ReturnMod ( ) ) {
