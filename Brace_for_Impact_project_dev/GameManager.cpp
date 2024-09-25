@@ -43,7 +43,7 @@ void GameManager::Camera_UI_Ground ( const HDC& mDC )
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );
 
 	SelectObject ( mDC , cyanBrush );
-	Rectangle ( mDC , 90 , 880 , 90 + TankController::TankOil ( ) , 880 + 64 );	//정보 UI
+	Rectangle ( mDC , 90 , 880 , 90 + TankController::TankOil ( ) / 3 * 2 , 880 + 64 );	//정보 UI
 	//==탱크 연료
 	TransparentBlt ( mDC , 0 , 880 , 500 , 64 ,
 		Texture::getInstance ( ).Texture_GetDC ( "B_UI_Status" ) , 0 , 0 , 575 , 64 , RGB ( 255 , 255 , 255 ) );

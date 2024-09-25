@@ -94,7 +94,7 @@ public:
 		Stage_frame = {0};
 		Cannon_frame = {0};
 		tankhp = { 300 };
-		tankoil = { 300 };
+		tankoil = { 450 };
 		tankbullet = { 0 };
 		tankoilcount = {0.0};
 		camera = {0};

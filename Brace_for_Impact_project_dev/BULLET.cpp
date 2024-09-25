@@ -135,7 +135,7 @@ void bullet::move ( ) {
 					if ( counter >= 300 ) {
 						if ( rect2Cir ( tankrect , x , y , SIZE + counter ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
-							TankController::Damage ( 100 );
+							TankController::Damage ( 80 );
 							TankController::TankHit ( ) = true;
 						}
 						type = 0;
@@ -145,7 +145,7 @@ void bullet::move ( ) {
 					if ( counter >=  20) {
 						if ( rect2Cir ( tankrect , x , y , 6*SIZE ) && TankController::TankHp ( ) > 0 ) {
 							SoundManager::getInstance ( ).GetSoundID ( "Hit" )->ReplaySound ( );
-							TankController::Damage ( 50 );
+							TankController::Damage ( 40 );
 							TankController::TankHit ( ) = true;
 						}
 						frame = 0;

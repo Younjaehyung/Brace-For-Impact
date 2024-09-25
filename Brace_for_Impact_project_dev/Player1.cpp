@@ -137,11 +137,15 @@ void Player1::SwitchStatus ( ) {
 	
 		if ( rect2rect_f ( 1024 + 16 * 9 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
 			//이동 조작
-			itemtype = itemtype%10 +30;
+			if ( !TankController::WhoMoveStatus ( ) ) {
+				itemtype = itemtype % 10 + 30;
+			}
 		}
 		else if ( ( rect2rect_f ( 1024 + 16 * 25 , 16 * 7 , 1024 + 16 * 34 , 16 * 11, ReturnRect ( ) )) ) {
 			//공격 조종기
-			itemtype = itemtype % 10 + 30;
+			if ( !TankController::WhoAimingStatus ( ) ) {
+				itemtype = itemtype % 10 + 30;
+			}
 		}
 		else if ( rect2rect_f ( 1024 + 16 * 16 , 16 * 24 , 1024 + 16 * 24 , 16 * 30, ReturnRect() ) ) {
 			//장전
@@ -219,9 +223,9 @@ void Player1::SwitchStatus ( ) {
 				status = 0;
 				itemtype = 6;
 				isHold = false;
-				TankController::TankOil ( ) += 75;
-				if ( TankController::TankOil ( ) > 300 ) {
-					TankController::TankOil ( ) = 300;
+				TankController::TankOil ( ) += 100;
+				if ( TankController::TankOil ( ) > 450 ) {
+					TankController::TankOil ( ) = 450;
 				}
 				SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
 			}
@@ -445,6 +449,7 @@ void Player2::move ( ) {
 void Player2::SwitchStatus ( ) {
 	//조종기 범위 내에서 F와 M나타나기
 	
+
 	if ( rect2rect_f ( 1024 + 16 * 7 , 16 * 7 , 1024 + 16 * 16 , 16 * 11 , ReturnRect ( ) ) ) {
 		//이동 조작
 		itemtype = itemtype % 10 + 40;
@@ -532,9 +537,9 @@ void Player2::SwitchStatus ( ) {
 				itemtype = 6;
 				isHold = false;
 				SoundManager::getInstance ( ).GetSoundID ( "Item" )->ReplaySound ( );
-				TankController::TankOil ( ) += 75;
-				if ( TankController::TankOil ( ) > 300 ) {
-					TankController::TankOil ( ) = 300;
+				TankController::TankOil ( ) += 100;
+				if ( TankController::TankOil ( ) > 450 ) {
+					TankController::TankOil ( ) = 450;
 				}
 			}
 		}

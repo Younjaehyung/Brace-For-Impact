@@ -44,22 +44,22 @@ mop::mop(int type) {
 
 
 	if ( type == 1 ) {
-		mop_inform.hp = 150; //꽁끼깅낑꽁깡꽁까강
+		mop_inform.hp = 60; //꽁끼깅낑꽁깡꽁까강
 	}
 	else if ( type == 2 ) { //빵빵이
-		mop_inform.hp = 150;
+		mop_inform.hp = 90;
 	}
 	else if ( type == 3 ) { //소환하는애
-		mop_inform.hp = 200;
+		mop_inform.hp = 120;
 	}
 	else if ( type == 4 ) { //자폭이
-		mop_inform.hp = 230;
+		mop_inform.hp = 120;
 	}
 	else if ( type == 5 ) { //춘식이
-		mop_inform.hp = 250;
+		mop_inform.hp = 150;
 	}
 	else if ( type == 6 ) { //최종보스
-		mop_inform.hp = 450;
+		mop_inform.hp = 350;
 	}
 	else if ( type == 10 ) { //튼튼이 소환몹
 		mop_inform.hp = 10;
@@ -127,7 +127,7 @@ void mop::attack( Tank& p1) {
 				//attack_count = 0; 원래 위치
 			}
 		}
-		if ( attack_count >= 1.1 ) {//원래3
+		if ( attack_count >= 3 ) {//원래3
 			
 			attack_count = 0;
 			status = 0;
@@ -362,7 +362,7 @@ void mop::attack( Tank& p1) {
 			}
 			if ( mop_inform.cnt == 0 ) {
 				status = 2;
-				TankController::Damage ( 30 );
+				TankController::Damage ( 15 );
 				mop_inform.cnt++;
 
 				
@@ -770,9 +770,9 @@ void mop::length_sound ( ) {
 	RECTS tankrect =  TankController::TankRects ( );
 	float lengthxy = length ( tankrect.right , tankrect.bottom , mop_inform.x , mop_inform.y );
 
-	float soundM = ( 0.8f / 1599.0f ) * ( 1599.0f - lengthxy );
+	float soundM = ( 3.0f / 1099.0f ) * ( 1099.0f - lengthxy );
 
-	float soundm = ( 0.4f / 1599.0f ) * ( 1599.0f - lengthxy );
+	float soundm = ( 1.4f / 1599.0f ) * ( 1599.0f - lengthxy );
 	if ( ( mop_inform.type == 1 || mop_inform.type == 2 ||  mop_inform.type == 5 ) ) {
 		SoundManager::getInstance ( ).GetSoundID ( "stomp3" )->ReplaySound ( soundM );
 	}
