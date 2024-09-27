@@ -13,6 +13,7 @@ V2: 2024.09
 
 ### **시연영상**
 v1: https://www.youtube.com/watch?v=liq-Lt9EgRk&t=11s
+
 v2: https://www.youtube.com/watch?v=taDSSb8kakE
 
 ### **게임설명**
